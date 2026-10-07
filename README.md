@@ -1,4 +1,8 @@
-﻿# Monev Ditjenbun — Jejak Bantuan Perkebunan
+﻿# Jejak Bantuan Perkebunan — Monev Ditjenbun
 
-Mockup halaman "Jejak" (data contoh dari hasil integrasi Monev). Satu berkas statis: `index.html`.
-Dibuka lewat GitHub Pages.
+Situs statis (HTML/CSS/JS) berisi ringkasan bantuan perkebunan: lahan ditanam, anggaran terbayar,
+rekap Nasional dan per Provinsi (bisa dicetak sebagai PDF). Hanya memuat data agregat.
+
+Berkas: `index.html`, `style.css`, `app.js`, `data.js`.
+`data.js` dibuat otomatis dari hasil integrasi Monev (`python tampilan.py --publik`);
+untuk memperbarui data, cukup unggah ulang `data.js` saja.
