@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOCKUP — Jejak Bantuan Perkebunan (Monev Ditjenbun)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F3F5F0; --paper:#FFFFFF; --ink:#17201B; --ink2:#3E4A43; --muted:#5E6963;
+  --line:#D8DED6; --track:#E3E8E2; --forest:#1F4D3A; --leaf:#2E7D4F;
+  --soil:#C9851A; --soil-ink:#8A5A0E; --alarm:#A3341B; --stone:#6B746E;
+  --chip:#E8EDE6; --band-sub:#D4E4DA; --gold:#F2C14E; --nowbg:#FFF4DE;
+  font-size:16px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  background:var(--ground);color:var(--ink);line-height:1.55;
+}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3{margin:0;line-height:1.15;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+
+/* ---------------- header ---------------- */
+#top{background:var(--forest);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 1px 0 rgba(255,255,255,.08);}
+.top-in{max-width:1120px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:18px;}
+.brand{display:flex;flex-direction:column;flex:0 0 auto;line-height:1.2;}
+.brand-kicker{font-weight:800;font-size:15px;color:var(--gold);}
+.brand-sub{font-size:11.5px;color:var(--band-sub);}
+#nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;padding:2px 0;}
+#nav::-webkit-scrollbar{display:none;}
+#nav a{
+  flex:0 0 auto;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;
+  color:var(--band-sub);white-space:nowrap;
+}
+#nav a:hover{background:rgba(255,255,255,.1);}
+#nav a.active{background:#fff;color:var(--forest);}
+#foot{max-width:1120px;margin:40px auto 0;padding:18px 20px 40px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);}
+
+/* ---------------- hero ---------------- */
+.hero{background:var(--forest);color:#fff;padding:34px 0 38px;}
+.hero .kicker{color:var(--gold);font-weight:700;font-size:17px;margin-bottom:10px;}
+.hero h1{font-size:clamp(32px,5.4vw,50px);font-weight:800;letter-spacing:-.02em;max-width:14ch;}
+.hero .lede{font-size:clamp(16px,2.1vw,19px);color:var(--band-sub);max-width:60ch;margin:14px 0 0;}
+.hero-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin:28px 0 20px;}
+.hero-kpi .n{font-size:clamp(30px,4.6vw,42px);font-weight:800;color:var(--gold);line-height:1.05;}
+.hero-kpi .t{font-size:13.5px;color:var(--band-sub);margin-top:6px;max-width:30ch;}
+.hero-box{background:rgba(255,255,255,.09);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--band-sub);max-width:640px;}
+.hero-box b{color:#fff;}
+.hero-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.btn-hero{border:0;border-radius:10px;padding:10px 16px;font:800 14px/1 inherit;font-family:inherit;cursor:pointer;
+  background:var(--gold);color:#3a2800;}
+.btn-hero.garis{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.45);}
+
+/* ---------------- bagian ---------------- */
+.bagian{padding:34px 0 6px;}
+.bagian > h2{font-size:24px;font-weight:800;color:var(--forest);}
+.bagian > p.ket{color:var(--muted);margin:6px 0 16px;max-width:70ch;font-size:15px;}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;border:0;border-radius:999px;background:var(--chip);color:var(--ink2);
+  padding:8px 15px;font:700 13.5px/1 inherit;font-family:inherit;cursor:pointer;
+}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--soil);display:inline-block;}
+.chip.on{background:var(--forest);color:#fff;}
+.chip.on i{background:var(--gold);}
+
+.kartu{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;}
+.kartu + .kartu{margin-top:14px;}
+.kartu-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:4px;}
+.kartu-head h3{font-size:26px;font-weight:800;}
+.kartu .sasaran{color:var(--muted);font-size:14px;margin-bottom:6px;}
+.pill{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:800;background:var(--nowbg);color:var(--soil-ink);}
+.pill.baik{background:#E0F0E6;color:#17613a;}
+.pill.buruk{background:#F8E3DD;color:var(--alarm);}
+.pill.netral{background:var(--chip);color:var(--ink2);}
+.narasi{font-size:15px;color:var(--ink2);margin:8px 0 16px;max-width:75ch;}
+.kolom2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+@media (max-width:820px){.kolom2{grid-template-columns:1fr;gap:18px;}}
+
+.meter{margin:0 0 15px;}
+.meter-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:700;font-size:14.5px;}
+.meter-head .v{font-weight:800;font-size:17px;}
+.track{background:var(--track);border-radius:999px;height:11px;overflow:hidden;margin:6px 0 4px;}
+.fill{height:100%;border-radius:999px;background:var(--forest);}
+.fill.emas{background:var(--soil);}
+.meter-sub{font-size:12.5px;color:var(--muted);}
+
+.sub-judul{font-size:13px;font-weight:800;color:var(--ink2);text-transform:uppercase;letter-spacing:.05em;margin:4px 0 10px;}
+.baris{display:grid;grid-template-columns:minmax(110px,1.1fr) 2fr minmax(120px,1fr);gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--chip);font-size:14px;}
+.baris:last-child{border-bottom:0;}
+.baris .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.baris .track{height:8px;margin:0;}
+.baris .nilai{text-align:right;color:var(--ink2);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+a.baris:hover .nm{color:var(--leaf);text-decoration:underline;}
+.catatan{font-size:12.5px;color:var(--muted);margin-top:12px;}
+
+@media (max-width:700px){
+  .top-in{flex-direction:column;align-items:flex-start;gap:6px;}
+  #nav{width:100%;}
+  .wrap{padding:0 16px;}
+  .baris{grid-template-columns:1fr 1fr;}
+  .baris .track{grid-column:1 / -1;order:3;}
+}
+
+.mock-pita{background:var(--gold);color:#3a2800;font-size:12px;font-weight:700;text-align:center;padding:5px 10px;}
+</style>
+</head>
+<body>
+<div class="mock-pita">MOCKUP desain — memakai data nyata hasil integrasi, tombol menu belum aktif</div>
+<header id="top">
+  <div class="top-in">
+    <a class="brand" href="#"><span class="brand-kicker">Monev Ditjenbun</span><span class="brand-sub" id="brandSub"></span></a>
+    <nav id="nav" aria-label="Menu utama">
+      <a href="#" class="active">Jejak</a><a href="#">Rekap Nasional</a><a href="#">Per Provinsi</a><a href="#">Satker</a>
+      <a href="#">Akun</a><a href="#">Komoditas</a><a href="#">Fisik Kabupaten</a><a href="#">Anggaran &amp; Fisik</a>
+      <a href="#">Detail Item</a><a href="#">Sub Komponen</a><a href="#">Pemeriksaan</a><a href="#">Info Proses</a>
+    </nav>
+  </div>
+</header>
+<main id="konten"></main>
+<footer id="foot">Sumber: hasil integrasi Monev (SAKTI, FA16, SAT 3, Hilirisasi). Anggaran terbayar = realisasi SP2D akun 526.</footer>
+<script>
+const D = {"meta": {"berkasSumber": "20261006 09.11 WIB hasil integrasi.xlsx", "waktuProses": "07-10-2026 09:11:36", "tanggalTeks": "7 Oktober 2026", "tahun": 2026, "dibuatTampilan": "07-10-2026 11:38:02"}, "rekap": {"nasional": {"total": {"pagu": 2365301502000.0, "realisasiRp": 221795310637.0, "realisasiPersen": 0.09377041804161507}}}, "daftarProvinsi": ["ACEH", "SUMATERA UTARA", "SUMATERA BARAT", "RIAU", "JAMBI", "SUMATERA SELATAN", "BENGKULU", "LAMPUNG", "KEPULAUAN BANGKA BELITUNG", "KEPULAUAN RIAU", "JAWA BARAT", "JAWA TENGAH", "DAERAH ISTIMEWA YOGYAKARTA", "JAWA TIMUR", "BANTEN", "BALI", "NUSA TENGGARA BARAT", "NUSA TENGGARA TIMUR", "KALIMANTAN BARAT", "KALIMANTAN SELATAN", "KALIMANTAN TIMUR", "KALIMANTAN UTARA", "SULAWESI UTARA", "SULAWESI TENGAH", "SULAWESI SELATAN", "SULAWESI TENGGARA", "GORONTALO", "SULAWESI BARAT", "MALUKU", "MALUKU UTARA", "PAPUA", "PAPUA BARAT", "PAPUA SELATAN", "PAPUA TENGAH", "PAPUA PEGUNUNGAN", "PAPUA BARAT DAYA"], "sheets": {"satker": {"baris": [null, null, null, null, null]}}, "jejak": {"komoditas": [{"nama": "Tebu", "target": 97970.0, "ditanam": 11694.38, "pagu": 1033196001000.0, "realisasi": 139967338352.0, "abt": {"target": 0.0, "ditanam": 0.0, "pagu": 0.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 97970.0, "ditanam": 11694.38, "pagu": 1033196001000.0, "realisasi": 139967338352.0}], "provinsi": [{"nama": "JAWA TIMUR", "target": 53887.0, "ditanam": 8911.09, "pagu": 486369993000.0, "realisasi": 42552158409.0}, {"nama": "LAMPUNG", "target": 11966.3, "ditanam": 146.6, "pagu": 188039938000.0, "realisasi": 74854660400.0}, {"nama": "JAWA TENGAH", "target": 11911.2, "ditanam": 423.73, "pagu": 122254626000.0, "realisasi": 6805738428.0}, {"nama": "JAWA BARAT", "target": 8312.3, "ditanam": 1795.08, "pagu": 95991632000.0, "realisasi": 11911102680.0}, {"nama": "SULAWESI SELATAN", "target": 5000.0, "ditanam": 0.0, "pagu": 47600000000.0, "realisasi": 0.0}, {"nama": "SUMATERA SELATAN", "target": 2277.3, "ditanam": 242.88, "pagu": 31725768000.0, "realisasi": 3202658000.0}, {"nama": "NUSA TENGGARA BARAT", "target": 2148.5, "ditanam": 79.0, "pagu": 29133660000.0, "realisasi": 0.0}, {"nama": "GORONTALO", "target": 950.0, "ditanam": 0.0, "pagu": 13127000000.0, "realisasi": 641020435.0}, {"nama": "SULAWESI TENGGARA", "target": 600.0, "ditanam": 0.0, "pagu": 8136000000.0, "realisasi": 0.0}, {"nama": "BANTEN", "target": 525.4, "ditanam": 0.0, "pagu": 6809184000.0, "realisasi": 0.0}, {"nama": "DAERAH ISTIMEWA YOGYAKARTA", "target": 392.0, "ditanam": 96.0, "pagu": 4008200000.0, "realisasi": 0.0}], "jenis": [{"nama": "Bongkar Ratoon", "target": 77438.7, "ditanam": 10231.66, "pagu": 516100716000.0, "realisasi": 88874154268.0}, {"nama": "Perluasan", "target": 20531.3, "ditanam": 1462.72, "pagu": 143581181000.0, "realisasi": 36018840084.0}]}, {"nama": "Kelapa", "target": 151554.0, "ditanam": 18018.08, "pagu": 416887322000.0, "realisasi": 63322915173.0, "abt": {"target": 1080.0, "ditanam": 0.0, "pagu": 29367900000.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 69418.0, "ditanam": 15495.79, "pagu": 184086917000.0, "realisasi": 43599088515.0}, {"nama": "BBPPTP Ambon", "target": 30970.0, "ditanam": 1374.13, "pagu": 92333332000.0, "realisasi": 10198057360.0}, {"nama": "BBPPTP Surabaya", "target": 25291.0, "ditanam": 548.16, "pagu": 70172788000.0, "realisasi": 1110137640.0}, {"nama": "BBPPTP Medan", "target": 24575.0, "ditanam": 600.0, "pagu": 65932785000.0, "realisasi": 8415631658.0}, {"nama": "BPTP Pontianak", "target": 1300.0, "ditanam": 0.0, "pagu": 4361500000.0, "realisasi": 0.0}], "provinsi": [{"nama": "SULAWESI UTARA", "target": 18798.0, "ditanam": 975.5, "pagu": 57807090000.0, "realisasi": 8217100460.0}, {"nama": "SULAWESI TENGGARA", "target": 17831.0, "ditanam": 400.0, "pagu": 49604588000.0, "realisasi": 373735890.0}, {"nama": "MALUKU UTARA", "target": 14700.0, "ditanam": 2100.0, "pagu": 39817050000.0, "realisasi": 6191924700.0}, {"nama": "RIAU", "target": 13100.0, "ditanam": 4217.5, "pagu": 37758125000.0, "realisasi": 12388811060.0}, {"nama": "GORONTALO", "target": 11722.0, "ditanam": 398.63, "pagu": 32475292000.0, "realisasi": 1792510400.0}, {"nama": "SULAWESI TENGAH", "target": 10871.0, "ditanam": 2605.0, "pagu": 31250410000.0, "realisasi": 8454850000.0}, {"nama": "JAMBI", "target": 10396.0, "ditanam": 0.0, "pagu": 26925640000.0, "realisasi": 3538032498.0}, {"nama": "SULAWESI SELATAN", "target": 8860.0, "ditanam": 148.16, "pagu": 23679930000.0, "realisasi": 736401750.0}, {"nama": "SUMATERA SELATAN", "target": 7187.0, "ditanam": 0.0, "pagu": 20119006000.0, "realisasi": 2769667820.0}, {"nama": "NUSA TENGGARA TIMUR", "target": 6200.0, "ditanam": 462.0, "pagu": 17137244000.0, "realisasi": 2537366640.0}, {"nama": "JAWA TIMUR", "target": 5170.0, "ditanam": 711.29, "pagu": 11793100000.0, "realisasi": 2218167035.0}, {"nama": "LAMPUNG", "target": 5058.0, "ditanam": 0.0, "pagu": 12890313000.0, "realisasi": 1735476120.0}, {"nama": "SUMATERA BARAT", "target": 4308.0, "ditanam": 600.0, "pagu": 11213505000.0, "realisasi": 1779581340.0}, {"nama": "JAWA BARAT", "target": 3956.0, "ditanam": 1900.0, "pagu": 8710265000.0, "realisasi": 3599242960.0}, {"nama": "BANTEN", "target": 3500.0, "ditanam": 3500.0, "pagu": 6551955000.0, "realisasi": 6473250000.0}, {"nama": "SUMATERA UTARA", "target": 1889.0, "ditanam": 0.0, "pagu": 4777281000.0, "realisasi": 0.0}, {"nama": "KALIMANTAN SELATAN", "target": 1100.0, "ditanam": 0.0, "pagu": 3745500000.0, "realisasi": 0.0}, {"nama": "JAWA TENGAH", "target": 1012.0, "ditanam": 0.0, "pagu": 2186588000.0, "realisasi": 0.0}, {"nama": "BALI", "target": 1000.0, "ditanam": 0.0, "pagu": 2620000000.0, "realisasi": 0.0}, {"nama": "BENGKULU", "target": 845.0, "ditanam": 0.0, "pagu": 2459795000.0, "realisasi": 0.0}, {"nama": "KEPULAUAN RIAU", "target": 700.0, "ditanam": 0.0, "pagu": 2247000000.0, "realisasi": 0.0}, {"nama": "DAERAH ISTIMEWA YOGYAKARTA", "target": 651.0, "ditanam": 0.0, "pagu": 1705620000.0, "realisasi": 0.0}, {"nama": "ACEH", "target": 600.0, "ditanam": 0.0, "pagu": 1849350000.0, "realisasi": 328350000.0}, {"nama": "MALUKU", "target": 500.0, "ditanam": 0.0, "pagu": 1475000000.0, "realisasi": 0.0}, {"nama": "NUSA TENGGARA BARAT", "target": 500.0, "ditanam": 0.0, "pagu": 1392500000.0, "realisasi": 0.0}, {"nama": "PAPUA SELATAN", "target": 300.0, "ditanam": 0.0, "pagu": 1314075000.0, "realisasi": 188446500.0}, {"nama": "PAPUA", "target": 275.0, "ditanam": 0.0, "pagu": 1270225000.0, "realisasi": 0.0}, {"nama": "KALIMANTAN TIMUR", "target": 200.0, "ditanam": 0.0, "pagu": 616000000.0, "realisasi": 0.0}, {"nama": "PAPUA TENGAH", "target": 100.0, "ditanam": 0.0, "pagu": 438500000.0, "realisasi": 0.0}, {"nama": "PAPUA PEGUNUNGAN", "target": 75.0, "ditanam": 0.0, "pagu": 441750000.0, "realisasi": 0.0}, {"nama": "PAPUA BARAT DAYA", "target": 75.0, "ditanam": 0.0, "pagu": 319500000.0, "realisasi": 0.0}, {"nama": "PAPUA BARAT", "target": 75.0, "ditanam": 0.0, "pagu": 295125000.0, "realisasi": 0.0}], "jenis": [{"nama": "Perluasan", "target": 91250.0, "ditanam": 6008.79, "pagu": 132606155000.0, "realisasi": 15344218440.0}, {"nama": "Peremajaan", "target": 60304.0, "ditanam": 12009.29, "pagu": 84570849000.0, "realisasi": 23273494233.0}]}, {"nama": "Kakao", "target": 174260.0, "ditanam": 94.5, "pagu": 226952587000.0, "realisasi": 717330000.0, "abt": {"target": 1854.0, "ditanam": 0.0, "pagu": 43754400000.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 79510.0, "ditanam": 94.5, "pagu": 104062727000.0, "realisasi": 703730000.0}, {"nama": "BBPPTP Ambon", "target": 39050.0, "ditanam": 0.0, "pagu": 53569960000.0, "realisasi": 13600000.0}, {"nama": "BBPPTP Surabaya", "target": 33350.0, "ditanam": 0.0, "pagu": 43612400000.0, "realisasi": 0.0}, {"nama": "BBPPTP Medan", "target": 22350.0, "ditanam": 0.0, "pagu": 25707500000.0, "realisasi": 0.0}], "provinsi": [{"nama": "SULAWESI SELATAN", "target": 37910.0, "ditanam": 94.5, "pagu": 49283000000.0, "realisasi": 304850000.0}, {"nama": "SULAWESI TENGGARA", "target": 28400.0, "ditanam": 0.0, "pagu": 36921847000.0, "realisasi": 0.0}, {"nama": "SULAWESI BARAT", "target": 20160.0, "ditanam": 0.0, "pagu": 26208000000.0, "realisasi": 0.0}, {"nama": "SULAWESI TENGAH", "target": 18900.0, "ditanam": 0.0, "pagu": 24583600000.0, "realisasi": 13600000.0}, {"nama": "LAMPUNG", "target": 11050.0, "ditanam": 0.0, "pagu": 13327380000.0, "realisasi": 398880000.0}, {"nama": "NUSA TENGGARA TIMUR", "target": 8810.0, "ditanam": 0.0, "pagu": 11453000000.0, "realisasi": 0.0}, {"nama": "ACEH", "target": 6800.0, "ditanam": 0.0, "pagu": 7514000000.0, "realisasi": 0.0}, {"nama": "PAPUA", "target": 5850.0, "ditanam": 0.0, "pagu": 9354150000.0, "realisasi": 0.0}, {"nama": "BALI", "target": 5000.0, "ditanam": 0.0, "pagu": 6500000000.0, "realisasi": 0.0}, {"nama": "SUMATERA UTARA", "target": 4500.0, "ditanam": 0.0, "pagu": 5265000000.0, "realisasi": 0.0}, {"nama": "MALUKU UTARA", "target": 4100.0, "ditanam": 0.0, "pagu": 4530500000.0, "realisasi": 0.0}, {"nama": "GORONTALO", "target": 3500.0, "ditanam": 0.0, "pagu": 4550000000.0, "realisasi": 0.0}, {"nama": "PAPUA TENGAH", "target": 3000.0, "ditanam": 0.0, "pagu": 5210400000.0, "realisasi": 0.0}, {"nama": "SUMATERA BARAT", "target": 2900.0, "ditanam": 0.0, "pagu": 3770000000.0, "realisasi": 0.0}, {"nama": "PAPUA BARAT", "target": 2100.0, "ditanam": 0.0, "pagu": 3172260000.0, "realisasi": 0.0}, {"nama": "SULAWESI UTARA", "target": 1900.0, "ditanam": 0.0, "pagu": 2470000000.0, "realisasi": 0.0}, {"nama": "JAWA TIMUR", "target": 1780.0, "ditanam": 0.0, "pagu": 2545400000.0, "realisasi": 0.0}, {"nama": "JAWA BARAT", "target": 1750.0, "ditanam": 0.0, "pagu": 2730000000.0, "realisasi": 0.0}, {"nama": "NUSA TENGGARA BARAT", "target": 1300.0, "ditanam": 0.0, "pagu": 1690000000.0, "realisasi": 0.0}, {"nama": "MALUKU", "target": 1200.0, "ditanam": 0.0, "pagu": 1560000000.0, "realisasi": 0.0}, {"nama": "JAWA TENGAH", "target": 1200.0, "ditanam": 0.0, "pagu": 1404000000.0, "realisasi": 0.0}, {"nama": "KALIMANTAN UTARA", "target": 1100.0, "ditanam": 0.0, "pagu": 1430000000.0, "realisasi": 0.0}, {"nama": "DAERAH ISTIMEWA YOGYAKARTA", "target": 450.0, "ditanam": 0.0, "pagu": 585000000.0, "realisasi": 0.0}, {"nama": "PAPUA PEGUNUNGAN", "target": 300.0, "ditanam": 0.0, "pagu": 466050000.0, "realisasi": 0.0}, {"nama": "KALIMANTAN TIMUR", "target": 200.0, "ditanam": 0.0, "pagu": 286000000.0, "realisasi": 0.0}, {"nama": "PAPUA BARAT DAYA", "target": 100.0, "ditanam": 0.0, "pagu": 143000000.0, "realisasi": 0.0}], "jenis": [{"nama": "Peremajaan", "target": 96921.0, "ditanam": 94.5, "pagu": 126429940000.0, "realisasi": 304850000.0}, {"nama": "Perluasan", "target": 77339.0, "ditanam": 0.0, "pagu": 100065267000.0, "realisasi": 13600000.0}]}, {"nama": "Jambu Mete", "target": 47858.0, "ditanam": 0.0, "pagu": 171129170000.0, "realisasi": 5094015861.0, "abt": {"target": 0.0, "ditanam": 0.0, "pagu": 0.0, "realisasi": 0.0}, "satker": [{"nama": "BBPPTP Surabaya", "target": 25168.0, "ditanam": 0.0, "pagu": 87737651000.0, "realisasi": 0.0}, {"nama": "Ditjenbun Pusat", "target": 22690.0, "ditanam": 0.0, "pagu": 83391519000.0, "realisasi": 5094015861.0}], "provinsi": [{"nama": "NUSA TENGGARA TIMUR", "target": 25285.0, "ditanam": 0.0, "pagu": 88193951000.0, "realisasi": 0.0}, {"nama": "SULAWESI TENGGARA", "target": 7998.0, "ditanam": 0.0, "pagu": 31192200000.0, "realisasi": 1393990053.0}, {"nama": "NUSA TENGGARA BARAT", "target": 6470.0, "ditanam": 0.0, "pagu": 22888012000.0, "realisasi": 0.0}, {"nama": "JAWA TIMUR", "target": 3900.0, "ditanam": 0.0, "pagu": 12394696000.0, "realisasi": 865388688.0}, {"nama": "JAWA TENGAH", "target": 1985.0, "ditanam": 0.0, "pagu": 8082635000.0, "realisasi": 2592000000.0}, {"nama": "SULAWESI SELATAN", "target": 1433.0, "ditanam": 0.0, "pagu": 5588700000.0, "realisasi": 0.0}, {"nama": "BALI", "target": 660.0, "ditanam": 0.0, "pagu": 2422200000.0, "realisasi": 242637120.0}, {"nama": "DAERAH ISTIMEWA YOGYAKARTA", "target": 127.0, "ditanam": 0.0, "pagu": 366776000.0, "realisasi": 0.0}], "jenis": [{"nama": "Peremajaan", "target": 29707.0, "ditanam": 0.0, "pagu": 56016663000.0, "realisasi": 1211730604.0}, {"nama": "Perluasan", "target": 18151.0, "ditanam": 0.0, "pagu": 35641307000.0, "realisasi": 1290285257.0}]}, {"nama": "Kopi", "target": 85700.0, "ditanam": 2139.8, "pagu": 112554883000.0, "realisasi": 7623033000.0, "abt": {"target": 12739.0, "ditanam": 0.0, "pagu": 253128600000.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 51190.0, "ditanam": 355.75, "pagu": 66807185000.0, "realisasi": 3049975000.0}, {"nama": "BBPPTP Medan", "target": 16710.0, "ditanam": 1784.05, "pagu": 20756498000.0, "realisasi": 4573058000.0}, {"nama": "BBPPTP Surabaya", "target": 14600.0, "ditanam": 0.0, "pagu": 18980000000.0, "realisasi": 0.0}, {"nama": "BBPPTP Ambon", "target": 3200.0, "ditanam": 0.0, "pagu": 6011200000.0, "realisasi": 0.0}], "provinsi": [{"nama": "ACEH", "target": 17450.0, "ditanam": 0.0, "pagu": 19464490000.0, "realisasi": 182240000.0}, {"nama": "SUMATERA UTARA", "target": 12960.0, "ditanam": 1784.05, "pagu": 15398208000.0, "realisasi": 3222018000.0}, {"nama": "SULAWESI SELATAN", "target": 8400.0, "ditanam": 0.0, "pagu": 10920000000.0, "realisasi": 0.0}, {"nama": "NUSA TENGGARA TIMUR", "target": 6600.0, "ditanam": 0.0, "pagu": 8580000000.0, "realisasi": 0.0}, {"nama": "JAWA BARAT", "target": 6450.0, "ditanam": 1.2, "pagu": 10063960000.0, "realisasi": 0.0}, {"nama": "SULAWESI BARAT", "target": 6200.0, "ditanam": 0.0, "pagu": 8060000000.0, "realisasi": 0.0}, {"nama": "JAWA TIMUR", "target": 4600.0, "ditanam": 0.0, "pagu": 6916725000.0, "realisasi": 338725000.0}, {"nama": "JAWA TENGAH", "target": 3900.0, "ditanam": 0.0, "pagu": 6832250000.0, "realisasi": 2269250000.0}, {"nama": "SUMATERA BARAT", "target": 3600.0, "ditanam": 0.0, "pagu": 5068800000.0, "realisasi": 388800000.0}, {"nama": "BALI", "target": 2700.0, "ditanam": 0.55, "pagu": 3510000000.0, "realisasi": 0.0}, {"nama": "SUMATERA SELATAN", "target": 2400.0, "ditanam": 0.0, "pagu": 3120000000.0, "realisasi": 780000000.0}, {"nama": "LAMPUNG", "target": 2200.0, "ditanam": 0.0, "pagu": 2574000000.0, "realisasi": 0.0}, {"nama": "JAMBI", "target": 2200.0, "ditanam": 354.0, "pagu": 2431000000.0, "realisasi": 442000000.0}, {"nama": "NUSA TENGGARA BARAT", "target": 1490.0, "ditanam": 0.0, "pagu": 1937000000.0, "realisasi": 0.0}, {"nama": "BENGKULU", "target": 1350.0, "ditanam": 0.0, "pagu": 1667250000.0, "realisasi": 0.0}, {"nama": "PAPUA TENGAH", "target": 1060.0, "ditanam": 0.0, "pagu": 2067000000.0, "realisasi": 0.0}, {"nama": "SULAWESI TENGAH", "target": 1000.0, "ditanam": 0.0, "pagu": 1300000000.0, "realisasi": 0.0}, {"nama": "PAPUA PEGUNUNGAN", "target": 900.0, "ditanam": 0.0, "pagu": 2176200000.0, "realisasi": 0.0}, {"nama": "PAPUA", "target": 240.0, "ditanam": 0.0, "pagu": 468000000.0, "realisasi": 0.0}], "jenis": [{"nama": "Perluasan", "target": 48466.0, "ditanam": 1846.3, "pagu": 63838863000.0, "realisasi": 6306183000.0}, {"nama": "Peremajaan", "target": 37234.0, "ditanam": 293.5, "pagu": 46168980000.0, "realisasi": 745810000.0}]}, {"nama": "Pala", "target": 13400.0, "ditanam": 0.0, "pagu": 36615781000.0, "realisasi": 1682608837.0, "abt": {"target": 0.0, "ditanam": 0.0, "pagu": 0.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 7400.0, "ditanam": 0.0, "pagu": 20980981000.0, "realisasi": 1121609198.0}, {"nama": "BBPPTP Ambon", "target": 6000.0, "ditanam": 0.0, "pagu": 15634800000.0, "realisasi": 560999639.0}], "provinsi": [{"nama": "SULAWESI UTARA", "target": 3800.0, "ditanam": 0.0, "pagu": 11078000000.0, "realisasi": 0.0}, {"nama": "MALUKU UTARA", "target": 2900.0, "ditanam": 0.0, "pagu": 8590100000.0, "realisasi": 448799640.0}, {"nama": "MALUKU", "target": 1600.0, "ditanam": 0.0, "pagu": 4997200000.0, "realisasi": 112199999.0}, {"nama": "SULAWESI SELATAN", "target": 1500.0, "ditanam": 0.0, "pagu": 3195750000.0, "realisasi": 0.0}, {"nama": "PAPUA BARAT", "target": 1500.0, "ditanam": 0.0, "pagu": 2047500000.0, "realisasi": 0.0}, {"nama": "NUSA TENGGARA TIMUR", "target": 1200.0, "ditanam": 0.0, "pagu": 4450431000.0, "realisasi": 795800000.0}, {"nama": "SULAWESI TENGGARA", "target": 900.0, "ditanam": 0.0, "pagu": 2256800000.0, "realisasi": 325809198.0}], "jenis": [{"nama": "Perluasan", "target": 8400.0, "ditanam": 0.0, "pagu": 17160031000.0, "realisasi": 996297968.0}, {"nama": "Rehabilitasi", "target": 5000.0, "ditanam": 0.0, "pagu": 4941250000.0, "realisasi": 686310869.0}]}, {"nama": "Lada", "target": 2392.0, "ditanam": 0.0, "pagu": 7745947000.0, "realisasi": 136703160.0, "abt": {"target": 0.0, "ditanam": 0.0, "pagu": 0.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 2392.0, "ditanam": 0.0, "pagu": 7745947000.0, "realisasi": 136703160.0}], "provinsi": [{"nama": "SULAWESI TENGGARA", "target": 700.0, "ditanam": 0.0, "pagu": 2276000000.0, "realisasi": 136703160.0}, {"nama": "SULAWESI SELATAN", "target": 600.0, "ditanam": 0.0, "pagu": 1905240000.0, "realisasi": 0.0}, {"nama": "KEPULAUAN BANGKA BELITUNG", "target": 592.0, "ditanam": 0.0, "pagu": 2274707000.0, "realisasi": 0.0}, {"nama": "LAMPUNG", "target": 500.0, "ditanam": 0.0, "pagu": 1290000000.0, "realisasi": 0.0}], "jenis": [{"nama": "Rehabilitasi", "target": 1992.0, "ditanam": 0.0, "pagu": 2528600000.0, "realisasi": 136703160.0}, {"nama": "Perluasan", "target": 400.0, "ditanam": 0.0, "pagu": 864467000.0, "realisasi": 0.0}]}, {"nama": "Sagu", "target": 1675.0, "ditanam": 0.0, "pagu": 5911250000.0, "realisasi": 1680709763.0, "abt": {"target": 0.0, "ditanam": 0.0, "pagu": 0.0, "realisasi": 0.0}, "satker": [{"nama": "Ditjenbun Pusat", "target": 1175.0, "ditanam": 0.0, "pagu": 4856250000.0, "realisasi": 1264937063.0}, {"nama": "BBPPTP Surabaya", "target": 300.0, "ditanam": 0.0, "pagu": 615000000.0, "realisasi": 0.0}, {"nama": "BBPPTP Ambon", "target": 200.0, "ditanam": 0.0, "pagu": 440000000.0, "realisasi": 415772700.0}], "provinsi": [{"nama": "PAPUA TENGAH", "target": 400.0, "ditanam": 0.0, "pagu": 1580000000.0, "realisasi": 0.0}, {"nama": "RIAU", "target": 375.0, "ditanam": 0.0, "pagu": 1696250000.0, "realisasi": 169244963.0}, {"nama": "PAPUA", "target": 300.0, "ditanam": 0.0, "pagu": 1185000000.0, "realisasi": 1095692100.0}, {"nama": "SULAWESI TENGAH", "target": 300.0, "ditanam": 0.0, "pagu": 615000000.0, "realisasi": 0.0}, {"nama": "SULAWESI UTARA", "target": 200.0, "ditanam": 0.0, "pagu": 440000000.0, "realisasi": 415772700.0}, {"nama": "PAPUA BARAT DAYA", "target": 100.0, "ditanam": 0.0, "pagu": 395000000.0, "realisasi": 0.0}], "jenis": [{"nama": "Penataan", "target": 1400.0, "ditanam": 0.0, "pagu": 4440000000.0, "realisasi": 1680709763.0}, {"nama": "Perluasan", "target": 275.0, "ditanam": 0.0, "pagu": 1383250000.0, "realisasi": 0.0}]}, {"nama": "Karet", "target": 0.0, "ditanam": 0.0, "pagu": 0.0, "realisasi": 0.0, "abt": {"target": 1122.0, "ditanam": 0.0, "pagu": 21221280000.0, "realisasi": 0.0}, "satker": [], "provinsi": [], "jenis": []}], "pendukung": {"target": 7050.0, "ditanam": 0.0, "pagu": 6836381000.0, "realisasi": 1570656491.0}}};
+// ---------------------------------------------------------------- format
+function formatAngka(v, desimalPaksa) {
+  if (v === null || v === undefined || v === "") return "";
+  const n = Number(v);
+  if (Number.isNaN(n)) return String(v);
+  const d = desimalPaksa !== undefined ? desimalPaksa : (Number.isInteger(n) ? 0 : 2);
+  return n.toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
+}
+function formatRupiah(v) {
+  if (v === null || v === undefined || v === "") return "";
+  return "Rp " + formatAngka(v, 0);
+}
+function formatPersen(v) {
+  if (v === null || v === undefined || v === "") return "";
+  return (Number(v) * 100).toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "%";
+}
+function isKolomKode(nama) {
+  const c = String(nama).toUpperCase();
+  return c.startsWith("KODE") || c.endsWith("_ID") || c === "ID" || c === "NO";
+}
+function formatCell(nama, nilai) {
+  if (nilai === null || nilai === undefined || nilai === "") return "";
+  if (typeof nilai !== "number") return String(nilai);
+  if (isKolomKode(nama)) return String(nilai);
+  const c = String(nama).toUpperCase();
+  if (c.startsWith("%") || c.includes("PERSEN")) return formatPersen(nilai);
+  const kataUang = ["ANGGARAN", "PAGU", "REALISASI_SP2D", "SISA", "HARGA", "KELEBIHAN"];
+  if (kataUang.some((k) => c.includes(k))) return formatRupiah(nilai);
+  return formatAngka(nilai);
+}
+function kelasSel(nama, nilai) {
+  return typeof nilai === "number" && !isKolomKode(nama) ? "num" : "";
+}
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function el(tag, attrs, ...anak) {
+  const n = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    if (k === "class") n.className = attrs[k];
+    else if (k === "html") n.innerHTML = attrs[k];
+    else n.setAttribute(k, attrs[k]);
+  }
+  for (const a of anak) {
+    if (a === null || a === undefined) continue;
+    n.appendChild(typeof a === "string" ? document.createTextNode(a) : a);
+  }
+  return n;
+}
+
+
+// ---------------------------------------------------------------- halaman Jejak (beranda)
+function pecah(a, b) { return b ? a / b : 0; }
+function meter(label, pecahan, nilaiTeks, sub, emas) {
+  const lebar = Math.min(100, Math.max(pecahan > 0 ? 1.5 : 0, pecahan * 100));
+  return el("div", { class: "meter" },
+    el("div", { class: "meter-head" }, el("span", {}, label), el("span", { class: "v" }, nilaiTeks)),
+    el("div", { class: "track" }, el("div", { class: "fill" + (emas ? " emas" : ""), style: `width:${lebar}%` })),
+    sub ? el("div", { class: "meter-sub" }, sub) : null);
+}
+function rupiahSingkat(v) {
+  const n = Number(v) || 0;
+  if (n >= 1e12) return "Rp" + formatAngka(n / 1e12, 2) + " T";
+  if (n >= 1e9) return "Rp" + formatAngka(n / 1e9, 1) + " M";
+  if (n >= 1e6) return "Rp" + formatAngka(n / 1e6, 1) + " jt";
+  return formatRupiah(n);
+}
+function statusKomoditas(k) {
+  if (!k.target) return { teks: "Hanya ABT", kls: "netral" };
+  const tanam = pecah(k.ditanam, k.target);
+  if (tanam >= 0.5) return { teks: "Berjalan baik", kls: "baik" };
+  if (k.ditanam > 0 || k.realisasi > 0) return { teks: "Perlu dipercepat", kls: "" };
+  return { teks: "Belum mulai", kls: "buruk" };
+}
+function narasiKomoditas(k) {
+  const bagian = [];
+  if (k.target) {
+    bagian.push(`Lahan yang sudah ditanam ${formatPersen(pecah(k.ditanam, k.target))} dari sasaran, sedangkan anggaran yang sudah terbayar ${formatPersen(pecah(k.realisasi, k.pagu))} dari pagu.`);
+  } else {
+    bagian.push("Komoditas ini baru punya kegiatan dari sumber dana ABT, yang belum punya pelaporan fisik.");
+  }
+  if (k.abt && (k.abt.target || k.abt.pagu)) {
+    bagian.push(`Tambahan ABT: ${formatAngka(k.abt.target)} Ha dengan pagu ${rupiahSingkat(k.abt.pagu)} (belum ada pelaporan fisik).`);
+  }
+  return bagian.join(" ");
+}
+
+function halamanJejak() {
+  const J = D.jejak;
+  const komoditas = J.komoditas;
+  const st = { aktif: 0, metrik: "ditanam", provKom: "Semua" };
+  const root = el("div");
+
+  const totTarget = komoditas.reduce((a, k) => a + k.target, 0);
+  const totDitanam = komoditas.reduce((a, k) => a + k.ditanam, 0);
+  const totNas = D.rekap.nasional.total;
+
+  // ---- hero
+  const hero = el("section", { class: "hero" }, el("div", { class: "wrap" },
+    el("div", { class: "kicker" }, `Pemantauan Bantuan Ditjenbun ${D.meta.tahun}`),
+    el("h1", {}, `Jejak bantuan perkebunan ${D.meta.tahun}`),
+    el("p", { class: "lede" }, "Telusuri sampai mana bantuan perkebunan sudah berjalan: berapa lahan yang sudah ditanam, berapa anggaran yang sudah terbayar, dan siapa yang mengerjakan."),
+    el("div", { class: "hero-kpi" },
+      el("div", {}, el("div", { class: "n" }, formatPersen(pecah(totDitanam, totTarget))), el("div", { class: "t" }, `lahan sudah ditanam: ${formatAngka(totDitanam)} dari ${formatAngka(totTarget)} Ha sasaran`)),
+      el("div", {}, el("div", { class: "n" }, formatPersen(totNas.realisasiPersen)), el("div", { class: "t" }, `anggaran terbayar: ${rupiahSingkat(totNas.realisasiRp)} dari ${rupiahSingkat(totNas.pagu)}`)),
+      el("div", {}, el("div", { class: "n" }, `${komoditas.length} komoditas`), el("div", { class: "t" }, `di ${D.daftarProvinsi.length} provinsi, dikerjakan ${D.sheets.satker.baris.length} satker`))
+    ),
+    el("div", { class: "hero-box", html: `<b>Data per ${esc(D.meta.tanggalTeks)}</b> — dari hasil integrasi Monev (${esc(D.meta.berkasSumber)}).` }),
+    el("div", { class: "hero-act" },
+      el("a", { class: "btn-hero", href: "#/rekap/nasional" }, "Rekap nasional (PDF)"),
+      el("a", { class: "btn-hero garis", href: "#/rekap/provinsi" }, "Lihat per provinsi"))
+  ));
+  root.appendChild(hero);
+
+  const isi = el("div", { class: "wrap" });
+  root.appendChild(isi);
+
+  function chipKomoditas(pilihan, aktifNama, saatPilih, denganSemua) {
+    const w = el("div", { class: "chips" });
+    const daftar = (denganSemua ? [{ nama: "Semua" }] : []).concat(pilihan);
+    daftar.forEach((k) => {
+      const c = el("button", { class: "chip" + (k.nama === aktifNama ? " on" : "") }, el("i"), k.nama);
+      c.addEventListener("click", () => saatPilih(k.nama));
+      w.appendChild(c);
+    });
+    return w;
+  }
+
+  function barisBar(nama, pecahan, nilaiTeks, href) {
+    return el(href ? "a" : "div", href ? { class: "baris", href } : { class: "baris" },
+      el("div", { class: "nm", title: nama }, nama),
+      el("div", { class: "track" }, el("div", { class: "fill", style: `width:${Math.min(100, Math.max(pecahan > 0 ? 1.5 : 0, pecahan * 100))}%` })),
+      el("div", { class: "nilai" }, nilaiTeks));
+  }
+
+  function seksiPilih() {
+    const k = komoditas[st.aktif];
+    const s = statusKomoditas(k);
+    const sec = el("section", { class: "bagian" });
+    sec.appendChild(el("h2", {}, "Pilih komoditas"));
+    sec.appendChild(el("p", { class: "ket" }, "Ketuk salah satu komoditas untuk melihat posisinya dan siapa yang mengerjakan."));
+    sec.appendChild(chipKomoditas(komoditas, k.nama, (nm) => { st.aktif = komoditas.findIndex((x) => x.nama === nm); muat(); }, false));
+
+    const kartu = el("div", { class: "kartu" });
+    kartu.appendChild(el("div", { class: "kartu-head" }, el("h3", {}, k.nama), el("span", { class: "pill " + s.kls }, s.teks)));
+    kartu.appendChild(el("div", { class: "sasaran" }, k.target ? `Sasaran ${formatAngka(k.target)} Ha` : "Belum ada sasaran fisik reguler"));
+    kartu.appendChild(el("p", { class: "narasi" }, narasiKomoditas(k)));
+
+    const kiri = el("div");
+    if (k.target) kiri.appendChild(meter("Lahan ditanam", pecah(k.ditanam, k.target), formatPersen(pecah(k.ditanam, k.target)), `${formatAngka(k.ditanam)} Ha dari ${formatAngka(k.target)} Ha`, true));
+    kiri.appendChild(meter("Anggaran terbayar", pecah(k.realisasi, k.pagu), formatPersen(pecah(k.realisasi, k.pagu)), `${rupiahSingkat(k.realisasi)} dari ${rupiahSingkat(k.pagu)} (SP2D)`, false));
+
+    const kanan = el("div");
+    if (k.satker.length) {
+      kanan.appendChild(el("div", { class: "sub-judul" }, "Siapa yang mengerjakan (Ha ditanam / sasaran)"));
+      k.satker.forEach((x) => kanan.appendChild(barisBar(x.nama, pecah(x.ditanam, x.target), `${formatAngka(x.ditanam)} / ${formatAngka(x.target)} Ha`)));
+    }
+    kartu.appendChild(el("div", { class: "kolom2" }, kiri, kanan));
+
+    if (k.jenis.length) {
+      const j = el("div", { style: "margin-top:18px" });
+      j.appendChild(el("div", { class: "sub-judul" }, "Menurut jenis kegiatan"));
+      k.jenis.forEach((x) => j.appendChild(barisBar(x.nama, pecah(x.ditanam, x.target), `${formatAngka(x.ditanam)} / ${formatAngka(x.target)} Ha`)));
+      kartu.appendChild(j);
+    }
+    sec.appendChild(kartu);
+    return sec;
+  }
+
+  function seksiBandingkan() {
+    const sec = el("section", { class: "bagian" });
+    sec.appendChild(el("h2", {}, "Bandingkan semua komoditas"));
+    sec.appendChild(el("p", { class: "ket" }, "Pilih ukuran yang ingin dibandingkan. Ketuk nama komoditas untuk membuka rinciannya."));
+    const w = el("div", { class: "chips" });
+    [["ditanam", "Lahan ditanam"], ["anggaran", "Anggaran terbayar"]].forEach(([kunci, label]) => {
+      const c = el("button", { class: "chip" + (st.metrik === kunci ? " on" : "") }, label);
+      c.addEventListener("click", () => { st.metrik = kunci; muat(); });
+      w.appendChild(c);
+    });
+    sec.appendChild(w);
+    const kartu = el("div", { class: "kartu" });
+    komoditas.forEach((k, i) => {
+      let pec, teks;
+      if (st.metrik === "ditanam") {
+        if (!k.target) return;
+        pec = pecah(k.ditanam, k.target); teks = `${formatPersen(pec)} · ${formatAngka(k.ditanam)} Ha`;
+      } else {
+        if (!k.pagu) return;
+        pec = pecah(k.realisasi, k.pagu); teks = `${formatPersen(pec)} · ${rupiahSingkat(k.realisasi)}`;
+      }
+      const b = barisBar(k.nama, pec, teks);
+      b.style.cursor = "pointer";
+      b.addEventListener("click", () => { st.aktif = i; muat(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+      kartu.appendChild(b);
+    });
+    kartu.appendChild(el("div", { class: "catatan" }, st.metrik === "ditanam"
+      ? "Lahan sudah ditanam dibanding sasaran reguler tahun ini. ABT belum punya pelaporan fisik."
+      : "Realisasi SP2D dibanding pagu (akun 526) per komoditas, tanpa ABT."));
+    sec.appendChild(kartu);
+    return sec;
+  }
+
+  function seksiProvinsi() {
+    const sec = el("section", { class: "bagian" });
+    sec.appendChild(el("h2", {}, "Sebaran per provinsi"));
+    sec.appendChild(el("p", { class: "ket" }, "Luas sasaran tiap provinsi. Ketuk provinsi untuk membuka rekap bantuannya dan mencetaknya sebagai PDF."));
+    sec.appendChild(chipKomoditas(komoditas.filter((k) => k.target), st.provKom, (nm) => { st.provKom = nm; muat(); }, true));
+
+    const agg = {};
+    komoditas.forEach((k) => {
+      if (st.provKom !== "Semua" && k.nama !== st.provKom) return;
+      k.provinsi.forEach((p) => {
+        const a = agg[p.nama] || (agg[p.nama] = { nama: p.nama, target: 0, ditanam: 0 });
+        a.target += p.target; a.ditanam += p.ditanam;
+      });
+    });
+    const daftar = Object.values(agg).filter((p) => p.target > 0).sort((a, b) => b.target - a.target);
+    const maks = daftar.length ? daftar[0].target : 1;
+    const kartu = el("div", { class: "kartu" });
+    daftar.forEach((p) => kartu.appendChild(barisBar(p.nama, p.target / maks,
+      `${formatAngka(p.target)} Ha · ${formatPersen(pecah(p.ditanam, p.target))}`, `#/rekap/provinsi/${encodeURIComponent(p.nama)}`)));
+    if (!daftar.length) kartu.appendChild(el("p", {}, "Belum ada sasaran untuk pilihan ini."));
+    kartu.appendChild(el("div", { class: "catatan" }, "Bar = luas sasaran (Ha); angka di kanan = sasaran dan persen ditanam."));
+    sec.appendChild(kartu);
+    return sec;
+  }
+
+  function muat() {
+    isi.innerHTML = "";
+    isi.appendChild(seksiPilih());
+    isi.appendChild(seksiBandingkan());
+    isi.appendChild(seksiProvinsi());
+    if (J.pendukung && (J.pendukung.pagu || J.pendukung.target)) {
+      const p = J.pendukung;
+      isi.appendChild(el("p", { class: "catatan", style: "margin-top:18px" },
+        `Kegiatan pendukung (kebun benih sebar, regu OPT, desa organik, dll.): pagu ${rupiahSingkat(p.pagu)}, terbayar ${rupiahSingkat(p.realisasi)} (${formatPersen(pecah(p.realisasi, p.pagu))}). Lihat rincian di Rekap Nasional.`));
+    }
+  }
+  muat();
+  return root;
+}
+
+
+document.getElementById("brandSub").textContent = "Data per " + D.meta.tanggalTeks;
+document.getElementById("konten").appendChild(halamanJejak());
+</script>
+</body>
+</html>
