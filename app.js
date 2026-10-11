@@ -256,7 +256,7 @@ function halamanJejak() {
   return root;
 }
 
-function tabelLaporan(rekap) {
+function tabelLaporan(rekap, tambahan) {
   const w = el("div", { class: "laporan area-cetak" });
   w.appendChild(el("h2", {}, rekap.judul));
   if (rekap.subjudul) w.appendChild(el("div", { class: "laporan-subjudul" }, rekap.subjudul));
@@ -300,7 +300,71 @@ function tabelLaporan(rekap) {
     `Kegiatan/Bantuan dikelompokkan per RO: "Kawasan <Komoditas>" untuk kegiatan tanam, ditambah akhiran "(ABT)" bila sumber dana ABT; kegiatan pendukung berdiri sendiri sesuai nama RO-nya. ` +
     `Volume/Realisasi Volume dalam Ha (TARGET_FISIK_HA/REALISASI_TANAM_HA). Pagu/Realisasi (Rp) dari akun 526 (ANGGARAN/REALISASI_SP2D).`
   ));
+  if (tambahan) w.appendChild(tambahan);
   return w;
+}
+
+// Rincian per kabupaten/kota untuk satu provinsi, dengan pilihan Kegiatan/Bantuan.
+function seksiKabupaten(provinsi) {
+  const K = D.rekap.kabupaten && D.rekap.kabupaten[provinsi];
+  if (!K || !K.baris.length) return null;
+  const blok = el("div", { class: "kab-blok" });
+  blok.appendChild(el("h3", { class: "kab-judul" }, `Rincian per Kabupaten/Kota — ${provinsi}`));
+
+  const sel = el("select");
+  sel.appendChild(el("option", { value: "-1" }, "Semua Kegiatan/Bantuan"));
+  K.kegiatan.forEach((nama, i) => sel.appendChild(el("option", { value: String(i) }, nama)));
+  blok.appendChild(el("div", { class: "kab-filter no-print" }, el("label", {}, "Tampilkan:"), sel));
+  const ketCetak = el("div", { class: "kab-cetak-ket" });
+  blok.appendChild(ketCetak);
+  const tempat = el("div");
+  blok.appendChild(tempat);
+
+  function gambar() {
+    const pilih = Number(sel.value);
+    const agg = {};
+    K.baris.forEach(([kab, ik, target, ditanam, pagu, real]) => {
+      if (pilih >= 0 && ik !== pilih) return;
+      const a = agg[kab] || (agg[kab] = { kab, target: 0, ditanam: 0, pagu: 0, real: 0 });
+      a.target += target; a.ditanam += ditanam; a.pagu += pagu; a.real += real;
+    });
+    const daftar = Object.values(agg).sort((a, b) => b.pagu - a.pagu || b.target - a.target || a.kab.localeCompare(b.kab, "id"));
+    ketCetak.textContent = pilih >= 0 ? `Kegiatan/Bantuan: ${K.kegiatan[pilih]}` : "Semua Kegiatan/Bantuan";
+
+    const table = el("table", { class: "laporan-tabel" });
+    table.appendChild(el("thead", {}, el("tr", {},
+      ...["No", "Kabupaten/Kota", "Sasaran (Ha)", "Ditanam (Ha)", "Ditanam (%)", "Pagu (Rp)", "Realisasi (Rp)", "Realisasi (%)"].map((h) => el("th", {}, h)))));
+    const tbody = el("tbody");
+    daftar.forEach((a, i) => tbody.appendChild(el("tr", {},
+      el("td", { class: "num" }, String(i + 1)),
+      el("td", { class: "teks" }, a.kab),
+      el("td", { class: "num" }, formatAngka(a.target)),
+      el("td", { class: "num" }, formatAngka(a.ditanam)),
+      el("td", { class: "num" }, formatPersen(a.target ? a.ditanam / a.target : 0)),
+      el("td", { class: "num" }, formatAngka(a.pagu, 0)),
+      el("td", { class: "num" }, formatAngka(a.real, 0)),
+      el("td", { class: "num" }, formatPersen(a.pagu ? a.real / a.pagu : 0)))));
+    table.appendChild(tbody);
+
+    const jml = daftar.reduce((s, a) => ({ target: s.target + a.target, ditanam: s.ditanam + a.ditanam, pagu: s.pagu + a.pagu, real: s.real + a.real }),
+      { target: 0, ditanam: 0, pagu: 0, real: 0 });
+    // Ha antar kegiatan berbeda tidak dijumlah (sama seperti rekap di atas); hanya bila satu kegiatan dipilih.
+    const tampilHa = pilih >= 0;
+    table.appendChild(el("tfoot", {}, el("tr", {},
+      el("td", {}, ""),
+      el("td", { class: "teks" }, `Jumlah (${daftar.length} kab/kota)`),
+      el("td", { class: "num" }, tampilHa ? formatAngka(jml.target) : ""),
+      el("td", { class: "num" }, tampilHa ? formatAngka(jml.ditanam) : ""),
+      el("td", { class: "num" }, tampilHa ? formatPersen(jml.target ? jml.ditanam / jml.target : 0) : ""),
+      el("td", { class: "num" }, formatAngka(jml.pagu, 0)),
+      el("td", { class: "num" }, formatAngka(jml.real, 0)),
+      el("td", { class: "num" }, formatPersen(jml.pagu ? jml.real / jml.pagu : 0)))));
+    tempat.innerHTML = "";
+    tempat.appendChild(table);
+  }
+  sel.addEventListener("change", gambar);
+  gambar();
+  return blok;
 }
 
 function tombolCetak() {
@@ -342,7 +406,7 @@ function halamanRekapProvinsi(nama) {
   const btnKembali = el("button", { class: "btn sekunder" }, "‹ Semua provinsi");
   btnKembali.addEventListener("click", () => { location.hash = "#/rekap/provinsi"; });
   w.appendChild(el("div", { class: "rekap-toolbar no-print" }, btnKembali, tombolCetak()));
-  w.appendChild(tabelLaporan(rekap));
+  w.appendChild(tabelLaporan(rekap, seksiKabupaten(nama)));
   return w;
 }
 
