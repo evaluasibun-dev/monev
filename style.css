@@ -156,3 +156,7 @@ table.laporan-tabel tfoot td{font-weight:800;background:#E3EEE6;}
   .kab-cetak-ket{display:block;}
   .laporan{overflow:visible;}
 }
+
+/* kolom Kabupaten/Kota pada tabel rekap provinsi */
+table.laporan-tabel td.kab{font-size:12px;line-height:1.35;min-width:240px;max-width:380px;}
+@media print{table.laporan-tabel td.kab{font-size:9.5px;}}

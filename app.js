@@ -262,15 +262,17 @@ function tabelLaporan(rekap, tambahan) {
   if (rekap.subjudul) w.appendChild(el("div", { class: "laporan-subjudul" }, rekap.subjudul));
   const table = el("table", { class: "laporan-tabel" });
   const thead = el("thead");
-  thead.appendChild(el("tr", {},
-    ...["No", "Kegiatan/Bantuan", "Volume", "Satuan", "Pagu (Rp)", "Realisasi Volume", "Realisasi Volume (%)", "Realisasi (Rp)", "Realisasi (%)"].map((h) => el("th", {}, h))
-  ));
+  // Tabel provinsi punya kolom Kabupaten/Kota (daftar kabupaten tempat kegiatan berada).
+  const adaKab = rekap.baris.some((b) => b.kabupaten);
+  const kolom = ["No", "Kegiatan/Bantuan", ...(adaKab ? ["Kabupaten/Kota"] : []), "Volume", "Satuan", "Pagu (Rp)", "Realisasi Volume", "Realisasi Volume (%)", "Realisasi (Rp)", "Realisasi (%)"];
+  thead.appendChild(el("tr", {}, ...kolom.map((h) => el("th", {}, h))));
   table.appendChild(thead);
   const tbody = el("tbody");
   rekap.baris.forEach((b, i) => {
     tbody.appendChild(el("tr", {},
       el("td", { class: "num" }, String(i + 1)),
       el("td", { class: "teks" }, b.kegiatan),
+      adaKab ? el("td", { class: "teks kab" }, (b.kabupaten || []).join(", ")) : null,
       el("td", { class: "num" }, formatAngka(b.volume)),
       el("td", {}, "Hektar"),
       el("td", { class: "num" }, formatAngka(b.pagu, 0)),
@@ -285,6 +287,7 @@ function tabelLaporan(rekap, tambahan) {
   tfoot.appendChild(el("tr", {},
     el("td", {}, ""),
     el("td", { class: "teks" }, D.rekap.labelTotal),
+    adaKab ? el("td", {}, "") : null,
     el("td", {}, ""),
     el("td", {}, ""),
     el("td", { class: "num" }, formatAngka(rekap.total.pagu, 0)),
