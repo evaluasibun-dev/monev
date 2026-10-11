@@ -395,6 +395,12 @@ function seksiKabupaten(provinsi) {
   return blok;
 }
 
+// Nama berkas PDF dari dialog cetak peramban diambil dari judul halaman:
+// "Banper Ditjenbun 2026 - Nasional" / "Banper Ditjenbun 2026 - <Nama Provinsi>".
+const JUDUL_AWAL = document.title;
+function judulKapital(s) { return String(s).toLowerCase().replace(/(^|\s)\S/g, (m) => m.toUpperCase()); }
+function setJudulBerkas(lingkup) { document.title = `Banper Ditjenbun ${D.meta.tahun} - ${lingkup}`; }
+
 function tombolCetak() {
   const btn = el("button", { class: "btn" }, "Cetak / Simpan PDF");
   btn.addEventListener("click", () => window.print());
@@ -403,7 +409,8 @@ function tombolCetak() {
 
 function halamanRekapNasional() {
   const w = el("div");
-  w.appendChild(halamanJudul("Rekap Nasional", "Rekap Kegiatan/Bantuan Ditjen Perkebunan seluruh Indonesia — format sama seperti laporan bantuan provinsi."));
+  setJudulBerkas("Nasional");
+  w.appendChild(halamanJudul("Rekap Nasional","Rekap Kegiatan/Bantuan Ditjen Perkebunan seluruh Indonesia — format sama seperti laporan bantuan provinsi."));
   w.appendChild(el("div", { class: "rekap-toolbar no-print" }, tombolCetak()));
   w.appendChild(tabelLaporan(D.rekap.nasional));
   return w;
@@ -430,6 +437,7 @@ function halamanRekapProvinsi(nama) {
   const rekap = D.rekap.provinsi[nama];
   const w = el("div");
   if (!rekap) { w.appendChild(halamanJudul("Provinsi tidak ditemukan")); return w; }
+  setJudulBerkas(judulKapital(nama));
   w.appendChild(halamanJudul(`Rekap Provinsi ${esc(nama)}`));
   const btnKembali = el("button", { class: "btn sekunder" }, "‹ Semua provinsi");
   btnKembali.addEventListener("click", () => { location.hash = "#/rekap/provinsi"; });
@@ -467,6 +475,7 @@ function urai(hash) {
 
 function render() {
   const b = urai(location.hash);
+  document.title = JUDUL_AWAL;
   let halaman, routeAktif = "jejak";
 
   if (b[0] === "rekap" && b[1] === "nasional") {
