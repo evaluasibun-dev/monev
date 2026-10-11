@@ -157,6 +157,12 @@ table.laporan-tabel tfoot td{font-weight:800;background:#E3EEE6;}
   .laporan{overflow:visible;}
 }
 
-/* kolom Kabupaten/Kota pada tabel rekap provinsi */
-table.laporan-tabel td.kab{font-size:12px;line-height:1.35;min-width:240px;max-width:380px;}
-@media print{table.laporan-tabel td.kab{font-size:9.5px;}}
+/* baris induk (kegiatan) dan baris per kabupaten pada tabel rekap provinsi */
+table.laporan-tabel td.kab{min-width:160px;}
+table.laporan-tabel tbody tr.baris-induk td{font-weight:800;background:#EEF5EF;}
+table.laporan-tabel tbody tr.baris-kab td{font-size:12.5px;background:#fff;color:#2b3530;}
+table.laporan-tabel tbody tr.baris-kab td.kab{padding-left:22px;}
+@media print{
+  table.laporan-tabel tbody tr.baris-kab td{font-size:10px;padding:3px 8px;}
+  table.laporan-tabel tbody tr{break-inside:avoid;page-break-inside:avoid;}
+}

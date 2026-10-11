@@ -256,23 +256,34 @@ function halamanJejak() {
   return root;
 }
 
-function tabelLaporan(rekap, tambahan) {
+function tabelLaporan(rekap, tambahan, provinsi) {
   const w = el("div", { class: "laporan area-cetak" });
   w.appendChild(el("h2", {}, rekap.judul));
   if (rekap.subjudul) w.appendChild(el("div", { class: "laporan-subjudul" }, rekap.subjudul));
   const table = el("table", { class: "laporan-tabel" });
   const thead = el("thead");
-  // Tabel provinsi punya kolom Kabupaten/Kota (daftar kabupaten tempat kegiatan berada).
-  const adaKab = rekap.baris.some((b) => b.kabupaten);
+  // Tabel provinsi: tiap Kegiatan/Bantuan (baris induk) diikuti satu baris per
+  // kabupaten/kota, masing-masing dengan angkanya sendiri. Jumlah di bawah hanya
+  // menjumlah baris induk, jadi tidak terhitung dua kali.
+  const K = provinsi && D.rekap.kabupaten ? D.rekap.kabupaten[provinsi] : null;
+  const adaKab = !!K;
   const kolom = ["No", "Kegiatan/Bantuan", ...(adaKab ? ["Kabupaten/Kota"] : []), "Volume", "Satuan", "Pagu (Rp)", "Realisasi Volume", "Realisasi Volume (%)", "Realisasi (Rp)", "Realisasi (%)"];
   thead.appendChild(el("tr", {}, ...kolom.map((h) => el("th", {}, h))));
   table.appendChild(thead);
   const tbody = el("tbody");
   rekap.baris.forEach((b, i) => {
-    tbody.appendChild(el("tr", {},
+    const anak = [];
+    if (K) {
+      const ik = K.kegiatan.indexOf(b.kegiatan);
+      K.baris.forEach(([kab, idx, target, ditanam, pagu, real]) => {
+        if (idx === ik) anak.push({ kab, target, ditanam, pagu, real });
+      });
+      anak.sort((x, y) => y.pagu - x.pagu || y.target - x.target || x.kab.localeCompare(y.kab, "id"));
+    }
+    tbody.appendChild(el("tr", { class: "baris-induk" },
       el("td", { class: "num" }, String(i + 1)),
       el("td", { class: "teks" }, b.kegiatan),
-      adaKab ? el("td", { class: "teks kab" }, (b.kabupaten || []).join(", ")) : null,
+      adaKab ? el("td", { class: "teks kab" }, anak.length ? `${anak.length} kab/kota` : "") : null,
       el("td", { class: "num" }, formatAngka(b.volume)),
       el("td", {}, "Hektar"),
       el("td", { class: "num" }, formatAngka(b.pagu, 0)),
@@ -281,6 +292,20 @@ function tabelLaporan(rekap, tambahan) {
       el("td", { class: "num" }, formatAngka(b.realisasiRp, 0)),
       el("td", { class: "num" }, formatPersen(b.realisasiPersen))
     ));
+    anak.forEach((a) => {
+      tbody.appendChild(el("tr", { class: "baris-kab" },
+        el("td", {}, ""),
+        el("td", {}, ""),
+        el("td", { class: "teks kab" }, a.kab),
+        el("td", { class: "num" }, formatAngka(a.target)),
+        el("td", {}, "Hektar"),
+        el("td", { class: "num" }, formatAngka(a.pagu, 0)),
+        el("td", { class: "num" }, formatAngka(a.ditanam)),
+        el("td", { class: "num" }, formatPersen(a.target ? a.ditanam / a.target : 0)),
+        el("td", { class: "num" }, formatAngka(a.real, 0)),
+        el("td", { class: "num" }, formatPersen(a.pagu ? a.real / a.pagu : 0))
+      ));
+    });
   });
   table.appendChild(tbody);
   const tfoot = el("tfoot");
@@ -409,7 +434,7 @@ function halamanRekapProvinsi(nama) {
   const btnKembali = el("button", { class: "btn sekunder" }, "‹ Semua provinsi");
   btnKembali.addEventListener("click", () => { location.hash = "#/rekap/provinsi"; });
   w.appendChild(el("div", { class: "rekap-toolbar no-print" }, btnKembali, tombolCetak()));
-  w.appendChild(tabelLaporan(rekap, seksiKabupaten(nama)));
+  w.appendChild(tabelLaporan(rekap, seksiKabupaten(nama), nama));
   return w;
 }
 
