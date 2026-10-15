@@ -112,8 +112,8 @@ a.baris:hover .nm{color:var(--leaf);text-decoration:underline;}
 .laporan{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;overflow-x:auto;}
 .laporan h2{text-align:center;font-size:16px;font-weight:800;margin:0 0 4px;text-transform:uppercase;color:#111;}
 .laporan-subjudul{text-align:center;font-size:16px;font-weight:800;margin:0 0 18px;text-transform:uppercase;color:#111;}
-table.laporan-tabel{border-collapse:collapse;width:100%;font-size:13px;min-width:760px;}
-table.laporan-tabel th,table.laporan-tabel td{border:1px solid #AEBBB0;padding:7px 10px;}
+table.laporan-tabel{border-collapse:collapse;width:100%;font-size:12px;min-width:1500px;}
+table.laporan-tabel th,table.laporan-tabel td{border:1px solid #AEBBB0;padding:6px 8px;}
 table.laporan-tabel thead th{background:#E3EEE6;font-weight:800;text-align:center;color:var(--forest);}
 table.laporan-tabel td.num{text-align:right;font-variant-numeric:tabular-nums;}
 table.laporan-tabel td.teks{text-align:left;}
@@ -141,8 +141,9 @@ table.laporan-tabel tfoot td{font-weight:800;background:#E3EEE6;}
   .area-cetak,.area-cetak *{visibility:visible;}
   .area-cetak{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;border:none;}
   .no-print{display:none !important;}
-  table.laporan-tabel{font-size:11px;min-width:0;}
-  @page{size:A4;margin:14mm 12mm;}
+  table.laporan-tabel{font-size:7.5px;min-width:0;}
+  table.laporan-tabel th,table.laporan-tabel td{padding:2px 3px;}
+  @page{size:A4 landscape;margin:8mm 7mm;}
 }
 
 /* ---------------- rincian per kabupaten ---------------- */
@@ -158,11 +159,11 @@ table.laporan-tabel tfoot td{font-weight:800;background:#E3EEE6;}
 }
 
 /* baris induk (kegiatan) dan baris per kabupaten pada tabel rekap provinsi */
-table.laporan-tabel td.kab{min-width:160px;}
+table.laporan-tabel td.kab{min-width:130px;}
 table.laporan-tabel tbody tr.baris-induk td{font-weight:800;background:#EEF5EF;}
-table.laporan-tabel tbody tr.baris-kab td{font-size:12.5px;background:#fff;color:#2b3530;}
+table.laporan-tabel tbody tr.baris-kab td{font-size:11.5px;background:#fff;color:#2b3530;}
 table.laporan-tabel tbody tr.baris-kab td.kab{padding-left:22px;}
 @media print{
-  table.laporan-tabel tbody tr.baris-kab td{font-size:10px;padding:3px 8px;}
+  table.laporan-tabel tbody tr.baris-kab td{font-size:7px;padding:1px 3px;}
   table.laporan-tabel tbody tr{break-inside:avoid;page-break-inside:avoid;}
 }

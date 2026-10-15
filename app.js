@@ -256,77 +256,97 @@ function halamanJejak() {
   return root;
 }
 
+// Angka nol ditampilkan "-" supaya tabel yang lebar tetap mudah dibaca.
+function angkaNol(v, desimal) { return v ? formatAngka(v, desimal) : "-"; }
+function persenAnggaran(rp, pagu) { return pagu > 0 ? formatPersen(rp / pagu) : "-"; }
+
 function tabelLaporan(rekap, tambahan, provinsi) {
   const w = el("div", { class: "laporan area-cetak" });
   w.appendChild(el("h2", {}, rekap.judul));
   if (rekap.subjudul) w.appendChild(el("div", { class: "laporan-subjudul" }, rekap.subjudul));
   const table = el("table", { class: "laporan-tabel" });
-  const thead = el("thead");
   // Tabel provinsi: tiap Kegiatan/Bantuan (baris induk) diikuti satu baris per
-  // kabupaten/kota, masing-masing dengan angkanya sendiri. Jumlah di bawah hanya
-  // menjumlah baris induk, jadi tidak terhitung dua kali.
+  // kabupaten/kota. Jumlah di bawah hanya menjumlah baris induk (tidak dobel).
   const K = provinsi && D.rekap.kabupaten ? D.rekap.kabupaten[provinsi] : null;
   const adaKab = !!K;
-  const kolom = ["No", "Kegiatan/Bantuan", ...(adaKab ? ["Kabupaten/Kota"] : []), "Volume", "Satuan", "Pagu (Rp)", "Realisasi Volume", "Realisasi Volume (%)", "Realisasi (Rp)", "Realisasi (%)"];
-  thead.appendChild(el("tr", {}, ...kolom.map((h) => el("th", {}, h))));
+  // Pemisahan Non Bencana/Bencana hanya untuk provinsi terdampak (Aceh, Sumut, Sumbar) dan nasional.
+  const adaBencana = !provinsi || (D.rekap.provinsiBencana || []).includes(provinsi);
+  const th = (teks, atr) => el("th", atr || {}, teks);
+  const sub = ["Volume", "Rp", "%"];
+  const kelompokReal = adaBencana ? ["Realisasi Total", "Realisasi Non Bencana", "Realisasi Bencana"] : ["Realisasi"];
+  const kepala1 = [th("No", { rowspan: "2" }), th("Kegiatan/Bantuan", { rowspan: "2" }),
+    ...(adaKab ? [th("Kabupaten/Kota", { rowspan: "2" })] : []),
+    th("Volume", { rowspan: "2" }), th("Satuan", { rowspan: "2" }),
+    th(adaBencana ? "Pagu Total (Rp)" : "Pagu (Rp)", { rowspan: "2" }),
+    ...(adaBencana ? [th("Pagu Non Bencana (Rp)", { rowspan: "2" }), th("Pagu Bencana (Rp)", { rowspan: "2" })] : []),
+    ...kelompokReal.map((n) => th(n, { colspan: "3" }))];
+  const thead = el("thead");
+  thead.appendChild(el("tr", {}, ...kepala1));
+  thead.appendChild(el("tr", {}, ...kelompokReal.flatMap(() => sub.map((s) => th(s)))));
   table.appendChild(thead);
+
+  const sel = (b) => [
+    el("td", { class: "num" }, angkaNol(b.volume)),
+    el("td", {}, b.satuan || "Hektar"),
+    el("td", { class: "num" }, formatAngka(b.paguTotal, 0)),
+    ...(adaBencana ? [el("td", { class: "num" }, angkaNol(b.paguNon, 0)), el("td", { class: "num" }, angkaNol(b.paguBencana, 0))] : []),
+    el("td", { class: "num" }, angkaNol(b.rvTotal)),
+    el("td", { class: "num" }, angkaNol(b.rpTotal, 0)),
+    el("td", { class: "num" }, persenAnggaran(b.rpTotal, b.paguTotal)),
+    ...(adaBencana ? [
+      el("td", { class: "num" }, angkaNol(b.rvNon)),
+      el("td", { class: "num" }, angkaNol(b.rpNon, 0)),
+      el("td", { class: "num" }, persenAnggaran(b.rpNon, b.paguNon)),
+      el("td", { class: "num" }, angkaNol(b.rvBencana)),
+      el("td", { class: "num" }, angkaNol(b.rpBencana, 0)),
+      el("td", { class: "num" }, persenAnggaran(b.rpBencana, b.paguBencana)),
+    ] : []),
+  ];
+
   const tbody = el("tbody");
   rekap.baris.forEach((b, i) => {
     const anak = [];
     if (K) {
       const ik = K.kegiatan.indexOf(b.kegiatan);
-      K.baris.forEach(([kab, idx, target, ditanam, pagu, real]) => {
-        if (idx === ik) anak.push({ kab, target, ditanam, pagu, real });
+      K.baris.forEach(([kab, idx, vNb, vB, pNb, pB, rvNb, rvB, rpNb, rpB]) => {
+        if (idx === ik) anak.push({ kab, satuan: b.satuan, volume: vNb + vB, paguNon: pNb, paguBencana: pB, paguTotal: pNb + pB,
+          rvNon: rvNb, rvBencana: rvB, rvTotal: rvNb + rvB, rpNon: rpNb, rpBencana: rpB, rpTotal: rpNb + rpB });
       });
-      anak.sort((x, y) => y.pagu - x.pagu || y.target - x.target || x.kab.localeCompare(y.kab, "id"));
+      anak.sort((x, y) => y.paguTotal - x.paguTotal || y.volume - x.volume || x.kab.localeCompare(y.kab, "id"));
     }
     tbody.appendChild(el("tr", { class: "baris-induk" },
       el("td", { class: "num" }, String(i + 1)),
       el("td", { class: "teks" }, b.kegiatan),
       adaKab ? el("td", { class: "teks kab" }, anak.length ? `${anak.length} kab/kota` : "") : null,
-      el("td", { class: "num" }, formatAngka(b.volume)),
-      el("td", {}, "Hektar"),
-      el("td", { class: "num" }, formatAngka(b.pagu, 0)),
-      el("td", { class: "num" }, formatAngka(b.realisasiVolume)),
-      el("td", { class: "num" }, formatPersen(b.realisasiVolumePersen)),
-      el("td", { class: "num" }, formatAngka(b.realisasiRp, 0)),
-      el("td", { class: "num" }, formatPersen(b.realisasiPersen))
-    ));
-    anak.forEach((a) => {
-      tbody.appendChild(el("tr", { class: "baris-kab" },
-        el("td", {}, ""),
-        el("td", {}, ""),
-        el("td", { class: "teks kab" }, a.kab),
-        el("td", { class: "num" }, formatAngka(a.target)),
-        el("td", {}, "Hektar"),
-        el("td", { class: "num" }, formatAngka(a.pagu, 0)),
-        el("td", { class: "num" }, formatAngka(a.ditanam)),
-        el("td", { class: "num" }, formatPersen(a.target ? a.ditanam / a.target : 0)),
-        el("td", { class: "num" }, formatAngka(a.real, 0)),
-        el("td", { class: "num" }, formatPersen(a.pagu ? a.real / a.pagu : 0))
-      ));
-    });
+      ...sel(b)));
+    anak.forEach((a) => tbody.appendChild(el("tr", { class: "baris-kab" },
+      el("td", {}, ""), el("td", {}, ""), el("td", { class: "teks kab" }, a.kab), ...sel(a))));
   });
   table.appendChild(tbody);
-  const tfoot = el("tfoot");
-  tfoot.appendChild(el("tr", {},
-    el("td", {}, ""),
-    el("td", { class: "teks" }, D.rekap.labelTotal),
-    adaKab ? el("td", {}, "") : null,
-    el("td", {}, ""),
-    el("td", {}, ""),
-    el("td", { class: "num" }, formatAngka(rekap.total.pagu, 0)),
-    el("td", {}, ""),
-    el("td", {}, ""),
-    el("td", { class: "num" }, formatAngka(rekap.total.realisasiRp, 0)),
-    el("td", { class: "num" }, formatPersen(rekap.total.realisasiPersen))
-  ));
-  table.appendChild(tfoot);
+
+  const t = rekap.total;
+  const kosong = () => el("td", {}, "");
+  table.appendChild(el("tfoot", {}, el("tr", {},
+    kosong(), el("td", { class: "teks" }, D.rekap.labelTotal), adaKab ? kosong() : null, kosong(), kosong(),
+    el("td", { class: "num" }, formatAngka(t.paguTotal, 0)),
+    ...(adaBencana ? [el("td", { class: "num" }, angkaNol(t.paguNon, 0)), el("td", { class: "num" }, angkaNol(t.paguBencana, 0))] : []),
+    kosong(), el("td", { class: "num" }, angkaNol(t.rpTotal, 0)), el("td", { class: "num" }, persenAnggaran(t.rpTotal, t.paguTotal)),
+    ...(adaBencana ? [
+      kosong(), el("td", { class: "num" }, angkaNol(t.rpNon, 0)), el("td", { class: "num" }, persenAnggaran(t.rpNon, t.paguNon)),
+      kosong(), el("td", { class: "num" }, angkaNol(t.rpBencana, 0)), el("td", { class: "num" }, persenAnggaran(t.rpBencana, t.paguBencana)),
+    ] : []))));
   w.appendChild(table);
+
+  const benih = D.rekap.adaProduksiBenih
+    ? " Baris Produksi Benih (Batang) dan Pembangunan/Pemeliharaan KBD Tebu berasal dari berkas Produksi Benih."
+    : " Baris Produksi Benih dan KBD Tebu belum ada (berkas Produksi Benih belum dipakai pada proses integrasi).";
+  const bencana = adaBencana
+    ? " Bencana: sumber dana ABT, serta kegiatan di kabupaten terdampak bencana."
+    : "";
   w.appendChild(el("p", { class: "laporan-ket" },
     `Sumber data: Data gabungan anggaran & fisik pada hasil integrasi Monev. ` +
-    `Kegiatan/Bantuan dikelompokkan per RO: "Kawasan <Komoditas>" untuk kegiatan tanam, ditambah akhiran "(ABT)" bila sumber dana ABT; kegiatan pendukung berdiri sendiri sesuai nama RO-nya. ` +
-    `Volume/Realisasi Volume dalam Ha (TARGET_FISIK_HA/REALISASI_TANAM_HA). Pagu/Realisasi (Rp) dari akun 526 (ANGGARAN/REALISASI_SP2D).`
+    `Kegiatan/Bantuan dikelompokkan per RO: "Kawasan <Komoditas>" untuk kegiatan tanam, ditambah akhiran "(ABT)" bila sumber dana ABT; kegiatan pendukung berdiri sendiri sesuai nama RO-nya.` + benih + bencana +
+    ` Realisasi Rp dari SP2D; persentase = realisasi Rp dibagi pagu.`
   ));
   if (tambahan) w.appendChild(tambahan);
   return w;
@@ -351,10 +371,10 @@ function seksiKabupaten(provinsi) {
   function gambar() {
     const pilih = Number(sel.value);
     const agg = {};
-    K.baris.forEach(([kab, ik, target, ditanam, pagu, real]) => {
+    K.baris.forEach(([kab, ik, vNb, vB, pNb, pB, rvNb, rvB, rpNb, rpB]) => {
       if (pilih >= 0 && ik !== pilih) return;
       const a = agg[kab] || (agg[kab] = { kab, target: 0, ditanam: 0, pagu: 0, real: 0 });
-      a.target += target; a.ditanam += ditanam; a.pagu += pagu; a.real += real;
+      a.target += vNb + vB; a.ditanam += rvNb + rvB; a.pagu += pNb + pB; a.real += rpNb + rpB;
     });
     const daftar = Object.values(agg).sort((a, b) => b.pagu - a.pagu || b.target - a.target || a.kab.localeCompare(b.kab, "id"));
     ketCetak.textContent = pilih >= 0 ? `Kegiatan/Bantuan: ${K.kegiatan[pilih]}` : "Semua Kegiatan/Bantuan";
@@ -452,9 +472,10 @@ function halamanTentang() {
   const kartu = el("div", { class: "kartu" });
   const baris = [
     ["Data per", D.meta.tanggalTeks],
-    ["Sumber", "Hasil integrasi Monev Ditjenbun: realisasi anggaran dari SAKTI dan FA16 (SP2D), target fisik dari SAT 3, realisasi tanam dari Hilirisasi."],
+    ["Sumber", "Hasil integrasi Monev Ditjenbun: realisasi anggaran dari SAKTI dan FA16 (SP2D), target fisik dari SAT 3, realisasi tanam dari Hilirisasi, serta data Produksi Benih dan KBD Tebu per kabupaten."],
     ["Lahan ditanam", "Realisasi tanam (Ha) dibanding sasaran fisik tahun ini. Hanya sumber dana reguler yang punya pelaporan fisik; ABT dicatat terpisah."],
-    ["Anggaran terbayar", "Realisasi SP2D dibanding pagu, khusus akun 526 (belanja yang diserahkan kepada masyarakat/pemda)."],
+    ["Anggaran terbayar", "Realisasi dibanding pagu. Kawasan dan kegiatan pendukung memakai SP2D akun 526 (belanja yang diserahkan kepada masyarakat/pemda); Produksi Benih dan KBD Tebu memakai data realisasi dari berkas Produksi Benih."],
+    ["Bencana / Non Bencana", "Pagu dan realisasi dipisah Non Bencana dan Bencana hanya untuk provinsi terdampak (" + (D.rekap.provinsiBencana || []).map((x) => x.toLowerCase().replace(/(^|\s)\S/g, (m) => m.toUpperCase())).join(", ") + ") dan rekap nasional. Sumber dana ABT seluruhnya Bencana; sumber dana reguler dan Produksi Benih masuk Bencana bila kabupatennya terdampak, selain itu Non Bencana. Provinsi lain hanya menampilkan total."],
     ["Kegiatan/Bantuan", "Dikelompokkan per RO: \"Kawasan <Komoditas>\" untuk kegiatan tanam, ditambah akhiran (ABT) untuk sumber dana ABT; kegiatan pendukung berdiri sendiri sesuai nama RO-nya."],
     ["Cetak PDF", "Buka Rekap Nasional atau halaman provinsi, tekan Cetak / Simpan PDF, lalu pilih tujuan \"Simpan sebagai PDF\"."],
     ["Cakupan", "Ditjen Perkebunan. Situs ini hanya memuat ringkasan; data per item dan per akun tidak dipublikasikan."],
