@@ -184,7 +184,7 @@
     if (baru) html += '<div class="banner" role="status"><span><strong>' + baru + " kontrak baru</strong> dari import terakhir perlu diverifikasi.</span>" +
       tombolMasuk("Verifikasi sekarang") + "</div>";
 
-    html += '<section class="grid-kartu" aria-label="Angka utama kontrak">' +
+    html += '<section class="grid-kartu grid-kartu-padat" aria-label="Angka utama kontrak">' +
       kartu(FILTER.aktif ? "Kontrak aktif" : "Kontrak", F().satuan(a.n, "").trim(), F().satuan(a.n - a.manual, "MyIntress") + " · " + F().satuan(a.manual, "manual")) +
       kartu("Nilai kontrak", F().rupiahM(a.nilai), "termasuk addendum") +
       kartu("Pembayaran", persen(a.pct), F().rupiahM(a.bayar)) +
