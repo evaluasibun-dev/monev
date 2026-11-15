@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-15T08:11:00+07:00",
+ "data_per": "2026-11-15T22:04:00+07:00",
  "hari_ini": "2026-11-15",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -19,21 +19,21 @@
  ],
  "import_terakhir": {
   "terakhir": {
-   "waktu": "2026-11-15T07:40:00+07:00",
-   "unduh": "2026-11-15T07:40:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-15 07-40.xlsx",
+   "waktu": "2026-11-15T15:44:00+07:00",
+   "unduh": "2026-11-15T15:37:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-15 15-37.xlsx",
    "validasi": "LOLOS",
    "baru": 0,
-   "berubah": 8,
+   "berubah": 2,
    "hilang": 0
   },
   "myintress": {
-   "waktu": "2026-11-15T07:40:00+07:00",
-   "unduh": "2026-11-15T07:40:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-15 07-40.xlsx",
+   "waktu": "2026-11-15T15:44:00+07:00",
+   "unduh": "2026-11-15T15:37:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-15 15-37.xlsx",
    "validasi": "LOLOS",
    "baru": 0,
-   "berubah": 8,
+   "berubah": 2,
    "hilang": 0
   }
  },
@@ -32440,8 +32440,8 @@
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
    "satker": "BBPPTP Surabaya",
    "kegiatan": "(belum diisi)",
-   "kode_keg": "1780",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "567338.098.522191.01805EC.5890RAG",
    "komoditas": "",
    "provinsi": "",
    "kab": "",
@@ -35733,18 +35733,6 @@
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
   {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M65VFEHPH21AFABAJFEN4EE7",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6CXJVM2K91VABWTJ0R67Z2H",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
    "k": "03. Melewati tanggal selesai",
    "no": "EP-01KGERNW977YJ0C21CFB76FTAN",
    "d": "BELUM SELESAI TERLAMBAT TERMIN",
@@ -36658,12 +36646,6 @@
   },
   {
    "k": "06. KRO kosong",
-   "no": "EP-01M7521ZTJ4NQ6YNHZSSZ7D1FT",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
    "no": "11687/PL.020/E1.3.3/10/2026",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
@@ -36719,7 +36701,7 @@
   {
    "k": "08. Kegiatan kosong",
    "no": "EP-01M7521ZTJ4NQ6YNHZSSZ7D1FT",
-   "d": "Kode keg: 1780",
+   "d": "Kode keg: 5890",
    "tl": "Isi nama kegiatan"
   },
   {
@@ -38558,7 +38540,7 @@
      "sisa": 3056953187457,
      "selesai": 272,
      "terlambat": 148,
-     "temuan": 475
+     "temuan": 472
     }
    ],
    "Direktorat Tanaman Kelapa Sawit dan Aneka Palma": [
@@ -39062,7 +39044,7 @@
      "sisa": 1729364396784,
      "selesai": 67,
      "terlambat": 69,
-     "temuan": 223
+     "temuan": 221
     }
    ],
    "Ditjenbun Pusat (kode kegiatan belum diisi)": [
@@ -39290,7 +39272,7 @@
      "sisa": 407786728759,
      "selesai": 48,
      "terlambat": 18,
-     "temuan": 72
+     "temuan": 71
     }
    ],
    "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon": [
