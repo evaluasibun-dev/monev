@@ -16,7 +16,7 @@
     mode: "sp2d", unit: "", kegiatan: "", komoditas: "",
     rinci: { satker: "", kegiatan: "", kro: "", jenis: "", buka: {}, akunHal: 0 },
     harian: { a: "", b: "", ukur: "sp2d" },
-    target: { unit: "", jalur: "1" }
+    target: { unit: "", jalur: "1", hariHal: null }
   };
 
   var JENIS = { "51": "Pegawai", "52": "Barang", "53": "Modal", "57": "Bansos/Banper" };
@@ -918,17 +918,65 @@
         var butuh = r["need" + k];
         var st = r.act == null ? "" : r.act >= butuh ? '<span class="chip chip-ok">Tercapai</span>' : '<span class="chip chip-bad">Kurang</span>';
         var kelas = r.d === hariIni ? "terpilih" : !r.past ? "redup" : "";
-        return "<tr" + (kelas ? ' class="' + kelas + '"' : "") + "><td>" + e(HARI[pISO(r.d).getDay()] + ", " + F().tanggal(r.d).replace(/ \d{4}$/, "")) +
+        return "<tr data-hari-baris" + (r.d === hariIni ? " data-hari-ini" : "") + (kelas ? ' class="' + kelas + '"' : "") + "><td>" + e(HARI[pISO(r.d).getDay()] + ", " + F().tanggal(r.d).replace(/ \d{4}$/, "")) +
           (r.d === hariIni ? ' <span class="chip chip-warn">Hari ini</span>' : "") + "</td>" + td(String(r.rem), 1) + td(e(rp(butuh)), 1) +
           td(r.act == null ? "–" : e(rp(r.act)), 1) + "<td>" + st + "</td></tr>";
-      }).join("") + "</tbody></table></div>";
+      }).join("") + "</tbody></table></div>" +
+      '<div class="pager-akun" data-pager-hari hidden><button type="button" class="tombol tombol-sekunder tombol-kecil" data-hari-hal="-1">‹ Sebelumnya</button>' +
+      '<span aria-live="polite" data-hari-ket></span><button type="button" class="tombol tombol-sekunder tombol-kecil" data-hari-hal="1">Berikutnya ›</button></div>';
 
     html += '<div class="grid-dua">' +
-      seksi("Rekap mingguan", tabMinggu, { kanan: tombolCSV("t-minggu") }) +
+      seksi("Rekap mingguan", tabMinggu, { kanan: tombolCSV("t-minggu"), kelas: "seksi-minggu" }) +
       seksi("Kebutuhan serapan harian",
         '<p class="catatan">Kebutuhan harian = (target − realisasi s.d. kemarin) ÷ sisa hari. Kekurangan satu hari otomatis dibagi ke hari berikutnya. Realisasi harian = selisih data realisasi antartanggal; hari tanpa data ditandai "–".</p>' + tabHari,
-        { kanan: tombolCSV("t-hari") }) + "</div>";
+        { kanan: tombolCSV("t-hari"), kelas: "seksi-hari" }) + "</div>";
     return html;
+  }
+
+  /*
+   * Tabel Kebutuhan serapan harian dibagi per halaman: bila berdampingan dengan Rekap mingguan,
+   * tinggi kartunya mengikuti kartu Rekap mingguan; bila bertumpuk (layar sempit), 10 hari per halaman.
+   * Halaman awal = halaman yang memuat hari ini (atau hari terakhir yang sudah lewat).
+   */
+  var HARI_PER_HAL = 10;
+  function halamanHari(el) {
+    var sa = el.querySelector(".seksi-hari"), sk = el.querySelector(".seksi-minggu");
+    if (!sa || !sk) return;
+    var rows = Array.prototype.slice.call(sa.querySelectorAll("tr[data-hari-baris]"));
+    var pager = sa.querySelector("[data-pager-hari]");
+    var batas = [0], i;
+    sa.style.alignSelf = "start"; sk.style.alignSelf = "start";
+    if (Math.abs(sa.offsetTop - sk.offsetTop) >= 4) {
+      for (i = HARI_PER_HAL; i < rows.length; i += HARI_PER_HAL) batas.push(i);
+    } else {
+      pager.hidden = false;
+      rows.forEach(function (r) { r.hidden = true; });
+      var target = sk.offsetHeight, mulai = 0;
+      for (i = 0; i < rows.length; i++) {
+        rows[i].hidden = false;
+        if (sa.offsetHeight > target && i > mulai) {
+          for (var k = mulai; k <= i; k++) rows[k].hidden = true;
+          rows[i].hidden = false; batas.push(i); mulai = i;
+        }
+      }
+    }
+    sa.style.alignSelf = ""; sk.style.alignSelf = "";
+    var jml = batas.length, T = STATE.target;
+    if (T.hariHal == null) {
+      var idx = rows.findIndex(function (r) { return r.hasAttribute("data-hari-ini"); });
+      if (idx < 0) { idx = rows.findIndex(function (r) { return r.classList.contains("redup"); }) - 1; if (idx < -1) idx = rows.length - 1; }
+      if (idx < 0) idx = 0;
+      T.hariHal = 0;
+      for (i = 0; i < jml; i++) if (batas[i] <= idx) T.hariHal = i;
+    }
+    if (T.hariHal >= jml) T.hariHal = jml - 1;
+    if (T.hariHal < 0) T.hariHal = 0;
+    var dari = batas[T.hariHal], ke = T.hariHal + 1 < jml ? batas[T.hariHal + 1] : rows.length;
+    rows.forEach(function (r, n) { r.hidden = n < dari || n >= ke; });
+    pager.hidden = jml < 2;
+    sa.querySelector("[data-hari-ket]").textContent = "Halaman " + (T.hariHal + 1) + " dari " + jml;
+    pager.querySelector('[data-hari-hal="-1"]').disabled = T.hariHal === 0;
+    pager.querySelector('[data-hari-hal="1"]').disabled = T.hariHal >= jml - 1;
   }
 
   function pasangGrafikTarget(el, T, j) {
@@ -1047,6 +1095,7 @@
       } else if (tab === "target") {
         el.innerHTML = target(ctx.T, ctx.j);
         pasangGrafikTarget(el, ctx.T, ctx.j);
+        halamanHari(el);
       }
       kembali();
     }
@@ -1101,6 +1150,12 @@
     }).catch(function (err) { gagal(err, tab === "harian" ? "Arsip realisasi" : tab === "target" ? "Target serapan" : "Data anggaran"); });
 
     function pasang() {
+      var tundaUkur;
+      window.addEventListener("resize", function ukurUlang() {
+        if (!el.isConnected) { window.removeEventListener("resize", ukurUlang); return; }
+        if (tab !== "target") return;
+        clearTimeout(tundaUkur); tundaUkur = setTimeout(function () { halamanHari(el); }, 200);
+      });
       el.addEventListener("change", function (ev) {
         var t = ev.target, k = t.getAttribute("data-pilih");
         if (!k) return;
@@ -1113,7 +1168,7 @@
         else if (k === "h-a") STATE.harian.a = t.value;
         else if (k === "h-b") STATE.harian.b = t.value;
         else if (k === "h-ukur") STATE.harian.ukur = t.value;
-        else if (k === "t-unit") STATE.target.unit = t.value;
+        else if (k === "t-unit") { STATE.target.unit = t.value; STATE.target.hariHal = null; }
         gambar();
       });
       el.addEventListener("click", function (ev) {
@@ -1121,7 +1176,7 @@
         if (!t || !el.contains(t)) return;
         if (t.hasAttribute("data-segmen")) {
           var s = t.getAttribute("data-segmen"), v = t.getAttribute("data-nilai");
-          if (s === "mode") STATE.mode = v; else if (s === "jalur") STATE.target.jalur = v;
+          if (s === "mode") STATE.mode = v; else if (s === "jalur") { STATE.target.jalur = v; STATE.target.hariHal = null; }
           var id = "seg-" + s + "-" + v; t.id = id; gambar(); var x = el.querySelector('[data-segmen="' + s + '"][data-nilai="' + v + '"]'); if (x) x.focus();
         } else if (t.hasAttribute("data-buka")) {
           var kunci = t.getAttribute("data-buka");
@@ -1133,6 +1188,12 @@
           STATE.rinci.buka = {};
           if (buka) { var P = dataRinci(ctx.j); for (var tk = 0; tk < 4; tk++) P[tk].forEach(function (r) { STATE.rinci.buka[kunciDari(r, tk)] = true; }); }
           gambar();
+        } else if (t.hasAttribute("data-hari-hal")) {
+          var arahH = t.getAttribute("data-hari-hal");
+          STATE.target.hariHal += +arahH;
+          halamanHari(el);
+          var hb = el.querySelector('[data-hari-hal="' + arahH + '"]');
+          if (hb && !hb.disabled) hb.focus(); else { var hl = el.querySelector("[data-hari-hal]:not([disabled])"); if (hl) hl.focus(); }
         } else if (t.hasAttribute("data-akun-hal")) {
           var arah = t.getAttribute("data-akun-hal");
           STATE.rinci.akunHal += +arah;
@@ -1143,7 +1204,7 @@
           STATE.rinci.jenis = t.getAttribute("data-jenis"); STATE.rinci.akunHal = 0; gambar();
           var jb = el.querySelector('[data-jenis="' + STATE.rinci.jenis + '"]'); if (jb) jb.focus();
         } else if (t.hasAttribute("data-t-unit")) {
-          STATE.target.unit = t.getAttribute("data-t-unit"); gambar();
+          STATE.target.unit = t.getAttribute("data-t-unit"); STATE.target.hariHal = null; gambar();
         } else if (t.hasAttribute("data-ke-kontrak")) {
           if (Monev.menu.kontrak && Monev.menu.kontrak.saringUnit) Monev.menu.kontrak.saringUnit(t.getAttribute("data-ke-kontrak"));
           location.hash = "#kontrak";
