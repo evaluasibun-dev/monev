@@ -14,7 +14,7 @@
 
   var STATE = {
     mode: "sp2d", unit: "", kegiatan: "", komoditas: "",
-    rinci: { satker: "", kegiatan: "", kro: "", jenis: "", buka: {} },
+    rinci: { satker: "", kegiatan: "", kro: "", jenis: "", buka: {}, akunHal: 0 },
     harian: { a: "", b: "", ukur: "sp2d" },
     target: { unit: "", jalur: "1" }
   };
@@ -125,7 +125,7 @@
 
   function seksi(judul, isi, opsi) {
     opsi = opsi || {};
-    return '<section class="seksi"><div class="seksi-kepala"><h2>' + e(judul) + "</h2>" +
+    return '<section class="seksi' + (opsi.kelas ? " " + opsi.kelas : "") + '"><div class="seksi-kepala"><h2>' + e(judul) + "</h2>" +
       (opsi.kanan || (opsi.ket ? '<span class="seksi-keterangan">' + e(opsi.ket) + "</span>" : "")) + "</div>" + isi + "</section>";
   }
 
@@ -434,7 +434,8 @@
       1: sat ? kumpul(pilihSat(j.satker_ro), ["KDKEG", "S05"]) : (j.kro || []),
       2: sat ? pilihSat(j.satker_ro) : (j.ro || []),
       3: sat ? pilihSat(j.satker_komponen) : (j.komponen || []),
-      4: kumpul(pilihSat(j.satker_subkomponen), ["KDKEG", "S05", "S13", "S14", "S15"])
+      // kode sub-komponen SAKTI hanya unik di dalam satu satker: jangan digabung antarsatker
+      4: kumpul(pilihSat(j.satker_subkomponen), ["KODE_SATKER", "KDKEG", "S05", "S13", "S14", "S15", "NAMA_SUBKOMPONEN"])
     };
     Object.keys(L).forEach(function (k) {
       L[k] = L[k].filter(function (r) { return (!STATE.rinci.kegiatan || String(r.KDKEG) === STATE.rinci.kegiatan) && (k === "0" || cocok(r)); });
@@ -442,7 +443,7 @@
     return L;
   }
 
-  var KUNCI_TINGKAT = [["KDKEG"], ["KDKEG", "S05"], ["KDKEG", "S05", "S13"], ["KDKEG", "S05", "S13", "S14"], ["KDKEG", "S05", "S13", "S14", "S15"]];
+  var KUNCI_TINGKAT = [["KDKEG"], ["KDKEG", "S05"], ["KDKEG", "S05", "S13"], ["KDKEG", "S05", "S13", "S14"], ["KDKEG", "S05", "S13", "S14", "S15", "KODE_SATKER"]];
   var NAMA_TINGKAT = ["Kegiatan", "KRO", "RO", "Komponen", "Sub-komponen"];
 
   function kunciDari(r, t) { return KUNCI_TINGKAT[t].map(function (x) { return r[x]; }).join("|"); }
@@ -470,11 +471,16 @@
       if (t === 1) return namaKro[r.S05] || r.NAMA_KRO || "–";
       if (t === 2) return namaRo[r.S05 + "|" + r.S13] || r.NAMA_RO || "–";
       if (t === 3) return namaKomp[r.S05 + "|" + r.S13 + "|" + r.S14] || r.NAMA_KOMPONEN || "–";
-      return "Sub-komponen " + r.S15;
+      var nm = r.NAMA_SUBKOMPONEN ? String(r.NAMA_SUBKOMPONEN).replace(/\s+/g, " ").trim() : "Sub-komponen " + r.S15;
+      return STATE.rinci.satker ? nm : nm + " · " + I().satker(String(r.KODE_SATKER));
     }
     var keluar = [];
     function jalan(rows, t) {
-      rows.slice().sort(function (a, b) { var x = kode(a, t), y = kode(b, t); return x < y ? -1 : x > y ? 1 : 0; }).forEach(function (r) {
+      rows.slice().sort(function (a, b) {
+        var x = kode(a, t), y = kode(b, t);
+        if (x === y && t === 4) return I().urutSatker(String(a.KODE_SATKER), String(b.KODE_SATKER));
+        return x < y ? -1 : x > y ? 1 : 0;
+      }).forEach(function (r) {
         var k = kunciDari(r, t), punyaAnak = t < 4 && (anak[k] || []).length > 0;
         var buka = !!STATE.rinci.buka[k];
         keluar.push({ t: t, k: k, kode: kode(r, t), uraian: uraian(r, t), pagu: +r.pagu || 0, real: +r.real || 0, anak: punyaAnak, buka: buka });
@@ -495,6 +501,46 @@
     (j.akun || []).concat(j.akun_kegiatan || []).forEach(function (r) { if (r.NAMA_AKUN) nama[r.S03] = r.NAMA_AKUN; });
     return kumpul(rows, ["S03"]).map(function (r) { r.nama = nama[r.S03] || r.NAMA_AKUN || "–"; return r; })
       .sort(function (a, b) { return a.S03 < b.S03 ? -1 : 1; });
+  }
+
+  /*
+   * Tabel akun dibagi per halaman: bila berdampingan dengan kartu Komposisi, tinggi kartu akun
+   * mengikuti kartu Komposisi; bila bertumpuk (layar sempit), 10 akun per halaman.
+   * Baris Jumlah selalu tampil dan tetap menjumlah semua akun pada saringan.
+   */
+  var AKUN_PER_HAL = 10;
+  function halamanAkun(el) {
+    var sa = el.querySelector(".seksi-akun"), sk = el.querySelector(".seksi-komposisi");
+    if (!sa || !sk) return;
+    var rows = Array.prototype.slice.call(sa.querySelectorAll("tr[data-akun-baris]"));
+    var pager = sa.querySelector("[data-pager-akun]");
+    var batas = [0], i;
+    sa.style.alignSelf = "start"; sk.style.alignSelf = "start";
+    var berdampingan = Math.abs(sa.offsetTop - sk.offsetTop) < 4;
+    if (!berdampingan) {
+      for (i = AKUN_PER_HAL; i < rows.length; i += AKUN_PER_HAL) batas.push(i);
+    } else {
+      pager.hidden = false;
+      rows.forEach(function (r) { r.hidden = true; });
+      var target = sk.offsetHeight, mulai = 0;
+      for (i = 0; i < rows.length; i++) {
+        rows[i].hidden = false;
+        if (sa.offsetHeight > target && i > mulai) {
+          for (var k = mulai; k <= i; k++) rows[k].hidden = true;
+          rows[i].hidden = false; batas.push(i); mulai = i;
+        }
+      }
+    }
+    sa.style.alignSelf = ""; sk.style.alignSelf = "";
+    var jml = batas.length, R = STATE.rinci;
+    if (R.akunHal >= jml) R.akunHal = jml - 1;
+    if (R.akunHal < 0) R.akunHal = 0;
+    var dari = batas[R.akunHal], ke = R.akunHal + 1 < jml ? batas[R.akunHal + 1] : rows.length;
+    rows.forEach(function (r, n) { r.hidden = n < dari || n >= ke; });
+    pager.hidden = jml < 2;
+    sa.querySelector("[data-akun-ket]").textContent = "Halaman " + (R.akunHal + 1) + " dari " + jml + " · akun " + (dari + 1) + "–" + ke + " dari " + rows.length;
+    pager.querySelector('[data-akun-hal="-1"]').disabled = R.akunHal === 0;
+    pager.querySelector('[data-akun-hal="1"]').disabled = R.akunHal >= jml - 1;
   }
 
   function jenisDari(akun) { var k = String(akun).slice(0, 2); return JENIS[k] ? k : "lain"; }
@@ -547,10 +593,12 @@
       '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Akun</th><th scope="col">Nama akun</th><th scope="col" class="angka">Pagu</th>' +
       '<th scope="col" class="angka">SP2D</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
       (akunTampil.map(function (r) {
-        return '<tr><td class="mono">' + e(r.S03) + "</td><td>" + e(r.nama) + "</td>" + td(rpM(r.pagu), 1) + td(rpM(r.real), 1) + td(persen(pct(r.real, r.pagu)), 1) + "</tr>";
+        return '<tr data-akun-baris><td class="mono">' + e(r.S03) + "</td><td>" + e(r.nama) + "</td>" + td(rpM(r.pagu), 1) + td(rpM(r.real), 1) + td(persen(pct(r.real, r.pagu)), 1) + "</tr>";
       }).join("") || '<tr><td colspan="5">Tidak ada akun untuk saringan ini.</td></tr>') +
       '<tr class="jumlah"><td></td><td>Jumlah</td>' + td(rpM(tAkun.pagu), 1) + td(rpM(tAkun.real), 1) + td(persen(pct(tAkun.real, tAkun.pagu)), 1) + "</tr></tbody></table></div>" +
-      (R.kro ? '<p class="catatan">Saringan KRO tidak berlaku untuk akun (data akun tidak dirinci per KRO).</p>' : "");
+      (R.kro ? '<p class="catatan">Saringan KRO tidak berlaku untuk akun (data akun tidak dirinci per KRO).</p>' : "") +
+      '<div class="pager-akun" data-pager-akun hidden><button type="button" class="tombol tombol-sekunder tombol-kecil" data-akun-hal="-1">‹ Sebelumnya</button>' +
+      '<span aria-live="polite" data-akun-ket></span><button type="button" class="tombol tombol-sekunder tombol-kecil" data-akun-hal="1">Berikutnya ›</button></div>';
 
     /* komposisi */
     var perJenis = {};
@@ -576,9 +624,9 @@
       ". Kolom DK dan TP tampil bila datanya ada.</p>";
 
     html += '<div class="grid-dua">' +
-      seksi("Realisasi per akun belanja", tabAkun, { kanan: tombolCSV("akun") }) +
+      seksi("Realisasi per akun belanja", tabAkun, { kanan: tombolCSV("akun"), kelas: "seksi-akun" }) +
       seksi("Komposisi belanja dan pagu", '<h3 class="subjudul">Per jenis belanja (% dari pagu)</h3>' + barKomp +
-        '<h3 class="subjudul">Realisasi SP2D per jenis belanja dan kewenangan</h3>' + tabelKw, { kanan: tombolCSV("kewenangan") }) +
+        '<h3 class="subjudul">Realisasi SP2D per jenis belanja dan kewenangan</h3>' + tabelKw, { kanan: tombolCSV("kewenangan"), kelas: "seksi-komposisi" }) +
       "</div>";
 
     /* satker × kegiatan */
@@ -939,8 +987,8 @@
         (j.per_komoditas || []).map(function (r) { return [I().komoditas(r.komoditas), r.jenis, r.sumber_dana, r.pagu, r.sp2d || r.real, r.os || r.outstanding]; }));
     } else if (jenis === "rincian") {
       var L = dataRinci(j), out = [];
-      for (var t = 0; t <= 4; t++) L[t].forEach(function (r) { out.push([NAMA_TINGKAT[t], r.KDKEG, r.S05 || "", r.S13 || "", r.S14 || "", r.S15 || "", +r.pagu || 0, +r.real || 0]); });
-      f("anggaran-rincian-" + ta + ".csv", ["Tingkat", "Kegiatan", "KRO", "RO", "Komponen", "Sub-komponen", "Pagu (Rp)", "Realisasi SP2D (Rp)"], out);
+      for (var t = 0; t <= 4; t++) L[t].forEach(function (r) { out.push([NAMA_TINGKAT[t], r.KDKEG, r.S05 || "", r.S13 || "", r.S14 || "", r.S15 || "", t === 4 ? String(r.KODE_SATKER || "") : "", t === 4 ? (r.NAMA_SUBKOMPONEN || "") : "", +r.pagu || 0, +r.real || 0]); });
+      f("anggaran-rincian-" + ta + ".csv", ["Tingkat", "Kegiatan", "KRO", "RO", "Komponen", "Sub-komponen", "Kode satker (sub-komponen)", "Nama sub-komponen", "Pagu (Rp)", "Realisasi SP2D (Rp)"], out);
     } else if (jenis === "akun") {
       f("anggaran-per-akun-" + ta + ".csv", ["Akun", "Nama akun", "Pagu (Rp)", "Realisasi SP2D (Rp)", "%"],
         sumberAkun(j).filter(function (r) { return !STATE.rinci.jenis || jenisDari(r.S03) === STATE.rinci.jenis; })
@@ -1007,7 +1055,7 @@
       if (!el.isConnected) return;
       var kembali = jaga(el);
       if (tab === "") el.innerHTML = realisasi(ctx.j);
-      else if (tab === "rincian") el.innerHTML = rincian(ctx.j);
+      else if (tab === "rincian") { el.innerHTML = rincian(ctx.j); halamanAkun(el); }
       else if (tab === "harian") {
         el.innerHTML = harianKerangka(ctx.indeks) + harianGrafik(ctx.indeks) + Monev.data.tampil.memuat(3);
         pasangGrafikHarian(el, ctx.indeks);
@@ -1069,14 +1117,20 @@
     }).catch(function (err) { gagal(err, tab === "harian" ? "Arsip realisasi" : tab === "target" ? "Target serapan" : "Data anggaran"); });
 
     function pasang() {
+      var tundaUkur;
+      window.addEventListener("resize", function ukurUlang() {
+        if (!el.isConnected) { window.removeEventListener("resize", ukurUlang); return; }
+        if (tab !== "rincian") return;
+        clearTimeout(tundaUkur); tundaUkur = setTimeout(function () { halamanAkun(el); }, 200);
+      });
       el.addEventListener("change", function (ev) {
         var t = ev.target, k = t.getAttribute("data-pilih");
         if (!k) return;
         if (k === "unit") { STATE.unit = t.value; if (t.value) STATE.kegiatan = ""; }
         else if (k === "kegiatan") { STATE.kegiatan = t.value; if (t.value) STATE.unit = ""; }
         else if (k === "komoditas") STATE.komoditas = t.value;
-        else if (k === "r-satker") STATE.rinci.satker = t.value;
-        else if (k === "r-kegiatan") { STATE.rinci.kegiatan = t.value; STATE.rinci.kro = ""; }
+        else if (k === "r-satker") { STATE.rinci.satker = t.value; STATE.rinci.akunHal = 0; }
+        else if (k === "r-kegiatan") { STATE.rinci.kegiatan = t.value; STATE.rinci.kro = ""; STATE.rinci.akunHal = 0; }
         else if (k === "r-kro") STATE.rinci.kro = t.value;
         else if (k === "h-a") STATE.harian.a = t.value;
         else if (k === "h-b") STATE.harian.b = t.value;
@@ -1101,8 +1155,14 @@
           STATE.rinci.buka = {};
           if (buka) { var P = dataRinci(ctx.j); for (var tk = 0; tk < 4; tk++) P[tk].forEach(function (r) { STATE.rinci.buka[kunciDari(r, tk)] = true; }); }
           gambar();
+        } else if (t.hasAttribute("data-akun-hal")) {
+          var arah = t.getAttribute("data-akun-hal");
+          STATE.rinci.akunHal += +arah;
+          halamanAkun(el);
+          var pb = el.querySelector('[data-akun-hal="' + arah + '"]');
+          if (pb && !pb.disabled) pb.focus(); else { var lain = el.querySelector("[data-akun-hal]:not([disabled])"); if (lain) lain.focus(); }
         } else if (t.hasAttribute("data-jenis")) {
-          STATE.rinci.jenis = t.getAttribute("data-jenis"); gambar();
+          STATE.rinci.jenis = t.getAttribute("data-jenis"); STATE.rinci.akunHal = 0; gambar();
           var jb = el.querySelector('[data-jenis="' + STATE.rinci.jenis + '"]'); if (jb) jb.focus();
         } else if (t.hasAttribute("data-t-unit")) {
           STATE.target.unit = t.getAttribute("data-t-unit"); gambar();
