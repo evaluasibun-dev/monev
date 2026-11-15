@@ -504,34 +504,18 @@
   }
 
   /*
-   * Tabel akun dibagi per halaman: bila berdampingan dengan kartu Komposisi, tinggi kartu akun
-   * mengikuti kartu Komposisi; bila bertumpuk (layar sempit), 10 akun per halaman.
-   * Baris Jumlah selalu tampil dan tetap menjumlah semua akun pada saringan.
+   * Tabel akun dibagi per halaman, 10 akun per halaman (pilihan pemilik portal 15 Nov 2026).
+   * Kartu Komposisi di sebelahnya ikut setinggi kartu akun (grid). Baris Jumlah selalu tampil
+   * dan tetap menjumlah semua akun pada saringan.
    */
   var AKUN_PER_HAL = 10;
   function halamanAkun(el) {
-    var sa = el.querySelector(".seksi-akun"), sk = el.querySelector(".seksi-komposisi");
-    if (!sa || !sk) return;
+    var sa = el.querySelector(".seksi-akun");
+    if (!sa) return;
     var rows = Array.prototype.slice.call(sa.querySelectorAll("tr[data-akun-baris]"));
     var pager = sa.querySelector("[data-pager-akun]");
-    var batas = [0], i;
-    sa.style.alignSelf = "start"; sk.style.alignSelf = "start";
-    var berdampingan = Math.abs(sa.offsetTop - sk.offsetTop) < 4;
-    if (!berdampingan) {
-      for (i = AKUN_PER_HAL; i < rows.length; i += AKUN_PER_HAL) batas.push(i);
-    } else {
-      pager.hidden = false;
-      rows.forEach(function (r) { r.hidden = true; });
-      var target = sk.offsetHeight, mulai = 0;
-      for (i = 0; i < rows.length; i++) {
-        rows[i].hidden = false;
-        if (sa.offsetHeight > target && i > mulai) {
-          for (var k = mulai; k <= i; k++) rows[k].hidden = true;
-          rows[i].hidden = false; batas.push(i); mulai = i;
-        }
-      }
-    }
-    sa.style.alignSelf = ""; sk.style.alignSelf = "";
+    var batas = [0];
+    for (var i = AKUN_PER_HAL; i < rows.length; i += AKUN_PER_HAL) batas.push(i);
     var jml = batas.length, R = STATE.rinci;
     if (R.akunHal >= jml) R.akunHal = jml - 1;
     if (R.akunHal < 0) R.akunHal = 0;
@@ -1117,12 +1101,6 @@
     }).catch(function (err) { gagal(err, tab === "harian" ? "Arsip realisasi" : tab === "target" ? "Target serapan" : "Data anggaran"); });
 
     function pasang() {
-      var tundaUkur;
-      window.addEventListener("resize", function ukurUlang() {
-        if (!el.isConnected) { window.removeEventListener("resize", ukurUlang); return; }
-        if (tab !== "rincian") return;
-        clearTimeout(tundaUkur); tundaUkur = setTimeout(function () { halamanAkun(el); }, 200);
-      });
       el.addEventListener("change", function (ev) {
         var t = ev.target, k = t.getAttribute("data-pilih");
         if (!k) return;
