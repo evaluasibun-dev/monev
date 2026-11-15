@@ -1,33 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jejak Bantuan Perkebunan — Monev Ditjenbun</title>
-<meta name="description" content="Pemantauan bantuan perkebunan Ditjenbun: lahan ditanam, anggaran terbayar, dan rekap per provinsi.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Monev Ditjenbun</title>
+  <meta name="description" content="Portal monitoring dan evaluasi anggaran, kontrak, dan bantuan Direktorat Jenderal Perkebunan.">
+  <link rel="icon" href="assets/ikon/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/token.css">
+  <link rel="stylesheet" href="assets/css/dasar.css">
+  <link rel="stylesheet" href="assets/css/komponen.css">
 </head>
 <body>
-<header id="top" class="no-print">
-  <div class="top-in">
-    <a class="brand" href="#/jejak">
-      <span class="brand-kicker">Monev Ditjenbun</span>
-      <span class="brand-sub" id="brandSub">memuat…</span>
-    </a>
-    <nav id="nav" aria-label="Menu utama">
-      <a href="#/jejak" data-route="jejak">Jejak</a>
-      <a href="#/rekap/nasional" data-route="rekap/nasional">Rekap Nasional</a>
-      <a href="#/rekap/provinsi" data-route="rekap/provinsi">Per Provinsi</a>
-      <a href="#/tentang" data-route="tentang">Tentang Data</a>
-    </nav>
+  <a class="lompat-isi" href="#isi" data-lompat>Lompat ke isi</a>
+
+  <div class="kerangka">
+    <header class="kepala">
+      <div class="identitas">
+        <a href="#beranda" class="logo" aria-label="Monev Ditjenbun, ke Beranda">
+          <img src="assets/ikon/logo.svg" alt="">
+        </a>
+        <div class="identitas-teks">
+          <a href="#beranda" class="nama-portal">Monev Ditjenbun</a>
+          <a href="#tahun" class="tombol-tahun" id="tombol-tahun" aria-label="Tahun anggaran, ganti tahun">
+            <span id="label-tahun">TA …</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="kepala-kanan">
+        <span class="status-data kosong" id="status-data" role="status">
+          <span class="titik"></span><span id="status-data-teks">Memuat waktu data…</span>
+        </span>
+        <a class="tombol tombol-sekunder" id="tombol-masuk" href="#">Masuk</a>
+      </div>
+    </header>
+
+    <nav class="menu-atas" aria-label="Menu utama" id="menu-atas"></nav>
+
+    <main class="isi" id="isi" tabindex="-1"></main>
+
+    <footer class="kaki">
+      <span>Anggaran mengikuti RAW SAKTI · lokus mengikuti Master Lokus · fisik dari Sisbun Hilirisasi</span>
+      <a href="#tentang">Tentang data dan rumus</a>
+    </footer>
   </div>
-</header>
-<main id="konten"></main>
-<footer id="foot" class="no-print">Sumber: hasil integrasi Monev (SAKTI, FA16, SAT 3, Hilirisasi). Anggaran terbayar = realisasi SP2D (akun 526) ditambah realisasi Produksi Benih & KBD Tebu.</footer>
-<script src="data.js?v=202611011519"></script>
-<script src="app.js"></script>
+
+  <nav class="menu-bawah" aria-label="Menu utama ponsel" id="menu-bawah"></nav>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/format.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/tahun.js"></script>
+  <script src="assets/js/istilah.js"></script>
+  <script src="assets/js/halaman/tentang.js"></script>
+  <script src="assets/js/halaman/tahun.js"></script>
+  <script src="assets/js/halaman/kontrak.js"></script>
+  <script src="assets/js/grafik.js"></script>
+  <script src="assets/js/halaman/anggaran.js"></script>
+  <script src="assets/js/laporan-dokumen.js"></script>
+  <script src="assets/js/halaman/laporan.js"></script>
+  <script src="assets/js/rekap-inti.js"></script>
+  <script src="assets/js/rekap-dokumen.js"></script>
+  <script src="assets/js/sisbun.js"></script>
+  <script src="assets/js/peta-provinsi.js"></script>
+  <script src="assets/js/halaman/bantuan.js"></script>
+  <script src="assets/js/halaman/beranda.js"></script>
+  <script src="assets/js/halaman/placeholder.js"></script>
+  <script src="assets/js/router.js"></script>
 </body>
 </html>

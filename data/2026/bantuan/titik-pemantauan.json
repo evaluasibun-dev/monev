@@ -1,0 +1,58 @@
+{
+ "ta": 2026,
+ "ukuran": {
+  "cpcl": "persen CPCL terhadap target kawasan",
+  "tanam": "persen lahan sasaran ditanam (luas tanam desa Sisbun)"
+ },
+ "keterangan": "Titik tetap dari jejak.html lama. Lahan ditanam hanya memakai data Sisbun, karena angka laporan triwulan memakai definisi berbeda; titik tanam diambil dari laporan harian terbit (akhir bulan). Target pada Maret belum direvisi; untuk pala, lada, dan jambu mete angka Juni dan September masih usulan.",
+ "titik": [
+  {
+   "tanggal": "2026-03-06",
+   "label": "6 Mar",
+   "sumber": "Pemantauan harian Ditjenbun",
+   "cpcl": {
+    "Kelapa": 28.77,
+    "Kopi": 14.86,
+    "Kakao": 7.37,
+    "Tebu": 47.54,
+    "Pala": 67.91,
+    "Lada": 5.82,
+    "Jambu mete": 69.77,
+    "Jumlah": 28
+   },
+   "tanam": null
+  },
+  {
+   "tanggal": "2026-06-30",
+   "label": "30 Jun",
+   "sumber": "Laporan Kegiatan Strategis Triwulan II (Tabel 6, Realisasi CPCL)",
+   "cpcl": {
+    "Kelapa": 86.2,
+    "Kopi": 87.7,
+    "Kakao": 81.6,
+    "Tebu": 67.2,
+    "Pala": 100,
+    "Lada": 100,
+    "Jambu mete": 100,
+    "Jumlah": 83.3
+   },
+   "tanam": null
+  },
+  {
+   "tanggal": "2026-09-30",
+   "label": "30 Sep",
+   "sumber": "Laporan Kegiatan Strategis Triwulan III",
+   "cpcl": {
+    "Kelapa": 92.86,
+    "Kopi": 87.7,
+    "Kakao": 93.77,
+    "Tebu": 67.24,
+    "Pala": 100,
+    "Lada": 100,
+    "Jambu mete": 100,
+    "Jumlah": 88.78
+   },
+   "tanam": null
+  }
+ ]
+}

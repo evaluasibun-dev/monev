@@ -1,8 +1,12 @@
-﻿# Jejak Bantuan Perkebunan — Monev Ditjenbun
+# Portal Monev Ditjenbun
 
-Situs statis (HTML/CSS/JS) berisi ringkasan bantuan perkebunan: lahan ditanam, anggaran terbayar,
-rekap Nasional dan per Provinsi (bisa dicetak sebagai PDF). Hanya memuat data agregat.
+Portal monitoring dan evaluasi Direktorat Jenderal Perkebunan, Kementerian Pertanian: anggaran, kontrak, bantuan, dan laporan harian dalam satu alamat.
 
-Berkas: `index.html`, `style.css`, `app.js`, `data.js`.
-`data.js` dibuat otomatis dari hasil integrasi Monev (`python tampilan.py --publik`);
-untuk memperbarui data, cukup unggah ulang `data.js` saja.
+Alamat: https://evaluasibun-dev.github.io/monev/
+
+- Halaman statis (HTML, CSS, JavaScript) tanpa server; navigasi dengan alamat `#menu` atau `#menu-subtab`.
+- Data ringkas per tahun anggaran di `data/<tahun>/`, ditulis otomatis oleh Apps Script setelah data diunggah dan diperiksa. Fisik bantuan dibaca langsung dari API publik Sisbun.
+- Daftar tahun dan statusnya di `data/tahun.json`.
+- Repo ini publik: tidak memuat nama penyedia, NRK, file mentah, token, PIN, atau ID Spreadsheet. Acuan tampilan di `DESIGN.md`.
+
+Web sebelumnya di alamat ini (Jejak dan rekap bantuan dari hasil integrasi) tetap tersimpan di riwayat git, commit sebelum penggantian portal.

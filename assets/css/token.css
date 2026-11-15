@@ -1,0 +1,112 @@
+/* Token tampilan — salinan DESIGN.md §2. Komponen hanya memakai variabel di sini. */
+:root {
+  color-scheme: light;
+
+  /* dasar */
+  --bg:            #F4F5F1;
+  --surface:       #FFFFFF;
+  --surface-muted: #F4F5F1;
+  --surface-sunk:  #E7EAE3;
+  --line:          #DDE2D8;
+  --line-soft:     #EDEFE9;
+
+  /* teks */
+  --ink:           #1B2A20;
+  --ink-2:         #3D4A42;
+  --ink-3:         #55625A;
+
+  /* identitas */
+  --brand:         #1F6B45;
+  --brand-strong:  #14492F;
+  --brand-soft:    #E6F0E9;
+  --brand-mid:     #A8C9B4;
+  --report:        #1F3A68;
+
+  /* status */
+  --ok-bg: #E6F0E9;    --ok-fg: #14492F;
+  --warn-bg: #FBE8D3;  --warn-fg: #8A3B07;
+  --bad-bg: #F7DEDA;   --bad-fg: #8E1F12;
+  --info-bg: #E3ECF7;  --info-fg: #1D4E89;
+  --neutral-bg: #EDEFE9; --neutral-fg: #3D4A42;
+
+  /* asal kontrak */
+  --src-myintress-bg: #E3ECF7; --src-myintress: #1D4E89;
+  --src-manual-bg:    #EDE9FE; --src-manual:    #5B21B6;
+
+  /* sumber dana */
+  --abt-bg: #F3E8D5; --abt-fg: #7A4A12;
+
+  /* ekspor */
+  --export-ppt: #C2410C;
+  --export-pdf: #8E1F12;
+
+  --focus: #1D4E89;
+
+  /* komponen khusus dari DESIGN.md §5.4, §5.9, §5.10 */
+  --total-bg: #F9FAF7;
+  --banner-bg: #FFF7E8;
+  --banner-line: #F1D9B8;
+  --overlay: rgba(27, 42, 32, .45);
+
+  /* huruf §2.2 */
+  --font-display: "Space Grotesk", Inter, system-ui, sans-serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-print: Arial, Helvetica, sans-serif;
+
+  /* ruang, sudut §2.3 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111814; --surface: #18211B; --surface-muted: #1F2A23; --surface-sunk: #0D130F;
+    --line: #2E3B33; --line-soft: #253029;
+    --ink: #E6ECE7; --ink-2: #C3CDC6; --ink-3: #9AA69F;
+    --brand: #4FB07E; --brand-strong: #9ED8B6; --brand-soft: #1E3A2B; --brand-mid: #2F6B4A;
+    --report: #8FB0E3;
+    --ok-bg: #1E3A2B;   --ok-fg: #9ED8B6;
+    --warn-bg: #3D2A16; --warn-fg: #F2B77A;
+    --bad-bg: #3F1E1A;  --bad-fg: #F1A69B;
+    --info-bg: #1B2C42; --info-fg: #9EC2F0;
+    --neutral-bg: #253029; --neutral-fg: #C3CDC6;
+    --src-myintress-bg: #1B2C42; --src-myintress: #9EC2F0;
+    --src-manual-bg: #2B2140;    --src-manual: #C9B5F5;
+    --abt-bg: #3A2C18; --abt-fg: #E8C48E;
+    --focus: #9EC2F0;
+    --total-bg: #1F2A23;
+    --banner-bg: #3A2C18;
+    --banner-line: #2E3B33;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111814; --surface: #18211B; --surface-muted: #1F2A23; --surface-sunk: #0D130F;
+  --line: #2E3B33; --line-soft: #253029;
+  --ink: #E6ECE7; --ink-2: #C3CDC6; --ink-3: #9AA69F;
+  --brand: #4FB07E; --brand-strong: #9ED8B6; --brand-soft: #1E3A2B; --brand-mid: #2F6B4A;
+  --report: #8FB0E3;
+  --ok-bg: #1E3A2B;   --ok-fg: #9ED8B6;
+  --warn-bg: #3D2A16; --warn-fg: #F2B77A;
+  --bad-bg: #3F1E1A;  --bad-fg: #F1A69B;
+  --info-bg: #1B2C42; --info-fg: #9EC2F0;
+  --neutral-bg: #253029; --neutral-fg: #C3CDC6;
+  --src-myintress-bg: #1B2C42; --src-myintress: #9EC2F0;
+  --src-manual-bg: #2B2140;    --src-manual: #C9B5F5;
+  --abt-bg: #3A2C18; --abt-fg: #E8C48E;
+  --focus: #9EC2F0;
+  --total-bg: #1F2A23;
+  --banner-bg: #3A2C18;
+  --banner-line: #2E3B33;
+}

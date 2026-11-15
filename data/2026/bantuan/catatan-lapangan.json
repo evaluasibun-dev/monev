@@ -1,0 +1,88 @@
+{
+ "ta": 2026,
+ "sumber": "Laporan Kegiatan Strategis Triwulan III",
+ "per": "2026-09-30",
+ "keterangan": "Catatan lapangan yang tidak ada di data Sisbun (penyebab dan rencana). Diisi manual oleh admin; ganti setiap laporan triwulan terbit.",
+ "komoditas": {
+  "Kelapa": {
+   "kenapa": "Empat paket pesanan benih kelapa dari pusat belum ditandatangani, dan kemarau membuat penanaman ditunda.",
+   "berikutnya": "Oktober: selesaikan pesanan benih; benih Tanjung Jabung Timur mulai diantar. November–Desember: pupuk, upah kerja, dan tanam di Sulawesi, Gorontalo, Kalimantan."
+  },
+  "Kopi": {
+   "kenapa": "Benih yang terlalu lama di persemaian makin tinggi dan akarnya bisa rusak. Sebagian penerima juga meminta varietas yang berbeda dari kontrak.",
+   "berikutnya": "Oktober–November: antar benih ke lokasi yang sudah membuat lubang tanam (Sumatera Utara, Jambi, Sumatera Selatan, Sulawesi Tengah), lalu tanam saat hujan."
+  },
+  "Kakao": {
+   "kenapa": "Kemarau memperlambat penyambungan bibit dan pasokan entres. Sebagian lahan beralih fungsi, sehingga lokasi pengganti perlu dicari.",
+   "berikutnya": "Oktober: antar benih ke Karo dan Tidore Kepulauan. Oktober–November: penyaluran bertahap di Sulawesi, NTT, Aceh, Lampung, Papua sesuai musim hujan."
+  },
+  "Tebu": {
+   "kenapa": "Calon penerima baru terkumpul dua pertiga dari target, dan sebagian petani menunda tanam karena kemarau.",
+   "berikutnya": "Oktober: lengkapi calon penerima atau sesuaikan target. Oktober–Desember: penyaluran benih dari kebun benih datar ke Jawa Timur, Lampung, Jawa Tengah."
+  },
+  "Pala": {
+   "kenapa": "Sebagian data calon penerima berubah sehingga penetapan tertunda. Di persemaian Maluku Utara, cadangan benih pengganti masih kurang.",
+   "berikutnya": "Oktober–Desember: sisa pupuk diantar, lubang tanam dibuat, lalu benih ditanam di Sulawesi Utara, Sulawesi Selatan, NTT, Maluku, dan Maluku Utara."
+  },
+  "Lada": {
+   "kenapa": "Pupuk harus diuji laboratorium 2–4 minggu sebelum dibagikan, dan pemeriksaan calon penerima memakan waktu.",
+   "berikutnya": "November: pemeriksaan dan sertifikasi benih. Akhir November–Desember: benih diantar dan ditanam."
+  },
+  "Jambu mete": {
+   "kenapa": "Sebagian usulan ditolak saat diperiksa dan harus diperbaiki. Di beberapa persemaian, daya kecambah benih masih rendah.",
+   "berikutnya": "Oktober: terbitkan SK penerima. November: pupuk dan upah kerja. Desember: tanam di semua provinsi."
+  }
+ },
+ "provinsi": {
+  "SUMATERA UTARA": [
+   "Kopi: lahan 2.523 Ha sudah dikerjakan (Karo, Tapanuli Selatan, Simalungun, Tapanuli Utara, Toba).",
+   "Benih kopi mulai diantar ke Karo, Simalungun, Tapanuli Selatan, Tapanuli Utara.",
+   "Kakao: benih untuk Karo dijadwalkan diantar minggu kedua Oktober."
+  ],
+  "SUMATERA SELATAN": [
+   "Kopi: 600 Ha sudah dikerjakan (Empat Lawang, Lahat).",
+   "Kelapa: 200 Ha sudah ditanam di Banyuasin."
+  ],
+  "SUMATERA BARAT": [
+   "Kelapa: 600 Ha sudah ditanam di Padang Pariaman."
+  ],
+  "JAMBI": [
+   "Benih kopi mulai diantar ke Merangin dan Sungai Penuh.",
+   "Benih kelapa untuk Tanjung Jabung Timur (275.000 batang) siap diantar awal Oktober."
+  ],
+  "SULAWESI UTARA": [
+   "Pupuk kelapa sudah tiba untuk 8.160 Ha.",
+   "Pupuk pala mulai dibagikan sejak September (Minahasa, Minahasa Utara, Kep. Sangihe)."
+  ],
+  "GORONTALO": [
+   "Pupuk kelapa sudah tiba untuk 700 Ha."
+  ],
+  "MALUKU": [
+   "Pupuk pala sudah tiba untuk 500 Ha (Seram Bagian Barat dan Timur)."
+  ],
+  "MALUKU UTARA": [
+   "Pupuk pala sudah tiba untuk 1.600 Ha di Halmahera, Ternate, dan Tidore.",
+   "Kakao: 300.000 batang benih sedang diantar ke Tidore Kepulauan."
+  ],
+  "SULAWESI TENGAH": [
+   "Kopi: lubang tanam 500 Ha selesai dan 203.000 batang benih diantar ke Lore Tengah, Sigi."
+  ],
+  "SULAWESI TENGGARA": [
+   "Pupuk pala mulai dibagikan di Konawe Selatan.",
+   "Pupuk kelapa di Konawe sudah diserahterimakan."
+  ],
+  "SULAWESI SELATAN": [
+   "Pupuk kelapa di Bone sudah diserahterimakan.",
+   "Pupuk lada mulai dibagikan sejak September."
+  ],
+  "LAMPUNG": [
+   "Pupuk lada mulai dibagikan sejak September."
+  ],
+  "KEPULAUAN BANGKA BELITUNG": [
+   "Pupuk lada mulai dibagikan sejak September."
+  ],
+  "KALIMANTAN SELATAN": [
+   "Pupuk kelapa Barito Kuala dan Tanah Bumbu sudah dipesan; penyaluran Oktober–Desember."
+  ]
+ }
+}

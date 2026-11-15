@@ -1,0 +1,8 @@
+*.xlsx
+*.xls
+*.csv
+.env
+*.gs
+.clasp.json
+node_modules/
+.DS_Store

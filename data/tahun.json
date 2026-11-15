@@ -1,0 +1,9 @@
+{
+  "bawaan": 2026,
+  "tahun": [
+    { "ta": 2026, "status": "berjalan", "keterangan": "Data diperbarui setiap hari kerja" },
+    { "ta": 2027, "status": "belum_dimulai", "keterangan": "Dibuka setelah DIPA 2027 terbit" },
+    { "ta": 2028, "status": "belum_dimulai", "keterangan": "" },
+    { "ta": 2029, "status": "belum_dimulai", "keterangan": "Tahun terakhir periode Pedoman Monev 2025–2029" }
+  ]
+}
