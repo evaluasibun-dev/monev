@@ -10,7 +10,7 @@
   var F = function () { return Monev.format; };
   var D = function () { return window.LaporanDokumen; };
   var LOGO = "assets/ikon/kementan.png";
-  var STATE = { tanggal: "" };
+  var STATE = { tanggal: "", butirHal: 0 };
 
   function muatIndeks(ta) { return Monev.data.muatTahun("laporan/terbit/indeks.json", ta); }
   function muatLaporan(ta, file) { return Monev.data.muatTahun("laporan/terbit/" + file, ta); }
@@ -90,8 +90,53 @@
   }
   function panelKeterangan(lap) {
     return seksi("Keterangan per komoditas", (lap.komoditas || []).map(function (k) {
-      return '<div class="butir"><strong>' + e(k.nama) + "</strong><span>" + e(k.keterangan || "–") + "</span></div>";
-    }).join("") + '<p class="catatan">Keterangan disusun otomatis dari angka Sisbun dan bisa diubah operator sebelum laporan diterbitkan.</p>');
+      return '<div class="butir" data-butir><strong>' + e(k.nama) + "</strong><span>" + e(k.keterangan || "–") + "</span></div>";
+    }).join("") +
+      '<div class="pager-akun" data-pager-butir hidden><button type="button" class="tombol tombol-sekunder tombol-kecil" data-butir-hal="-1">‹ Sebelumnya</button>' +
+      '<span aria-live="polite" data-butir-ket></span><button type="button" class="tombol tombol-sekunder tombol-kecil" data-butir-hal="1">Berikutnya ›</button></div>' +
+      '<p class="catatan">Keterangan disusun otomatis dari angka Sisbun dan bisa diubah operator sebelum laporan diterbitkan.</p>');
+  }
+
+  /*
+   * Kolom samping setinggi pratinjau dokumen: keterangan per komoditas dibagi per halaman supaya
+   * kolom samping tidak lebih tinggi dari pratinjau. Bila bertumpuk (layar sempit), 3 komoditas per halaman.
+   */
+  var BUTIR_PER_HAL = 3;
+  function halamanButir(el) {
+    var A = el.querySelector(".kolom-samping"), P = el.querySelector(".lap-pratinjau");
+    if (!A || !P) return;
+    var rows = Array.prototype.slice.call(A.querySelectorAll("[data-butir]"));
+    var pager = A.querySelector("[data-pager-butir]");
+    if (!rows.length || !pager) return;
+    var batas = [0], i;
+    A.style.minHeight = "";
+    A.style.alignSelf = "start"; P.style.alignSelf = "start";
+    var berdampingan = Math.abs(A.offsetTop - P.offsetTop) < 4;
+    if (!berdampingan) {
+      for (i = BUTIR_PER_HAL; i < rows.length; i += BUTIR_PER_HAL) batas.push(i);
+    } else {
+      pager.hidden = false;
+      rows.forEach(function (r) { r.hidden = true; });
+      var target = P.offsetHeight, mulai = 0;
+      for (i = 0; i < rows.length; i++) {
+        rows[i].hidden = false;
+        if (A.offsetHeight > target && i > mulai) {
+          for (var k = mulai; k <= i; k++) rows[k].hidden = true;
+          rows[i].hidden = false; batas.push(i); mulai = i;
+        }
+      }
+    }
+    A.style.alignSelf = ""; P.style.alignSelf = "";
+    if (berdampingan) A.style.minHeight = P.offsetHeight + "px";
+    var jml = batas.length;
+    if (STATE.butirHal >= jml) STATE.butirHal = jml - 1;
+    if (STATE.butirHal < 0) STATE.butirHal = 0;
+    var dari = batas[STATE.butirHal], ke = STATE.butirHal + 1 < jml ? batas[STATE.butirHal + 1] : rows.length;
+    rows.forEach(function (r, n) { r.hidden = n < dari || n >= ke; });
+    pager.hidden = jml < 2;
+    A.querySelector("[data-butir-ket]").textContent = "Halaman " + (STATE.butirHal + 1) + " dari " + jml;
+    pager.querySelector('[data-butir-hal="-1"]').disabled = STATE.butirHal === 0;
+    pager.querySelector('[data-butir-hal="1"]').disabled = STATE.butirHal >= jml - 1;
   }
   function panelAturan() {
     return seksi("Aturan penyusunan", '<ul class="daftar-titik">' + [
@@ -133,7 +178,8 @@
       var label = tab === "menteri" ? "Pratinjau Laporan Menteri 16:9" : "Pratinjau laporan internal A3";
       html += '<div class="grid-laporan"><section class="lap-pratinjau" aria-label="' + e(label) + '"><div class="lap-skala" id="lap-skala">' +
         (tab === "menteri" ? D().htmlMenteri(lap, { logo: LOGO }) : D().htmlA3(lap, { logo: LOGO })) + "</div></section>" +
-        '<aside class="kolom-samping">' + (tab === "menteri" ? panelKeterangan(lap) + panelAturan() : panelStatus(lap) + panelKenaikan(lap)) + "</aside></div>";
+        '<aside class="kolom-samping">' + (tab === "menteri" ? panelKeterangan(lap) : panelStatus(lap) + panelKenaikan(lap)) + "</aside></div>" +
+        (tab === "menteri" ? panelAturan() : "");
     }
     el.innerHTML = html;
     skalakan(el);
@@ -154,6 +200,7 @@
       sk.style.height = lembar.offsetHeight + "px";
       sk.style.marginBottom = (lembar.offsetHeight * (s - 1)) + "px";
       sk.style.marginRight = (lembar.offsetWidth * (s - 1)) + "px";
+      halamanButir(el);
     };
     atur();
     if (window.ResizeObserver) new ResizeObserver(atur).observe(wadah);
@@ -194,7 +241,7 @@
       if (!ev.target.hasAttribute("data-lap-tanggal")) return;
       var x = ctx.ind.filter(function (i) { return i.tanggal === ev.target.value; })[0];
       if (!x) return;
-      STATE.tanggal = x.tanggal;
+      STATE.tanggal = x.tanggal; STATE.butirHal = 0;
       pesan(el, "Memuat laporan " + F().tanggal(x.tanggal) + "…");
       muatLaporan(ta, x.file || x.tanggal + ".json").then(function (lap) {
         ctx.lap = lap; gambar(el, ctx.ind, lap, tab);
@@ -202,6 +249,14 @@
       }).catch(function () { pesan(el, "Laporan " + F().tanggal(x.tanggal) + " gagal dimuat."); });
     });
     el.addEventListener("click", function (ev) {
+      var hb = ev.target.closest("[data-butir-hal]");
+      if (hb && el.contains(hb)) {
+        var arah = hb.getAttribute("data-butir-hal");
+        STATE.butirHal += +arah; halamanButir(el);
+        var fb = el.querySelector('[data-butir-hal="' + arah + '"]');
+        if (fb && !fb.disabled) fb.focus(); else { var lb = el.querySelector("[data-butir-hal]:not([disabled])"); if (lb) lb.focus(); }
+        return;
+      }
       var t = ev.target.closest("[data-lap-aksi]");
       if (!t || !el.contains(t)) return;
       var aksi = t.getAttribute("data-lap-aksi"), jenis = tab === "menteri" ? "menteri" : "a3", lap = ctx.lap;

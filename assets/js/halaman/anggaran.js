@@ -903,8 +903,8 @@
       seksi("Realisasi kumulatif vs rencana",
         Monev.grafik.legenda([{ nama: "Realisasi SP2D", warna: "--brand" }, { nama: "SP2D + outstanding", warna: "--brand-mid" },
           { nama: "Rencana RPATA", warna: "--export-ppt", putus: true }, { nama: "Rencana tanpa RPATA", warna: "--info-fg", putus: true }]) +
-        '<div class="wadah-grafik" data-grafik="target"></div>') +
-      seksi("Posisi per unit kerja", tabUnit, { kanan: tombolCSV("t-unit") }) + "</div>";
+        '<div class="wadah-grafik" data-grafik="target"></div>', { kelas: "seksi-grafik-target" }) +
+      seksi("Posisi per unit kerja", tabUnit, { kanan: tombolCSV("t-unit"), kelas: "seksi-posisi-unit" }) + "</div>";
 
     /* mingguan dan harian */
     var k = G.jalur, namaJalur = k === "1" ? "RPATA" : "tanpa RPATA";
@@ -988,6 +988,23 @@
     pager.querySelector('[data-hari-hal="1"]').disabled = T.hariHal >= jml - 1;
   }
 
+  /*
+   * Tinggi grafik mengikuti kartu di sebelahnya (Posisi per unit kerja) supaya kedua kartu sama tinggi
+   * tanpa ruang kosong. Bila kartu bertumpuk (layar sempit), tinggi baku 260 px.
+   */
+  function tinggiIsiKartu(wadah) {
+    var A = wadah.closest(".seksi"), B = A && A.parentNode.querySelector(".seksi-posisi-unit");
+    if (!A || !B) return 260;
+    A.style.alignSelf = "start"; B.style.alignSelf = "start";
+    var hasil = 260;
+    if (Math.abs(A.offsetTop - B.offsetTop) < 4) {
+      var lain = A.offsetHeight - wadah.offsetHeight;
+      hasil = Math.max(260, B.offsetHeight - lain);
+    }
+    A.style.alignSelf = ""; B.style.alignSelf = "";
+    return hasil;
+  }
+
   function pasangGrafikTarget(el, T, j) {
     var wadah = el.querySelector('[data-grafik="target"]');
     if (!wadah) return;
@@ -1006,6 +1023,7 @@
         { nama: "SP2D + outstanding", data: pc(S.ro), warna: "--brand-mid", tebal: 3 },
         { nama: "Realisasi SP2D", data: pc(S.real), warna: "--brand", tebal: 3 }],
       yMaks: maks, satuanY: "%", penanda: { indeks: iAkhir, teks: "data terakhir" },
+      tinggi: tinggiIsiKartu,
       ringkasan: "Realisasi SP2D " + persen((E.lastReal / P) * 100) + " per " + F().tanggal(E.last) + "; target RPATA " + persen((E.t1 / P) * 100) +
         " dan tanpa RPATA " + persen((E.t2 / P) * 100) + " pada " + F().tanggal(T.cfg.end) + "."
     });

@@ -166,6 +166,7 @@
 .butir { display: flex; flex-direction: column; gap: 2px; padding-top: var(--space-2); border-top: 1px solid var(--line-soft); }
 .butir strong { font-size: 14px; }
 .butir span { font-size: 13px; color: var(--ink-2); }
+.butir[hidden] { display: none; }
 
 .catatan { font-size: 12px; color: var(--ink-3); margin: 0; }
 .paragraf-kecil { font-size: 13px; color: var(--ink-2); margin: 0; }
@@ -352,6 +353,7 @@
 .grid-laporan { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 340px); gap: var(--space-4); align-items: start; }
 @media (max-width: 1000px) { .grid-laporan { grid-template-columns: minmax(0, 1fr); } }
 .kolom-samping { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+.kolom-samping > .seksi:only-child { flex: 1 1 auto; }
 .lap-pratinjau { background: var(--surface-sunk); border-radius: var(--radius-lg); padding: var(--space-5); overflow: hidden; min-width: 0; }
 .lap-skala { transform-origin: top left; }
 .lap-skala .lap-lembar { border: 1px solid var(--line); }

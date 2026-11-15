@@ -4,7 +4,7 @@
      seri: [{ nama, data:[angka|null], warna:"--brand", tebal:3, putus:false }],
      yMaks: 100, satuanY: "%",             // sumbu y 0..yMaks
      penanda: { indeks: 5, teks: "data terakhir" },   // garis tegak putus-putus (opsional)
-     tinggi: 260, ringkasan: "kalimat untuk aria-label"
+     tinggi: 260 atau fungsi(el) → angka, ringkasan: "kalimat untuk aria-label"
    }) */
 (function () {
   "use strict";
@@ -25,7 +25,8 @@
 
   function gambar(el, o) {
     var lebar = Math.max(260, Math.floor(el.clientWidth || 600));
-    var tinggi = o.tinggi || 260;
+    // tinggi boleh fungsi(el) → dihitung ulang setiap kali digambar (mis. mengisi tinggi kartu di sebelahnya)
+    var tinggi = Math.max(160, Math.round((typeof o.tinggi === "function" ? o.tinggi(el) : o.tinggi) || 260));
     var kiri = 44, kanan = 12, atas = 12, bawah = 28;
     var w = lebar - kiri - kanan, h = tinggi - atas - bawah;
     var n = o.label.length;
