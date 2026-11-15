@@ -1,0 +1,262 @@
+{
+ "versi": 1,
+ "ta": 2026,
+ "tanggal_laporan": "2026-11-15",
+ "diterbitkan": "2026-11-15T21:37:00+07:00",
+ "pembanding": null,
+ "sumber": {
+  "myintress_unduh": "2026-11-15T15:35:00+07:00",
+  "sisbun_per": "2026-11-15",
+  "sisbun_ditarik": "2026-11-15T21:30:00+07:00"
+ },
+ "anggaran": {
+  "pagu": 6173139544000,
+  "blokir": 14253000000,
+  "sp2d": 1301955112919,
+  "outstanding": 3056953187457,
+  "sisa": 1799978243624
+ },
+ "unit_kerja": [
+  {
+   "unit": "Direktorat Pelindungan Perkebunan",
+   "pagu": 1059901000,
+   "blokir": 0,
+   "sp2d": 1028740219,
+   "outstanding": 0
+  },
+  {
+   "unit": "Sekretariat Direktorat Jenderal Perkebunan",
+   "pagu": 53229301000,
+   "blokir": 0,
+   "sp2d": 42446468156,
+   "outstanding": 1207079970
+  },
+  {
+   "unit": "Balai Pelindungan Tanaman Perkebunan (BPTP) Pontianak",
+   "pagu": 11828031000,
+   "blokir": 0,
+   "sp2d": 6263910892,
+   "outstanding": 1260146910
+  },
+  {
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
+   "pagu": 310766884000,
+   "blokir": 352331000,
+   "sp2d": 103695615737,
+   "outstanding": 115918942391
+  },
+  {
+   "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
+   "pagu": 226083361000,
+   "blokir": 0,
+   "sp2d": 75263276497,
+   "outstanding": 52749168629
+  },
+  {
+   "unit": "Direktorat Hilirisasi Hasil Perkebunan",
+   "pagu": 15327183000,
+   "blokir": 0,
+   "sp2d": 4026610182,
+   "outstanding": 9804220587
+  },
+  {
+   "unit": "Direktorat Perbenihan Perkebunan",
+   "pagu": 2699469972000,
+   "blokir": 11400669000,
+   "sp2d": 618483261165,
+   "outstanding": 1729364396784
+  },
+  {
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
+   "pagu": 784831219000,
+   "blokir": 2500000000,
+   "sp2d": 150694112064,
+   "outstanding": 407786728759
+  },
+  {
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
+   "pagu": 375165883000,
+   "blokir": 0,
+   "sp2d": 69618426540,
+   "outstanding": 142865831102
+  },
+  {
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
+   "pagu": 1695377809000,
+   "blokir": 0,
+   "sp2d": 230434691467,
+   "outstanding": 595996672325
+  }
+ ],
+ "komoditas": [
+  {
+   "nama": "Kelapa",
+   "target_btg": 16670940,
+   "target_ha": 151554,
+   "kontrak_btg": 15917110,
+   "kontrak_ha": 144701,
+   "cpcl_ha": 142635,
+   "tanam_btg": 2395670,
+   "tanam_ha": 22555.920000000002,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 22.556 ha, sisanya bertahap ditanam sesuai jadwal salur mulai bulan November sampai dengan bulan Desember 2026. CPCL di bawah 80% di Sumatera Selatan (62%), Sulawesi Selatan (65%) dan Sumatera Utara (72%). Koreksi: target ada yang tidak terhitung; update.",
+   "koreksi": [
+    {
+     "kolom": "target_ha",
+     "nilai_sisbun": 151479,
+     "nilai_dipakai": 151554,
+     "alasan": "target ada yang tidak terhitung"
+    },
+    {
+     "kolom": "target_btg",
+     "nilai_sisbun": 16662690,
+     "nilai_dipakai": 16670940,
+     "alasan": "update"
+    }
+   ],
+   "alasan": "update"
+  },
+  {
+   "nama": "Kopi",
+   "target_btg": 85700000,
+   "target_ha": 85700,
+   "kontrak_btg": 86450000,
+   "kontrak_ha": 86450,
+   "cpcl_ha": 80591.5,
+   "tanam_btg": 5925160,
+   "tanam_ha": 5925.16,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 5.925 ha, sisanya bertahap ditanam sesuai jadwal salur mulai bulan November sampai dengan bulan Desember 2026. CPCL di bawah 80% di Sulawesi Barat (36%).",
+   "koreksi": [],
+   "alasan": "update"
+  },
+  {
+   "nama": "Kakao",
+   "target_btg": 174260000,
+   "target_ha": 174260,
+   "kontrak_btg": 172800000,
+   "kontrak_ha": 166894.5,
+   "cpcl_ha": 168156.47,
+   "tanam_btg": 854770,
+   "tanam_ha": 854.77,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 855 ha, sisanya bertahap ditanam sesuai jadwal salur mulai bulan November sampai dengan bulan Desember 2026. CPCL di bawah 80% di Sulawesi Tenggara (69%).",
+   "koreksi": [],
+   "alasan": "update"
+  },
+  {
+   "nama": "Pala",
+   "target_btg": 1608000,
+   "target_ha": 13400,
+   "kontrak_btg": 1308000,
+   "kontrak_ha": 13400,
+   "cpcl_ha": 13400,
+   "tanam_btg": 47280,
+   "tanam_ha": 475,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 475 ha, sisanya bertahap ditanam sesuai jadwal salur bulan November 2026.",
+   "koreksi": [],
+   "alasan": "update"
+  },
+  {
+   "nama": "Lada",
+   "target_btg": 3827200,
+   "target_ha": 2392,
+   "kontrak_btg": 2233600,
+   "kontrak_ha": 2392,
+   "cpcl_ha": 2392,
+   "tanam_btg": 186992,
+   "tanam_ha": 218.74,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 219 ha, sisanya bertahap ditanam sesuai jadwal salur bulan November 2026.",
+   "koreksi": [],
+   "alasan": ""
+  },
+  {
+   "nama": "Jambu mete",
+   "target_btg": 5264380,
+   "target_ha": 47858,
+   "kontrak_btg": 5264380,
+   "kontrak_ha": 47858,
+   "cpcl_ha": 47858,
+   "tanam_btg": 23210,
+   "tanam_ha": 211,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 211 ha, sisanya bertahap ditanam sesuai jadwal salur mulai bulan November sampai dengan bulan Desember 2026.",
+   "koreksi": [],
+   "alasan": ""
+  },
+  {
+   "nama": "Tebu",
+   "target_btg": 5878200000,
+   "target_ha": 97970.00000000001,
+   "kontrak_btg": 5186040000,
+   "kontrak_ha": 86434,
+   "cpcl_ha": 83963.72,
+   "tanam_btg": 1111252505,
+   "tanam_ha": 18786.75,
+   "keterangan": "Realisasi tanam sampai dengan tanggal 15 November 2026 seluas 18.787 ha, sisanya bertahap ditanam sesuai jadwal salur mulai bulan November sampai dengan bulan Desember 2026. CPCL di bawah 80% di Jawa Timur (79%), Sulawesi Selatan (61%) dan Gorontalo (63%). Koreksi: update; update.",
+   "koreksi": [
+    {
+     "kolom": "kontrak_btg",
+     "nilai_sisbun": 3594851435,
+     "nilai_dipakai": 5186040000,
+     "alasan": "update"
+    },
+    {
+     "kolom": "kontrak_ha",
+     "nilai_sisbun": 63257.1,
+     "nilai_dipakai": 86434,
+     "alasan": "update"
+    }
+   ],
+   "alasan": "update"
+  }
+ ],
+ "pemeriksaan": [
+  {
+   "kode": "P1",
+   "judul": "Angka Sisbun tidak turun dibanding data pembanding (kontrak, CPCL, tanam).",
+   "hasil": "INFO",
+   "rincian": [
+    "Belum ada laporan terbit sebagai pembanding."
+   ]
+  },
+  {
+   "kode": "P2",
+   "judul": "Realisasi tanam tidak melebihi kontrak benih dan CPCL.",
+   "hasil": "LOLOS",
+   "rincian": []
+  },
+  {
+   "kode": "P3",
+   "judul": "Konversi batang/mata ke hektar sesuai standar per komoditas.",
+   "hasil": "INFO",
+   "rincian": [
+    "Pala: kontrak 1.308.000 batang setara 10.900 ha menurut standar, Sisbun mencatat 13.400 ha.",
+    "Lada: kontrak 2.233.600 batang setara 1.396 ha menurut standar, Sisbun mencatat 2.392 ha."
+   ]
+  },
+  {
+   "kode": "P4",
+   "judul": "Target hektar sama dengan target di data integrasi (SAT 3).",
+   "hasil": "PERINGATAN",
+   "rincian": [
+    "Kelapa: target 151.554 ha, data integrasi (SAT 3) 152.774 ha.",
+    "Kopi: target 85.700 ha, data integrasi (SAT 3) 14.139 ha.",
+    "Kakao: target 174.260 ha, data integrasi (SAT 3) 1.856 ha.",
+    "Pala: target 13.400 ha, data integrasi (SAT 3) 4.613 ha.",
+    "Tebu: target 97.970 ha, data integrasi (SAT 3) 101.020 ha."
+   ]
+  },
+  {
+   "kode": "P5",
+   "judul": "Total realisasi unit kerja sama dengan total di menu Anggaran.",
+   "hasil": "LOLOS",
+   "rincian": []
+  },
+  {
+   "kode": "P6",
+   "judul": "Data MyIntress dan Sisbun ditarik pada tanggal laporan, bukan sisa kemarin.",
+   "hasil": "LOLOS",
+   "rincian": []
+  }
+ ],
+ "catatan_terbit": "",
+ "catatan_kaki": "",
+ "narasi": "Ijin menyampaikan laporan harian PM per 15 November 2026:\n\n(Belum ada laporan terbit sebelumnya sebagai pembanding, sehingga kenaikan belum dapat dihitung.)\n\nTerima kasih dan mohon arahan"
+}
