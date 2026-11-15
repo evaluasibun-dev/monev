@@ -19,7 +19,7 @@
   var STATE = {
     kom: "Kelapa", ukuran: "tanam", petaKom: "", prov: "", tren: "tanam",
     nas: { sumber: "", komoditas: "", bencana: false },
-    pv: { provinsi: "", sumber: "", komoditas: "" }
+    pv: { provinsi: "", sumber: "", komoditas: "", kabHal: null, kabKunci: "" }
   };
   var D = { ta: null, sisbun: null, rekap: undefined, titik: null, catatan: null, lap: null, satker: {}, waktuMuat: 0 };
 
@@ -608,18 +608,24 @@
     var kiri = seksi("Semua provinsi", daftar + '<p class="catatan">Fisik = realisasi tanam dibanding target reguler. Anggaran = terbayar dibanding pagu.</p>', { kanan: '<span class="seksi-keterangan">Klik nama provinsi untuk membuka rinciannya</span>' });
     var kanan = V.provinsi ? rincianProvinsi(dasar, V.provinsi, j) : seksi("Rincian provinsi", '<p class="paragraf-kecil">Tidak ada provinsi untuk pilihan ini.</p>');
     el.innerHTML = filter + '<div class="grid-rekap-prov">' + kiri + kanan + "</div>" + '<p class="catatan" id="bantuan-pesan" role="status"></p>';
+    // tabel kabupaten/kota dibagi per halaman supaya rincian setinggi daftar Semua provinsi
+    var kunciKab = [V.provinsi, V.sumber, V.komoditas].join("|");
+    if (V.kabKunci !== kunciKab) { V.kabKunci = kunciKab; V.kabHal = null; }
+    var g = el.querySelector(".grid-rekap-prov");
+    Monev.bagiHalaman.pasang({ kartu: el.querySelector(".seksi-rincian-prov"), lawan: g && g.firstElementChild, baris: "tr[data-hal-baris]",
+      perHal: 15, minBaris: 10, keadaan: V, kunci: "kabHal" });
   }
   function rincianProvinsi(dasar, nama, j) {
     var rows = R().saring(dasar, { provinsi: nama }), k = R().kartu(rows), ben = (j.provinsi_bencana || []).indexOf(nama) >= 0;
     var kab = R().perKabupaten(rows, nama).sort(function (a, b) { return a.grup - b.grup || b.pagu - a.pagu || (a.kabupaten < b.kabupaten ? -1 : 1); });
     var kabTabel = '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Kabupaten/kota</th><th scope="col">Komoditas / kegiatan</th><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Pagu</th><th scope="col" class="angka">Terbayar</th></tr></thead><tbody>' +
       kab.map(function (x) {
-        return "<tr><td>" + e(x.kabupaten) + "</td><td>" + e(x.kegiatan) + (x.sumber_dana === "ABT" ? " " + chip("abt", "ABT") : "") + '</td><td class="angka">' + fisik(x.target, x.satuan) + '</td><td class="angka">' + fisik(x.realisasi, x.satuan) +
+        return "<tr data-hal-baris><td>" + e(x.kabupaten) + "</td><td>" + e(x.kegiatan) + (x.sumber_dana === "ABT" ? " " + chip("abt", "ABT") : "") + '</td><td class="angka">' + fisik(x.target, x.satuan) + '</td><td class="angka">' + fisik(x.realisasi, x.satuan) +
           '</td><td class="angka">' + (x.satuan === "Hektar" && x.grup <= 1 ? pct(x.realisasi, x.target) : "–") + '</td><td class="angka">' + F().rupiahM(x.pagu) + '</td><td class="angka">' + F().rupiahM(x.terbayar) + "</td></tr>";
-      }).join("") + "</tbody></table></div>";
-    return '<section class="seksi"><div class="seksi-kepala"><div class="kolom-blok"><span class="label-kecil">RINCIAN PROVINSI</span><h2>' + e(namaProv(nama)) + "</h2></div>" +
+      }).join("") + "</tbody></table></div>" + Monev.bagiHalaman.pager();
+    return '<section class="seksi seksi-rincian-prov"><div class="seksi-kepala"><div class="kolom-blok"><span class="label-kecil">RINCIAN PROVINSI</span><h2>' + e(namaProv(nama)) + "</h2></div>" +
       (ben ? chip("abt", "Provinsi terdampak bencana") : "") + "</div>" +
-      '<div class="grid-kartu grid-kartu-padat">' + kartuRekap("Target fisik", F().hektar(k.target), "kawasan") + kartuRekap("Realisasi tanam", F().hektar(k.realisasi_reg), pct(k.realisasi_reg, k.target_reg) + " dari target reguler") +
+      '<div class="grid-kartu grid-kartu-padat grid-kartu-empat">' + kartuRekap("Target fisik", F().hektar(k.target), "kawasan") + kartuRekap("Realisasi tanam", F().hektar(k.realisasi_reg), pct(k.realisasi_reg, k.target_reg) + " dari target reguler") +
       kartuRekap("Pagu", F().rupiahM(k.pagu), "kawasan, pendukung, benih, KBD") + kartuRekap("Terbayar", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " dari pagu") + "</div>" +
       '<div class="seksi-kepala"><h3 class="subjudul">Per komoditas</h3>' + tombolCSV("prov-kegiatan") + "</div>" + tabelKegiatan(rows, "provinsi", ben) +
       '<div class="seksi-kepala"><h3 class="subjudul">Per kabupaten/kota</h3>' + tombolCSV("prov-kab") + "</div>" + kabTabel +
