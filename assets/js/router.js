@@ -135,7 +135,7 @@
   /* ---------- Tombol Masuk ---------- */
   function siapkanMasuk() {
     var a = document.getElementById("tombol-masuk");
-    var url = Monev.config.MASUK_URL;
+    var url = Monev.urlMasuk("unggah");
     if (url) {
       a.href = url;
       a.rel = "noopener";

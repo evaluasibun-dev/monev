@@ -132,7 +132,7 @@
   }
 
   function tombolMasuk(label) {
-    var url = Monev.config.MASUK_URL;
+    var url = Monev.urlMasuk("");
     return url
       ? '<a class="tombol tombol-sekunder tombol-kecil" href="' + e(url) + '" rel="noopener">' + e(label) + "</a>"
       : '<span class="tombol tombol-sekunder tombol-kecil" role="link" aria-disabled="true" title="Halaman kerja belum tersedia">' + e(label) + "</span>";

@@ -23,8 +23,8 @@
     return '<nav class="subtab" aria-label="Sub-menu ' + Monev.esc(menu.nama) + '">' + s + "</nav>";
   }
 
-  function halamanLogin(nama) {
-    var url = Monev.config.MASUK_URL;
+  function halamanLogin(nama, page) {
+    var url = Monev.urlMasuk(page);
     return '<section class="keadaan">' +
       "<h2>" + Monev.esc(nama) + " ada di halaman kerja</h2>" +
       "<p>Halaman ini untuk operator dan admin, dibuka lewat tombol Masuk dengan akun Google kantor.</p>" +
@@ -52,7 +52,7 @@
     }
 
     if (menu.login || (sub && sub.login)) {
-      return html + halamanLogin(sub && sub.login ? sub.nama : menu.nama);
+      return html + halamanLogin(sub && sub.login ? sub.nama : menu.nama, menu.id === "unggah" ? "unggah" : "");
     }
 
     if (Monev.tahun.belumDibuka(ta)) {

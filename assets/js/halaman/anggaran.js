@@ -133,8 +133,8 @@
     return '<button type="button" class="tombol tombol-sekunder tombol-kecil" data-csv="' + e(nama) + '">Unduh CSV</button>';
   }
 
-  function tombolMasuk(label, utama) {
-    var url = Monev.config.MASUK_URL;
+  function tombolMasuk(label, utama, page) {
+    var url = Monev.urlMasuk(page);
     var kelas = "tombol " + (utama ? "tombol-utama" : "tombol-sekunder");
     return url
       ? '<a class="' + kelas + '" href="' + e(url) + '" rel="noopener">' + e(label) + "</a>"
@@ -1133,7 +1133,7 @@
     aksi: function (r) {
       if (r.sub && r.sub.id) return "";
       return '<a class="tombol tombol-sekunder" href="#unggah">Unggah data realisasi</a>' +
-        tombolMasuk("Blokir dan tambahan hibah") +
+        tombolMasuk("Blokir dan tambahan hibah", false, "realisasi") +
         '<span class="tombol tombol-ppt" role="link" aria-disabled="true" title="Paparan PPT sementara dibuat di halaman kerja">Unduh paparan (PPT)</span>' +
         '<button type="button" class="tombol tombol-utama" data-anggaran-excel>Unduh Excel realisasi</button>';
     },

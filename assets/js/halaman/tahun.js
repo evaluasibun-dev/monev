@@ -117,11 +117,9 @@
     return '<div class="wadah-tabel"><table class="tabel">' + kepala + "<tbody>" + badan + per + "</tbody></table></div>";
   }
 
+  /* Penyiapan tahun baru belum punya halaman kerja: langkahnya dikerjakan admin manual (RENCANA Tahap 8). */
   function tombolMasuk(label) {
-    var url = Monev.config.MASUK_URL;
-    return url
-      ? '<a class="tombol tombol-utama" href="' + e(url) + '" rel="noopener">' + e(label) + "</a>"
-      : '<span class="tombol tombol-utama" role="link" aria-disabled="true" title="Halaman kerja belum tersedia (Tahap 4)">' + e(label) + "</span>";
+    return '<span class="tombol tombol-utama" role="link" aria-disabled="true" title="Dikerjakan admin manual sesuai langkah di atas">' + e(label) + "</span>";
   }
 
   function langkahBaru(daftar) {
@@ -139,7 +137,7 @@
     ];
     return '<section class="seksi" id="tahun-baru" tabindex="-1"><h2>Membuka tahun baru (admin)</h2><ol class="langkah-tahun">' +
       L.map(function (x, i) { return '<li><span class="langkah-nomor" aria-hidden="true">' + (i + 1) + "</span><span>" + e(x) + "</span></li>"; }).join("") + "</ol>" +
-      '<div class="baris-alat">' + tombolMasuk("Siapkan TA " + n) + '<span class="catatan">Tombol aktif setelah halaman kerja dengan login akun Google siap (Tahap 4).</span></div></section>';
+      '<div class="baris-alat">' + tombolMasuk("Siapkan TA " + n) + '<span class="catatan">Langkah di atas dikerjakan admin secara manual (RENCANA Tahap 8); belum ada tombol otomatis di halaman kerja.</span></div></section>';
   }
   function seksiPolos(judul, isi) { return '<section class="seksi"><h2>' + e(judul) + "</h2>" + isi + "</section>"; }
 

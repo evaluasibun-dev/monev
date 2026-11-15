@@ -16,7 +16,7 @@
   function muatLaporan(ta, file) { return Monev.data.muatTahun("laporan/terbit/" + file, ta); }
 
   function tombolMasuk(label) {
-    var url = Monev.config.MASUK_URL;
+    var url = Monev.urlMasuk("laporan");
     return url
       ? '<a class="tombol tombol-sekunder" href="' + e(url) + '" rel="noopener">' + e(label) + "</a>"
       : '<span class="tombol tombol-sekunder" role="link" aria-disabled="true" title="Halaman kerja belum tersedia (Tahap 4)">' + e(label) + "</span>";
