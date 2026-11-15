@@ -264,7 +264,7 @@
     if (siap(D.rekap)) cek("hasil integrasi", D.rekap.data_per);
     if (basi.length && !Monev.tahun.ditutup(D.ta)) butir("DATA", "neutral", "Data belum diperbarui lebih dari " + Monev.config.BATAS_HARI_BASI + " hari", basi.join(", "), "#tentang");
 
-    var isi = B.length ? '<ul class="daftar-beranda-perhatian">' + B.map(function (b) {
+    var isi = B.length ? '<ul class="daftar-beranda-perhatian isi-rata">' + B.map(function (b) {
       return '<li><a class="butir-perhatian" href="' + b.href + '"><span class="chip chip-' + b.kelas + '">' + e(b.jenis) + "</span>" +
         '<span class="butir-teks"><strong>' + e(b.judul) + '</strong><span class="paragraf-kecil">' + e(b.ket) + "</span></span></a></li>";
     }).join("") + "</ul>" : (muat.length ? "" : '<p class="paragraf-kecil">Tidak ada yang perlu perhatian dari data yang sudah terbit.</p>');

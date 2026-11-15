@@ -239,8 +239,8 @@
     var kegBar = m.keg.filter(function (x) { return !x.unmapped; }).slice().sort(function (a, b) { return a.kode < b.kode ? -1 : 1; });
     var unitBar = m.unit.filter(function (x) { return !x.unmapped; }).slice().sort(function (a, b) { return I().urutUnit(a.unit, b.unit); });
     html += '<div class="grid-dua">' +
-      seksi("Realisasi per kegiatan", legendaBar(STATE.mode) + kegBar.map(function (x) { return barBaris(x.kode + " " + I().kegiatanSingkat(x.kode, x.nama), x, STATE.mode); }).join("")) +
-      seksi("Realisasi per unit kerja", legendaBar(STATE.mode) + unitBar.map(function (x) { return barBaris(x.unit, x, STATE.mode); }).join("")) +
+      seksi("Realisasi per kegiatan", legendaBar(STATE.mode) + '<div class="isi-rata">' + kegBar.map(function (x) { return barBaris(x.kode + " " + I().kegiatanSingkat(x.kode, x.nama), x, STATE.mode); }).join("") + "</div>") +
+      seksi("Realisasi per unit kerja", legendaBar(STATE.mode) + '<div class="isi-rata">' + unitBar.map(function (x) { return barBaris(x.unit, x, STATE.mode); }).join("") + "</div>") +
       "</div>";
 
     /* slide 4 */
@@ -596,7 +596,7 @@
 
     var kw = kewenangan(j);
     var kolomKw = kw.kolom;
-    var tabelKw = '<div class="wadah-tabel"><table class="tabel"><thead><tr><th scope="col">Jenis belanja</th>' +
+    var tabelKw = '<div class="wadah-tabel tabel-isi"><table class="tabel"><thead><tr><th scope="col">Jenis belanja</th>' +
       kolomKw.map(function (k) { return '<th scope="col" class="angka">' + k + "</th>"; }).join("") + '<th scope="col" class="angka">Jumlah</th></tr></thead><tbody>' +
       (kw.jenis.map(function (k) {
         var x = kw.isi[k], jml = kolomKw.reduce(function (s, c) { return s + (x[c] || 0); }, 0);

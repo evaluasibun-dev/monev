@@ -75,7 +75,7 @@
       }).join("") + "</ul></details>" : "") +
       (lap.catatan_terbit ? '<p class="paragraf-kecil"><strong>Catatan penerbitan:</strong> ' + e(lap.catatan_terbit) + "</p>" : "") +
       '<p class="catatan">Diterbitkan ' + e(lap.diterbitkan ? F().waktu(lap.diterbitkan) : "–") + ". Laporan terbit dikunci sebagai pembanding Narasi PM esok hari.</p>";
-    return seksi("Status data", isi);
+    return seksi("Status data", '<div class="isi-rata">' + isi + "</div>");
   }
   function panelKenaikan(lap) {
     var bag = [], cur = null;
@@ -178,7 +178,7 @@
       var label = tab === "menteri" ? "Pratinjau Laporan Menteri 16:9" : "Pratinjau laporan internal A3";
       html += '<div class="grid-laporan"><section class="lap-pratinjau" aria-label="' + e(label) + '"><div class="lap-skala" id="lap-skala">' +
         (tab === "menteri" ? D().htmlMenteri(lap, { logo: LOGO }) : D().htmlA3(lap, { logo: LOGO })) + "</div></section>" +
-        '<aside class="kolom-samping">' + (tab === "menteri" ? panelKeterangan(lap) : panelStatus(lap) + panelKenaikan(lap)) + "</aside></div>" +
+        '<aside class="kolom-samping">' + (tab === "menteri" ? panelKeterangan(lap) : panelStatus(lap) + panelKenaikan(lap) + panelKeterangan(lap)) + "</aside></div>" +
         (tab === "menteri" ? panelAturan() : "");
     }
     el.innerHTML = html;

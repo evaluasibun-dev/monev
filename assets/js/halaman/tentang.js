@@ -121,7 +121,7 @@
 
       '<div class="grid-dua">' +
         '<section class="seksi" aria-labelledby="h-rumus"><h2 id="h-rumus">Rumus</h2>' + rumus + "</section>" +
-        '<section class="seksi" aria-labelledby="h-aturan"><h2 id="h-aturan">Aturan integrasi</h2><ul class="daftar-titik">' + aturan + "</ul></section>" +
+        '<section class="seksi" aria-labelledby="h-aturan"><h2 id="h-aturan">Aturan integrasi</h2><ul class="daftar-titik isi-rata">' + aturan + "</ul></section>" +
       "</div>" +
 
       '<section class="seksi" aria-labelledby="h-posisi"><h2 id="h-posisi">Posisi data</h2>' +
@@ -137,8 +137,8 @@
       "</section>" +
 
       '<div class="grid-dua">' +
-        '<section class="seksi" aria-labelledby="h-peran"><h2 id="h-peran">Peran dan aturan unggah</h2>' + peran + "</section>" +
-        '<section class="seksi" aria-labelledby="h-batas"><h2 id="h-batas">Keterbatasan data</h2>' + batas + "</section>" +
+        '<section class="seksi" aria-labelledby="h-peran"><h2 id="h-peran">Peran dan aturan unggah</h2><div class="isi-rata">' + peran + "</div></section>" +
+        '<section class="seksi" aria-labelledby="h-batas"><h2 id="h-batas">Keterbatasan data</h2><div class="isi-rata">' + batas + "</div></section>" +
       "</div>";
   };
 })();

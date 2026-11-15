@@ -183,6 +183,14 @@
 
 .tabel-lebar { min-width: 980px; }
 .kolom-blok { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+/* Isi daftar meregang setinggi kartu: di kartu yang lebih pendek dari kartu sebelahnya, baris dibagi rata
+   ke seluruh tinggi sehingga tidak ada ruang kosong di bawah (DESIGN.md §3). Di kartu yang tertinggi tidak berubah. */
+.isi-rata { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-3); min-height: 0; }
+/* Tabel pendek di kartu yang lebih pendek: baris meregang setinggi sisa kartu */
+.tabel-isi { flex: 1 1 auto; display: flex; flex-direction: column; }
+.tabel-isi > table { flex: 1 1 auto; height: 100%; }
+/* Kotak narasi meregang mengisi kartu bila kolom samping lebih tinggi */
+.grid-laporan > .seksi > .area-narasi { flex: 1 1 auto; }
 .kartu-tahun .chip { align-self: flex-start; }
 
 /* ---------- Menu Kontrak dan komponen tabel/daftar umum ---------- */

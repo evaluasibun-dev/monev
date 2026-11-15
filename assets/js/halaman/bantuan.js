@@ -183,7 +183,7 @@
       (o.ringkas ? '<p class="paragraf-kecil">' + e(o.ringkas) + "</p>" : "") + tahap + meter +
       (uangKet ? '<p class="catatan">' + e(uangKet) + "</p>" : "") +
       '<div class="grid-dua"><div class="kolom-blok"><div class="seksi-kepala"><h3 class="subjudul">Siapa yang mengerjakan</h3>' +
-      '<div class="legenda"><span><i class="bar-cpcl-i"></i>CPCL</span><span><i style="background:var(--brand)"></i>Ditanam</span></div></div>' + siapa +
+      '<div class="legenda"><span><i class="bar-cpcl-i"></i>CPCL</span><span><i style="background:var(--brand)"></i>Ditanam</span></div></div>' + '<div class="isi-rata">' + siapa + "</div>" +
       '<span class="catatan">Dari kolom Satker Kawasan di Sisbun. Sisbun belum mencatat target per satker, jadi pembandingnya CPCL.</span></div>' +
       '<div class="kolom-blok"><h3 class="subjudul">Kenapa begini</h3><ul class="daftar-titik">' + o.kenapa.map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul>" +
       '<h3 class="subjudul">Berikutnya</h3><ul class="daftar-titik">' + (o.berikutnya.length ? o.berikutnya : ["Tidak ada jadwal salur baru di Sisbun."]).map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul>" +
@@ -315,8 +315,8 @@
       "Untuk pala, lada, dan jambu mete, penerima terdata masih berupa usulan yang belum seluruhnya ditetapkan.",
       "Luas HOK tidak dihitung sebagai luas tanam.",
       "Tahap SK penetapan belum tercatat di Sisbun; tahap salur benih memakai jadwal salur Sisbun, bukan benih yang sudah diterima."];
-    return '<div class="grid-dua">' + seksi("Kamus singkat", K.map(function (x) { return '<div class="butir"><strong>' + e(x[0]) + "</strong><span>" + e(x[1]) + "</span></div>"; }).join("")) +
-      seksi("Catatan data", '<ul class="daftar-titik">' + C.map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul>") + "</div>";
+    return '<div class="grid-dua">' + seksi("Kamus singkat", '<div class="isi-rata">' + K.map(function (x) { return '<div class="butir"><strong>' + e(x[0]) + "</strong><span>" + e(x[1]) + "</span></div>"; }).join("") + "</div>") +
+      seksi("Catatan data", '<ul class="daftar-titik isi-rata">' + C.map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul>") + "</div>";
   }
 
   function gambarJejak(el) {

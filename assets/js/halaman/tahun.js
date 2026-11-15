@@ -135,7 +135,7 @@
       "Di data/tahun.json: ubah status TA " + n + " menjadi \"berjalan\" dan jadikan " + n + " tahun bawaan (\"bawaan\": " + n + ").",
       "Tutup TA " + lama + ": ubah statusnya menjadi \"ditutup\". Unggahan berikutnya ditolak; data tetap bisa dibuka sebagai arsip."
     ];
-    return '<section class="seksi" id="tahun-baru" tabindex="-1"><h2>Membuka tahun baru (admin)</h2><ol class="langkah-tahun">' +
+    return '<section class="seksi" id="tahun-baru" tabindex="-1"><h2>Membuka tahun baru (admin)</h2><ol class="langkah-tahun isi-rata">' +
       L.map(function (x, i) { return '<li><span class="langkah-nomor" aria-hidden="true">' + (i + 1) + "</span><span>" + e(x) + "</span></li>"; }).join("") + "</ol>" +
       '<div class="baris-alat">' + tombolMasuk("Siapkan TA " + n) + '<span class="catatan">Langkah di atas dikerjakan admin secara manual (RENCANA Tahap 8); belum ada tombol otomatis di halaman kerja.</span></div></section>';
   }
