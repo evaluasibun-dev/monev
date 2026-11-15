@@ -138,7 +138,7 @@ Tidak ada bayangan, gradien, atau efek kaca.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ Monev Ditjenbun [TA 2026 ▾]  Beranda Anggaran Kontrak …  [Masuk]│ header putih, 1 baris
+│ Monev Ditjenbun [TA 2026 ▾]  Beranda Anggaran …  [Halaman kerja]│ header putih, 1 baris
 ├──────────────────────────────────────────────────────────────┤
 │  Judul halaman                       [aksi] [aksi] [unduh]   │
 │  [Sub-tab | Sub-tab | Sub-tab]                               │
@@ -155,7 +155,7 @@ Tidak ada bayangan, gradien, atau efek kaca.
 - Tabel lebar dibungkus `overflow-x: auto`; badan halaman tidak boleh menggulir ke samping.
 - Viewport: `width=device-width, initial-scale=1, viewport-fit=cover`, dengan padding `env(safe-area-inset-*)`.
 
-**Ponsel (< 640 px):** menu atas diganti bilah bawah lima ikon-teks (Beranda, Anggaran, Kontrak, Bantuan, Laporan). Unggah data dan Panel admin hanya lewat tombol Masuk. Kartu angka dua kolom.
+**Ponsel (< 640 px):** menu atas diganti bilah bawah lima ikon-teks (Beranda, Anggaran, Kontrak, Bantuan, Laporan). Unggah data dan Panel admin hanya lewat tombol Halaman kerja. Kartu angka dua kolom.
 
 ---
 

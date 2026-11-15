@@ -132,7 +132,7 @@
     });
   }
 
-  /* ---------- Tombol Masuk ---------- */
+  /* ---------- Tombol Halaman kerja (dulu "Masuk") ---------- */
   function siapkanMasuk() {
     var a = document.getElementById("tombol-masuk");
     var url = Monev.urlMasuk("unggah");
@@ -144,7 +144,7 @@
       a.setAttribute("role", "link");
       a.setAttribute("aria-disabled", "true");
       a.title = "Halaman kerja belum tersedia";
-      a.setAttribute("aria-label", "Masuk, halaman kerja belum tersedia");
+      a.setAttribute("aria-label", "Halaman kerja belum tersedia");
     }
   }
 

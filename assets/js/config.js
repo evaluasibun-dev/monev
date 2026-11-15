@@ -3,7 +3,7 @@ window.Monev = window.Monev || {};
 
 Monev.config = {
   /* Alamat web app Apps Script deployment KEDUA (login akun Google; hanya akun di sheet PENGGUNA yang bisa masuk).
-     Dipasang 15 Nov 2026. Kosong = tombol Masuk tampil nonaktif. */
+     Dipasang 15 Nov 2026. Kosong = tombol Halaman kerja tampil nonaktif. */
   MASUK_URL: "https://script.google.com/macros/s/AKfycbxa83oMFBm_EHu1h5xtmJGPbvtlXIKk_kBlmlRGSPTyHCFJ3ahdGZVr6BZTV2QMNSmq/exec",
 
   /* Kunci localStorage untuk tahun pilihan pengguna. */

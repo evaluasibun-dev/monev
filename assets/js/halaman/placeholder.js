@@ -27,7 +27,7 @@
     var url = Monev.urlMasuk(page);
     return '<section class="keadaan">' +
       "<h2>" + Monev.esc(nama) + " ada di halaman kerja</h2>" +
-      "<p>Halaman ini untuk operator dan admin, dibuka lewat tombol Masuk dengan akun Google kantor.</p>" +
+      "<p>Halaman ini untuk operator dan admin, dibuka lewat tombol Halaman kerja dan login dengan akun Google yang terdaftar.</p>" +
       (url
         ? '<a class="tombol tombol-utama" href="' + Monev.esc(url) + '" rel="noopener">Masuk ke halaman kerja</a>'
         : '<p class="tambahan">Halaman kerja belum tersedia. Alamatnya dipasang setelah Apps Script deployment kedua siap (Tahap 4).</p>') +

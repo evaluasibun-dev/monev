@@ -407,7 +407,7 @@
       '<th scope="col" class="angka">Nilai</th><th scope="col">Detail temuan</th><th scope="col">Tindak lanjut</th></tr></thead><tbody>' +
       (badan || '<tr><td colspan="6">Tidak ada temuan untuk kategori dan saringan ini.</td></tr>') + "</tbody></table></div>" +
       (list.length > tampil.length ? '<button type="button" class="tombol tombol-sekunder" data-lebih="temuan">Tampilkan ' + Math.min(100, list.length - tampil.length) + " lagi dari " + (list.length - tampil.length) + "</button>" : "") +
-      '<p class="catatan">Perbaikan dilakukan operator di halaman kerja (tombol Masuk), bukan di halaman publik ini.</p>');
+      '<p class="catatan">Perbaikan dilakukan operator di halaman kerja (tombol Halaman kerja), bukan di halaman publik ini.</p>');
     return html;
   }
 
