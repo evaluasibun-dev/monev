@@ -5,7 +5,7 @@ Semua halaman, publik maupun yang butuh login, harus terlihat sebagai satu situs
 
 - Mockup acuan: https://claude.ai/artifact/VmQEve7UkMxkYoVCznAvtY (28 layar)
 - Rencana pembangunan: https://claude.ai/artifact/JJFjziak42McHoctA2GpKW
-- Versi: 13 November 2026
+- Versi: 13 November 2026; tema Monev (warna dashboard kontrak lama, Plus Jakarta Sans, pita hijau tua di kepala halaman) disetujui pemilik portal 15 November 2026
 
 ---
 
@@ -14,7 +14,7 @@ Semua halaman, publik maupun yang butuh login, harus terlihat sebagai satu situs
 1. **Angka dulu, hiasan tidak ada.** Pengguna utama adalah pimpinan dan tim monev yang membuka portal untuk satu angka. Setiap layar dibuka dengan angka yang paling sering ditanyakan.
 2. **Satu sumber, satu angka.** Angka yang sama tampil identik di semua halaman, PPT, PDF, dan Excel. Rumus ada di halaman Tentang data, bukan tersebar di kode tampilan.
 3. **Asal data selalu terlihat.** Setiap halaman menulis sumber dan waktu datanya (contoh: "MyIntress diunduh 13 Nov 2026, 15.30 WIB").
-4. **Warna punya arti.** Hijau tua = identitas dan aksi utama. Warna status hanya dipakai untuk status. Biru dan ungu hanya untuk asal kontrak (MyIntress dan manual).
+4. **Warna punya arti.** Hijau tua (hutan) = identitas, pita kepala halaman, dan aksi utama; emas = aksi utama di atas pita dan penanda (kicker). Warna status hanya dipakai untuk status. Biru dan ungu hanya untuk asal kontrak (MyIntress dan manual).
 5. **Bahasa Indonesia baku dan lugas.** Huruf kapital di awal kalimat saja. Tombol menyebut hasilnya ("Simpan dan terbitkan", bukan "Submit").
 6. **Ponsel diperlakukan serius.** Pimpinan membuka Beranda dan Laporan harian dari ponsel; tabel lebar menggulir di dalam wadahnya sendiri.
 
@@ -31,31 +31,37 @@ Tulis sebagai variabel CSS di `:root`. Komponen hanya memakai variabel, tidak me
   color-scheme: light;
 
   /* dasar */
-  --bg:            #F4F5F1;  /* latar halaman */
-  --surface:       #FFFFFF;  /* kartu, tabel, header */
-  --surface-muted: #F4F5F1;  /* kotak di dalam kartu, kepala tabel */
-  --surface-sunk:  #E7EAE3;  /* wadah sub-tab, latar pratinjau dokumen */
-  --line:          #DDE2D8;  /* garis kartu dan input */
-  --line-soft:     #EDEFE9;  /* garis antarbaris tabel */
+  --bg:            #F3F5F0;  /* latar halaman */
+  --surface:       #FFFFFF;  /* kartu, tabel */
+  --surface-muted: #F3F5F0;  /* kotak di dalam kartu, kepala tabel */
+  --surface-sunk:  #E3E8E2;  /* wadah sub-tab, latar pratinjau dokumen */
+  --line:          #D8DED6;  /* garis kartu dan input */
+  --line-soft:     #E8EDE6;  /* garis antarbaris tabel */
 
   /* teks */
-  --ink:           #1B2A20;  /* teks utama */
-  --ink-2:         #3D4A42;  /* teks isi sekunder */
-  --ink-3:         #55625A;  /* keterangan, label kecil */
+  --ink:           #17201B;  /* teks utama */
+  --ink-2:         #3E4A43;  /* teks isi sekunder */
+  --ink-3:         #5E6963;  /* keterangan, label kecil */
 
-  /* identitas */
-  --brand:         #1F6B45;  /* aksi utama, tautan, bar realisasi */
-  --brand-strong:  #14492F;  /* teks di atas brand-soft, tautan saat hover */
-  --brand-soft:    #E6F0E9;  /* menu aktif, chip LOLOS */
-  --brand-mid:     #A8C9B4;  /* bar outstanding, CPCL */
+  /* identitas (tema Monev) */
+  --brand:         #1F4D3A;  /* hijau hutan: aksi utama, tautan, bar realisasi, garis aksen kartu */
+  --brand-strong:  #163A2B;  /* teks di atas brand-soft, tautan saat hover */
+  --brand-soft:    #E3F1E7;  /* chip LOLOS, baris terpilih */
+  --brand-mid:     #6FB08A;  /* bar outstanding, CPCL */
+  --leaf:          #2E7D4F;  /* hijau daun: aksen kedua */
   --report:        #1F3A68;  /* khusus laporan harian dan dokumen cetak */
 
+  /* pita kepala halaman (§3) */
+  --band:          #1F4D3A;  --band-ink: #FFFFFF;  --band-sub: #D4E4DA;
+  --band-garis:    rgba(255,255,255,.22);  --band-isi: rgba(255,255,255,.10);
+  --gold:          #F2C14E;  --gold-ink: #2A2208;  /* kicker, tombol utama dan tombol Halaman kerja di atas pita, garis menu aktif */
+
   /* status */
-  --ok-bg: #E6F0E9;    --ok-fg: #14492F;     /* LOLOS, sesuai jadwal, terverifikasi */
-  --warn-bg: #FBE8D3;  --warn-fg: #8A3B07;   /* PERINGATAN, perlu dipercepat */
-  --bad-bg: #F7DEDA;   --bad-fg: #8E1F12;    /* GAGAL, tertinggal jauh, lewat batas */
-  --info-bg: #E3ECF7;  --info-fg: #1D4E89;   /* INFO, sedang diperiksa */
-  --neutral-bg: #EDEFE9; --neutral-fg: #3D4A42; /* belum, tetap, data belum ada */
+  --ok-bg: #E3F1E7;    --ok-fg: #1F4D3A;     /* LOLOS, sesuai jadwal, terverifikasi */
+  --warn-bg: #FBF0DC;  --warn-fg: #8A5A0E;   /* PERINGATAN, perlu dipercepat */
+  --bad-bg: #F8E5E0;   --bad-fg: #A3341B;    /* GAGAL, tertinggal jauh, lewat batas */
+  --info-bg: #E3EEF6;  --info-fg: #2F6690;   /* INFO, sedang diperiksa */
+  --neutral-bg: #E8EDE6; --neutral-fg: #3E4A43; /* belum, tetap, data belum ada */
 
   /* asal kontrak */
   --src-myintress-bg: #E3ECF7; --src-myintress: #1D4E89;
@@ -69,7 +75,7 @@ Tulis sebagai variabel CSS di `:root`. Komponen hanya memakai variabel, tidak me
   --export-pdf: #8E1F12;   /* tombol unduh PDF */
   /* Excel memakai --brand */
 
-  --focus: #1D4E89;
+  --focus: #C9851A;   /* emas tanah; di atas pita memakai --gold */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,6 +85,7 @@ Tulis sebagai variabel CSS di `:root`. Komponen hanya memakai variabel, tidak me
     --line: #2E3B33; --line-soft: #253029;
     --ink: #E6ECE7; --ink-2: #C3CDC6; --ink-3: #9AA69F;
     --brand: #4FB07E; --brand-strong: #9ED8B6; --brand-soft: #1E3A2B; --brand-mid: #2F6B4A;
+    --band: #14271E; --band-ink: #F1F5F2; --band-sub: #B9CDBF; --gold: #E8B84A; --gold-ink: #241C06; --leaf: #5FB487;
     --report: #8FB0E3;
     --ok-bg: #1E3A2B;   --ok-fg: #9ED8B6;
     --warn-bg: #3D2A16; --warn-fg: #F2B77A;
@@ -88,31 +95,32 @@ Tulis sebagai variabel CSS di `:root`. Komponen hanya memakai variabel, tidak me
     --src-myintress-bg: #1B2C42; --src-myintress: #9EC2F0;
     --src-manual-bg: #2B2140;    --src-manual: #C9B5F5;
     --abt-bg: #3A2C18; --abt-fg: #E8C48E;
-    --focus: #9EC2F0;
+    --focus: #E8B84A;
   }
 }
 :root[data-theme="dark"] { /* salin isi blok gelap di atas */ }
 ```
 
-Kontras teks utama terhadap latar di kedua tema minimal 4,5 : 1. Teks di atas chip status memakai pasangan `-fg` dengan `-bg` yang sama.
+Kontras teks utama terhadap latar di kedua tema minimal 4,5 : 1 (diperiksa 15 Nov 2026: putih di pita 9,6; emas di pita 5,7; teks di tombol emas 9,4; ink-3 di latar 5,2). Teks di atas chip status memakai pasangan `-fg` dengan `-bg` yang sama.
 
 ### 2.2 Tipografi
 
 | Peran | Huruf | Ukuran | Tebal | Dipakai untuk |
 |---|---|---|---|---|
-| Judul halaman | Space Grotesk | 30 px (ponsel 24) | 700 | "Anggaran", "Kontrak" |
-| Judul bagian | Space Grotesk | 18–20 px | 700 | Judul kartu dan seksi |
-| Angka utama | Space Grotesk | 26–34 px | 700 | Kartu angka (KPI) |
-| Isi | Inter | 14–15 px | 400 | Paragraf, tabel, form |
-| Label | Inter | 12–13 px | 500–600 | Label kartu, keterangan sumber |
-| Chip | Inter | 11–12 px | 600–700 | Status, sumber, peran |
-| Kode dan nomor kontrak | ui-monospace | 12 px | 400 | `EP-01…`, KRO |
+| Judul halaman | Plus Jakarta Sans | 26–38 px (ponsel 24), putih di atas pita | 800 | "Anggaran", "Kontrak" |
+| Penanda (kicker) | Plus Jakarta Sans | 14 px, emas | 700 | "Beranda" di atas judul |
+| Judul bagian | Plus Jakarta Sans | 18–20 px | 800 | Judul kartu dan seksi |
+| Angka utama | Plus Jakarta Sans | 26–34 px | 700 | Kartu angka (KPI) |
+| Isi | Plus Jakarta Sans | 14–15 px | 400 | Paragraf, tabel, form |
+| Label | Plus Jakarta Sans | 12–13 px | 500–600 | Label kartu, keterangan sumber |
+| Chip | Plus Jakarta Sans | 11–12 px | 600–700 | Status, sumber, peran |
+| Kode dan nomor kontrak | IBM Plex Mono | 12 px | 500 | `EP-01…`, KRO |
 | Dokumen cetak (PDF, laporan A3/16:9) | Arial | min. 10 pt | 400/700 | Semua keluaran resmi |
 
 ```css
---font-display: "Space Grotesk", Inter, system-ui, sans-serif;
---font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
---font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+--font-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+--font-body: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+--font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
 --font-print: Arial, Helvetica, sans-serif;
 ```
 
@@ -138,7 +146,7 @@ Tidak ada bayangan, gradien, atau efek kaca.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ Monev Ditjenbun [TA 2026 ▾]  Beranda Anggaran …  [Halaman kerja]│ header putih, 1 baris
+│ Monev Ditjenbun [TA 2026 ▾]  Beranda Anggaran …  [Halaman kerja]│ pita hijau tua (--band)
 ├──────────────────────────────────────────────────────────────┤
 │  Judul halaman                       [aksi] [aksi] [unduh]   │
 │  [Sub-tab | Sub-tab | Sub-tab]                               │
@@ -149,6 +157,8 @@ Tidak ada bayangan, gradien, atau efek kaca.
 └──────────────────────────────────────────────────────────────┘
 ```
 
+- **Pita kepala (tema Monev):** kepala, menu atas, dan judul halaman menyatu dalam satu pita `--band` selebar layar. Nama portal, judul (800), dan menu putih; penanda (kicker) emas; menu aktif = latar `--band-isi` + garis bawah emas 3 px; tombol Halaman kerja dan tombol utama di judul = emas (`--gold`, teks `--gold-ink`); tombol sekunder di pita = `--band-isi` + garis `--band-garis`. Sub-tab, saringan, kartu, dan isi berada di latar terang di bawah pita. Bilah bawah ponsel tetap putih.
+- Kartu angka diberi garis aksen kiri 4 px `--brand` (seperti KPI dashboard kontrak lama).
 - Lebar isi maksimum 1320 px, padding 24–28 px, rata kiri.
 - Grid kartu angka: `repeat(auto-fit, minmax(190px, 1fr))`, jarak 12 px.
 - Dua seksi berdampingan: `repeat(auto-fit, minmax(460px, 1fr))`, turun jadi satu kolom di layar sempit.
@@ -165,7 +175,7 @@ Tidak ada bayangan, gradien, atau efek kaca.
 
 `Beranda · Anggaran · Kontrak · Bantuan · Laporan harian · Unggah data`
 
-Menu aktif: latar `--brand-soft`, teks `--brand-strong`, tebal 600. Tinggi minimal 40 px.
+Menu di atas pita: teks `--band-sub` tebal 600; menu aktif: latar `--band-isi`, teks putih tebal 700, garis bawah emas 3 px. Tinggi minimal 40 px.
 
 ### 4.2 Sub-tab
 
@@ -234,7 +244,7 @@ Huruf kapital penuh hanya untuk hasil validasi (mengikuti istilah V01–V14 dan 
 ```
 ┌────────────────────────┐
 │ Realisasi SP2D          │  label 12 px --ink-3
-│ 48,7%                   │  angka 26–34 px Space Grotesk 700
+│ 48,7%                   │  angka 26–34 px Plus Jakarta Sans 700
 │ Rp 812,4 M dari pagu …  │  keterangan 12 px --ink-3
 │ Realisasi anggaran      │  tautan asal, 12 px --brand (opsional)
 └────────────────────────┘

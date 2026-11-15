@@ -3,31 +3,41 @@
   color-scheme: light;
 
   /* dasar */
-  --bg:            #F4F5F1;
+  --bg:            #F3F5F0;
   --surface:       #FFFFFF;
-  --surface-muted: #F4F5F1;
-  --surface-sunk:  #E7EAE3;
-  --line:          #DDE2D8;
-  --line-soft:     #EDEFE9;
+  --surface-muted: #F3F5F0;
+  --surface-sunk:  #E3E8E2;
+  --line:          #D8DED6;
+  --line-soft:     #E8EDE6;
 
   /* teks */
-  --ink:           #1B2A20;
-  --ink-2:         #3D4A42;
-  --ink-3:         #55625A;
+  --ink:           #17201B;
+  --ink-2:         #3E4A43;
+  --ink-3:         #5E6963;
 
   /* identitas */
-  --brand:         #1F6B45;
-  --brand-strong:  #14492F;
-  --brand-soft:    #E6F0E9;
-  --brand-mid:     #A8C9B4;
+  --brand:         #1F4D3A;
+  --brand-strong:  #163A2B;
+  --brand-soft:    #E3F1E7;
+  --brand-mid:     #6FB08A;
+
+  /* pita kepala halaman (tema Monev, disetujui 15 Nov 2026) */
+  --band:          #1F4D3A;
+  --band-ink:      #FFFFFF;
+  --band-sub:      #D4E4DA;
+  --band-garis:    rgba(255, 255, 255, .22);
+  --band-isi:      rgba(255, 255, 255, .10);
+  --gold:          #F2C14E;
+  --gold-ink:      #2A2208;
+  --leaf:          #2E7D4F;
   --report:        #1F3A68;
 
   /* status */
-  --ok-bg: #E6F0E9;    --ok-fg: #14492F;
-  --warn-bg: #FBE8D3;  --warn-fg: #8A3B07;
-  --bad-bg: #F7DEDA;   --bad-fg: #8E1F12;
-  --info-bg: #E3ECF7;  --info-fg: #1D4E89;
-  --neutral-bg: #EDEFE9; --neutral-fg: #3D4A42;
+  --ok-bg: #E3F1E7;    --ok-fg: #1F4D3A;
+  --warn-bg: #FBF0DC;  --warn-fg: #8A5A0E;
+  --bad-bg: #F8E5E0;   --bad-fg: #A3341B;
+  --info-bg: #E3EEF6;  --info-fg: #2F6690;
+  --neutral-bg: #E8EDE6; --neutral-fg: #3E4A43;
 
   /* asal kontrak */
   --src-myintress-bg: #E3ECF7; --src-myintress: #1D4E89;
@@ -40,18 +50,18 @@
   --export-ppt: #C2410C;
   --export-pdf: #8E1F12;
 
-  --focus: #1D4E89;
+  --focus: #C9851A;
 
   /* komponen khusus dari DESIGN.md §5.4, §5.9, §5.10 */
-  --total-bg: #F9FAF7;
+  --total-bg: #F7F9F5;
   --banner-bg: #FFF7E8;
   --banner-line: #F1D9B8;
-  --overlay: rgba(27, 42, 32, .45);
+  --overlay: rgba(23, 32, 27, .45);
 
   /* huruf §2.2 */
-  --font-display: "Space Grotesk", Inter, system-ui, sans-serif;
-  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
   --font-print: Arial, Helvetica, sans-serif;
 
   /* ruang, sudut §2.3 */
@@ -74,6 +84,8 @@
     --line: #2E3B33; --line-soft: #253029;
     --ink: #E6ECE7; --ink-2: #C3CDC6; --ink-3: #9AA69F;
     --brand: #4FB07E; --brand-strong: #9ED8B6; --brand-soft: #1E3A2B; --brand-mid: #2F6B4A;
+    --band: #14271E; --band-ink: #F1F5F2; --band-sub: #B9CDBF; --band-garis: rgba(255, 255, 255, .16); --band-isi: rgba(255, 255, 255, .07);
+    --gold: #E8B84A; --gold-ink: #241C06; --leaf: #5FB487;
     --report: #8FB0E3;
     --ok-bg: #1E3A2B;   --ok-fg: #9ED8B6;
     --warn-bg: #3D2A16; --warn-fg: #F2B77A;
@@ -83,7 +95,7 @@
     --src-myintress-bg: #1B2C42; --src-myintress: #9EC2F0;
     --src-manual-bg: #2B2140;    --src-manual: #C9B5F5;
     --abt-bg: #3A2C18; --abt-fg: #E8C48E;
-    --focus: #9EC2F0;
+    --focus: #E8B84A;
     --total-bg: #1F2A23;
     --banner-bg: #3A2C18;
     --banner-line: #2E3B33;
@@ -96,6 +108,8 @@
   --line: #2E3B33; --line-soft: #253029;
   --ink: #E6ECE7; --ink-2: #C3CDC6; --ink-3: #9AA69F;
   --brand: #4FB07E; --brand-strong: #9ED8B6; --brand-soft: #1E3A2B; --brand-mid: #2F6B4A;
+  --band: #14271E; --band-ink: #F1F5F2; --band-sub: #B9CDBF; --band-garis: rgba(255, 255, 255, .16); --band-isi: rgba(255, 255, 255, .07);
+  --gold: #E8B84A; --gold-ink: #241C06; --leaf: #5FB487;
   --report: #8FB0E3;
   --ok-bg: #1E3A2B;   --ok-fg: #9ED8B6;
   --warn-bg: #3D2A16; --warn-fg: #F2B77A;
@@ -105,7 +119,7 @@
   --src-myintress-bg: #1B2C42; --src-myintress: #9EC2F0;
   --src-manual-bg: #2B2140;    --src-manual: #C9B5F5;
   --abt-bg: #3A2C18; --abt-fg: #E8C48E;
-  --focus: #9EC2F0;
+  --focus: #E8B84A;
   --total-bg: #1F2A23;
   --banner-bg: #3A2C18;
   --banner-line: #2E3B33;

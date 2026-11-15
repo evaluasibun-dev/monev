@@ -16,7 +16,7 @@ DESIGN.md             acuan tampilan
 ## Aturan teknis
 
 - Halaman statis murni (HTML, CSS, JavaScript tanpa server). Boleh memakai pustaka dari CDN (cdnjs, jsdelivr); jangan menambah proses build kecuali disetujui.
-- Semua warna lewat variabel CSS di DESIGN.md §2.1. Huruf: Space Grotesk + Inter; dokumen cetak Arial.
+- Semua warna lewat variabel CSS di DESIGN.md §2.1. Huruf: Plus Jakarta Sans (+ IBM Plex Mono untuk kode); dokumen cetak Arial.
 - Tahun aktif dibaca dari `data/tahun.json`; tahun pilihan pengguna disimpan di `localStorage` dengan `try/catch`.
 - Data dibaca dari `data/<tahun>/…json` dan API publik Sisbun. Halaman yang butuh login (unggah, verifikasi, database kontrak lengkap, panel admin) **tidak** dibangun di sini; tombol Masuk mengarah ke web app Apps Script deployment kedua.
 - Setiap halaman menampilkan sumber dan waktu data. Bila data gagal dimuat, tampilkan keadaan gagal sesuai DESIGN.md §5.13, jangan angka nol.

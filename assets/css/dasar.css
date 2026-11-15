@@ -153,3 +153,50 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; margin: 0; }
     width: 22px; height: 3px; border-radius: var(--radius-pill); background: var(--brand);
   }
 }
+
+/* ---------- Tema Monev: pita hijau tua (DESIGN.md §3, disetujui 15 Nov 2026) ----------
+   Kepala, menu atas, dan judul halaman menyatu dalam satu pita --band; kicker dan tombol utama emas.
+   Isi di bawah pita tetap terang. Pita penuh lebar layar walau isi dibatasi 1320 px (box-shadow + clip-path). */
+.kepala { background: var(--band); color: var(--band-ink); border-bottom: 0; }
+.identitas, .identitas:hover, .nama-portal { color: var(--band-ink); }
+.logo { background: var(--band-isi); border: 1px solid var(--band-garis); }
+.tombol-tahun { background: var(--band-isi); border-color: var(--band-garis); color: var(--band-ink); }
+.tombol-tahun:hover { color: var(--band-ink); border-color: var(--gold); }
+.kepala .status-data { background: var(--band-isi); color: var(--band-sub); }
+.kepala .status-data .titik { background: var(--gold); }
+.kepala .status-data.basi { background: var(--warn-bg); color: var(--warn-fg); }
+.kepala .status-data.basi .titik { background: var(--warn-fg); }
+.kepala .status-data.kosong { background: var(--band-isi); color: var(--band-sub); }
+.kepala .status-data.kosong .titik { background: var(--band-sub); }
+.kepala #tombol-masuk { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); font-weight: 700; }
+.kepala #tombol-masuk:hover { filter: brightness(1.05); color: var(--gold-ink); }
+.kepala #tombol-masuk[aria-disabled="true"] { background: var(--band-isi); border-color: var(--band-garis); color: var(--band-sub); }
+.kepala :focus-visible, .menu-atas :focus-visible, .judul-halaman :focus-visible { outline-color: var(--gold); }
+
+.menu-atas { background: var(--band); border-bottom: 0; padding-top: 0; }
+.menu-atas a { color: var(--band-sub); font-weight: 600; }
+.menu-atas a:hover { background: var(--band-isi); color: var(--band-ink); }
+.menu-atas a[aria-current="page"] { background: var(--band-isi); color: var(--band-ink); font-weight: 700; box-shadow: inset 0 -3px 0 var(--gold); }
+
+.judul-halaman {
+  background: var(--band); color: var(--band-ink);
+  box-shadow: 0 0 0 100vmax var(--band); clip-path: inset(0 -100vmax);
+  margin-top: calc(-1 * var(--space-6)); padding: var(--space-5) 0 var(--space-6);
+}
+.judul-halaman .penanda { color: var(--gold); font-weight: 700; font-size: 14px; }
+.judul-halaman h1 { color: var(--band-ink); font-weight: 800; letter-spacing: -.01em; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.1; }
+.judul-halaman p { color: var(--band-sub); }
+.judul-halaman .tombol-sekunder { background: var(--band-isi); border-color: var(--band-garis); color: var(--band-ink); }
+.judul-halaman .tombol-sekunder:hover { border-color: var(--gold); color: var(--band-ink); }
+.judul-halaman .tombol-utama { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); font-weight: 700; }
+.judul-halaman .tombol-utama:hover { background: var(--gold); filter: brightness(1.05); color: var(--gold-ink); }
+.judul-halaman .tombol[aria-disabled="true"], .judul-halaman .tombol:disabled { background: var(--band-isi); border-color: var(--band-garis); color: var(--band-sub); }
+
+h1, h2, h3 { font-weight: 800; letter-spacing: -.01em; }
+.kartu-angka { position: relative; }
+.kartu-angka::before { content: ""; position: absolute; top: 20px; left: 0; width: 4px; height: 26px; border-radius: 0 4px 4px 0; background: var(--brand); }
+
+@media (max-width: 639.98px) {
+  .judul-halaman { margin-top: -20px; padding: var(--space-4) 0 var(--space-5); }
+  .judul-halaman h1 { font-size: 24px; }
+}
