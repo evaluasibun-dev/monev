@@ -772,7 +772,13 @@
     return out;
   }
 
-  /** Salinan tgEngine() Dashboard.html: seri realisasi kumulatif dan rencana untuk sekumpulan unit kerja. */
+  /**
+   * Turunan tgEngine() Dashboard.html: seri realisasi kumulatif dan rencana untuk sekumpulan unit kerja.
+   * Aturan pemilik portal (15 Nov 2026): kekurangan/kelebihan realisasi tiap hari dijumlah kembali lalu
+   * dibagi sisa hari s.d. akhir tahun. Jadi kebutuhan hari d = (target − realisasi s.d. kemarin) ÷ sisa hari,
+   * rencana kumulatif = posisi awal + Σ kebutuhan harian, dan GAP = realisasi − rencana kumulatif itu
+   * (= Σ realisasi hari − kebutuhan hari). Dashboard lama memakai rencana rata dari posisi awal untuk GAP.
+   */
   function mesinTarget(T, units, s5rows) {
     var cfg = T.cfg, keys = {};
     units.forEach(function (u) { keys[u.unit] = 1; });
@@ -799,21 +805,23 @@
     for (var q = 0; q < days.length; q++) if (days[q] > last) { futIdx = q; break; }
     var remFut = futIdx < 0 ? 0 : N - futIdx;
     var needNow1 = remFut ? Math.max(0, t1 - lastReal) / remFut : 0, needNow2 = remFut ? Math.max(0, t2 - lastReal) / remFut : 0;
+    var jml1 = B0, jml2 = B0;
     var rows = days.map(function (d, i) {
       var past = d <= last, prev = past ? before(d) : lastReal;
       if (prev == null) prev = B0;
       var rem = N - i;
-      var plan1 = B0 + (t1 - B0) * (i + 1) / N, plan2 = B0 + (t2 - B0) * (i + 1) / N;
       var need1 = past ? Math.max(0, t1 - prev) / rem : needNow1, need2 = past ? Math.max(0, t2 - prev) / rem : needNow2;
+      jml1 += need1; jml2 += need2;
       var act = past && byDate[d] != null ? byDate[d] - prev : null, cum = past ? at(d) : null, cumOs = past ? atOs(d) : null;
-      return { d: d, i: i + 1, rem: rem, past: past, plan1: plan1, plan2: plan2, need1: need1, need2: need2, act: act, cum: cum, cumOs: cumOs,
-        gap1: cum == null ? null : cum - plan1, gap2: cum == null ? null : cum - plan2 };
+      return { d: d, i: i + 1, rem: rem, past: past, plan1: jml1, plan2: jml2, need1: need1, need2: need2, act: act, cum: cum, cumOs: cumOs,
+        gap1: cum == null ? null : cum - jml1, gap2: cum == null ? null : cum - jml2 };
     });
     var doneDays = days.filter(function (d) { return d <= last; }).length;
+    var rLalu = doneDays ? rows[doneDays - 1] : null;
     E.lastOs = osBy[last]; E.lastRo = byDate[last] + osBy[last]; E.B0os = byDate[bDate] + osBy[bDate];
     E.bDate = bDate; E.B0 = B0; E.days = days; E.N = N; E.last = last; E.lastReal = lastReal; E.rows = rows; E.remFut = remFut;
     E.needNow1 = needNow1; E.needNow2 = needNow2;
-    E.planNow1 = B0 + (t1 - B0) * doneDays / (N || 1); E.planNow2 = B0 + (t2 - B0) * doneDays / (N || 1);
+    E.planNow1 = rLalu ? rLalu.plan1 : B0; E.planNow2 = rLalu ? rLalu.plan2 : B0;
     E.gapNow1 = lastReal - E.planNow1; E.gapNow2 = lastReal - E.planNow2;
     var W = [], cur = null;
     rows.forEach(function (r) {
@@ -824,8 +832,9 @@
     W.forEach(function (w, k) {
       var f = w.rows[0], l = w.rows[w.rows.length - 1];
       w.no = k + 1; w.from = f.d; w.to = l.d; w.n = w.rows.length;
-      var startPos = f.i === 1 ? B0 : rows[f.i - 2].plan1, startPos2 = f.i === 1 ? B0 : rows[f.i - 2].plan2;
-      w.tw1 = l.plan1 - startPos; w.tw2 = l.plan2 - startPos2; w.cum1 = l.plan1; w.cum2 = l.plan2;
+      // target minggu = jumlah kebutuhan harian di minggu itu (hari lewat: dihitung ulang dari realisasi; hari depan: butuh/hari sekarang)
+      w.tw1 = w.rows.reduce(function (a, r) { return a + r.need1; }, 0); w.tw2 = w.rows.reduce(function (a, r) { return a + r.need2; }, 0);
+      w.cum1 = l.plan1; w.cum2 = l.plan2;
       var realStart = before(f.d);
       if (realStart == null || f.d <= bDate) realStart = B0;
       w.status = f.d > last ? "akan" : (l.d <= last ? "selesai" : "berjalan");
@@ -888,7 +897,7 @@
         return "<tr" + (G.unit === x.u.unit ? ' class="terpilih"' : "") + '><td><button type="button" class="tautan-sel" data-t-unit="' + e(x.u.unit) + '">' + e(I().unit(x.u.unit)) + "</button></td>" +
           td(persen((x.lastReal / p) * 100), 1) + td(e(F().rupiah(x.needNow1)), 1) + td(gapTeks(x.gapNow1), 1) + td(e(F().rupiah(x.needNow2)), 1) + td(gapTeks(x.gapNow2), 1) + "</tr>";
       }).join("") + "</tbody></table></div>" +
-      '<p class="catatan">Butuh/hari = sisa target ÷ sisa hari setelah data terakhir · GAP = realisasi − rencana s.d. data terakhir. Klik unit kerja untuk melihat rinciannya.</p>';
+      '<p class="catatan">Butuh/hari = sisa target ÷ sisa hari setelah data terakhir · GAP = realisasi − jumlah kebutuhan harian s.d. data terakhir (kekurangan/kelebihan tiap hari dibagi ulang ke sisa hari). Klik unit kerja untuk melihat rinciannya.</p>';
 
     html += '<div class="grid-dua">' +
       seksi("Realisasi kumulatif vs rencana",
@@ -909,7 +918,7 @@
           td(e(rp(w["tw" + k])), 1) + td(w.realWeek == null ? "–" : e(rp(w.realWeek)), 1) + td(gapTeks(w["gap" + k]), 1) + "<td>" + stMinggu[w.status] + "</td></tr>";
       }).join("") +
       '<tr class="jumlah"><td>Jumlah</td>' + td(e(rp(tw("tw" + k))), 1) + td(e(rp(E.lastReal - E.B0)), 1) + td(gapTeks(E["gapNow" + k]), 1) + "<td></td></tr></tbody></table></div>" +
-      '<p class="catatan">Minggu Senin–Minggu. Target minggu = bagian rencana rata dari posisi ' + e(F().tanggal(E.bDate)) + " ke target akhir tahun (" + namaJalur + "). Minggu berjalan dihitung s.d. data terakhir.</p>";
+      '<p class="catatan">Minggu Senin–Minggu. Target minggu = jumlah kebutuhan harian (' + namaJalur + ") di minggu itu: hari yang sudah lewat memakai kebutuhan hari itu, hari mendatang memakai butuh/hari sekarang. Kekurangan atau kelebihan realisasi dibagi ulang ke sisa hari s.d. akhir tahun, jadi target minggu mendatang ikut berubah. Minggu berjalan dihitung s.d. data terakhir.</p>";
 
     var hariIni = dISO(new Date());
     var tabHari = '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Tanggal</th><th scope="col" class="angka">Sisa hari</th>' +
