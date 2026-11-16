@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T15:47:00+07:00",
+ "data_per": "2026-11-16T17:17:00+07:00",
  "hari_ini": "2026-11-16",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -23816,8 +23816,8 @@
    "nilai": 148506600,
    "bayar": 0,
    "sisa": 148506600,
-   "volume": null,
-   "satuan": "",
+   "volume": 1,
+   "satuan": "Paket",
    "status": "BELUM SELESAI",
    "selesai": false,
    "tgl_selesai": "2026-12-31",
@@ -23825,7 +23825,7 @@
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "TERVERIFIKASI",
-   "perlu_verifikasi": true,
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -37479,12 +37479,6 @@
   {
    "k": "09. Volume/satuan kosong (akun bantuan)",
    "no": "EP-01M6ZRG1JNTS4HZWP89225JBXG",
-   "d": "Akun 526115 | kosong: Volume, Satuan",
-   "tl": "Lengkapi volume & satuan dari kontrak/BAST"
-  },
-  {
-   "k": "09. Volume/satuan kosong (akun bantuan)",
-   "no": "EP-01M6ZRGP7QX9AQ3DQJ7YYH0H3N",
    "d": "Akun 526115 | kosong: Volume, Satuan",
    "tl": "Lengkapi volume & satuan dari kontrak/BAST"
   },
