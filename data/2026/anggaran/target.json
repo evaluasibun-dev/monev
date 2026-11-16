@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T11:44:00+07:00",
+ "data_per": "2026-11-16T11:48:00+07:00",
  "cfg": {
   "start": "2026-11-12",
   "end": "2026-12-31",
@@ -407,13 +407,13 @@
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
    "pagu": 784831219000,
    "real": 150694112064,
-   "os": 407786728759
+   "os": 408325228759
   },
   {
    "tgl": "2026-11-16",
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
    "pagu": 375165883000,
-   "real": 69618426540,
+   "real": 70009343190,
    "os": 142865831102
   },
   {
