@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T15:29:00+07:00",
+ "data_per": "2026-11-16T15:37:00+07:00",
  "hari_ini": "2026-11-16",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -16492,8 +16492,8 @@
    "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -16518,8 +16518,8 @@
    "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -18806,8 +18806,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -18832,8 +18832,8 @@
    "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -18858,8 +18858,8 @@
    "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -19676,7 +19676,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Aceh",
    "kab": "Pidie Jaya",
    "nilai": 1810611000,
@@ -19690,8 +19690,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -19702,7 +19702,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Sumatera Utara",
    "kab": "Mandailing Natal",
    "nilai": 2659140000,
@@ -19716,8 +19716,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -19728,7 +19728,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Aceh",
    "kab": "Aceh Utara",
    "nilai": 1743551700,
@@ -19742,8 +19742,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -19754,7 +19754,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Sumatera Utara",
    "kab": "Tapanuli Tengah",
    "nilai": 1743551700,
@@ -19768,8 +19768,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -20274,7 +20274,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Aceh",
    "kab": "Aceh Timur",
    "nilai": 1795959000,
@@ -20288,8 +20288,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
