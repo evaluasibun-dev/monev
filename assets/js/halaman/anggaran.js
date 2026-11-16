@@ -812,7 +812,10 @@
       var rem = N - i;
       var need1 = past ? Math.max(0, t1 - prev) / rem : needNow1, need2 = past ? Math.max(0, t2 - prev) / rem : needNow2;
       jml1 += need1; jml2 += need2;
-      var act = past && byDate[d] != null ? byDate[d] - prev : null, cum = past ? at(d) : null, cumOs = past ? atOs(d) : null;
+      // realisasi hari d = s.d. sebelum hari dihitung berikutnya, jadi realisasi Sabtu/Minggu/libur ikut ke hari kerja sebelumnya
+      // (sama dengan realisasi yang dikurangkan saat menghitung kebutuhan hari berikutnya)
+      var akhirD = i + 1 < N ? before(days[i + 1]) : at(d);
+      var act = past && byDate[d] != null ? akhirD - prev : null, cum = past ? at(d) : null, cumOs = past ? atOs(d) : null;
       return { d: d, i: i + 1, rem: rem, past: past, plan1: jml1, plan2: jml2, need1: need1, need2: need2, act: act, cum: cum, cumOs: cumOs,
         gap1: cum == null ? null : cum - jml1, gap2: cum == null ? null : cum - jml2 };
     });
@@ -839,7 +842,8 @@
       if (realStart == null || f.d <= bDate) realStart = B0;
       w.status = f.d > last ? "akan" : (l.d <= last ? "selesai" : "berjalan");
       if (w.status === "akan") { w.realCum = null; w.realWeek = null; w.gap1 = null; w.gap2 = null; return; }
-      var upto = w.status === "selesai" ? l.d : last;
+      // minggu Senin–Minggu: minggu selesai memakai realisasi s.d. Minggu (atau data terakhir), termasuk realisasi akhir pekan
+      var upto = w.status === "selesai" ? (w.sun < last ? w.sun : last) : last;
       w.upto = upto; w.realCum = at(upto); w.realWeek = w.realCum - realStart; w.roCum = atOs(upto);
       var pr = rows.filter(function (r) { return r.d <= upto; }), p = pr[pr.length - 1];
       w.planUpto1 = p ? p.plan1 : B0; w.planUpto2 = p ? p.plan2 : B0;
