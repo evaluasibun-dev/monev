@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T14:57:00+07:00",
+ "data_per": "2026-11-16T14:59:00+07:00",
  "hari_ini": "2026-11-16",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -24325,11 +24325,11 @@
   {
    "no": "EP-01M60744A8HDW9DHZGYBQQRCR5",
    "uraian": "PENGADAAN PEKERJAAN PENGEMBANGAN SETARA KBD TEBU KABUPATEN TULANG BAWANG PROVINSI LAMPUNG SELUAS 50 HA TA. 2026",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Perbenihan Perkebunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengembangan Setara KBD",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "238830.139.521822.01805EC.5890RBK",
    "komoditas": "Tebu",
    "provinsi": "LAMPUNG",
    "kab": "Tulang Bawang",
@@ -24344,8 +24344,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -24559,11 +24559,11 @@
   {
    "no": "EP-01M6T2HZTKQJ3FG7C1AY10V302",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Perluasan Tanaman Tebu Kabupaten Ogan Komering Ulu Timur Tahap I 281,75 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Perluasan Tebu",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "SUMATERA SELATAN",
    "kab": "Ogan Komering Ulu Timur",
@@ -24578,18 +24578,18 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
    "no": "EP-01M719P5KE80KW0GECJZBQ40NW",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Sragen Tahap XII 116,29 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "JAWA TENGAH",
    "kab": "Sragen",
@@ -24604,8 +24604,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -36727,24 +36727,6 @@
   {
    "k": "06. KRO kosong",
    "no": "EP-01M6T8NFPFQVC02T3PS4GA3F3G",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M60744A8HDW9DHZGYBQQRCR5",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M6T2HZTKQJ3FG7C1AY10V302",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M719P5KE80KW0GECJZBQ40NW",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
