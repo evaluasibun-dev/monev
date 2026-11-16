@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-15T08:11:00+07:00",
+ "data_per": "2026-11-16T11:44:00+07:00",
  "cfg": {
   "start": "2026-11-12",
   "end": "2026-12-31",
@@ -348,6 +348,76 @@
   },
   {
    "tgl": "2026-11-15",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
+   "pagu": 1695377809000,
+   "real": 230434691467,
+   "os": 595996672325
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Direktorat Pelindungan Perkebunan",
+   "pagu": 1059901000,
+   "real": 1028740219,
+   "os": 0
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Sekretariat Direktorat Jenderal Perkebunan",
+   "pagu": 53229301000,
+   "real": 42446468156,
+   "os": 1207079970
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Balai Pelindungan Tanaman Perkebunan (BPTP) Pontianak",
+   "pagu": 11828031000,
+   "real": 6263910892,
+   "os": 1260146910
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
+   "pagu": 310766884000,
+   "real": 103695615737,
+   "os": 115918942391
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
+   "pagu": 226083361000,
+   "real": 75263276497,
+   "os": 52749168629
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Direktorat Hilirisasi Hasil Perkebunan",
+   "pagu": 15327183000,
+   "real": 4026610182,
+   "os": 9804220587
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Direktorat Perbenihan Perkebunan",
+   "pagu": 2699469972000,
+   "real": 618483261165,
+   "os": 1729364396784
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
+   "pagu": 784831219000,
+   "real": 150694112064,
+   "os": 407786728759
+  },
+  {
+   "tgl": "2026-11-16",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
+   "pagu": 375165883000,
+   "real": 69618426540,
+   "os": 142865831102
+  },
+  {
+   "tgl": "2026-11-16",
    "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "pagu": 1695377809000,
    "real": 230434691467,
