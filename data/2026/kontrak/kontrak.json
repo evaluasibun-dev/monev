@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T15:37:00+07:00",
+ "data_per": "2026-11-16T15:39:00+07:00",
  "hari_ini": "2026-11-16",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -12523,7 +12523,7 @@
    "uraian": "Pengadaan Mesin Pencacah Kompos dalam rangka Pembangunan Desa Pertanian Organik Berbasis Komoditas Perkebunan Tahun ke 1 Kab. Magelang",
    "unit": "Direktorat Pelindungan Perkebunan",
    "satker": "Ditjenbun Pusat",
-   "kegiatan": "Desa Organik",
+   "kegiatan": "Desa Pertanian Organik",
    "kode_keg": "1779",
    "kro": "238830.139.526112.01805EC.1779QDD",
    "komoditas": "",
@@ -12540,7 +12540,7 @@
    "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": false
   },
@@ -13459,7 +13459,7 @@
    "uraian": "Pengadaan Mesin Pencacah Kompos dalam rangka Pembangunan Desa PertanianOrganik Berbasis Komoditas Perkebunan Tahun ke 1 Kab. Purbalingga",
    "unit": "Direktorat Pelindungan Perkebunan",
    "satker": "Ditjenbun Pusat",
-   "kegiatan": "Desa Organik",
+   "kegiatan": "Desa Pertanian Organik",
    "kode_keg": "1779",
    "kro": "238830.139.526112.01805EC.1779QDD",
    "komoditas": "",
@@ -13476,7 +13476,7 @@
    "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": false
   },
@@ -18711,7 +18711,7 @@
    "uraian": "Pengadaan Knapsack dan Herbisida Kegiatan Perluasan Tanaman Sagu Kab. Kep. Meranti 275 ha",
    "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
    "satker": "Ditjenbun Pusat",
-   "kegiatan": "Pengadaan Knapsack Sprayer",
+   "kegiatan": "Pengadaan Knapsack Sprayer dan Herbisida",
    "kode_keg": "1777",
    "kro": "238830.139.526112.01805EC.1777RAI",
    "komoditas": "Sagu",
@@ -18728,7 +18728,7 @@
    "sisa_hari": 15,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "PERLU KONFIRMASI",
    "perlu_verifikasi": true,
    "baru": false
   },
