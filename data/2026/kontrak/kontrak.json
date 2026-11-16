@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T15:09:00+07:00",
+ "data_per": "2026-11-16T15:29:00+07:00",
  "hari_ini": "2026-11-16",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -19,21 +19,21 @@
  ],
  "import_terakhir": {
   "terakhir": {
-   "waktu": "2026-11-16T15:06:00+07:00",
-   "unduh": "2026-11-16T15:05:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-16 15-05.xlsx",
-   "validasi": "LOLOS",
-   "baru": 1,
-   "berubah": 13,
+   "waktu": "2026-11-16T15:13:00+07:00",
+   "unduh": "2026-11-16T15:11:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-16 15-11.xlsx",
+   "validasi": "PERINGATAN",
+   "baru": 0,
+   "berubah": 8,
    "hilang": 0
   },
   "myintress": {
-   "waktu": "2026-11-16T15:06:00+07:00",
-   "unduh": "2026-11-16T15:05:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-16 15-05.xlsx",
-   "validasi": "LOLOS",
-   "baru": 1,
-   "berubah": 13,
+   "waktu": "2026-11-16T15:13:00+07:00",
+   "unduh": "2026-11-16T15:11:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-16 15-11.xlsx",
+   "validasi": "PERINGATAN",
+   "baru": 0,
+   "berubah": 8,
    "hilang": 0
   }
  },
@@ -4838,10 +4838,10 @@
    "sisa": 1008869400,
    "volume": 66000,
    "satuan": "Batang",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI",
+   "selesai": false,
    "tgl_selesai": "2026-11-18",
-   "sisa_hari": null,
+   "sisa_hari": 2,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -5046,10 +5046,10 @@
    "sisa": 4314585000,
    "volume": 165000,
    "satuan": "Batang",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI",
+   "selesai": false,
    "tgl_selesai": "2026-11-19",
-   "sisa_hari": null,
+   "sisa_hari": 3,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -8790,10 +8790,10 @@
    "sisa": 2265505000,
    "volume": 93500,
    "satuan": "Batang",
-   "status": "SELESAI TERLAMBAT",
-   "selesai": true,
+   "status": "BELUM SELESAI TERLAMBAT",
+   "selesai": false,
    "tgl_selesai": "2026-09-30",
-   "sisa_hari": null,
+   "sisa_hari": -47,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -14094,10 +14094,10 @@
    "sisa": 665906760,
    "volume": null,
    "satuan": "",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI TERLAMBAT",
+   "selesai": false,
    "tgl_selesai": "2026-10-31",
-   "sisa_hari": null,
+   "sisa_hari": -16,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -14874,10 +14874,10 @@
    "sisa": 694380480,
    "volume": null,
    "satuan": "",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI",
+   "selesai": false,
    "tgl_selesai": "2026-12-10",
-   "sisa_hari": null,
+   "sisa_hari": 24,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -18884,8 +18884,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -18910,8 +18910,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -19780,7 +19780,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Sumatera Utara",
    "kab": "Tapanuli Selatan",
    "nilai": 3487836000,
@@ -19794,8 +19794,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -20248,7 +20248,7 @@
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "1777",
    "kro": "238830.139.526115.01805EC.1777RAI",
-   "komoditas": "Kelapa Genjah",
+   "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "Aceh",
    "kab": "Aceh Tamiang",
    "nilai": 5842530900,
@@ -20262,8 +20262,8 @@
    "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": false
   },
   {
@@ -32086,10 +32086,10 @@
    "sisa": 68500000,
    "volume": 2,
    "satuan": "Ha",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI",
+   "selesai": false,
    "tgl_selesai": "2026-12-31",
-   "sisa_hari": null,
+   "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -34504,10 +34504,10 @@
    "sisa": 112195470,
    "volume": 100,
    "satuan": "Ha",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI",
+   "selesai": false,
    "tgl_selesai": "2026-12-31",
-   "sisa_hari": null,
+   "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -34842,10 +34842,10 @@
    "sisa": 421134000,
    "volume": 200,
    "satuan": "Ha",
-   "status": "SELESAI TEPAT WAKTU",
-   "selesai": true,
+   "status": "BELUM SELESAI",
+   "selesai": false,
    "tgl_selesai": "2026-12-31",
-   "sisa_hari": null,
+   "sisa_hari": 45,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -36308,6 +36308,12 @@
   },
   {
    "k": "03. Melewati tanggal selesai",
+   "no": "EP-01KN490EKSJP6Z2Y582JBH14BN",
+   "d": "47 hari sejak 30/09/2026 | bayar 0%",
+   "tl": "Konfirmasi progres fisik, BAST, atau addendum waktu"
+  },
+  {
+   "k": "03. Melewati tanggal selesai",
    "no": "EP-01KKXB5DEA9TAYA8ANST1V5PGP",
    "d": "BELUM SELESAI TERLAMBAT TERMIN",
    "tl": "Konfirmasi progres fisik/pembayaran termin"
@@ -36602,6 +36608,12 @@
   },
   {
    "k": "03. Melewati tanggal selesai",
+   "no": "EP-01KSH5KS28DPQBV1S17QJ88KG2",
+   "d": "16 hari sejak 31/10/2026 | bayar 0%",
+   "tl": "Konfirmasi progres fisik, BAST, atau addendum waktu"
+  },
+  {
+   "k": "03. Melewati tanggal selesai",
    "no": "EP-01KSQFA74YTB002073PASXPNJ5",
    "d": "BELUM SELESAI TERLAMBAT TERMIN",
    "tl": "Konfirmasi progres fisik/pembayaran termin"
@@ -36695,54 +36707,6 @@
    "no": "EP-01M6E5MTR3MBH2QHC6F9V4PT1R",
    "d": "3 hari sejak 13/11/2026 | bayar 0%",
    "tl": "Konfirmasi progres fisik, BAST, atau addendum waktu"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KSPAFBN3W3X6FMAEBK9GDPE7",
-   "d": "Sisa: 112.195.470",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KT3MVWR928061SK9QP912SJ2",
-   "d": "Sisa: 421.134.000",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "B-8455/PL.020/E7/10/2026",
-   "d": "Sisa: 68.500.000",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KGPGNF7WDZMEJX97VXGMQHG8",
-   "d": "Sisa: 1.008.869.400",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KGS59NRF33EVMX9EYRDDR01Y",
-   "d": "Sisa: 4.314.585.000",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KN490EKSJP6Z2Y582JBH14BN",
-   "d": "Sisa: 2.265.505.000",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KSH5KS28DPQBV1S17QJ88KG2",
-   "d": "Sisa: 665.906.760",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
-  },
-  {
-   "k": "05. Status selesai tapi masih ada sisa kontrak",
-   "no": "EP-01KSRZ20FG6MAJ449SDPAKJJXH",
-   "d": "Sisa: 694.380.480",
-   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
   },
   {
    "k": "06. KRO kosong",
@@ -38659,9 +38623,9 @@
      "nilai": 4002187200727,
      "bayar": 933825674433,
      "sisa": 3068361526294,
-     "selesai": 276,
-     "terlambat": 148,
-     "temuan": 456
+     "selesai": 268,
+     "terlambat": 150,
+     "temuan": 449
     }
    ],
    "Direktorat Tanaman Kelapa Sawit dan Aneka Palma": [
@@ -39031,9 +38995,9 @@
      "nilai": 669554731818,
      "bayar": 69245912956,
      "sisa": 600308818862,
-     "selesai": 42,
-     "terlambat": 30,
-     "temuan": 84
+     "selesai": 40,
+     "terlambat": 31,
+     "temuan": 83
     }
    ],
    "Direktorat Hilirisasi Hasil Perkebunan": [
@@ -39217,9 +39181,9 @@
      "nilai": 2317664454992,
      "bayar": 582242365908,
      "sisa": 1735422089084,
-     "selesai": 70,
-     "terlambat": 68,
-     "temuan": 223
+     "selesai": 67,
+     "terlambat": 69,
+     "temuan": 221
     }
    ],
    "Ditjenbun Pusat (kode kegiatan belum diisi)": [
@@ -39472,9 +39436,9 @@
      "nilai": 537510623017,
      "bayar": 128685394258,
      "sisa": 408825228759,
-     "selesai": 49,
+     "selesai": 48,
      "terlambat": 19,
-     "temuan": 75
+     "temuan": 73
     }
    ],
    "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon": [
@@ -39565,9 +39529,9 @@
      "nilai": 194726032188,
      "bayar": 51860201086,
      "sisa": 142865831102,
-     "selesai": 30,
+     "selesai": 28,
      "terlambat": 4,
-     "temuan": 12
+     "temuan": 10
     }
    ],
    "Balai Pelindungan Tanaman Perkebunan (BPTP) Pontianak": [
