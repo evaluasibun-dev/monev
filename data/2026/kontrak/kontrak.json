@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-16T00:06:00+07:00",
+ "data_per": "2026-11-16T11:47:00+07:00",
  "hari_ini": "2026-11-16",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -19,21 +19,21 @@
  ],
  "import_terakhir": {
   "terakhir": {
-   "waktu": "2026-11-15T15:44:00+07:00",
-   "unduh": "2026-11-15T15:37:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-15 15-37.xlsx",
+   "waktu": "2026-11-16T11:47:00+07:00",
+   "unduh": "2026-11-16T11:37:00+07:00",
+   "sumber": "Unggah data: Monitoring Data Kontrak_2026-11-16 11-37.xlsx",
    "validasi": "LOLOS",
-   "baru": 0,
-   "berubah": 2,
+   "baru": 7,
+   "berubah": 42,
    "hilang": 0
   },
   "myintress": {
-   "waktu": "2026-11-15T15:44:00+07:00",
-   "unduh": "2026-11-15T15:37:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-15 15-37.xlsx",
+   "waktu": "2026-11-16T11:47:00+07:00",
+   "unduh": "2026-11-16T11:37:00+07:00",
+   "sumber": "Unggah data: Monitoring Data Kontrak_2026-11-16 11-37.xlsx",
    "validasi": "LOLOS",
-   "baru": 0,
-   "berubah": 2,
+   "baru": 7,
+   "berubah": 42,
    "hilang": 0
   }
  },
@@ -2422,8 +2422,8 @@
    "satuan": "Batang",
    "status": "BELUM SELESAI",
    "selesai": false,
-   "tgl_selesai": "2026-11-17",
-   "sisa_hari": 1,
+   "tgl_selesai": "2026-12-23",
+   "sisa_hari": 37,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -2448,8 +2448,8 @@
    "satuan": "Batang",
    "status": "BELUM SELESAI",
    "selesai": false,
-   "tgl_selesai": "2026-11-17",
-   "sisa_hari": 1,
+   "tgl_selesai": "2026-12-23",
+   "sisa_hari": 37,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -3644,8 +3644,8 @@
    "satuan": "Batang",
    "status": "BELUM SELESAI",
    "selesai": false,
-   "tgl_selesai": "2026-11-17",
-   "sisa_hari": 1,
+   "tgl_selesai": "2026-12-23",
+   "sisa_hari": 37,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -9988,8 +9988,8 @@
    "satuan": "Batang",
    "status": "BELUM SELESAI",
    "selesai": false,
-   "tgl_selesai": "2026-11-27",
-   "sisa_hari": 11,
+   "tgl_selesai": "2026-12-23",
+   "sisa_hari": 37,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -23803,6 +23803,32 @@
    "baru": false
   },
   {
+   "no": "EP-01M6ZRGP7QX9AQ3DQJ7YYH0H3N",
+   "uraian": "Pengadaan Pupuk NPK untuk Kegiatan Intensifikasi Tanaman Karet Kabupaten Tapanuli Utara",
+   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "satker": "Ditjenbun Pusat",
+   "kegiatan": "Pengadaan Pupuk NPK",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Karet",
+   "provinsi": "SUMATERA UTARA",
+   "kab": "Tapanuli Utara",
+   "nilai": 148506600,
+   "bayar": 0,
+   "sisa": 148506600,
+   "volume": null,
+   "satuan": "",
+   "status": "BELUM SELESAI",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
+  },
+  {
    "no": "EP-01M6ZXRJ9544STA6595HG6GVXS",
    "uraian": "Pengadaan Pupuk Organik untuk Perluasan Tanaman Kelapa Genjah Khusus Kab. Lebak 50 Ha",
    "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
@@ -24245,6 +24271,32 @@
    "baru": false
   },
   {
+   "no": "EP-01M6T8NFPFQVC02T3PS4GA3F3G",
+   "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Madiun Tahap II 35,3 Ha",
+   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "satker": "Ditjenbun Pusat",
+   "kegiatan": "Bongkar Ratoon",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Tebu",
+   "provinsi": "JAWA TIMUR",
+   "kab": "Madiun",
+   "nilai": 320029800,
+   "bayar": 0,
+   "sisa": 320029800,
+   "volume": 35.3,
+   "satuan": "Ha",
+   "status": "BELUM SELESAI",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
+  },
+  {
    "no": "EP-01M726XCAMRHTF6WKH4ZS86T02",
    "uraian": "Pengadaan benih untuk kunjungan, bantuan bencana, pameran, percontohan, fasilitasi permintaan kelp tani/dinas/akademisi/kelp masyarakat lainnya di Kabupaten Lima Puluh Kota Provinsi Sumatera Barat",
    "unit": "Direktorat Perbenihan Perkebunan",
@@ -24269,6 +24321,58 @@
    "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": false,
    "baru": false
+  },
+  {
+   "no": "EP-01M60744A8HDW9DHZGYBQQRCR5",
+   "uraian": "PENGADAAN PEKERJAAN PENGEMBANGAN SETARA KBD TEBU KABUPATEN TULANG BAWANG PROVINSI LAMPUNG SELUAS 50 HA TA. 2026",
+   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "satker": "Ditjenbun Pusat",
+   "kegiatan": "Pengembangan Setara KBD",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Tebu",
+   "provinsi": "LAMPUNG",
+   "kab": "Tulang Bawang",
+   "nilai": 2753496500,
+   "bayar": 0,
+   "sisa": 2753496500,
+   "volume": 50,
+   "satuan": "Ha",
+   "status": "BELUM SELESAI",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
+  },
+  {
+   "no": "EP-01M62W13T6482HH9047SX18F1G",
+   "uraian": "PENGADAAN PEKERJAAN PENGEMBANGAN SETARA KBD TEBU KABUPATEN TULANG BAWANG BARAT PROVINSI LAMPUNG SELUAS 60 HA TA. 2026",
+   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "satker": "Ditjenbun Pusat",
+   "kegiatan": "Pengembangan Setara KBD",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Tebu",
+   "provinsi": "LAMPUNG",
+   "kab": "Tulang Bawang Barat",
+   "nilai": 3304195800,
+   "bayar": 0,
+   "sisa": 3304195800,
+   "volume": 60,
+   "satuan": "Ha",
+   "status": "BELUM SELESAI",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
   },
   {
    "no": "EP-01M65VFEHPH21AFABAJFEN4EE7",
@@ -24451,6 +24555,58 @@
    "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": false,
    "baru": false
+  },
+  {
+   "no": "EP-01M6T2HZTKQJ3FG7C1AY10V302",
+   "uraian": "Pengadaan Benih Tebu untuk Kegiatan Perluasan Tanaman Tebu Kabupaten Ogan Komering Ulu Timur Tahap I 281,75 Ha",
+   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "satker": "Ditjenbun Pusat",
+   "kegiatan": "Perluasan Tebu",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Tebu",
+   "provinsi": "SUMATERA SELATAN",
+   "kab": "Ogan Komering Ulu Timur",
+   "nilai": 2789324997,
+   "bayar": 0,
+   "sisa": 2789324997,
+   "volume": 281.75,
+   "satuan": "Ha",
+   "status": "BELUM SELESAI",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
+  },
+  {
+   "no": "EP-01M719P5KE80KW0GECJZBQ40NW",
+   "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Sragen Tahap XII 116,29 Ha",
+   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "satker": "Ditjenbun Pusat",
+   "kegiatan": "Bongkar Ratoon",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Tebu",
+   "provinsi": "JAWA TENGAH",
+   "kab": "Sragen",
+   "nilai": 1054285140,
+   "bayar": 0,
+   "sisa": 1054285140,
+   "volume": 116.29,
+   "satuan": "Ha",
+   "status": "BELUM SELESAI",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
   },
   {
    "no": "EP-01KDSG226JD2J0MADSR8218A4M",
@@ -30032,7 +30188,7 @@
    "sisa": 2554375000,
    "volume": 250,
    "satuan": "Ha",
-   "status": "BELUM SELESAI",
+   "status": "BELUM SELESAI TERLAMBAT TERMIN",
    "selesai": false,
    "tgl_selesai": "2026-12-31",
    "sisa_hari": 45,
@@ -31925,9 +32081,9 @@
    "komoditas": "Kakao",
    "provinsi": "Sulawesi Selatan",
    "kab": "Bone",
-   "nilai": 30000000,
+   "nilai": 68500000,
    "bayar": 0,
-   "sisa": 30000000,
+   "sisa": 68500000,
    "volume": 2,
    "satuan": "Ha",
    "status": "BELUM SELESAI",
@@ -32459,6 +32615,32 @@
    "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": false
+  },
+  {
+   "no": "EP-01M705S7JD1RE5T5RR2TBGAM8X",
+   "uraian": "Pengadaan Produksi Benih Kakao Siap Salur di Kabupaten Lombok Timur Tahap II (50 Ha) sejumlah 50.000 batang bersertifikat dan berlabel",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
+   "satker": "BBPPTP Surabaya",
+   "kegiatan": "Produksi Benih",
+   "kode_keg": "",
+   "kro": "",
+   "komoditas": "Kakao",
+   "provinsi": "NUSA TENGGARA BARAT",
+   "kab": "Lombok Timur",
+   "nilai": 500000000,
+   "bayar": 0,
+   "sisa": 500000000,
+   "volume": 50000,
+   "satuan": "Batang",
+   "status": "KONTRAK BELUM TERDAFTAR",
+   "selesai": false,
+   "tgl_selesai": "2026-12-31",
+   "sisa_hari": 45,
+   "aktif": true,
+   "sumber": "MyIntress",
+   "verifikasi": "",
+   "perlu_verifikasi": true,
+   "baru": true
   },
   {
    "no": "EP-01KG76JJ28H818F767JA60GMC3",
@@ -35518,7 +35700,13 @@
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01M7521ZTJ4NQ6YNHZSSZ7D1FT",
+   "no": "B-8455/PL.020/E7/10/2026",
+   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
+   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
+  },
+  {
+   "k": "02. NRK belum terdaftar",
+   "no": "EP-01M705S7JD1RE5T5RR2TBGAM8X",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
@@ -35530,55 +35718,7 @@
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01KG1AZPC634F21ZWT7CGEKMDY",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KG1ET48ZH58DRAS3S4P128D1",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KG7MVB5382G4MJ1G0CY3MHFZ",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KGS14HERJM0BSSYYJ7EJWTRH",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KGP2ZC84FSHQEHZHAW0TFN0K",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KKJM4HCVTAWJHWREM66Z595J",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KN440Z2FXE0WGAZ7ASSARG5G",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KNBHJHXSWT3BDJ7852W3C8JT",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01KS6XMDXENYAFKC6Z0KV16XQC",
+   "no": "EP-01KG15HXCG7MK3VMY8ZFP4ENMF",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
   },
@@ -35608,127 +35748,31 @@
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01M63T9E8TJCJ8PCAK3PJNRTS0",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M65Z32JQ17V99D2KC88X7P48",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M68C5PJW8H3Y7FRCJ5NW90HY",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M68C8B5J8Y5HFAE5E0ZGJW29",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M68CC9J78GH5YSQ93ZMXBSE4",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Cek kesesuaian NRK SPAN vs SAKTI"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6R18RH43RYVB1EGPB11Y9F2",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6KGEB8NTNKQSZW6E1RZTGBE",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6T5QY1HXCM7JFX5WRA8254Q",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6T6BQ8RJQK0TASD80E51E9W",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6THVD8VMR8RB35SACQTVWRH",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6DPPW1A7J9YT9940AETWRF2",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
    "no": "EP-01M6GE9PSEE7EGBJN47R732MA6",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6JFDX2JZ1FXGH4FS1TD1VQP",
+   "no": "EP-01M6ZRGP7QX9AQ3DQJ7YYH0H3N",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6QF8SHGTZSEVWE0NKPH8SYF",
+   "no": "EP-01M6T8NFPFQVC02T3PS4GA3F3G",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6QHKC6M0R5873QNK0KMP57H",
+   "no": "EP-01M6T2HZTKQJ3FG7C1AY10V302",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
   {
    "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6RGF14HH2KH4KAJETC3M822",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6ZKAJGXFWXN2M0N4CQQSQZ6",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6ZN5TAJ4RZFHFTR9H6RS32E",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6ZQPDG81E2CKC5DKXHQ4852",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6ZRG1JNTS4HZWP89225JBXG",
-   "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
-   "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
-  },
-  {
-   "k": "02. NRK belum terdaftar",
-   "no": "EP-01M6ZXRJ9544STA6595HG6GVXS",
+   "no": "EP-01M719P5KE80KW0GECJZBQ40NW",
    "d": "NRK SPAN/SAKTI belum lengkap atau belum sesuai",
    "tl": "Minta PPK mendaftarkan kontrak di SAKTI/SPAN"
   },
@@ -35921,6 +35965,12 @@
   {
    "k": "03. Melewati tanggal selesai",
    "no": "EP-01KVYKER9M75A82YFK0HTCZBFY",
+   "d": "BELUM SELESAI TERLAMBAT TERMIN",
+   "tl": "Konfirmasi progres fisik/pembayaran termin"
+  },
+  {
+   "k": "03. Melewati tanggal selesai",
+   "no": "EP-01KVZK0G3DKYJR8V969G40JV23",
    "d": "BELUM SELESAI TERLAMBAT TERMIN",
    "tl": "Konfirmasi progres fisik/pembayaran termin"
   },
@@ -36646,6 +36696,12 @@
   },
   {
    "k": "06. KRO kosong",
+   "no": "EP-01M705S7JD1RE5T5RR2TBGAM8X",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
    "no": "11687/PL.020/E1.3.3/10/2026",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
@@ -36659,6 +36715,42 @@
   {
    "k": "06. KRO kosong",
    "no": "EP-01M5Y8CSKEYVR2STMQF5CKG805",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
+   "no": "EP-01M6ZRGP7QX9AQ3DQJ7YYH0H3N",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
+   "no": "EP-01M6T8NFPFQVC02T3PS4GA3F3G",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
+   "no": "EP-01M60744A8HDW9DHZGYBQQRCR5",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
+   "no": "EP-01M62W13T6482HH9047SX18F1G",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
+   "no": "EP-01M6T2HZTKQJ3FG7C1AY10V302",
+   "d": "",
+   "tl": "Isi KRO lengkap dari SAKTI"
+  },
+  {
+   "k": "06. KRO kosong",
+   "no": "EP-01M719P5KE80KW0GECJZBQ40NW",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
@@ -37427,6 +37519,12 @@
   {
    "k": "09. Volume/satuan kosong (akun bantuan)",
    "no": "EP-01M6ZRG1JNTS4HZWP89225JBXG",
+   "d": "Akun 526115 | kosong: Volume, Satuan",
+   "tl": "Lengkapi volume & satuan dari kontrak/BAST"
+  },
+  {
+   "k": "09. Volume/satuan kosong (akun bantuan)",
+   "no": "EP-01M6ZRGP7QX9AQ3DQJ7YYH0H3N",
    "d": "Akun 526115 | kosong: Volume, Satuan",
    "tl": "Lengkapi volume & satuan dari kontrak/BAST"
   },
@@ -38348,7 +38446,8 @@
    "2026-11-12",
    "2026-11-13",
    "2026-11-14",
-   "2026-11-15"
+   "2026-11-15",
+   "2026-11-16"
   ],
   "seri": {
    "Ditjenbun Pusat": [
@@ -38361,6 +38460,7 @@
      "terlambat": 113,
      "temuan": 343
     },
+    null,
     null,
     null,
     null,
@@ -38389,6 +38489,7 @@
     null,
     null,
     null,
+    null,
     null
    ],
    "BBPPTP Surabaya": [
@@ -38401,6 +38502,7 @@
      "terlambat": 17,
      "temuan": 75
     },
+    null,
     null,
     null,
     null,
@@ -38429,6 +38531,7 @@
     null,
     null,
     null,
+    null,
     null
    ],
    "BPTP Pontianak": [
@@ -38441,6 +38544,7 @@
      "terlambat": 0,
      "temuan": 5
     },
+    null,
     null,
     null,
     null,
@@ -38541,6 +38645,15 @@
      "selesai": 272,
      "terlambat": 148,
      "temuan": 472
+    },
+    {
+     "n": 1371,
+     "nilai": 4001687200727,
+     "bayar": 933825674433,
+     "sisa": 3067861526294,
+     "selesai": 272,
+     "terlambat": 149,
+     "temuan": 458
     }
    ],
    "Direktorat Tanaman Kelapa Sawit dan Aneka Palma": [
@@ -38625,10 +38738,28 @@
      "selesai": 44,
      "terlambat": 1,
      "temuan": 5
+    },
+    {
+     "n": 87,
+     "nilai": 86327362388,
+     "bayar": 33578193759,
+     "sisa": 52749168629,
+     "selesai": 44,
+     "terlambat": 1,
+     "temuan": 4
     }
    ],
    "Direktorat Pelindungan Perkebunan": [
     null,
+    {
+     "n": 12,
+     "nilai": 318808658,
+     "bayar": 318808658,
+     "sisa": 0,
+     "selesai": 12,
+     "terlambat": 0,
+     "temuan": 16
+    },
     {
      "n": 12,
      "nilai": 318808658,
@@ -38793,6 +38924,15 @@
      "selesai": 11,
      "terlambat": 7,
      "temuan": 12
+    },
+    {
+     "n": 21,
+     "nilai": 6609680978,
+     "bayar": 5402601008,
+     "sisa": 1207079970,
+     "selesai": 11,
+     "terlambat": 7,
+     "temuan": 12
     }
    ],
    "Direktorat Tanaman Semusim dan Tahunan": [
@@ -38877,6 +39017,15 @@
      "selesai": 42,
      "terlambat": 30,
      "temuan": 104
+    },
+    {
+     "n": 412,
+     "nilai": 665242585281,
+     "bayar": 69245912956,
+     "sisa": 595996672325,
+     "selesai": 42,
+     "terlambat": 30,
+     "temuan": 80
     }
    ],
    "Direktorat Hilirisasi Hasil Perkebunan": [
@@ -38925,6 +39074,15 @@
      "selesai": 0,
      "terlambat": 7,
      "temuan": 7
+    },
+    {
+     "n": 8,
+     "nilai": 13430530586,
+     "bayar": 3626309999,
+     "sisa": 9804220587,
+     "selesai": 0,
+     "terlambat": 8,
+     "temuan": 8
     },
     {
      "n": 8,
@@ -39045,6 +39203,15 @@
      "selesai": 67,
      "terlambat": 69,
      "temuan": 221
+    },
+    {
+     "n": 399,
+     "nilai": 2311606762692,
+     "bayar": 582242365908,
+     "sisa": 1729364396784,
+     "selesai": 67,
+     "terlambat": 69,
+     "temuan": 218
     }
    ],
    "Ditjenbun Pusat (kode kegiatan belum diisi)": [
@@ -39105,7 +39272,16 @@
      "temuan": 4
     },
     null,
-    null
+    null,
+    {
+     "n": 6,
+     "nilai": 10369838837,
+     "bayar": 0,
+     "sisa": 10369838837,
+     "selesai": 0,
+     "terlambat": 0,
+     "temuan": 11
+    }
    ],
    "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan": [
     null,
@@ -39171,6 +39347,15 @@
      "selesai": 6,
      "terlambat": 11,
      "temuan": 17
+    },
+    {
+     "n": 49,
+     "nilai": 174422658240,
+     "bayar": 58503715849,
+     "sisa": 115918942391,
+     "selesai": 6,
+     "terlambat": 11,
+     "temuan": 16
     },
     {
      "n": 49,
@@ -39273,6 +39458,15 @@
      "selesai": 48,
      "terlambat": 18,
      "temuan": 71
+    },
+    {
+     "n": 260,
+     "nilai": 537010623017,
+     "bayar": 128685394258,
+     "sisa": 408325228759,
+     "selesai": 48,
+     "terlambat": 19,
+     "temuan": 74
     }
    ],
    "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon": [
@@ -39357,6 +39551,15 @@
      "selesai": 30,
      "terlambat": 4,
      "temuan": 12
+    },
+    {
+     "n": 102,
+     "nilai": 194726032188,
+     "bayar": 51860201086,
+     "sisa": 142865831102,
+     "selesai": 30,
+     "terlambat": 4,
+     "temuan": 12
     }
    ],
    "Balai Pelindungan Tanaman Perkebunan (BPTP) Pontianak": [
@@ -39414,6 +39617,15 @@
      "selesai": 12,
      "terlambat": 0,
      "temuan": 5
+    },
+    {
+     "n": 15,
+     "nilai": 1622317862,
+     "bayar": 362170952,
+     "sisa": 1260146910,
+     "selesai": 12,
+     "terlambat": 0,
+     "temuan": 7
     },
     {
      "n": 15,
