@@ -116,6 +116,11 @@
   /* ================= potongan tampilan ================= */
   function persen(p) { return p == null ? "–" : F().persen(p); }
   function rpM(n) { return n == null ? "–" : F().rupiahM(n); }
+  /* Tabel menu Anggaran memakai rupiah lengkap bertitik ribuan tanpa "Rp" (satuan di kepala kolom), atas permintaan pemilik portal 17 Nov 2026;
+     kartu angka tetap ringkas (rpM). DESIGN §6 "Rupiah lengkap". */
+  var RIBU = new Intl.NumberFormat("id-ID", { maximumFractionDigits: 0 });
+  function rpL(n) { return n == null || !isFinite(n) ? "–" : (n < 0 ? "−" : "") + RIBU.format(Math.abs(Math.round(n))); }
+  function selisihL(n) { return n == null || !isFinite(n) ? "–" : (n > 0 ? "+" : "") + rpL(n); }
 
   function kartu(label, nilai, ket, opsi) {
     opsi = opsi || {};
@@ -157,7 +162,7 @@
 
   function gapTeks(g) {
     if (g == null || !isFinite(g)) return "–";
-    return '<span class="' + (g >= 0 ? "teks-ok" : "teks-bad") + '">' + e(F().selisihRupiah(g)) + "</span>";
+    return '<span class="' + (g >= 0 ? "teks-ok" : "teks-bad") + '">' + e(selisihL(g)) + "</span>";
   }
 
   function td(isi, angka, kelas) { return "<td" + (angka || kelas ? ' class="' + (angka ? "angka" : "") + (kelas ? " " + kelas : "") + '"' : "") + ">" + isi + "</td>"; }
@@ -181,17 +186,17 @@
   function tabelAnggaran(rows, total, kolomPertama, opsiT) {
     opsiT = opsiT || {};
     var kepala = "<thead><tr>" + kolomPertama.map(function (k) { return '<th scope="col">' + e(k) + "</th>"; }).join("") +
-      '<th scope="col" class="angka">Pagu</th><th scope="col" class="angka">Blokir</th><th scope="col" class="angka">Realisasi SP2D</th><th scope="col" class="angka">%</th>' +
-      '<th scope="col" class="angka">Outstanding</th><th scope="col" class="angka">SP2D + OS</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa</th></tr></thead>';
+      '<th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Blokir (Rp)</th><th scope="col" class="angka">Realisasi SP2D (Rp)</th><th scope="col" class="angka">%</th>' +
+      '<th scope="col" class="angka">Outstanding (Rp)</th><th scope="col" class="angka">SP2D + OS (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa (Rp)</th></tr></thead>';
     var badan = rows.map(function (r) {
       var kelas = (r.unmapped ? "redup" : "") + (opsiT.pilih && opsiT.pilih(r) ? " terpilih" : "");
       return '<tr' + (kelas.trim() ? ' class="' + kelas.trim() + '"' : "") + ">" + opsiT.sel(r) +
-        td(r.unmapped ? "–" : rpM(r.pagu), 1) + td(!r.blokir || r.unmapped ? "–" : rpM(r.blokir), 1) + td(r.unmapped && !r.real ? "–" : rpM(r.real), 1) + td(r.unmapped ? "–" : persen(r.pct), 1) +
-        td(rpM(r.os), 1) + td(rpM(r.realOs), 1) + td(r.unmapped ? "–" : persen(r.pct2), 1) + td(r.unmapped || r.blokir == null ? "–" : rpM(r.sisa), 1) + "</tr>";
+        td(r.unmapped ? "–" : rpL(r.pagu), 1) + td(!r.blokir || r.unmapped ? "–" : rpL(r.blokir), 1) + td(r.unmapped && !r.real ? "–" : rpL(r.real), 1) + td(r.unmapped ? "–" : persen(r.pct), 1) +
+        td(rpL(r.os), 1) + td(rpL(r.realOs), 1) + td(r.unmapped ? "–" : persen(r.pct2), 1) + td(r.unmapped || r.blokir == null ? "–" : rpL(r.sisa), 1) + "</tr>";
     }).join("");
     var jumlah = '<tr class="jumlah">' + kolomPertama.map(function (k, i) { return "<td>" + (i === kolomPertama.length - 1 ? "Jumlah" : "") + "</td>"; }).join("") +
-      td(rpM(total.pagu), 1) + td(rpM(total.blokir), 1) + td(rpM(total.real), 1) + td(persen(total.pct), 1) + td(rpM(total.os), 1) + td(rpM(total.realOs), 1) +
-      td(persen(total.pct2), 1) + td(total.blokir == null ? "–" : rpM(total.sisa), 1) + "</tr>";
+      td(rpL(total.pagu), 1) + td(rpL(total.blokir), 1) + td(rpL(total.real), 1) + td(persen(total.pct), 1) + td(rpL(total.os), 1) + td(rpL(total.realOs), 1) +
+      td(persen(total.pct2), 1) + td(total.blokir == null ? "–" : rpL(total.sisa), 1) + "</tr>";
     return '<div class="wadah-tabel"><table class="tabel tabel-anggaran">' + kepala + "<tbody>" + (badan || '<tr><td colspan="10">Belum ada data.</td></tr>') + jumlah + "</tbody></table></div>";
   }
 
@@ -295,15 +300,15 @@
     var t = jumlahkan(rows);
     var badan = rows.map(function (r) {
       var chip = /ABT/i.test(r.dana) ? ' <span class="chip chip-abt">ABT</span>' : r.dana ? ' <span class="chip chip-ok">Reguler</span>' : "";
-      return "<tr><td>" + e(r.kom) + chip + "</td><td>" + e(r.jenis) + "</td>" + td(rpM(r.pagu), 1) + td(rpM(r.real), 1) + td(persen(r.pct), 1) +
-        td(rpM(r.os), 1) + td(rpM(r.realOs), 1) + td(persen(r.pct2), 1) + "</tr>";
+      return "<tr><td>" + e(r.kom) + chip + "</td><td>" + e(r.jenis) + "</td>" + td(rpL(r.pagu), 1) + td(rpL(r.real), 1) + td(persen(r.pct), 1) +
+        td(rpL(r.os), 1) + td(rpL(r.realOs), 1) + td(persen(r.pct2), 1) + "</tr>";
     }).join("");
     return seksi("Realisasi bantuan per komoditas",
       '<span class="seksi-keterangan">' + e(ket) + "</span>" +
-      '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Komoditas</th><th scope="col">Jenis bantuan</th><th scope="col" class="angka">Pagu</th>' +
-      '<th scope="col" class="angka">Realisasi SP2D</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Outstanding</th><th scope="col" class="angka">SP2D + OS</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
+      '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Komoditas</th><th scope="col">Jenis bantuan</th><th scope="col" class="angka">Pagu (Rp)</th>' +
+      '<th scope="col" class="angka">Realisasi SP2D (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Outstanding (Rp)</th><th scope="col" class="angka">SP2D + OS (Rp)</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
       (badan || '<tr><td colspan="8">Tidak ada data untuk saringan ini.</td></tr>') +
-      '<tr class="jumlah"><td>Jumlah</td><td></td>' + td(rpM(t.pagu), 1) + td(rpM(t.real), 1) + td(persen(t.pct), 1) + td(rpM(t.os), 1) + td(rpM(t.realOs), 1) + td(persen(t.pct2), 1) + "</tr></tbody></table></div>" +
+      '<tr class="jumlah"><td>Jumlah</td><td></td>' + td(rpL(t.pagu), 1) + td(rpL(t.real), 1) + td(persen(t.pct), 1) + td(rpL(t.os), 1) + td(rpL(t.realOs), 1) + td(persen(t.pct2), 1) + "</tr></tbody></table></div>" +
       '<p class="catatan">Sub-komponen digabung sesuai aturan integrasi: kelapa dalam, genjah, dan genjah khusus menjadi Kelapa; arabika, robusta, dan liberika menjadi Kopi. Anggaran di luar bantuan komoditas tidak masuk tabel ini.</p>',
       { kanan: tombolCSV("komoditas") });
   }
@@ -549,16 +554,16 @@
         : '<span class="tombol-buka-kosong"></span>';
       return '<tr class="tingkat-' + b.t + '"><td class="mono"><span class="tingkat-sel" style="padding-left:' + (18 * b.t) + 'px">' + tombol + "<span>" + e(b.kode) + "</span></span></td>" +
         '<td class="sel-uraian">' + e(b.uraian) + "</td><td>" + NAMA_TINGKAT[b.t] + "</td>" +
-        td(rpM(b.pagu), 1) + td(rpM(b.real), 1) + td(persen(pct(b.real, b.pagu)), 1) + td(rpM(b.pagu - b.real), 1) + "</tr>";
+        td(rpL(b.pagu), 1) + td(rpL(b.real), 1) + td(persen(pct(b.real, b.pagu)), 1) + td(rpL(b.pagu - b.real), 1) + "</tr>";
     }).join("");
     html += seksi("Rincian kegiatan sampai sub-komponen",
       '<p class="catatan">Klik ▸ untuk membuka tingkat di bawahnya · anggaran mengikuti RAW SAKTI' + (R.kro ? " · saringan KRO berlaku mulai tingkat KRO" : "") + "</p>" +
       '<div class="baris-alat"><button type="button" class="tombol tombol-sekunder tombol-kecil" data-buka-semua="1">Buka semua</button>' +
       '<button type="button" class="tombol tombol-sekunder tombol-kecil" data-buka-semua="0">Tutup semua</button></div>' +
       '<div class="wadah-tabel"><table class="tabel tabel-anggaran"><thead><tr><th scope="col">Kode</th><th scope="col">Uraian</th><th scope="col">Tingkat</th>' +
-      '<th scope="col" class="angka">Pagu</th><th scope="col" class="angka">Realisasi SP2D</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa</th></tr></thead><tbody>' +
+      '<th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Realisasi SP2D (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa (Rp)</th></tr></thead><tbody>' +
       (badan || '<tr><td colspan="7">Tidak ada anggaran untuk saringan ini.</td></tr>') +
-      '<tr class="jumlah"><td></td><td>Jumlah</td><td></td>' + td(rpM(P.total.pagu), 1) + td(rpM(P.total.real), 1) + td(persen(pct(P.total.real, P.total.pagu)), 1) + td(rpM(P.total.pagu - P.total.real), 1) + "</tr>" +
+      '<tr class="jumlah"><td></td><td>Jumlah</td><td></td>' + td(rpL(P.total.pagu), 1) + td(rpL(P.total.real), 1) + td(persen(pct(P.total.real, P.total.pagu)), 1) + td(rpL(P.total.pagu - P.total.real), 1) + "</tr>" +
       "</tbody></table></div>" +
       '<p class="catatan">Sisa di tabel ini = pagu − realisasi SP2D (tanpa blokir dan outstanding, karena keduanya tidak tercatat per RO). Pagu dan realisasi di sini dari FA16 Segmen: realisasi belum termasuk tambahan realisasi hibah, dan pagu bisa berbeda dari tab Realisasi anggaran (file realisasi per kegiatan MyIntress) bila kedua file mengikuti revisi DIPA yang berbeda atau diunduh pada tanggal berbeda. Saringan Reguler/ABT dan komoditas tampil setelah data FA16 memuat kolom itu.</p>',
       { kanan: tombolCSV("rincian") });
@@ -571,12 +576,12 @@
       [["", "Semua"]].concat(URUT_JENIS.map(function (k) { return [k, k + " " + JENIS[k]]; })).map(function (d) {
         return '<button type="button" data-jenis="' + d[0] + '" aria-pressed="' + (R.jenis === d[0] ? "true" : "false") + '">' + e(d[1]) + "</button>";
       }).join("") + "</div>" +
-      '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Akun</th><th scope="col">Nama akun</th><th scope="col" class="angka">Pagu</th>' +
-      '<th scope="col" class="angka">SP2D</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
+      '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Akun</th><th scope="col">Nama akun</th><th scope="col" class="angka">Pagu (Rp)</th>' +
+      '<th scope="col" class="angka">SP2D (Rp)</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
       (akunTampil.map(function (r) {
-        return '<tr data-akun-baris><td class="mono">' + e(r.S03) + "</td><td>" + e(r.nama) + "</td>" + td(rpM(r.pagu), 1) + td(rpM(r.real), 1) + td(persen(pct(r.real, r.pagu)), 1) + "</tr>";
+        return '<tr data-akun-baris><td class="mono">' + e(r.S03) + "</td><td>" + e(r.nama) + "</td>" + td(rpL(r.pagu), 1) + td(rpL(r.real), 1) + td(persen(pct(r.real, r.pagu)), 1) + "</tr>";
       }).join("") || '<tr><td colspan="5">Tidak ada akun untuk saringan ini.</td></tr>') +
-      '<tr class="jumlah"><td></td><td>Jumlah</td>' + td(rpM(tAkun.pagu), 1) + td(rpM(tAkun.real), 1) + td(persen(pct(tAkun.real, tAkun.pagu)), 1) + "</tr></tbody></table></div>" +
+      '<tr class="jumlah"><td></td><td>Jumlah</td>' + td(rpL(tAkun.pagu), 1) + td(rpL(tAkun.real), 1) + td(persen(pct(tAkun.real, tAkun.pagu)), 1) + "</tr></tbody></table></div>" +
       (R.kro ? '<p class="catatan">Saringan KRO tidak berlaku untuk akun (data akun tidak dirinci per KRO).</p>' : "") +
       '<div class="pager-akun" data-pager-akun hidden><button type="button" class="tombol tombol-sekunder tombol-kecil" data-akun-hal="-1">‹ Sebelumnya</button>' +
       '<span aria-live="polite" data-akun-ket></span><button type="button" class="tombol tombol-sekunder tombol-kecil" data-akun-hal="1">Berikutnya ›</button></div>';
@@ -594,13 +599,13 @@
     var kw = kewenangan(j);
     var kolomKw = kw.kolom;
     var tabelKw = '<div class="wadah-tabel tabel-isi"><table class="tabel"><thead><tr><th scope="col">Jenis belanja</th>' +
-      kolomKw.map(function (k) { return '<th scope="col" class="angka">' + k + "</th>"; }).join("") + '<th scope="col" class="angka">Jumlah</th></tr></thead><tbody>' +
+      kolomKw.map(function (k) { return '<th scope="col" class="angka">' + k + " (Rp)</th>"; }).join("") + '<th scope="col" class="angka">Jumlah (Rp)</th></tr></thead><tbody>' +
       (kw.jenis.map(function (k) {
         var x = kw.isi[k], jml = kolomKw.reduce(function (s, c) { return s + (x[c] || 0); }, 0);
-        return "<tr><td>" + e(namaJ(k)) + "</td>" + kolomKw.map(function (c) { return td(rpM(x[c] || 0), 1); }).join("") + td(rpM(jml), 1) + "</tr>";
+        return "<tr><td>" + e(namaJ(k)) + "</td>" + kolomKw.map(function (c) { return td(rpL(x[c] || 0), 1); }).join("") + td(rpL(jml), 1) + "</tr>";
       }).join("") || '<tr><td colspan="' + (kolomKw.length + 2) + '">Tidak ada data untuk saringan ini.</td></tr>') +
-      '<tr class="jumlah"><td>Jumlah</td>' + kolomKw.map(function (c) { return td(rpM(kw.tot[c] || 0), 1); }).join("") +
-      td(rpM(kolomKw.reduce(function (s, c) { return s + (kw.tot[c] || 0); }, 0)), 1) + "</tr></tbody></table></div>" +
+      '<tr class="jumlah"><td>Jumlah</td>' + kolomKw.map(function (c) { return td(rpL(kw.tot[c] || 0), 1); }).join("") +
+      td(rpL(kolomKw.reduce(function (s, c) { return s + (kw.tot[c] || 0); }, 0)), 1) + "</tr></tbody></table></div>" +
       '<p class="catatan">KP kantor pusat (satker 238830) · KD kantor daerah (balai)' + (kolomKw.indexOf("DK") >= 0 ? " · DK dekonsentrasi" : "") + (kolomKw.indexOf("TP") >= 0 ? " · TP tugas pembantuan" : "") +
       ". Kolom DK dan TP tampil bila datanya ada.</p>";
 
@@ -740,14 +745,14 @@
       return d > 0 ? '<span class="chip chip-ok">Naik</span>' : d < 0 ? '<span class="chip chip-warn">Turun</span>' : '<span class="chip chip-neutral">Tetap</span>';
     };
     var badan = rows.map(function (r) {
-      return "<tr" + (r.d != null && r.d < 0 ? ' class="sorot"' : "") + "><td>" + e(r.unit) + "</td>" + td(rpM(r.vb), 1) + td(rpM(r.va), 1) +
-        td(r.d == null ? "–" : e(F().selisihRupiah(r.d)), 1) + td(r.dp == null ? "–" : e(F().selisihPoin(r.dp)), 1) + "<td>" + status(r.d) + "</td></tr>";
+      return "<tr" + (r.d != null && r.d < 0 ? ' class="sorot"' : "") + "><td>" + e(r.unit) + "</td>" + td(rpL(r.vb), 1) + td(rpL(r.va), 1) +
+        td(r.d == null ? "–" : e(selisihL(r.d)), 1) + td(r.dp == null ? "–" : e(F().selisihPoin(r.dp)), 1) + "<td>" + status(r.d) + "</td></tr>";
     }).join("");
     var judul = "Selisih per unit kerja dibanding " + (xb ? F().tanggal(xb.tanggal) : "H-1");
     return seksi(judul,
-      '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Unit kerja</th><th scope="col" class="angka">' + e(nama + " " + lb) + "</th>" +
-      '<th scope="col" class="angka">' + e(nama + " " + la) + '</th><th scope="col" class="angka">Selisih (Rp)</th><th scope="col" class="angka">Selisih (% poin)</th><th scope="col">Status</th></tr></thead><tbody>' +
-      badan + '<tr class="jumlah"><td>Jumlah</td>' + td(rpM(tB), 1) + td(rpM(tA), 1) + td(tB == null ? "–" : e(F().selisihRupiah(tA - tB)), 1) +
+      '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Unit kerja</th><th scope="col" class="angka">' + e(nama + " " + lb + " (Rp)") + "</th>" +
+      '<th scope="col" class="angka">' + e(nama + " " + la + " (Rp)") + '</th><th scope="col" class="angka">Selisih (Rp)</th><th scope="col" class="angka">Selisih (% poin)</th><th scope="col">Status</th></tr></thead><tbody>' +
+      badan + '<tr class="jumlah"><td>Jumlah</td>' + td(rpL(tB), 1) + td(rpL(tA), 1) + td(tB == null ? "–" : e(selisihL(tA - tB)), 1) +
       td(dpT == null ? "–" : e(F().selisihPoin(dpT)), 1) + "<td>" + status(tB == null ? null : tA - tB) + "</td></tr></tbody></table></div>" +
       '<p class="catatan">Realisasi yang turun dibanding H-1 biasanya karena koreksi SP2D atau file yang belum lengkap; unggahan seperti ini mendapat PERINGATAN dan wajib diberi catatan. Selisih % poin dihitung terhadap pagu masing-masing tanggal.</p>',
       { kanan: tombolCSV("harian") });
@@ -894,13 +899,13 @@
 
     /* posisi per unit */
     var semua = units.map(function (u) { var x = mesinTarget(T, [u], s5); x.u = u; return x; }).filter(function (x) { return x.ok; });
-    var tabUnit = '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col" rowspan="2">Unit kerja</th><th scope="col" rowspan="2" class="angka">SP2D</th>' +
+    var tabUnit = '<div class="wadah-tabel"><table class="tabel tabel-kecil tabel-rapat"><thead><tr><th scope="col" rowspan="2">Unit kerja</th><th scope="col" rowspan="2" class="angka">SP2D</th>' +
       '<th scope="colgroup" colspan="2" class="kelompok">RPATA</th><th scope="colgroup" colspan="2" class="kelompok">Tanpa RPATA</th></tr>' +
-      '<tr><th scope="col" class="angka">Butuh/hari</th><th scope="col" class="angka">GAP</th><th scope="col" class="angka">Butuh/hari</th><th scope="col" class="angka">GAP</th></tr></thead><tbody>' +
+      '<tr><th scope="col" class="angka">Butuh/hari (Rp)</th><th scope="col" class="angka">GAP (Rp)</th><th scope="col" class="angka">Butuh/hari (Rp)</th><th scope="col" class="angka">GAP (Rp)</th></tr></thead><tbody>' +
       semua.map(function (x) {
         var p = x.pagu || 1;
         return "<tr" + (G.unit === x.u.unit ? ' class="terpilih"' : "") + '><td><button type="button" class="tautan-sel" data-t-unit="' + e(x.u.unit) + '">' + e(I().unit(x.u.unit)) + "</button></td>" +
-          td(persen((x.lastReal / p) * 100), 1) + td(e(F().rupiah(x.needNow1)), 1) + td(gapTeks(x.gapNow1), 1) + td(e(F().rupiah(x.needNow2)), 1) + td(gapTeks(x.gapNow2), 1) + "</tr>";
+          td(persen((x.lastReal / p) * 100), 1) + td(e(rpL(x.needNow1)), 1) + td(gapTeks(x.gapNow1), 1) + td(e(rpL(x.needNow2)), 1) + td(gapTeks(x.gapNow2), 1) + "</tr>";
       }).join("") + "</tbody></table></div>" +
       '<p class="catatan">Butuh/hari = sisa target ÷ sisa hari setelah data terakhir · GAP = realisasi − jumlah kebutuhan harian s.d. data terakhir (kekurangan/kelebihan tiap hari dibagi ulang ke sisa hari). Klik unit kerja untuk melihat rinciannya.</p>';
 
@@ -915,26 +920,26 @@
     var k = G.jalur, namaJalur = k === "1" ? "RPATA" : "tanpa RPATA";
     var stMinggu = { selesai: '<span class="chip chip-neutral">Selesai</span>', berjalan: '<span class="chip chip-info">Berjalan</span>', akan: '<span class="chip chip-neutral">Akan datang</span>' };
     var tw = function (key) { return E.weeks.reduce(function (a, w) { return a + (w[key] || 0); }, 0); };
-    var tabMinggu = '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Minggu</th><th scope="col" class="angka">Target minggu</th>' +
-      '<th scope="col" class="angka">Realisasi minggu</th><th scope="col" class="angka">GAP kumulatif</th><th scope="col">Status</th></tr></thead><tbody>' +
+    var tabMinggu = '<div class="wadah-tabel"><table class="tabel tabel-kecil tabel-rapat"><thead><tr><th scope="col">Minggu</th><th scope="col" class="angka">Target minggu (Rp)</th>' +
+      '<th scope="col" class="angka">Realisasi minggu (Rp)</th><th scope="col" class="angka">GAP kumulatif (Rp)</th><th scope="col">Status</th></tr></thead><tbody>' +
       E.weeks.map(function (w) {
         return "<tr" + (w.status === "berjalan" ? ' class="terpilih"' : w.status === "akan" ? ' class="redup"' : "") + "><td>Minggu " + w.no +
           '<br><span class="teks-redup">' + e(F().tanggal(w.from).replace(/ \d{4}$/, "") + " – " + F().tanggal(w.to).replace(/ \d{4}$/, "")) + "</span></td>" +
-          td(e(rp(w["tw" + k])), 1) + td(w.realWeek == null ? "–" : e(rp(w.realWeek)), 1) + td(gapTeks(w["gap" + k]), 1) + "<td>" + stMinggu[w.status] + "</td></tr>";
+          td(e(rpL(w["tw" + k])), 1) + td(w.realWeek == null ? "–" : e(rpL(w.realWeek)), 1) + td(gapTeks(w["gap" + k]), 1) + "<td>" + stMinggu[w.status] + "</td></tr>";
       }).join("") +
-      '<tr class="jumlah"><td>Jumlah</td>' + td(e(rp(tw("tw" + k))), 1) + td(e(rp(E.lastReal - E.B0)), 1) + td(gapTeks(E["gapNow" + k]), 1) + "<td></td></tr></tbody></table></div>" +
+      '<tr class="jumlah"><td>Jumlah</td>' + td(e(rpL(tw("tw" + k))), 1) + td(e(rpL(E.lastReal - E.B0)), 1) + td(gapTeks(E["gapNow" + k]), 1) + "<td></td></tr></tbody></table></div>" +
       '<p class="catatan">Minggu Senin–Minggu. Target minggu = jumlah kebutuhan harian (' + namaJalur + ") di minggu itu: hari yang sudah lewat memakai kebutuhan hari itu, hari mendatang memakai butuh/hari sekarang. Kekurangan atau kelebihan realisasi dibagi ulang ke sisa hari s.d. akhir tahun, jadi target minggu mendatang ikut berubah. Minggu berjalan dihitung s.d. data terakhir.</p>";
 
     var hariIni = dISO(new Date());
     var tabHari = '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Tanggal</th><th scope="col" class="angka">Sisa hari</th>' +
-      '<th scope="col" class="angka">Butuh (' + namaJalur + ')</th><th scope="col" class="angka">Realisasi</th><th scope="col">Status</th></tr></thead><tbody>' +
+      '<th scope="col" class="angka">Butuh ' + namaJalur + ' (Rp)</th><th scope="col" class="angka">Realisasi (Rp)</th><th scope="col">Status</th></tr></thead><tbody>' +
       E.rows.map(function (r) {
         var butuh = r["need" + k];
         var st = r.act == null ? "" : r.act >= butuh ? '<span class="chip chip-ok">Tercapai</span>' : '<span class="chip chip-bad">Kurang</span>';
         var kelas = r.d === hariIni ? "terpilih" : !r.past ? "redup" : "";
         return "<tr data-hari-baris" + (r.d === hariIni ? " data-hari-ini" : "") + (kelas ? ' class="' + kelas + '"' : "") + "><td>" + e(HARI[pISO(r.d).getDay()] + ", " + F().tanggal(r.d).replace(/ \d{4}$/, "")) +
-          (r.d === hariIni ? ' <span class="chip chip-warn">Hari ini</span>' : "") + "</td>" + td(String(r.rem), 1) + td(e(rp(butuh)), 1) +
-          td(r.act == null ? "–" : e(rp(r.act)), 1) + "<td>" + st + "</td></tr>";
+          (r.d === hariIni ? ' <span class="chip chip-warn">Hari ini</span>' : "") + "</td>" + td(String(r.rem), 1) + td(e(rpL(butuh)), 1) +
+          td(r.act == null ? "–" : e(rpL(r.act)), 1) + "<td>" + st + "</td></tr>";
       }).join("") + "</tbody></table></div>" +
       '<div class="pager-akun" data-pager-hari hidden><button type="button" class="tombol tombol-sekunder tombol-kecil" data-hari-hal="-1">‹ Sebelumnya</button>' +
       '<span aria-live="polite" data-hari-ket></span><button type="button" class="tombol tombol-sekunder tombol-kecil" data-hari-hal="1">Berikutnya ›</button></div>';

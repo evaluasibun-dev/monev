@@ -573,3 +573,7 @@
   font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
 }
 #lintas:focus, #tahun-baru:focus { outline: none; }
+/* Tabel rupiah lengkap yang berbagi lebar dengan kartu lain (Target serapan): jarak sel lebih rapat */
+.tabel-rapat th, .tabel-rapat td { padding-left: 6px; padding-right: 6px; }
+.tabel-rapat th { white-space: normal; }
+.tabel-rapat { font-size: 12px; }

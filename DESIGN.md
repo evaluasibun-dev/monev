@@ -322,6 +322,8 @@ Tiga kotak sejajar: nomor dalam lingkaran 30 px, judul, keterangan. Selesai = li
 | Rupiah ringkas | Rp + miliar 1 desimal | Rp 812,4 M |
 | Rupiah juta | Rp + juta tanpa desimal | Rp 420 Jt |
 | Rupiah lengkap (rekonsiliasi) | titik ribuan | Rp 3.977.315.566.857 |
+
+**Tabel menu Anggaran** (keputusan pemilik portal 17 Nov 2026): semua tabel di keempat sub-tab memakai rupiah lengkap bertitik ribuan tanpa awalan "Rp" (satuan "(Rp)" di kepala kolom, selisih dengan tanda + atau −); kartu angka di atasnya tetap Rp ringkas (M/Jt). Tabel yang berbagi lebar dengan kartu lain boleh memakai `.tabel-rapat` (huruf 12 px, jarak sel 6 px) supaya tidak menggulir.
 | Persen | 1 desimal | 48,7% |
 | Selisih | tanda + atau − (minus sejati) | +Rp 12 Jt · −0,3 poin |
 | Luas | ha, titik ribuan | 1.250 ha |
