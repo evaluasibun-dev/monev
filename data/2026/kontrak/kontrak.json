@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-17T15:47:00+07:00",
+ "data_per": "2026-11-17T15:49:00+07:00",
  "hari_ini": "2026-11-17",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -24663,11 +24663,11 @@
   {
    "no": "EP-01M7A1EDFT6BPBJYV15YVSWEK6",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Kediri Tahap 25 208,22 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "JAWA TIMUR",
    "kab": "Kediri",
@@ -24682,18 +24682,18 @@
    "sisa_hari": 44,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
    "no": "EP-01M7A1XXQ29J1566M1KDNMAZ9K",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Kediri Tahap 26 177,08 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "JAWA TIMUR",
    "kab": "Kediri",
@@ -24708,8 +24708,8 @@
    "sisa_hari": 44,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -36961,18 +36961,6 @@
   {
    "k": "06. KRO kosong",
    "no": "EP-01M5Y8CSKEYVR2STMQF5CKG805",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7A1EDFT6BPBJYV15YVSWEK6",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7A1XXQ29J1566M1KDNMAZ9K",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
