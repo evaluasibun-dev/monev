@@ -563,7 +563,7 @@
       (badan || '<tr><td colspan="7">Tidak ada anggaran untuk saringan ini.</td></tr>') +
       '<tr class="jumlah"><td></td><td>Jumlah</td><td></td>' + td(rpM(P.total.pagu), 1) + td(rpM(P.total.real), 1) + td(persen(pct(P.total.real, P.total.pagu)), 1) + td(rpM(P.total.pagu - P.total.real), 1) + "</tr>" +
       "</tbody></table></div>" +
-      '<p class="catatan">Sisa di tabel ini = pagu − realisasi SP2D (tanpa blokir dan outstanding, karena keduanya tidak tercatat per RO). Realisasi di sini dari FA16 Segmen, belum termasuk tambahan realisasi hibah, sehingga bisa lebih kecil dari tab Realisasi anggaran. Saringan Reguler/ABT dan komoditas tampil setelah data FA16 memuat kolom itu.</p>',
+      '<p class="catatan">Sisa di tabel ini = pagu − realisasi SP2D (tanpa blokir dan outstanding, karena keduanya tidak tercatat per RO). Pagu dan realisasi di sini dari FA16 Segmen: realisasi belum termasuk tambahan realisasi hibah, dan pagu bisa berbeda dari tab Realisasi anggaran (file realisasi per kegiatan MyIntress) bila kedua file mengikuti revisi DIPA yang berbeda atau diunduh pada tanggal berbeda. Saringan Reguler/ABT dan komoditas tampil setelah data FA16 memuat kolom itu.</p>',
       { kanan: tombolCSV("rincian") });
 
     /* akun */
@@ -796,6 +796,7 @@
     var at = function (d) { var v = null; for (var i = 0; i < sd.length && sd[i] <= d; i++) v = byDate[sd[i]]; return v; };
     var atOs = function (d) { var v = null; for (var i = 0; i < sd.length && sd[i] <= d; i++) v = byDate[sd[i]] + osBy[sd[i]]; return v; };
     var before = function (d) { var v = null; for (var i = 0; i < sd.length && sd[i] < d; i++) v = byDate[sd[i]]; return v; };
+    var beforeOs = function (d) { var v = null; for (var i = 0; i < sd.length && sd[i] < d; i++) v = byDate[sd[i]] + osBy[sd[i]]; return v; };
     var bDate = null;
     sd.forEach(function (x) { if (x < cfg.start) bDate = x; });
     if (!bDate) bDate = sd[0];
@@ -815,7 +816,10 @@
       // realisasi hari d = s.d. sebelum hari dihitung berikutnya, jadi realisasi Sabtu/Minggu/libur ikut ke hari kerja sebelumnya
       // (sama dengan realisasi yang dikurangkan saat menghitung kebutuhan hari berikutnya)
       var akhirD = i + 1 < N ? before(days[i + 1]) : at(d);
-      var act = past && byDate[d] != null ? akhirD - prev : null, cum = past ? at(d) : null, cumOs = past ? atOs(d) : null;
+      var akhirOs = i + 1 < N ? beforeOs(days[i + 1]) : atOs(d);
+      var act = past && byDate[d] != null ? akhirD - prev : null;
+      // kumulatif (dan GAP) memakai titik akhir yang sama dengan realisasi hari itu, supaya akhir pekan ikut (audit 17 Nov 2026)
+      var cum = !past ? null : act != null ? akhirD : at(d), cumOs = !past ? null : act != null ? akhirOs : atOs(d);
       return { d: d, i: i + 1, rem: rem, past: past, plan1: jml1, plan2: jml2, need1: need1, need2: need2, act: act, cum: cum, cumOs: cumOs,
         gap1: cum == null ? null : cum - jml1, gap2: cum == null ? null : cum - jml2 };
     });
@@ -941,7 +945,7 @@
     html += '<div class="grid-dua">' +
       seksi("Rekap mingguan", tabMinggu, { kanan: tombolCSV("t-minggu"), kelas: "seksi-minggu" }) +
       seksi("Kebutuhan serapan harian",
-        '<p class="catatan">Kebutuhan harian = (target − realisasi s.d. kemarin) ÷ sisa hari. Kekurangan satu hari otomatis dibagi ke hari berikutnya. Realisasi harian = selisih data realisasi antartanggal; hari tanpa data ditandai "–".</p>' + tabHari,
+        '<p class="catatan">Kebutuhan harian = (target − realisasi s.d. kemarin) ÷ sisa hari. Kekurangan satu hari otomatis dibagi ke hari berikutnya. Realisasi harian = selisih data realisasi antartanggal; realisasi Sabtu, Minggu, dan hari libur ikut ke hari kerja sebelumnya; hari tanpa data ditandai "–".</p>' + tabHari,
         { kanan: tombolCSV("t-hari"), kelas: "seksi-hari" }) + "</div>";
     return html;
   }
