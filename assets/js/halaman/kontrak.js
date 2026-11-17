@@ -230,15 +230,15 @@
     var baris = units.map(function (u) {
       var x = A[u];
       return '<tr><td><button type="button" class="tautan-sel" data-pilih-unit="' + e(u) + '">' + e(u) + "</button></td>" +
-        '<td class="angka">' + F().satuan(x.n, "").trim() + '</td><td class="angka">' + F().rupiahM(x.nilai) + '</td><td class="angka">' + F().rupiahM(x.bayar) +
-        '</td><td class="angka">' + persen(x.pct) + '</td><td class="angka">' + F().rupiahM(x.sisa) + '</td><td class="angka">' + x.selesai +
+        '<td class="angka">' + F().satuan(x.n, "").trim() + '</td><td class="angka">' + F().ribuan(x.nilai) + '</td><td class="angka">' + F().ribuan(x.bayar) +
+        '</td><td class="angka">' + persen(x.pct) + '</td><td class="angka">' + F().ribuan(x.sisa) + '</td><td class="angka">' + x.selesai +
         '</td><td class="angka">' + (x.lewat ? '<span class="chip chip-bad">' + x.lewat + "</span>" : "0") + '</td><td class="angka">' + persen(x.n ? x.ver / x.n : 0) + "</td></tr>";
     }).join("");
-    var jumlah = '<tr class="jumlah"><td>Jumlah</td><td class="angka">' + F().satuan(tot.n, "").trim() + '</td><td class="angka">' + F().rupiahM(tot.nilai) +
-      '</td><td class="angka">' + F().rupiahM(tot.bayar) + '</td><td class="angka">' + persen(tot.pct) + '</td><td class="angka">' + F().rupiahM(tot.sisa) +
+    var jumlah = '<tr class="jumlah"><td>Jumlah</td><td class="angka">' + F().satuan(tot.n, "").trim() + '</td><td class="angka">' + F().ribuan(tot.nilai) +
+      '</td><td class="angka">' + F().ribuan(tot.bayar) + '</td><td class="angka">' + persen(tot.pct) + '</td><td class="angka">' + F().ribuan(tot.sisa) +
       '</td><td class="angka">' + tot.selesai + '</td><td class="angka">' + tot.lewat + '</td><td class="angka">' + persen(tot.n ? tot.ver / tot.n : 0) + "</td></tr>";
     html += seksi("Resume per unit kerja", "", '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Unit kerja</th><th scope="col" class="angka">Kontrak</th>' +
-      '<th scope="col" class="angka">Nilai kontrak</th><th scope="col" class="angka">Pembayaran</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa (OS)</th>' +
+      '<th scope="col" class="angka">Nilai kontrak (Rp)</th><th scope="col" class="angka">Pembayaran (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa OS (Rp)</th>' +
       '<th scope="col" class="angka">Selesai</th><th scope="col" class="angka">Lewat batas</th><th scope="col" class="angka">Terverifikasi</th></tr></thead><tbody>' +
       (baris || '<tr><td colspan="9">Tidak ada kontrak untuk saringan ini.</td></tr>') + jumlah + "</tbody></table></div>" +
       '<p class="catatan">Ditjenbun Pusat (satker 238830) dipecah per kode kegiatan. Kontrak Pusat yang KRO atau kode kegiatannya belum diisi tampil di baris "Pusat, belum terpetakan" sampai dilengkapi lewat verifikasi. Klik nama unit untuk menyaring.</p>',
@@ -249,7 +249,7 @@
     var kegs = Object.keys(gk).map(function (k) { return { k: k, x: agg(gk[k], batas) }; })
       .sort(function (p, q) { return q.x.nilai - p.x.nilai; }).slice(0, 10);
     var tKeg = kegs.map(function (o) {
-      return "<tr><td>" + e(o.k) + '</td><td class="angka">' + F().rupiahM(o.x.nilai) + '</td><td class="angka">' + F().rupiahM(o.x.bayar) +
+      return "<tr><td>" + e(o.k) + '</td><td class="angka">' + F().ribuan(o.x.nilai) + '</td><td class="angka">' + F().ribuan(o.x.bayar) +
         '</td><td class="angka">' + persen(o.x.pct) + "</td></tr>";
     }).join("");
 
@@ -263,18 +263,18 @@
       if (!p) { tHist += "<tr><td>" + F().tanggal(h.hari[i]) + '</td><td colspan="4">Tidak ada data unit kerja ini</td></tr>'; continue; }
       var prev = null;
       for (var k = i - 1; k >= 0; k--) if (seri[k]) { prev = seri[k]; break; }
-      tHist += "<tr><td>" + F().tanggal(h.hari[i]) + '</td><td class="angka">' + F().rupiahM(p.bayar) + '</td><td class="angka">' +
-        persen(p.nilai ? p.bayar / p.nilai : 0) + '</td><td class="angka">' + (prev ? F().selisihRupiah(p.bayar - prev.bayar) : "–") +
+      tHist += "<tr><td>" + F().tanggal(h.hari[i]) + '</td><td class="angka">' + F().ribuan(p.bayar) + '</td><td class="angka">' +
+        persen(p.nilai ? p.bayar / p.nilai : 0) + '</td><td class="angka">' + (prev ? F().selisihRibuan(p.bayar - prev.bayar) : "–") +
         '</td><td class="angka">' + p.selesai + "</td></tr>";
     }
     var catatanHist = FILTER.kegiatan || FILTER.komoditas || FILTER.sumber ? "Saringan kegiatan, komoditas, dan sumber tidak berlaku untuk histori." : "Posisi akhir tiap hari import.";
 
     html += '<div class="grid-dua">' +
       seksi("Per kegiatan · 10 nilai kontrak terbesar", "", '<div class="wadah-tabel"><table class="tabel"><thead><tr><th scope="col">Kegiatan</th>' +
-        '<th scope="col" class="angka">Nilai</th><th scope="col" class="angka">Dibayar</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
+        '<th scope="col" class="angka">Nilai (Rp)</th><th scope="col" class="angka">Dibayar (Rp)</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
         (tKeg || '<tr><td colspan="4">Tidak ada kontrak untuk saringan ini.</td></tr>') + "</tbody></table></div>", { kanan: tombolCSV("kegiatan") }) +
       seksi("Histori harian", catatanHist, '<div class="wadah-tabel"><table class="tabel"><thead><tr><th scope="col">Tanggal</th>' +
-        '<th scope="col" class="angka">Total bayar</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Tambahan</th><th scope="col" class="angka">Selesai</th></tr></thead><tbody>' +
+        '<th scope="col" class="angka">Total bayar (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Tambahan (Rp)</th><th scope="col" class="angka">Selesai</th></tr></thead><tbody>' +
         (tHist || '<tr><td colspan="5">Belum ada histori. Histori bertambah setiap kali file MyIntress diimport.</td></tr>') + "</tbody></table></div>") +
       "</div>";
 
@@ -332,7 +332,7 @@
     var badan = tampil.map(function (c) {
       return "<tr><td>" + chipSisaHari(c, batas) + '</td><td class="mono">' + e(c.no) + '</td><td class="sel-uraian">' + e(c.uraian) +
         "</td><td>" + e(c.unitBaku) + " " + (c.manual ? chipSumber(c) : "") + "</td><td>" + e(F().tanggal(c.tgl_selesai)) +
-        '</td><td class="angka">' + F().rupiah(c.nilai) + '</td><td class="angka">' + persen(c.pct) + "</td><td>" + e(teksStatus(c.status)) + "</td></tr>";
+        '</td><td class="angka">' + F().ribuan(c.nilai) + '</td><td class="angka">' + persen(c.pct) + "</td><td>" + e(teksStatus(c.status)) + "</td></tr>";
     }).join("");
 
     html += seksi(judulDaftar, "",
@@ -341,7 +341,7 @@
         (STATE.peringatan !== "semua" ? '<button type="button" class="tombol tombol-sekunder tombol-kecil" data-kartu="semua">Tampilkan semua peringatan</button>' : "") +
       "</div>" +
       '<div class="wadah-tabel"><table class="tabel tabel-lebar"><thead><tr><th scope="col">Batas</th><th scope="col">Nomor kontrak</th><th scope="col">Uraian</th>' +
-      '<th scope="col">Unit kerja</th><th scope="col">Tanggal selesai</th><th scope="col" class="angka">Nilai</th><th scope="col" class="angka">Bayar</th><th scope="col">Status progres</th></tr></thead><tbody>' +
+      '<th scope="col">Unit kerja</th><th scope="col">Tanggal selesai</th><th scope="col" class="angka">Nilai (Rp)</th><th scope="col" class="angka">Bayar</th><th scope="col">Status progres</th></tr></thead><tbody>' +
       (badan || '<tr><td colspan="8">Tidak ada kontrak dalam kelompok ini.</td></tr>') + "</tbody></table></div>" +
       (list.length > tampil.length ? '<button type="button" class="tombol tombol-sekunder" data-lebih="peringatan">Tampilkan ' + Math.min(100, list.length - tampil.length) + " lagi dari " + (list.length - tampil.length) + "</button>" : "") +
       '<p class="catatan">' + list.length + " kontrak · diurutkan dari yang paling mendesak · tanggal selesai dari MyIntress atau input manual.</p>",
@@ -397,14 +397,14 @@
 
     var badan = tampil.map(function (x) {
       return '<tr><td class="mono">' + e(x.c.no) + '</td><td class="sel-uraian">' + e(String(x.c.uraian).slice(0, 140)) + "</td><td>" + e(x.c.unitBaku) +
-        '</td><td class="angka">' + F().rupiah(x.c.nilai) + "</td><td>" + e(x.t.d || "–") + "</td><td>" + e(x.t.tl || "–") + "</td></tr>";
+        '</td><td class="angka">' + F().ribuan(x.c.nilai) + "</td><td>" + e(x.t.d || "–") + "</td><td>" + e(x.t.tl || "–") + "</td></tr>";
     }).join("");
 
     html += seksi("Daftar temuan · " + STATE.kategori + " " + (TEMUAN[STATE.kategori] || ""), list.length + " temuan",
       '<div class="baris-alat"><label class="sr-only" for="cari-temuan">Cari temuan</label>' +
         '<input type="search" id="cari-temuan" class="input-cari" placeholder="Cari nomor kontrak, uraian, detail temuan…" value="' + e(STATE.cariTemuan) + '">' + tombolCSV("temuan") + "</div>" +
       '<div class="wadah-tabel"><table class="tabel tabel-lebar"><thead><tr><th scope="col">Nomor kontrak</th><th scope="col">Uraian</th><th scope="col">Unit kerja</th>' +
-      '<th scope="col" class="angka">Nilai</th><th scope="col">Detail temuan</th><th scope="col">Tindak lanjut</th></tr></thead><tbody>' +
+      '<th scope="col" class="angka">Nilai (Rp)</th><th scope="col">Detail temuan</th><th scope="col">Tindak lanjut</th></tr></thead><tbody>' +
       (badan || '<tr><td colspan="6">Tidak ada temuan untuk kategori dan saringan ini.</td></tr>') + "</tbody></table></div>" +
       (list.length > tampil.length ? '<button type="button" class="tombol tombol-sekunder" data-lebih="temuan">Tampilkan ' + Math.min(100, list.length - tampil.length) + " lagi dari " + (list.length - tampil.length) + "</button>" : "") +
       '<p class="catatan">Perbaikan dilakukan operator di halaman kerja (tombol Halaman kerja), bukan di halaman publik ini.</p>');

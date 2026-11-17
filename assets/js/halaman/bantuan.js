@@ -537,13 +537,13 @@
       (nas ? '<th scope="col" rowspan="2" class="angka">Provinsi</th>' : "") + '<th scope="col" rowspan="2" class="angka">Kab/kota</th>' +
       '<th scope="colgroup" colspan="3" class="kelompok">Fisik</th><th scope="colgroup" colspan="' + (bencana ? 5 : 3) + '" class="kelompok">Anggaran</th></tr>' +
       '<tr><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th>' +
-      '<th scope="col" class="angka">Pagu</th><th scope="col" class="angka">Terbayar</th><th scope="col" class="angka">%</th>' +
-      (bencana ? '<th scope="col" class="angka">Pagu bencana</th><th scope="col" class="angka">Terbayar bencana</th>' : "") + "</tr></thead>";
+      '<th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Terbayar (Rp)</th><th scope="col" class="angka">%</th>' +
+      (bencana ? '<th scope="col" class="angka">Pagu bencana (Rp)</th><th scope="col" class="angka">Terbayar bencana (Rp)</th>' : "") + "</tr></thead>";
     var sel = function (x, satuan, grup) {
       var fp = satuan === "Hektar" && grup <= 1 ? pct(x.realisasi, x.target) : "–";
       return '<td class="angka">' + fisik(x.target, satuan) + '</td><td class="angka">' + fisik(x.realisasi, satuan) + '</td><td class="angka">' + fp + "</td>" +
-        '<td class="angka">' + F().rupiahM(x.pagu) + '</td><td class="angka">' + F().rupiahM(x.terbayar) + '</td><td class="angka">' + pct(x.terbayar, x.pagu) + "</td>" +
-        (bencana ? '<td class="angka">' + (x.pagu_b ? F().rupiahM(x.pagu_b) : "–") + '</td><td class="angka">' + (x.terbayar_b ? F().rupiahM(x.terbayar_b) : "–") + "</td>" : "");
+        '<td class="angka">' + F().ribuan(x.pagu) + '</td><td class="angka">' + F().ribuan(x.terbayar) + '</td><td class="angka">' + pct(x.terbayar, x.pagu) + "</td>" +
+        (bencana ? '<td class="angka">' + (x.pagu_b ? F().ribuan(x.pagu_b) : "–") + '</td><td class="angka">' + (x.terbayar_b ? F().ribuan(x.terbayar_b) : "–") + "</td>" : "");
     };
     var body = keg.map(function (x) {
       return '<tr class="tingkat-0"><td>' + e(x.kegiatan) + "</td><td>" + chipSumber(x.sumber_dana) + "</td>" + (nas ? '<td class="angka">' + x.jml_prov + "</td>" : "") +
@@ -618,10 +618,10 @@
   function rincianProvinsi(dasar, nama, j) {
     var rows = R().saring(dasar, { provinsi: nama }), k = R().kartu(rows), ben = (j.provinsi_bencana || []).indexOf(nama) >= 0;
     var kab = R().perKabupaten(rows, nama).sort(function (a, b) { return a.grup - b.grup || b.pagu - a.pagu || (a.kabupaten < b.kabupaten ? -1 : 1); });
-    var kabTabel = '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Kabupaten/kota</th><th scope="col">Komoditas / kegiatan</th><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Pagu</th><th scope="col" class="angka">Terbayar</th></tr></thead><tbody>' +
+    var kabTabel = '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Kabupaten/kota</th><th scope="col">Komoditas / kegiatan</th><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Terbayar (Rp)</th></tr></thead><tbody>' +
       kab.map(function (x) {
         return "<tr data-hal-baris><td>" + e(x.kabupaten) + "</td><td>" + e(x.kegiatan) + (x.sumber_dana === "ABT" ? " " + chip("abt", "ABT") : "") + '</td><td class="angka">' + fisik(x.target, x.satuan) + '</td><td class="angka">' + fisik(x.realisasi, x.satuan) +
-          '</td><td class="angka">' + (x.satuan === "Hektar" && x.grup <= 1 ? pct(x.realisasi, x.target) : "–") + '</td><td class="angka">' + F().rupiahM(x.pagu) + '</td><td class="angka">' + F().rupiahM(x.terbayar) + "</td></tr>";
+          '</td><td class="angka">' + (x.satuan === "Hektar" && x.grup <= 1 ? pct(x.realisasi, x.target) : "–") + '</td><td class="angka">' + F().ribuan(x.pagu) + '</td><td class="angka">' + F().ribuan(x.terbayar) + "</td></tr>";
       }).join("") + "</tbody></table></div>" + Monev.bagiHalaman.pager();
     return '<section class="seksi seksi-rincian-prov"><div class="seksi-kepala"><div class="kolom-blok"><span class="label-kecil">RINCIAN PROVINSI</span><h2>' + e(namaProv(nama)) + "</h2></div>" +
       (ben ? chip("abt", "Provinsi terdampak bencana") : "") + "</div>" +

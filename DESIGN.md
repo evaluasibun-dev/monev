@@ -329,7 +329,7 @@ Tiga kotak sejajar: nomor dalam lingkaran 30 px, judul, keterangan. Selesai = li
 | Tanggal | tanggal bulan-singkat tahun | 13 Nov 2026 |
 | Jam | 24 jam dengan titik + WIB | 15.30 WIB |
 
-**Tabel menu Anggaran** (keputusan pemilik portal 17 Nov 2026): semua tabel di keempat sub-tab memakai rupiah lengkap bertitik ribuan tanpa awalan "Rp" (satuan "(Rp)" di kepala kolom, selisih dengan tanda + atau −); kartu angka di atasnya tetap Rp ringkas (M/Jt). Tabel yang berbagi lebar dengan kartu lain boleh memakai `.tabel-rapat` (huruf 12 px, jarak sel 6 px) supaya tidak menggulir.
+**Tabel menu Anggaran, Kontrak, dan Bantuan** (keputusan pemilik portal 17 Nov 2026): semua tabel di menu itu memakai rupiah lengkap bertitik ribuan tanpa awalan "Rp" (satuan "(Rp)" di kepala kolom, selisih dengan tanda + atau −); kartu angka, teks keterangan, chip, Beranda, dan Pilih tahun tetap Rp ringkas (M/Jt). Format: `Monev.format.ribuan`, `Monev.format.selisihRibuan`. Tabel yang berbagi lebar dengan kartu lain boleh memakai `.tabel-rapat` (huruf 12 px, jarak sel 6 px) supaya tidak menggulir.
 
 Istilah baku: SP2D, outstanding (OS), SP2D + OS, pagu, blokir, CPCL, SK penetapan, HOK, RPATA, KRO, RO, unit kerja, satker, Reguler, ABT.
 Nama unit kerja: Sekretariat, Dit. Sawit dan Aneka Palma, Dit. Pelindungan, Dit. Semusim dan Tahunan, Dit. Hilirisasi, Dit. Perbenihan, BBPPTP Medan, BBPPTP Surabaya, BBPPTP Ambon, BPTP Pontianak.

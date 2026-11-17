@@ -37,6 +37,16 @@
       if (!sah(n)) return "–";
       return tanda(n) + "Rp " + angka(Math.round(n), 0);
     },
+    /** Rupiah lengkap untuk sel tabel, tanpa "Rp" (satuan di kepala kolom): 6173139544000 → "6.173.139.544.000" */
+    ribuan: function (n) {
+      if (!sah(n)) return "–";
+      return tanda(n) + angka(Math.round(n), 0);
+    },
+    /** Selisih rupiah lengkap bertanda untuk sel tabel: "+390.916.650", "−1.200.000" */
+    selisihRibuan: function (n) {
+      if (!sah(n)) return "–";
+      return (n > 0 ? "+" : "") + f.ribuan(n);
+    },
     /** 48.7 → "48,7%" (masukan sudah dalam persen) */
     persen: function (p) {
       if (!sah(p)) return "–";
