@@ -322,14 +322,14 @@ Tiga kotak sejajar: nomor dalam lingkaran 30 px, judul, keterangan. Selesai = li
 | Rupiah ringkas | Rp + miliar 1 desimal | Rp 812,4 M |
 | Rupiah juta | Rp + juta tanpa desimal | Rp 420 Jt |
 | Rupiah lengkap (rekonsiliasi) | titik ribuan | Rp 3.977.315.566.857 |
-
-**Tabel menu Anggaran** (keputusan pemilik portal 17 Nov 2026): semua tabel di keempat sub-tab memakai rupiah lengkap bertitik ribuan tanpa awalan "Rp" (satuan "(Rp)" di kepala kolom, selisih dengan tanda + atau −); kartu angka di atasnya tetap Rp ringkas (M/Jt). Tabel yang berbagi lebar dengan kartu lain boleh memakai `.tabel-rapat` (huruf 12 px, jarak sel 6 px) supaya tidak menggulir.
 | Persen | 1 desimal | 48,7% |
 | Selisih | tanda + atau − (minus sejati) | +Rp 12 Jt · −0,3 poin |
 | Luas | ha, titik ribuan | 1.250 ha |
 | Benih | batang atau mata, titik ribuan | 137.500 batang |
 | Tanggal | tanggal bulan-singkat tahun | 13 Nov 2026 |
 | Jam | 24 jam dengan titik + WIB | 15.30 WIB |
+
+**Tabel menu Anggaran** (keputusan pemilik portal 17 Nov 2026): semua tabel di keempat sub-tab memakai rupiah lengkap bertitik ribuan tanpa awalan "Rp" (satuan "(Rp)" di kepala kolom, selisih dengan tanda + atau −); kartu angka di atasnya tetap Rp ringkas (M/Jt). Tabel yang berbagi lebar dengan kartu lain boleh memakai `.tabel-rapat` (huruf 12 px, jarak sel 6 px) supaya tidak menggulir.
 
 Istilah baku: SP2D, outstanding (OS), SP2D + OS, pagu, blokir, CPCL, SK penetapan, HOK, RPATA, KRO, RO, unit kerja, satker, Reguler, ABT.
 Nama unit kerja: Sekretariat, Dit. Sawit dan Aneka Palma, Dit. Pelindungan, Dit. Semusim dan Tahunan, Dit. Hilirisasi, Dit. Perbenihan, BBPPTP Medan, BBPPTP Surabaya, BBPPTP Ambon, BPTP Pontianak.
