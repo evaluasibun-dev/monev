@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-17T15:57:00+07:00",
+ "data_per": "2026-11-17T22:09:00+07:00",
  "hari_ini": "2026-11-17",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -19,21 +19,21 @@
  ],
  "import_terakhir": {
   "terakhir": {
-   "waktu": "2026-11-17T15:41:00+07:00",
-   "unduh": "2026-11-17T15:38:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-17 15-38.xlsx",
-   "validasi": "PERINGATAN",
+   "waktu": "2026-11-17T16:13:00+07:00",
+   "unduh": "2026-11-17T16:12:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-17 16-12.xlsx",
+   "validasi": "LOLOS",
    "baru": 0,
-   "berubah": 0,
+   "berubah": 2,
    "hilang": 0
   },
   "myintress": {
-   "waktu": "2026-11-17T15:41:00+07:00",
-   "unduh": "2026-11-17T15:38:00+07:00",
-   "sumber": "Monitoring Data Kontrak_2026-11-17 15-38.xlsx",
-   "validasi": "PERINGATAN",
+   "waktu": "2026-11-17T16:13:00+07:00",
+   "unduh": "2026-11-17T16:12:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-17 16-12.xlsx",
+   "validasi": "LOLOS",
    "baru": 0,
-   "berubah": 0,
+   "berubah": 2,
    "hilang": 0
   }
  },
@@ -4396,10 +4396,10 @@
    "sisa": 3344978544,
    "volume": 366.3,
    "satuan": "Ha",
-   "status": "BELUM SELESAI",
-   "selesai": false,
+   "status": "SELESAI TEPAT WAKTU",
+   "selesai": true,
    "tgl_selesai": "2026-12-31",
-   "sisa_hari": 44,
+   "sisa_hari": null,
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "",
@@ -24754,7 +24754,7 @@
    "sisa": 1152096000,
    "volume": 66000,
    "satuan": "Batang",
-   "status": "KONTRAK BELUM TERDAFTAR",
+   "status": "BELUM SELESAI",
    "selesai": false,
    "tgl_selesai": "2026-12-23",
    "sisa_hari": 36,
@@ -26046,7 +26046,7 @@
    "kegiatan": "Pengadaan Pupuk Organik",
    "kode_keg": "1777",
    "kro": "567408.004.526115.01805EC.1777RAI",
-   "komoditas": "",
+   "komoditas": "Kelapa Dalam",
    "provinsi": "KEPULAUAN RIAU",
    "kab": "Natuna",
    "nilai": 82480215,
@@ -26061,7 +26061,7 @@
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "TERVERIFIKASI",
-   "perlu_verifikasi": true,
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -32859,8 +32859,8 @@
    "kode_keg": "5890",
    "kro": "567338.098.521822.01805EC.5890RAG",
    "komoditas": "Kelapa Genjah",
-   "provinsi": "",
-   "kab": "",
+   "provinsi": "Jawa Tengah",
+   "kab": "Batang",
    "nilai": 124999999,
    "bayar": 0,
    "sisa": 124999999,
@@ -36888,6 +36888,12 @@
   },
   {
    "k": "05. Status selesai tapi masih ada sisa kontrak",
+   "no": "EP-01KG1VW5PM1J3GE174HAWGZ5ZV",
+   "d": "Sisa: 3.344.978.544",
+   "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
+  },
+  {
+   "k": "05. Status selesai tapi masih ada sisa kontrak",
    "no": "EP-01KGPGNF7WDZMEJX97VXGMQHG8",
    "d": "Sisa: 1.008.869.400",
    "tl": "Cek kemungkinan kelebihan pagu/kontrak belum ditutup"
@@ -37848,12 +37854,6 @@
   },
   {
    "k": "10. Lokasi/komoditas kosong (akun bantuan)",
-   "no": "EP-01M7HKVTTCHNZ9M51WA3DNX2XS",
-   "d": "Kosong: Komoditas",
-   "tl": "Lengkapi lokus & komoditas sesuai CPCL"
-  },
-  {
-   "k": "10. Lokasi/komoditas kosong (akun bantuan)",
    "no": "EP-01KGRZMP5FP79YPF1H4YRXGRW3",
    "d": "Kosong: Kab/Kota",
    "tl": "Lengkapi lokus & komoditas sesuai CPCL"
@@ -37987,12 +37987,6 @@
   {
    "k": "10. Lokasi/komoditas kosong (akun bantuan)",
    "no": "EP-01M6WW3GG0G0RXH9SRS1GD8S7B",
-   "d": "Kosong: Provinsi, Kab/Kota",
-   "tl": "Lengkapi lokus & komoditas sesuai CPCL"
-  },
-  {
-   "k": "10. Lokasi/komoditas kosong (akun bantuan)",
-   "no": "EP-01M79KM2TYKM0JXK6D1H29HNP1",
    "d": "Kosong: Provinsi, Kab/Kota",
    "tl": "Lengkapi lokus & komoditas sesuai CPCL"
   },
@@ -38864,9 +38858,9 @@
      "nilai": 4013191961661,
      "bayar": 936836433524,
      "sisa": 3076355528137,
-     "selesai": 283,
+     "selesai": 284,
      "terlambat": 149,
-     "temuan": 460
+     "temuan": 453
     }
    ],
    "Direktorat Tanaman Kelapa Sawit dan Aneka Palma": [
@@ -39268,13 +39262,13 @@
      "temuan": 83
     },
     {
-     "n": 416,
-     "nilai": 669544231591,
+     "n": 421,
+     "nilai": 679853705601,
      "bayar": 70359393077,
-     "sisa": 599184838514,
-     "selesai": 43,
+     "sisa": 609494312524,
+     "selesai": 44,
      "terlambat": 30,
-     "temuan": 81
+     "temuan": 82
     }
    ],
    "Direktorat Hilirisasi Hasil Perkebunan": [
@@ -39472,13 +39466,13 @@
      "temuan": 221
     },
     {
-     "n": 401,
-     "nilai": 2317664454992,
+     "n": 402,
+     "nilai": 2318816550992,
      "bayar": 582242365908,
-     "sisa": 1735422089084,
+     "sisa": 1736574185084,
      "selesai": 75,
      "terlambat": 69,
-     "temuan": 225
+     "temuan": 226
     }
    ],
    "Ditjenbun Pusat (kode kegiatan belum diisi)": [
@@ -39658,7 +39652,7 @@
      "sisa": 115347633543,
      "selesai": 6,
      "terlambat": 11,
-     "temuan": 19
+     "temuan": 18
     }
    ],
    "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya": [
@@ -39760,7 +39754,7 @@
      "sisa": 407586279258,
      "selesai": 50,
      "terlambat": 19,
-     "temuan": 74
+     "temuan": 73
     }
    ],
    "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon": [
