@@ -16,7 +16,7 @@ Semua halaman, publik maupun yang butuh login, harus terlihat sebagai satu situs
 3. **Asal data selalu terlihat.** Setiap halaman menulis sumber dan waktu datanya (contoh: "MyIntress diunduh 13 Nov 2026, 15.30 WIB").
 4. **Warna punya arti.** Hijau tua (hutan) = identitas, pita kepala halaman, dan aksi utama; emas = aksi utama di atas pita dan penanda (kicker). Warna status hanya dipakai untuk status. Biru dan ungu hanya untuk asal kontrak (MyIntress dan manual).
 5. **Bahasa Indonesia baku dan lugas.** Huruf kapital di awal kalimat saja. Tombol menyebut hasilnya ("Simpan dan terbitkan", bukan "Submit").
-6. **Ponsel diperlakukan serius.** Pimpinan membuka Beranda dan Laporan harian dari ponsel; tabel lebar menggulir di dalam wadahnya sendiri.
+6. **Ponsel diperlakukan serius.** Pimpinan membuka Beranda dari ponsel; tabel lebar menggulir di dalam wadahnya sendiri.
 
 ---
 
@@ -167,7 +167,7 @@ Tidak ada bayangan, gradien, atau efek kaca.
 - **Seksi yang berdampingan sama tinggi.** Isi panjang (tabel, daftar, keterangan) tidak memanjang ke bawah melebihi seksi di sebelahnya: dibagi per halaman dengan tombol ‹ Sebelumnya / Berikutnya › di bawah isi (`Monev.bagiHalaman` di `assets/js/bagi-halaman.js`, tinggi mengikuti seksi sebelah, paling sedikit beberapa baris per halaman; bila bertumpuk di layar sempit, jumlah baris tetap per halaman). Seksi yang lebih pendek direntang setinggi sebelahnya **tanpa ruang kosong di bawah isi**: daftar/bar diberi `.isi-rata` (baris dibagi rata setinggi kartu), tabel pendek `.tabel-isi` (baris meregang), grafik mengisi tinggi seksi (`tinggi` fungsi di `grafik.js`), atau isi panjang di kartu sebelah dibagi per halaman. Ruang kosong yang tersisa paling banyak setinggi satu baris. Baris jumlah tabel selalu tampil dan tetap menjumlah semua baris.
 - Viewport: `width=device-width, initial-scale=1, viewport-fit=cover`, dengan padding `env(safe-area-inset-*)`.
 
-**Ponsel (< 640 px):** menu atas diganti bilah bawah lima ikon-teks (Beranda, Anggaran, Kontrak, Bantuan, Laporan). Unggah data dan Panel admin hanya lewat tombol Halaman kerja. Kartu angka dua kolom.
+**Ponsel (< 640 px):** menu atas diganti bilah bawah empat ikon-teks (Beranda, Anggaran, Kontrak, Bantuan). Unggah data dan Panel admin hanya lewat tombol Halaman kerja. Kartu angka dua kolom.
 
 ---
 
@@ -175,7 +175,9 @@ Tidak ada bayangan, gradien, atau efek kaca.
 
 ### 4.1 Menu atas (sama di semua halaman)
 
-`Beranda · Anggaran · Kontrak · Bantuan · Laporan harian · Unggah data`
+`Beranda · Anggaran · Kontrak · Bantuan · Unggah data`
+
+Laporan harian (A3, Menteri 16:9, Narasi PM) dan paparan realisasi (PPT) hanya di halaman kerja (keputusan pemilik portal 17 Nov 2026).
 
 Menu di atas pita: teks `--band-sub` tebal 600; menu aktif: latar `--band-isi`, teks putih tebal 700, garis bawah emas 3 px. Tinggi minimal 40 px.
 
@@ -186,7 +188,6 @@ Menu di atas pita: teks `--band-sub` tebal 600; menu aktif: latar `--band-isi`, 
 | Anggaran | Realisasi anggaran · Rincian RO dan akun · Perbandingan harian · Target serapan |
 | Kontrak | Ringkasan · Validasi data · Temuan · Peringatan · Database kontrak · Aktivitas |
 | Bantuan | Jejak komoditas · Rekap nasional · Rekap per provinsi |
-| Laporan harian | Laporan internal (A3) · Laporan Menteri (16:9) · Narasi PM |
 
 Sub-tab berupa segmen di wadah `--surface-sunk`; yang aktif berlatar putih.
 
@@ -201,10 +202,10 @@ Tahun dibaca dari `data/tahun.json`; tahun yang dipilih disimpan di `localStorag
 | `#anggaran`, `#anggaran-rincian`, `#anggaran-harian`, `#anggaran-target` | Anggaran | Tidak |
 | `#kontrak`, `#kontrak-temuan`, `#kontrak-peringatan` | Kontrak (data ringkas) | Tidak |
 | `#bantuan`, `#bantuan-nasional`, `#bantuan-provinsi` | Bantuan | Tidak |
-| `#laporan` | Laporan terbit | Tidak |
+| `#laporan` | Pengalih ke halaman kerja Laporan harian (tidak tampil di menu) | — |
 | `#tentang` | Tentang data dan rumus | Tidak |
 | `#tahun` | Pilih tahun anggaran | Tidak |
-| Web app Apps Script | Unggah, validasi, verifikasi, database kontrak lengkap, laporan (susun dan terbitkan), panel admin | Ya |
+| Web app Apps Script | Unggah, validasi, verifikasi, database kontrak lengkap, laporan harian (susun, terbitkan, lihat, unduh), paparan realisasi (PPT), panel admin | Ya |
 
 ---
 

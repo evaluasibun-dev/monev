@@ -33,13 +33,10 @@
         { id: "nasional", nama: "Rekap nasional" },
         { id: "provinsi", nama: "Rekap per provinsi" }
       ] },
-    { id: "laporan", nama: "Laporan harian", bawah: "Laporan", tahap: 4, judul: "Laporan harian",
-      ket: "Laporan yang sudah terbit dan dikunci sebagai pembanding Narasi PM esok hari.",
-      sub: [
-        { id: "", nama: "Laporan internal (A3)" },
-        { id: "menteri", nama: "Laporan Menteri (16:9)" },
-        { id: "narasi", nama: "Narasi PM" }
-      ] },
+    /* Laporan harian hanya di halaman kerja (keputusan pemilik portal 17 Nov 2026): tidak tampil di menu,
+       alamat #laporan dan #laporan-* lama diarahkan ke halaman "ada di halaman kerja". */
+    { id: "laporan", nama: "Laporan harian", tahap: 4, judul: "Laporan harian", login: true, sembunyi: true, page: "laporan",
+      ket: "Laporan internal (A3), Laporan Menteri (16:9), dan Narasi PM disusun, diverifikasi, diterbitkan, dan diunduh di halaman kerja." },
     { id: "unggah", nama: "Unggah data", tahap: 3, judul: "Unggah data", login: true,
       ket: "Tujuh jenis file, satu jalur unggah per jenis: LOLOS langsung terbit, PERINGATAN terbit dengan catatan, GAGAL menunggu admin." }
   ];
@@ -65,7 +62,7 @@
     var bagian = h.split("-"), menu = cariMenu(bagian[0]);
     if (!menu) return null;
     var subId = bagian.slice(1).join("-");
-    if (!menu.sub) return subId ? null : { menu: menu, sub: null };
+    if (!menu.sub) return subId && !menu.sembunyi ? null : { menu: menu, sub: null };
     for (var j = 0; j < menu.sub.length; j++) if (menu.sub[j].id === subId) return { menu: menu, sub: menu.sub[j] };
     return null;
   }
@@ -75,6 +72,7 @@
   function gambarMenu(aktifId) {
     var atas = "", bawah = "";
     MENU.forEach(function (m) {
+      if (m.sembunyi) return;
       var cur = m.id === aktifId ? ' aria-current="page"' : "";
       atas += '<a href="#' + m.id + '"' + cur + ">" + Monev.esc(m.nama) + "</a>";
       if (m.bawah) bawah += '<a href="#' + m.id + '"' + cur + ">" + Monev.esc(m.bawah) + "</a>";

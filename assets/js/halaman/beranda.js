@@ -4,8 +4,8 @@
    - Kontrak: Monev.menu.kontrak._ringkas (agg tab Ringkasan, bucket tab Peringatan, temuan status "belum" tab Temuan; kontrak aktif).
    - Bantuan: Monev.menu.bantuan._headline (angka utama Jejak), Sisbun.olah (fase dan status komoditas, siap tanam belum menanam),
      RekapInti.kartu (kartu Rekap nasional: pagu dan anggaran terbayar).
-   - Laporan harian: narasi dari laporan/terbit/<tanggal>.json terbaru.
-   Data: data/<ta>/anggaran/latest.json, anggaran/arsip/, kontrak/kontrak.json, integrasi/rekap.json, laporan/terbit/, API Sisbun.
+   Laporan harian dan Narasi PM hanya di halaman kerja (keputusan pemilik portal 17 Nov 2026).
+   Data: data/<ta>/anggaran/latest.json, anggaran/arsip/, kontrak/kontrak.json, integrasi/rekap.json, API Sisbun.
    Mockup: Main (desktop), Mobile (ponsel). */
 (function () {
   "use strict";
@@ -25,7 +25,7 @@
   var elAktif = null;
 
   function baru(ta) {
-    D = { ta: ta, j: undefined, harian: undefined, K: undefined, Sb: undefined, rekap: undefined, lapInd: undefined };
+    D = { ta: ta, j: undefined, harian: undefined, K: undefined, Sb: undefined, rekap: undefined };
   }
   function gagal(x) { return x && x.gagal; }
   /* Sisbun hanya untuk tahun berjalan (API tanpa pilihan tahun). */
@@ -56,7 +56,6 @@
     if (!Monev.tahun.berjalan(ta)) D.Sb = { nonaktif: true };
     else S().ambilBersama(false).then(function (o) { return o; }, function () { return { gagal: true }; }).then(ulang(set("Sb")));
     opsional404(muat("integrasi/rekap.json")).then(ulang(set("rekap")));
-    opsional404(muat("laporan/terbit/indeks.json")).then(ulang(set("lapInd")));
   }
 
   /* ---------------- pembantu tampilan ---------------- */
@@ -92,15 +91,13 @@
   /* ---------------- bagian halaman ---------------- */
   function sumberData() {
     var m = siap(D.j) ? MA()._model(D.j) : null;
-    var lapTerbaru = siap(D.lapInd) && D.lapInd.laporan && D.lapInd.laporan.length ? D.lapInd.laporan.map(function (x) { return x.tanggal; }).sort().pop() : null;
     var v = function (x, f) { return x === undefined ? undefined : siap(x) ? f(x) : null; };
     var kosong = function (x, teks) { return gagal(x) ? "gagal dimuat" : teks || "belum terbit"; };
     var daftar = [
       ["SP2D MyIntress", v(D.j, function () { return m.dataPer; }), { kosong: kosong(D.j) }],
       ["Kontrak MyIntress", v(D.K, function (K) { return K.data_per; }), { kosong: kosong(D.K) }],
       ["Sisbun", v(D.Sb, function (s) { return s.asof; }), { lama: siap(D.Sb) && D.Sb.lama, kosong: nonaktif(D.Sb) ? "hanya tahun berjalan" : kosong(D.Sb) }],
-      ["Integrasi SAKTI–SAT 3", v(D.rekap, function (r) { return r.data_per; }), { kosong: kosong(D.rekap) }],
-      ["Laporan harian terbit", v(D.lapInd, function () { return lapTerbaru; }), { kosong: kosong(D.lapInd, "belum ada") }]
+      ["Integrasi SAKTI–SAT 3", v(D.rekap, function (r) { return r.data_per; }), { kosong: kosong(D.rekap) }]
     ];
     return '<section class="baris-sumber" aria-label="Status sumber data">' + daftar.map(function (d) { return chipSumber(d[0], d[1], d[2]); }).join("") + "</section>";
   }
@@ -289,10 +286,6 @@
     return seksi("Jejak tujuh komoditas", isi, kanan);
   }
 
-  function tombolSalin(kelas) {
-    return '<button type="button" class="tombol ' + kelas + '" data-beranda-salin>Salin Narasi PM</button>';
-  }
-
   /* ---------------- pasang ---------------- */
   function gambar() {
     var el = elAktif;
@@ -300,36 +293,11 @@
     var fokus = document.activeElement && document.activeElement.id;
     el.innerHTML = filterUnit() + sumberData() + kartuUtama() + alur() +
       '<div class="grid-dua">' + perUnit() + perhatian() + "</div>" + jejakKomoditas() +
-      '<div class="hanya-ponsel">' + tombolSalin("tombol-utama tombol-penuh") + "</div>" +
       '<p class="catatan" id="beranda-pesan" role="status"></p>';
     if (fokus && document.getElementById(fokus)) document.getElementById(fokus).focus();
   }
 
   function pesan(t) { var p = document.getElementById("beranda-pesan"); if (p) p.textContent = t; }
-
-  function salinNarasi() {
-    var ta = Monev.tahun.aktif();
-    Monev.data.muatTahun("laporan/terbit/indeks.json", ta).then(function (ind) {
-      var L = ((ind && ind.laporan) || []).slice().sort(function (a, b) { return a.tanggal < b.tanggal ? 1 : -1; });
-      if (!L.length) throw { kosong: true };
-      return Monev.data.muatTahun("laporan/terbit/" + (L[0].file || L[0].tanggal + ".json"), ta).then(function (lap) { return { x: L[0], lap: lap }; });
-    }).then(function (h) {
-      var teks = h.lap && h.lap.narasi;
-      if (!teks) throw { kosong: true };
-      var ok = function () { pesan("Narasi PM laporan terbit " + F().tanggal(h.x.tanggal) + " disalin ke papan klip."); };
-      if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(teks).then(ok, function () { salinCadangan(teks); ok(); });
-      salinCadangan(teks); ok();
-    }).catch(function (err) {
-      pesan(err && (err.kosong || err.status === 404) ? "Belum ada laporan harian terbit untuk TA " + ta + "." : "Narasi PM gagal dimuat. Periksa sambungan lalu coba lagi.");
-    });
-  }
-  function salinCadangan(teks) {
-    var t = document.createElement("textarea");
-    t.value = teks; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
-    document.body.appendChild(t); t.select();
-    try { document.execCommand("copy"); } catch (er) { /* abaikan */ }
-    t.remove();
-  }
 
   var terpasang = false;
   function pasangSekali() {
@@ -340,10 +308,9 @@
       STATE.unit = t.value; gambar();
     });
     document.addEventListener("click", function (ev) {
-      var t = ev.target.closest && ev.target.closest("[data-beranda-salin], [data-beranda-kom], [data-beranda-unit-kontrak], [data-beranda-ulang]");
+      var t = ev.target.closest && ev.target.closest("[data-beranda-kom], [data-beranda-unit-kontrak], [data-beranda-ulang]");
       if (!t) return;
-      if (t.hasAttribute("data-beranda-salin")) salinNarasi();
-      else if (t.hasAttribute("data-beranda-kom")) MB().pilihKomoditas(t.getAttribute("data-beranda-kom"));
+      if (t.hasAttribute("data-beranda-kom")) MB().pilihKomoditas(t.getAttribute("data-beranda-kom"));
       else if (t.hasAttribute("data-beranda-unit-kontrak")) { var u = t.getAttribute("data-beranda-unit-kontrak"); if (MK().saringUnit) MK().saringUnit(u === "-" ? "" : u); }
       else if (t.hasAttribute("data-beranda-ulang")) { D.Sb = undefined; gambar(); S().ambilBersama(true).then(function (o) { return o; }, function () { return { gagal: true }; }).then(function (v) { D.Sb = v; gambar(); }); }
     });
@@ -352,8 +319,7 @@
   Monev.menu = Monev.menu || {};
   Monev.menu.beranda = {
     aksi: function () {
-      return tombolSalin("tombol-sekunder hanya-desktop") +
-        '<a class="tombol tombol-utama" href="#laporan">Lihat laporan harian</a>';
+      return "";
     },
     isi: function (el) {
       elAktif = el; pasangSekali();

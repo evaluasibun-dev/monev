@@ -12,9 +12,9 @@
     ["RAW SAKTI", "Pagu dan struktur anggaran: kegiatan, KRO, RO, komponen, lokus, akun", "Aplikasi integrasi → Unggah data (admin) → data/<tahun>/integrasi/", "Mingguan", "Anggaran, Bantuan"],
     ["RAW SAT 3", "Target fisik (kolom volume)", "Aplikasi integrasi → data/<tahun>/integrasi/", "Mingguan", "Bantuan"],
     ["Hilirisasi", "Luas tanam desa, diagregasi ke kabupaten", "Aplikasi integrasi → data/<tahun>/integrasi/", "Mingguan", "Bantuan, Beranda"],
-    ["Sisbun (API publik)", "CPCL, kontrak benih, penyaluran, luas tanam", "Dibaca langsung dari peramban", "Langsung", "Beranda, Bantuan, Laporan harian"],
+    ["Sisbun (API publik)", "CPCL, kontrak benih, penyaluran, luas tanam", "Dibaca langsung dari peramban", "Langsung", "Beranda, Bantuan, halaman kerja Laporan harian"],
     ["Master Lokus", "Kode dan nama provinsi, kabupaten/kota", "Apps Script dan aplikasi integrasi", "Bila berubah", "Semua menu"],
-    ["Laporan harian terbit", "Angka laporan yang sudah dikunci", "Diterbitkan operator → data/<tahun>/laporan/terbit/", "Setiap hari kerja", "Laporan harian, Narasi PM"]
+    ["Laporan harian terbit", "Angka laporan yang sudah dikunci", "Diterbitkan operator → data/<tahun>/laporan/terbit/", "Setiap hari kerja", "Halaman kerja Laporan harian; titik tanam di Bantuan"]
   ];
 
   var RUMUS = [

@@ -272,11 +272,8 @@
     /* per komoditas */
     html += komoditas(j);
 
-    /* ekspor */
+    /* ekspor (paparan PPT ada di halaman kerja › Paparan realisasi, keputusan pemilik portal 17 Nov 2026) */
     html += seksi("Ekspor", '<div class="grid-ekspor">' +
-      '<div class="kotak-ekspor"><h3>Paparan realisasi (.pptx)</h3><ol><li>Cover</li><li>Ringkasan eksekutif</li><li>Status kontrak</li><li>Realisasi per kegiatan</li><li>Realisasi per unit kerja</li><li>Penutup</li></ol>' +
-        '<p class="catatan">Paparan PPT sementara masih dibuat di halaman kerja (tombol Halaman kerja).</p>' +
-        '<div class="baris-alat"><span class="tombol tombol-ppt" role="link" aria-disabled="true" title="Paparan PPT dibuat di halaman kerja">Unduh PPT</span></div></div>' +
       '<div class="kotak-ekspor"><h3>Excel realisasi (.xlsx)</h3><ul><li>Ringkasan (slide 2)</li><li>Per kegiatan (slide 4), dengan rumus %, SP2D + OS, sisa</li><li>Per unit kerja (slide 5)</li></ul>' +
         '<div class="baris-alat"><button type="button" class="tombol tombol-utama" data-excel>Unduh Excel</button><span class="catatan" id="pesan-excel" role="status"></span></div></div>' +
       "</div>");
@@ -1268,7 +1265,6 @@
       if (r.sub && r.sub.id) return "";
       return '<a class="tombol tombol-sekunder" href="#unggah">Unggah data realisasi</a>' +
         tombolMasuk("Blokir dan tambahan hibah", false, "realisasi") +
-        '<span class="tombol tombol-ppt" role="link" aria-disabled="true" title="Paparan PPT sementara dibuat di halaman kerja">Unduh paparan (PPT)</span>' +
         '<button type="button" class="tombol tombol-utama" data-anggaran-excel>Unduh Excel realisasi</button>';
     },
     isi: function (el, r) { isiTab(el, r, Monev.tahun.aktif()); },

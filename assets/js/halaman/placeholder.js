@@ -52,7 +52,7 @@
     }
 
     if (menu.login || (sub && sub.login)) {
-      return html + halamanLogin(sub && sub.login ? sub.nama : menu.nama, menu.id === "unggah" ? "unggah" : "");
+      return html + halamanLogin(sub && sub.login ? sub.nama : menu.nama, menu.page || (menu.id === "unggah" ? "unggah" : ""));
     }
 
     if (Monev.tahun.belumDibuka(ta)) {
