@@ -577,3 +577,16 @@
 .tabel-rapat th, .tabel-rapat td { padding-left: 6px; padding-right: 6px; }
 .tabel-rapat th { white-space: normal; }
 .tabel-rapat { font-size: 12px; }
+/* Rekap per provinsi: kartu rincian berbagi lebar dengan daftar provinsi, jadi tabelnya dirapatkan supaya muat tanpa gulir
+   di laptop (lebar minimum dilepas, huruf 12 px, jarak sel 6 px, judul kolom boleh turun baris). Di ponsel tetap menggulir di wadahnya. */
+@media (min-width: 900px) {
+  .seksi-rincian-prov .tabel { min-width: 0; font-size: 12px; }
+  .seksi-rincian-prov .tabel th, .seksi-rincian-prov .tabel td { padding-left: 6px; padding-right: 6px; }
+  .seksi-rincian-prov .tabel th { white-space: normal; }
+}
+@media (min-width: 900px) and (max-width: 1339.98px) {
+  .tabel-rapat th, .tabel-rapat td,
+  .seksi-rincian-prov .tabel th, .seksi-rincian-prov .tabel td { padding-left: 3px; padding-right: 3px; }
+  .tabel-rapat th:first-child, .tabel-rapat td:first-child,
+  .seksi-rincian-prov .tabel th:first-child, .seksi-rincian-prov .tabel td:first-child { padding-left: 4px; }
+}
