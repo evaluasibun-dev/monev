@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-17T15:49:00+07:00",
+ "data_per": "2026-11-17T15:57:00+07:00",
  "hari_ini": "2026-11-17",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -24715,11 +24715,11 @@
   {
    "no": "EP-01M7AHRF23GSZXD5ZSZZEZ5H9C",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Ogan Komering Ilir Tahap III 20 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "SUMATERA SELATAN",
    "kab": "Ogan Komering Ilir",
@@ -24734,18 +24734,18 @@
    "sisa_hari": 44,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
    "no": "EP-01M7A9C8EMXY3DWQK4G0EBKZXK",
    "uraian": "Pengadaan Produksi Benih Kelapa Dalam Intermediate Non Polibeg Sejumlah 66.000 Batang Kabupaten Halmahera Timur Provinsi Maluku Utara",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Perbenihan Perkebunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "238830.139.521822.01805EC.5890RAG",
    "komoditas": "Kelapa Dalam",
    "provinsi": "MALUKU UTARA",
    "kab": "Halmahera Timur",
@@ -24760,8 +24760,8 @@
    "sisa_hari": 36,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -26044,8 +26044,8 @@
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
    "satker": "BBPPTP Medan",
    "kegiatan": "Pengadaan Pupuk Organik",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "1777",
+   "kro": "567408.004.526115.01805EC.1777RAI",
    "komoditas": "",
    "provinsi": "KEPULAUAN RIAU",
    "kab": "Natuna",
@@ -26060,7 +26060,7 @@
    "sisa_hari": 44,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -32856,8 +32856,8 @@
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
    "satker": "BBPPTP Surabaya",
    "kegiatan": "Pengadaan Benih",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "567338.098.521822.01805EC.5890RAG",
    "komoditas": "Kelapa Genjah",
    "provinsi": "",
    "kab": "",
@@ -32872,7 +32872,7 @@
    "sisa_hari": 44,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -36936,18 +36936,6 @@
   },
   {
    "k": "06. KRO kosong",
-   "no": "EP-01M7HKVTTCHNZ9M51WA3DNX2XS",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M79KM2TYKM0JXK6D1H29HNP1",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
    "no": "11687/PL.020/E1.3.3/10/2026",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
@@ -36961,18 +36949,6 @@
   {
    "k": "06. KRO kosong",
    "no": "EP-01M5Y8CSKEYVR2STMQF5CKG805",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7AHRF23GSZXD5ZSZZEZ5H9C",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7A9C8EMXY3DWQK4G0EBKZXK",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
