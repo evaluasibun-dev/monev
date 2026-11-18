@@ -667,6 +667,7 @@
       '<button type="button" class="tombol tombol-utama" data-bantuan-aksi="excel">Unduh Excel</button>';
     return '<button type="button" class="tombol tombol-pdf" data-bantuan-aksi="pdf-provinsi">PDF provinsi ini</button>' +
       '<button type="button" class="tombol tombol-sekunder" data-bantuan-aksi="pdf-semua">PDF semua provinsi</button>' +
+      '<button type="button" class="tombol tombol-sekunder" data-bantuan-aksi="excel-provinsi">Excel provinsi ini</button>' +
       '<button type="button" class="tombol tombol-utama" data-bantuan-aksi="excel">Unduh Excel</button>';
   }
 
@@ -676,8 +677,8 @@
     var Dk = window.RekapDokumen, lama = tombol ? tombol.textContent : "";
     if (tombol) { tombol.disabled = true; tombol.textContent = "Menyiapkan…"; }
     var s = jenis === "excel" ? (location.hash.indexOf("provinsi") >= 0 ? STATE.pv : STATE.nas) : jenis === "pdf-nasional" ? STATE.nas : STATE.pv;
-    var p = jenis === "excel" ? Dk.unduhExcel(D.rekap, s) : Dk.unduhPDF(jenis.replace("pdf-", ""), D.rekap, s);
-    p.then(function () { pesan(jenis === "excel" ? "Excel diunduh." : "PDF diunduh."); }, function (err) { pesan((err && err.message || "Unduhan gagal") + ". Periksa sambungan internet lalu coba lagi."); })
+    var p = jenis === "excel" ? Dk.unduhExcel(D.rekap, s) : jenis === "excel-provinsi" ? Dk.unduhExcelProvinsi(D.rekap, s) : Dk.unduhPDF(jenis.replace("pdf-", ""), D.rekap, s);
+    p.then(function () { pesan(jenis.indexOf("excel") === 0 ? "Excel diunduh." : "PDF diunduh."); }, function (err) { pesan((err && err.message || "Unduhan gagal") + ". Periksa sambungan internet lalu coba lagi."); })
       .then(function () { if (tombol) { tombol.disabled = false; tombol.textContent = lama; } });
   }
 

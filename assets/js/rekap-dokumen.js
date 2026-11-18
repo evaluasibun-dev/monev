@@ -34,7 +34,8 @@
 
   function nf(v, d) { return new Intl.NumberFormat("id-ID", { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).format(v); }
   function angka(v) { return v ? nf(v, Math.abs(v) < 10 && v % 1 ? 1 : 0) : "–"; }
-  function miliar(v) { return v ? nf(v / 1e9, 1) : "–"; }
+  /* rupiah murni: rupiah utuh bertitik ribuan tanpa singkatan (keputusan pemilik portal 18 Nov 2026), satuan "(Rp)" di kepala kolom */
+  function rupiah(v) { return v ? (v < 0 ? "−" : "") + nf(Math.abs(Math.round(v))) : "–"; }
   function persen(a, b) { return b > 0 ? nf(a / b * 100, 1) + "%" : "–"; }
   function sd(v) { return v === "REGULER" ? "Reguler" : v === "ABT" ? "ABT" : "–"; }
   function fisikPersen(x) { return x.satuan === "Hektar" && x.grup <= 1 ? persen(x.realisasi, x.target) : "–"; }
@@ -54,15 +55,15 @@
   /* ================= PDF ================= */
   function kepalaTabel(lingkup, bencana) {
     var h1 = ["No", "Kegiatan / sub-komponen", "Sumber dana"].concat(lingkup === "nasional" ? ["Prov"] : []).concat(["Kab/kota", "Volume", "Satuan", "Realisasi fisik", "% fisik",
-      "Pagu (Rp M)", "Terbayar (Rp M)", "% terbayar"]);
-    if (bencana) h1 = h1.concat(["Pagu non bencana", "Pagu bencana", "Terbayar non bencana", "Terbayar bencana"]);
+      "Pagu (Rp)", "Terbayar (Rp)", "% terbayar"]);
+    if (bencana) h1 = h1.concat(["Pagu non bencana (Rp)", "Pagu bencana (Rp)", "Terbayar non bencana (Rp)", "Terbayar bencana (Rp)"]);
     return [h1];
   }
   function selBaris(x, lingkup, bencana, no, label) {
     var r = [no, label || x.kegiatan, sd(x.sumber_dana)].concat(lingkup === "nasional" ? [x.jml_prov != null ? nf(x.jml_prov) : ""] : [])
       .concat([x.jml_kab != null ? nf(x.jml_kab) : "", angka(x.target), x.satuan === "Hektar" ? "ha" : String(x.satuan || "").toLowerCase(), angka(x.realisasi), fisikPersen(x),
-        miliar(x.pagu), miliar(x.terbayar), persen(x.terbayar, x.pagu)]);
-    if (bencana) r = r.concat([miliar(x.pagu - x.pagu_b), miliar(x.pagu_b), miliar(x.terbayar - x.terbayar_b), miliar(x.terbayar_b)]);
+        rupiah(x.pagu), rupiah(x.terbayar), persen(x.terbayar, x.pagu)]);
+    if (bencana) r = r.concat([rupiah(x.pagu - x.pagu_b), rupiah(x.pagu_b), rupiah(x.terbayar - x.terbayar_b), rupiah(x.terbayar_b)]);
     return r;
   }
   function badanTabel(rows, lingkup, bencana, kabDari) {
@@ -107,11 +108,21 @@
   }
   function tabel(doc, head, body, startY) {
     var angkaMulai = 3, awal = doc.internal.getCurrentPageInfo().pageNumber;
+    /* kolom rupiah murni tidak boleh terpotong baris: lebar "wrap"; tabel berkolom bencana memakai huruf lebih kecil supaya muat A4 lanskap */
+    var lebar = head[0].length > 13, huruf = lebar ? 6.4 : 7.2, kol = { 0: { halign: "center", cellWidth: 7 }, 1: { cellWidth: lebar ? 44 : 58 } };
+    head[0].forEach(function (h, i) {   /* lebar tetap = angka terpanjang di kolom itu; kepala kolom boleh terpotong baris */
+      if (!/\(Rp\)$/.test(h)) return;
+      var mm = 0;
+      doc.setFont("helvetica", "bold");   /* ukur dengan huruf tebal (baris jumlah) supaya pasti muat */
+      body.forEach(function (x) { mm = Math.max(mm, doc.getStringUnitWidth(String(x.sel[i])) * huruf * 25.4 / 72); });
+      kol[i] = { cellWidth: Math.max(14, mm + 2 * 1.2 + 0.6) };
+    });
+    doc.setFont("helvetica", "normal");
     doc.autoTable({
       head: head, body: body.map(function (b) { return b.sel; }), startY: startY || 40, margin: { top: 26, left: 12, right: 12, bottom: 16 },
-      theme: "grid", styles: { font: "helvetica", fontSize: 7.2, cellPadding: 1.2, textColor: W.ink, lineColor: W.garis, lineWidth: 0.1, overflow: "linebreak" },
-      headStyles: { fillColor: W.report, textColor: 255, fontStyle: "bold", halign: "center", valign: "middle", fontSize: 7.2 },
-      columnStyles: { 0: { halign: "center", cellWidth: 7 }, 1: { cellWidth: 58 } },
+      theme: "grid", styles: { font: "helvetica", fontSize: huruf, cellPadding: 1.2, textColor: W.ink, lineColor: W.garis, lineWidth: 0.1, overflow: "linebreak" },
+      headStyles: { fillColor: W.report, textColor: 255, fontStyle: "bold", halign: "center", valign: "middle", fontSize: huruf },
+      columnStyles: kol,
       didParseCell: function (d) {
         if (d.section !== "body") { return; }
         var b = body[d.row.index];
@@ -119,7 +130,7 @@
         if (d.column.index === 2) d.cell.styles.halign = "center";
         if (b.jenis === "jumlah") { d.cell.styles.fontStyle = "bold"; d.cell.styles.fillColor = W.muted; }
         if (b.jenis === "induk") d.cell.styles.fontStyle = "bold";
-        if (b.jenis === "kab" || b.jenis === "sub") { d.cell.styles.textColor = W.ink3; d.cell.styles.fontSize = 6.8; }
+        if (b.jenis === "kab" || b.jenis === "sub") { d.cell.styles.textColor = W.ink3; d.cell.styles.fontSize = huruf - 0.4; }
       },
       didDrawPage: function () { if (doc.internal.getCurrentPageInfo().pageNumber > awal) kop(doc); }   /* halaman lanjutan tabel */
     });
@@ -228,7 +239,8 @@
     return ws;
   }
 
-  function unduhExcel(j, s) {
+  /** satuProvinsi: hanya s.provinsi (sheet Provinsi, Per Kabupaten, Catatan Data), data sama dengan PDF provinsi ini */
+  function unduhExcel(j, s, satuProvinsi) {
     s = s || {};
     return muatXLSX().then(function (X) {
       var R = window.RekapInti, semua = R.saring(R.baca(j), { sumber: s.sumber, komoditas: s.komoditas });
@@ -252,6 +264,10 @@
       var sumberNama = function (x) { return sd(x.sumber_dana); };
       var satuanNama = function (x) { return x.satuan; };
 
+      if (satuProvinsi) {
+        if (!s.provinsi) return Promise.reject(new Error("Belum ada provinsi yang dipilih"));
+        semua = R.saring(semua, { provinsi: s.provinsi });
+      }
       var keg = R.perKegiatan(semua), T = R.jumlah(keg, semua);
       var wsNas = lembar(X, [
         { judul: "Kegiatan/Bantuan", nilai: function (x) { return x.kegiatan; }, lebar: 52 },
@@ -261,6 +277,14 @@
         { judul: "Jumlah provinsi", jenis: "n", nilai: function (x) { return x.jml_prov; }, lebar: 9 },
         { judul: "Jumlah kab/kota", jenis: "n", nilai: function (x) { return x.jml_kab; }, lebar: 9 }
       ].concat(kolomAngka(T)), keg, "Jumlah nasional");
+
+      var wsProvSatu = satuProvinsi ? lembar(X, [
+        { judul: "Kegiatan/Bantuan", nilai: function (x) { return x.kegiatan; }, lebar: 52 },
+        { judul: "Kelompok", kunci: "grup", nilai: grupNama, lebar: 18 },
+        { judul: "Sumber dana", nilai: sumberNama, lebar: 11 },
+        { judul: "Satuan", nilai: satuanNama, lebar: 9 },
+        { judul: "Jumlah kab/kota", jenis: "n", nilai: function (x) { return x.jml_kab; }, lebar: 9 }
+      ].concat(kolomAngka(T)), keg, "Jumlah provinsi") : null;
 
       var rowsProv = [];
       R.daftarProvinsi(semua).forEach(function (p) {
@@ -291,7 +315,7 @@
         { judul: "Satuan", nilai: satuanNama, lebar: 9 }
       ].concat(kolomAngka(TK)), rowsKab, "Jumlah");
 
-      var cat = [["Rekap bantuan perkebunan TA " + (j.ta || "")], ["Data per " + tglTeks(j.data_per)],
+      var cat = [["Rekap bantuan perkebunan " + (satuProvinsi ? "Provinsi " + R.namaProvinsi(s.provinsi) + " " : "") + "TA " + (j.ta || "")], ["Data per " + tglTeks(j.data_per)],
         ["Sumber dana: " + namaSumber(s) + (s.komoditas ? " · komoditas " + s.komoditas.toLowerCase() : "")],
         ["Diunduh " + Monev.format.waktu(new Date()) + " dari Monev Ditjenbun"], [""]]
         .concat(CATATAN.map(function (c) { return [c]; }))
@@ -299,13 +323,17 @@
       var wsCat = X.utils.aoa_to_sheet(cat); wsCat["!cols"] = [{ wch: 140 }];
 
       var wb = X.utils.book_new();
-      X.utils.book_append_sheet(wb, wsNas, "Nasional");
-      X.utils.book_append_sheet(wb, wsProv, "Per Provinsi");
+      if (satuProvinsi) X.utils.book_append_sheet(wb, wsProvSatu, "Provinsi");
+      else {
+        X.utils.book_append_sheet(wb, wsNas, "Nasional");
+        X.utils.book_append_sheet(wb, wsProv, "Per Provinsi");
+      }
       X.utils.book_append_sheet(wb, wsKab, "Per Kabupaten");
       X.utils.book_append_sheet(wb, wsCat, "Catatan Data");
-      simpanXlsx(X, wb, "Rekap Bantuan Ditjenbun " + (j.ta || "") + " - " + String(j.data_per || "").slice(0, 10) + ".xlsx");
+      simpanXlsx(X, wb, "Rekap Bantuan Ditjenbun " + (j.ta || "") + " - " + (satuProvinsi ? R.namaProvinsi(s.provinsi) + " - " : "") + String(j.data_per || "").slice(0, 10) + ".xlsx");
     });
   }
 
-  window.RekapDokumen = { unduhPDF: unduhPDF, unduhExcel: unduhExcel, CATATAN: CATATAN };
+  window.RekapDokumen = { unduhPDF: unduhPDF, unduhExcel: unduhExcel,
+    unduhExcelProvinsi: function (j, s) { return unduhExcel(j, s, true); }, CATATAN: CATATAN };
 })();

@@ -331,6 +331,8 @@ Tiga kotak sejajar: nomor dalam lingkaran 30 px, judul, keterangan. Selesai = li
 
 **Tabel menu Anggaran, Kontrak, dan Bantuan** (keputusan pemilik portal 17 Nov 2026): semua tabel di menu itu memakai rupiah lengkap bertitik ribuan tanpa awalan "Rp" (satuan "(Rp)" di kepala kolom, selisih dengan tanda + atau −); kartu angka, teks keterangan, chip, Beranda, dan Pilih tahun tetap Rp ringkas (M/Jt). Format: `Monev.format.ribuan`, `Monev.format.selisihRibuan`. Tabel yang berbagi lebar dengan kartu lain boleh memakai `.tabel-rapat` (huruf 12 px, jarak sel 6 px) supaya tidak menggulir.
 
+**PDF rekap Bantuan** (keputusan pemilik portal 18 Nov 2026): PDF rekap nasional, per provinsi, dan semua provinsi memakai rupiah murni (rupiah utuh bertitik ribuan, satuan "(Rp)" di kepala kolom), sama dengan tabel di layar. Kolom rupiah selebar angka terpanjangnya (tidak terpotong baris); tabel berkolom bencana memakai huruf 6,4 pt supaya muat A4 lanskap. Kartu angka Rekap nasional dan Rekap per provinsi tetap Rp ringkas. Sumber: `assets/js/rekap-dokumen.js`.
+
 Istilah baku: SP2D, outstanding (OS), SP2D + OS, pagu, blokir, CPCL, SK penetapan, HOK, RPATA, KRO, RO, unit kerja, satker, Reguler, ABT.
 Nama unit kerja: Sekretariat, Dit. Sawit dan Aneka Palma, Dit. Pelindungan, Dit. Semusim dan Tahunan, Dit. Hilirisasi, Dit. Perbenihan, BBPPTP Medan, BBPPTP Surabaya, BBPPTP Ambon, BPTP Pontianak.
 Urutan komoditas: Kelapa, Kopi, Kakao, Pala, Lada, Jambu mete, Tebu.
@@ -347,6 +349,7 @@ Urutan komoditas: Kelapa, Kopi, Kakao, Pala, Lada, Jambu mete, Tebu.
 | Paparan realisasi | PPTX 6 slide | Susunan slide dan gambar latar mengikuti `RealisasiAssets` Apps Script yang sudah ada |
 | Paparan laporan kontrak BUN | PPTX | Memakai `TEMPLATE PAPARAN BUN.pptx` |
 | Excel | XLSX | Satu sheet per tabel, persentase dan jumlah sebagai rumus, baris judul dibekukan |
+| Excel rekap satu provinsi | XLSX | Tombol "Excel provinsi ini" di Rekap per provinsi: sheet Provinsi, Per Kabupaten, Catatan Data; saringan sama dengan PDF provinsi ini |
 
 Isi angka di semua keluaran diambil dari data yang sama dengan yang tampil di layar.
 
