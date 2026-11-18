@@ -108,19 +108,30 @@
   }
   function tabel(doc, head, body, startY) {
     var angkaMulai = 3, awal = doc.internal.getCurrentPageInfo().pageNumber;
-    /* kolom rupiah murni tidak boleh terpotong baris: lebar "wrap"; tabel berkolom bencana memakai huruf lebih kecil supaya muat A4 lanskap */
-    var lebar = head[0].length > 13, huruf = lebar ? 6.4 : 7.2, kol = { 0: { halign: "center", cellWidth: 7 }, 1: { cellWidth: lebar ? 44 : 58 } };
-    head[0].forEach(function (h, i) {   /* lebar tetap = angka terpanjang di kolom itu; kepala kolom boleh terpotong baris */
-      if (!/\(Rp\)$/.test(h)) return;
-      var mm = 0;
-      doc.setFont("helvetica", "bold");   /* ukur dengan huruf tebal (baris jumlah) supaya pasti muat */
-      body.forEach(function (x) { mm = Math.max(mm, doc.getStringUnitWidth(String(x.sel[i])) * huruf * 25.4 / 72); });
-      kol[i] = { cellWidth: Math.max(14, mm + 2 * 1.2 + 0.6) };
-    });
+    /* Lebar kolom dihitung dari isinya: setiap kolom angka/teks pendek selebar isi terpanjang (tidak terpotong baris; kepala kolom
+       boleh terpotong pada spasi), huruf sebesar mungkin (≤ 10 pt) selama tabel muat 273 mm, sisa lebar untuk kolom kegiatan
+       (sampai muat satu baris), lalu dibagi rata ke semua kolom. */
+    var LEBAR = 273, PAD = 1.3, MAKS = 10, MIN = 6, KEG_MIN = 45;
+    function ukur(t, f) { return doc.getStringUnitWidth(String(t)) * f * 25.4 / 72; }
+    function alami(f) {
+      doc.setFont("helvetica", "bold");   /* ukur dengan huruf tebal (baris induk dan jumlah) supaya pasti muat */
+      return head[0].map(function (h, c) {
+        var w = 0;
+        String(h).split(/\s+/).forEach(function (kata) { w = Math.max(w, ukur(kata, f)); });
+        body.forEach(function (x) { w = Math.max(w, ukur(x.sel[c], f)); });
+        return w + 2 * PAD + 0.4;
+      });
+    }
+    var huruf = MAKS, w = alami(huruf);
+    function sisaKeg(w) { return LEBAR - w.reduce(function (a, v, c) { return c === 1 ? a : a + v; }, 0); }
+    while (huruf > MIN && sisaKeg(w) < Math.min(KEG_MIN, w[1])) { huruf = Math.round((huruf - 0.2) * 10) / 10; w = alami(huruf); }
     doc.setFont("helvetica", "normal");
+    var kegLebar = Math.min(w[1], sisaKeg(w)), lebih = (sisaKeg(w) - kegLebar) / w.length, kol = {};
+    w.forEach(function (v, c) { kol[c] = { cellWidth: (c === 1 ? kegLebar : v) + lebih }; });
+    kol[0].halign = "center";
     doc.autoTable({
       head: head, body: body.map(function (b) { return b.sel; }), startY: startY || 40, margin: { top: 26, left: 12, right: 12, bottom: 16 },
-      theme: "grid", styles: { font: "helvetica", fontSize: huruf, cellPadding: 1.2, textColor: W.ink, lineColor: W.garis, lineWidth: 0.1, overflow: "linebreak" },
+      theme: "grid", styles: { font: "helvetica", fontSize: huruf, cellPadding: PAD, textColor: W.ink, lineColor: W.garis, lineWidth: 0.1, overflow: "linebreak" },
       headStyles: { fillColor: W.report, textColor: 255, fontStyle: "bold", halign: "center", valign: "middle", fontSize: huruf },
       columnStyles: kol,
       didParseCell: function (d) {
@@ -130,7 +141,7 @@
         if (d.column.index === 2) d.cell.styles.halign = "center";
         if (b.jenis === "jumlah") { d.cell.styles.fontStyle = "bold"; d.cell.styles.fillColor = W.muted; }
         if (b.jenis === "induk") d.cell.styles.fontStyle = "bold";
-        if (b.jenis === "kab" || b.jenis === "sub") { d.cell.styles.textColor = W.ink3; d.cell.styles.fontSize = huruf - 0.4; }
+        if (b.jenis === "kab" || b.jenis === "sub") { d.cell.styles.textColor = W.ink3; d.cell.styles.fontSize = huruf - 0.5; }
       },
       didDrawPage: function () { if (doc.internal.getCurrentPageInfo().pageNumber > awal) kop(doc); }   /* halaman lanjutan tabel */
     });
