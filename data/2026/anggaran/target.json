@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-17T11:54:00+07:00",
+ "data_per": "2026-11-18T08:57:00+07:00",
  "cfg": {
   "start": "2026-11-12",
   "end": "2026-12-31",
@@ -434,7 +434,7 @@
    "tgl": "2026-11-17",
    "unit": "Sekretariat Direktorat Jenderal Perkebunan",
    "pagu": 53229301000,
-   "real": 42452506646,
+   "real": 42460806646,
    "os": 1207079970
   },
   {
@@ -448,7 +448,7 @@
    "tgl": "2026-11-17",
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
    "pagu": 310766884000,
-   "real": 105877886737,
+   "real": 106174954893,
    "os": 115347633543
   },
   {
@@ -469,29 +469,29 @@
    "tgl": "2026-11-17",
    "unit": "Direktorat Perbenihan Perkebunan",
    "pagu": 2699469972000,
-   "real": 618483261165,
-   "os": 1735422089084
-  },
-  {
-   "tgl": "2026-11-17",
-   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
-   "pagu": 375165883000,
-   "real": 72207497660,
-   "os": 142865831102
+   "real": 618516385319,
+   "os": 1736574185084
   },
   {
    "tgl": "2026-11-17",
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
    "pagu": 784831219000,
-   "real": 150694112064,
-   "os": 408950228758
+   "real": 152624357942,
+   "os": 407586279258
+  },
+  {
+   "tgl": "2026-11-17",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
+   "pagu": 375165883000,
+   "real": 72267788032,
+   "os": 142332501632
   },
   {
    "tgl": "2026-11-17",
    "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "pagu": 1695377809000,
-   "real": 233833771822,
-   "os": 599184838514
+   "real": 233835571822,
+   "os": 609494312524
   }
  ]
 }
