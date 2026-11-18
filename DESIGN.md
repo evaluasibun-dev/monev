@@ -186,7 +186,7 @@ Menu di atas pita: teks `--band-sub` tebal 600; menu aktif: latar `--band-isi`, 
 | Menu | Sub-tab |
 |---|---|
 | Anggaran | Realisasi anggaran · Rincian RO dan akun · Perbandingan harian · Target serapan |
-| Kontrak | Ringkasan · Validasi data · Temuan · Peringatan · Database kontrak · Aktivitas |
+| Kontrak | Ringkasan · Validasi data · Temuan · Peringatan · Sandingan Sisbun · Database kontrak · Aktivitas |
 | Bantuan | Jejak komoditas · Rekap nasional · Rekap per provinsi |
 
 Sub-tab berupa segmen di wadah `--surface-sunk`; yang aktif berlatar putih.
@@ -200,7 +200,7 @@ Tahun dibaca dari `data/tahun.json`; tahun yang dipilih disimpan di `localStorag
 |---|---|---|
 | `#beranda` | Beranda | Tidak |
 | `#anggaran`, `#anggaran-rincian`, `#anggaran-harian`, `#anggaran-target` | Anggaran | Tidak |
-| `#kontrak`, `#kontrak-temuan`, `#kontrak-peringatan` | Kontrak (data ringkas) | Tidak |
+| `#kontrak`, `#kontrak-temuan`, `#kontrak-peringatan`, `#kontrak-sisbun` | Kontrak (data ringkas; Sandingan Sisbun = kontrak 5888·526115 dan 5890·521822 yang belum masuk Sisbun, hanya tahun berjalan) | Tidak |
 | `#bantuan`, `#bantuan-nasional`, `#bantuan-provinsi` | Bantuan | Tidak |
 | `#laporan` | Pengalih ke halaman kerja Laporan harian (tidak tampil di menu) | — |
 | `#tentang` | Tentang data dan rumus | Tidak |

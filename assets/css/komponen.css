@@ -590,3 +590,16 @@
   .tabel-rapat th:first-child, .tabel-rapat td:first-child,
   .seksi-rincian-prov .tabel th:first-child, .seksi-rincian-prov .tabel td:first-child { padding-left: 4px; }
 }
+
+/* Kontrak › Sandingan Sisbun (kontrak belum masuk Sisbun) */
+.sb-sub { display: block; font-size: 12px; color: var(--ink-3); font-weight: 400; white-space: normal; }
+.sb-uraian { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sb-indent { display: inline-block; padding-left: 18px; }
+.sb-daftar td { vertical-align: top; }
+.sb-daftar td:first-child { min-width: 300px; white-space: normal; }
+.sb-daftar td:last-child { min-width: 220px; white-space: normal; }
+.tabel tr.sb-lokasi td { background: var(--warn-bg); color: var(--ink); white-space: normal; font-size: 13px; }
+.tabel tr.sb-lokasi:hover td { background: var(--warn-bg); }
+.sb-aturan { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+.redup { color: var(--ink-3); }
+@media (max-width: 640px) { .sb-daftar td:first-child { min-width: 230px; } .sb-uraian { -webkit-line-clamp: 3; } }

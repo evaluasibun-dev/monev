@@ -446,6 +446,7 @@
   function gambar(el, r, j) {
     var rows = terfilter(j);
     var tab = r.sub && r.sub.id ? r.sub.id : "";
+    if (tab === "sisbun") { Monev.kontrakSisbun.isi(el, j); return; }
     var isi = tab === "temuan" ? temuan(j, rows) : tab === "peringatan" ? peringatan(j, rows) : ringkasan(j, rows);
     var fokus = document.activeElement && document.activeElement.id;
     var posisi = fokus && document.activeElement.selectionStart;

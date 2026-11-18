@@ -17,12 +17,13 @@
         { id: "target", nama: "Target serapan" }
       ] },
     { id: "kontrak", nama: "Kontrak", bawah: "Kontrak", tahap: 1, judul: "Kontrak",
-      ket: "Ringkasan kontrak MyIntress dan manual, temuan validasi, dan peringatan jatuh tempo.",
+      ket: "Ringkasan kontrak MyIntress dan manual, temuan validasi, peringatan jatuh tempo, dan sandingan dengan Sisbun.",
       sub: [
         { id: "", nama: "Ringkasan" },
         { id: "validasi", nama: "Validasi data", login: true },
         { id: "temuan", nama: "Temuan" },
         { id: "peringatan", nama: "Peringatan" },
+        { id: "sisbun", nama: "Sandingan Sisbun" },
         { id: "database", nama: "Database kontrak", login: true },
         { id: "aktivitas", nama: "Aktivitas", login: true }
       ] },
