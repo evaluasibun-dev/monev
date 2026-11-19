@@ -32147,11 +32147,11 @@
   "by_kegiatan": [
    {
     "KDKEG": "",
-    "NAMA_KEGIATAN": "Bongkar Ratoon",
-    "jml_kontrak": 2,
-    "nilai_kontrak": 207329600,
+    "NAMA_KEGIATAN": "Pengadaan Benih",
+    "jml_kontrak": 1,
+    "nilai_kontrak": 188000000,
     "realisasi_kontrak": 0,
-    "sisa_kontrak": 207329600
+    "sisa_kontrak": 188000000
    },
    {
     "KDKEG": "1777",
@@ -32180,10 +32180,10 @@
    {
     "KDKEG": "5888",
     "NAMA_KEGIATAN": "Bongkar Ratoon",
-    "jml_kontrak": 480,
-    "nilai_kontrak": 739970365218,
+    "jml_kontrak": 481,
+    "nilai_kontrak": 739989694818,
     "realisasi_kontrak": 85408338145,
-    "sisa_kontrak": 654562027073
+    "sisa_kontrak": 654581356673
    },
    {
     "KDKEG": "5889",
@@ -32261,10 +32261,10 @@
     "KODE_SATKER": "238830",
     "KDKEG": "5888",
     "KDKRO_SUFFIX": "RAI",
-    "jml_kontrak": 422,
-    "nilai_kontrak": 683148341720,
+    "jml_kontrak": 423,
+    "nilai_kontrak": 683167671320,
     "realisasi_kontrak": 82685637571,
-    "sisa_kontrak": 600462704149
+    "sisa_kontrak": 600482033749
    },
    {
     "KODE_SATKER": "238830",
@@ -32306,10 +32306,10 @@
     "KODE_SATKER": "238830",
     "KDKEG": "",
     "KDKRO_SUFFIX": "",
-    "jml_kontrak": 2,
-    "nilai_kontrak": 207329600,
+    "jml_kontrak": 1,
+    "nilai_kontrak": 188000000,
     "realisasi_kontrak": 0,
-    "sisa_kontrak": 207329600
+    "sisa_kontrak": 188000000
    },
    {
     "KODE_SATKER": "567338",
@@ -32645,23 +32645,23 @@
      "blokir": 0,
      "real": 283463485906,
      "pct": 14.28583412609011,
-     "os": 654562027073,
-     "realOs": 938025512979,
-     "pct2": 47.2740848495116,
-     "sisa": 1046202243021,
+     "os": 654581356673,
+     "realOs": 938044842579,
+     "pct2": 47.275059011874845,
+     "sisa": 1046182913421,
      "kode": "5888",
      "kunci": "5888"
     },
     {
-     "nama": "Belum terpetakan (KRO/kode kegiatan kontrak kosong/tidak valid) – 2 kontrak",
+     "nama": "Belum terpetakan (KRO/kode kegiatan kontrak kosong/tidak valid) – 1 kontrak",
      "pagu": 0,
      "blokir": 0,
      "real": 0,
      "pct": 0,
-     "os": 207329600,
-     "realOs": 207329600,
+     "os": 188000000,
+     "realOs": 188000000,
      "pct2": 0,
-     "sisa": -207329600,
+     "sisa": -188000000,
      "kode": "",
      "unmapped": true
     }
@@ -32795,22 +32795,22 @@
      "blokir": 0,
      "real": 247237583007,
      "pct": 14.583037579855453,
-     "os": 605409060089,
-     "realOs": 852646643096,
-     "pct2": 50.29242677176035,
-     "sisa": 842731165904,
+     "os": 605428389689,
+     "realOs": 852665972696,
+     "pct2": 50.2935669070091,
+     "sisa": 842711836304,
      "kunci": "Direktorat Tanaman Semusim dan Tahunan"
     },
     {
-     "nama": "Ditjenbun Pusat (kode kegiatan belum diisi) – 2 kontrak",
+     "nama": "Ditjenbun Pusat (kode kegiatan belum diisi) – 1 kontrak",
      "pagu": 0,
      "blokir": 0,
      "real": 0,
      "pct": 0,
-     "os": 207329600,
-     "realOs": 207329600,
+     "os": 188000000,
+     "realOs": 188000000,
      "pct2": 0,
-     "sisa": -207329600,
+     "sisa": -188000000,
      "unmapped": true
     }
    ],
@@ -32828,7 +32828,7 @@
    },
    "notes": [
     "Realisasi Outstanding (OS) Direktorat Hilirisasi Hasil Perkebunan termasuk dana hibah luar negeri sebesar Rp 9.804.220.587,- dan realisasi termasuk pembayaran hibah Rp 1.414.920.000,- di input secara manual karena tidak muncul dalam aplikasi MyIntress DJPB, KPPN khusus hibah dan pinjaman tidak mencantumkan catatan untuk OS.",
-    "Outstanding Rp 207.329.600,- berasal dari kontrak Kantor Pusat yang KRO/kode kegiatannya belum diisi; lengkapi melalui Dashboard › Verifikasi."
+    "Outstanding Rp 188.000.000,- berasal dari kontrak Kantor Pusat yang KRO/kode kegiatannya belum diisi; lengkapi melalui Dashboard › Verifikasi."
    ]
   },
   "kontrak_aktif": 1389
