@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-19T14:37:00+07:00",
+ "data_per": "2026-11-19T15:37:00+07:00",
  "hari_ini": "2026-11-19",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -19,22 +19,22 @@
  ],
  "import_terakhir": {
   "terakhir": {
-   "waktu": "2026-11-19T14:11:00+07:00",
-   "unduh": "2026-11-19T14:10:00+07:00",
-   "sumber": "Unggah data: Monitoring Data Kontrak_2026-11-19 14-10.xlsx",
+   "waktu": "2026-11-19T15:27:00+07:00",
+   "unduh": "2026-11-19T15:15:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-19 15-15.xlsx",
    "validasi": "LOLOS",
-   "baru": 2,
-   "berubah": 25,
-   "hilang": 1
+   "baru": 0,
+   "berubah": 0,
+   "hilang": 0
   },
   "myintress": {
-   "waktu": "2026-11-19T14:11:00+07:00",
-   "unduh": "2026-11-19T14:10:00+07:00",
-   "sumber": "Unggah data: Monitoring Data Kontrak_2026-11-19 14-10.xlsx",
+   "waktu": "2026-11-19T15:27:00+07:00",
+   "unduh": "2026-11-19T15:15:00+07:00",
+   "sumber": "Monitoring Data Kontrak_2026-11-19 15-15.xlsx",
    "validasi": "LOLOS",
-   "baru": 2,
-   "berubah": 25,
-   "hilang": 1
+   "baru": 0,
+   "berubah": 0,
+   "hilang": 0
   }
  },
  "kontrak": [
@@ -33106,8 +33106,8 @@
    "sisa_hari": 22,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "PERLU KONFIRMASI",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -33132,8 +33132,8 @@
    "sisa_hari": 29,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "PERLU KONFIRMASI",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -39114,7 +39114,7 @@
      "sisa": 3047510749379,
      "selesai": 291,
      "terlambat": 148,
-     "temuan": 447
+     "temuan": 445
     }
    ],
    "Direktorat Tanaman Kelapa Sawit dan Aneka Palma": [
@@ -39588,13 +39588,13 @@
      "temuan": 82
     },
     {
-     "n": 426,
-     "nilai": 688094697660,
+     "n": 427,
+     "nilai": 688114027260,
      "bayar": 82685637571,
-     "sisa": 605409060089,
+     "sisa": 605428389689,
      "selesai": 47,
      "terlambat": 30,
-     "temuan": 81
+     "temuan": 82
     }
    ],
    "Direktorat Hilirisasi Hasil Perkebunan": [
@@ -39828,13 +39828,13 @@
      "temuan": 219
     },
     {
-     "n": 402,
-     "nilai": 2318816550992,
+     "n": 403,
+     "nilai": 2319004550992,
      "bayar": 611224754474,
-     "sisa": 1707591796518,
+     "sisa": 1707779796518,
      "selesai": 78,
      "terlambat": 69,
-     "temuan": 217
+     "temuan": 218
     }
    ],
    "Ditjenbun Pusat (kode kegiatan belum diisi)": [
