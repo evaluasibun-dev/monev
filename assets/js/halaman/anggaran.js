@@ -576,12 +576,13 @@
       [["", "Semua"]].concat(URUT_JENIS.map(function (k) { return [k, k + " " + JENIS[k]]; })).map(function (d) {
         return '<button type="button" data-jenis="' + d[0] + '" aria-pressed="' + (R.jenis === d[0] ? "true" : "false") + '">' + e(d[1]) + "</button>";
       }).join("") + "</div>" +
-      '<div class="wadah-tabel"><table class="tabel tabel-kecil"><thead><tr><th scope="col">Akun</th><th scope="col">Nama akun</th><th scope="col" class="angka">Pagu (Rp)</th>' +
-      '<th scope="col" class="angka">SP2D (Rp)</th><th scope="col" class="angka">%</th></tr></thead><tbody>' +
+      '<div class="wadah-tabel"><table class="tabel tabel-kecil tabel-rapat"><thead><tr><th scope="col">Akun</th><th scope="col">Nama akun</th><th scope="col" class="angka">Pagu (Rp)</th>' +
+      '<th scope="col" class="angka">SP2D (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Sisa (Rp)</th></tr></thead><tbody>' +
       (akunTampil.map(function (r) {
-        return '<tr data-akun-baris><td class="mono">' + e(r.S03) + "</td><td>" + e(r.nama) + "</td>" + td(rpL(r.pagu), 1) + td(rpL(r.real), 1) + td(persen(pct(r.real, r.pagu)), 1) + "</tr>";
-      }).join("") || '<tr><td colspan="5">Tidak ada akun untuk saringan ini.</td></tr>') +
-      '<tr class="jumlah"><td></td><td>Jumlah</td>' + td(rpL(tAkun.pagu), 1) + td(rpL(tAkun.real), 1) + td(persen(pct(tAkun.real, tAkun.pagu)), 1) + "</tr></tbody></table></div>" +
+        return '<tr data-akun-baris><td class="mono">' + e(r.S03) + "</td><td>" + e(r.nama) + "</td>" + td(rpL(r.pagu), 1) + td(rpL(r.real), 1) + td(persen(pct(r.real, r.pagu)), 1) + td(rpL(r.pagu - r.real), 1) + "</tr>";
+      }).join("") || '<tr><td colspan="6">Tidak ada akun untuk saringan ini.</td></tr>') +
+      '<tr class="jumlah"><td></td><td>Jumlah</td>' + td(rpL(tAkun.pagu), 1) + td(rpL(tAkun.real), 1) + td(persen(pct(tAkun.real, tAkun.pagu)), 1) + td(rpL(tAkun.pagu - tAkun.real), 1) + "</tr></tbody></table></div>" +
+      '<p class="catatan">Sisa = pagu − realisasi SP2D (tanpa blokir dan outstanding, karena keduanya tidak tercatat per akun).</p>' +
       (R.kro ? '<p class="catatan">Saringan KRO tidak berlaku untuk akun (data akun tidak dirinci per KRO).</p>' : "") +
       '<div class="pager-akun" data-pager-akun hidden><button type="button" class="tombol tombol-sekunder tombol-kecil" data-akun-hal="-1">‹ Sebelumnya</button>' +
       '<span aria-live="polite" data-akun-ket></span><button type="button" class="tombol tombol-sekunder tombol-kecil" data-akun-hal="1">Berikutnya ›</button></div>';
@@ -1059,9 +1060,9 @@
       for (var t = 0; t <= 4; t++) L[t].forEach(function (r) { out.push([NAMA_TINGKAT[t], r.KDKEG, r.S05 || "", r.S13 || "", r.S14 || "", r.S15 || "", t === 4 ? String(r.KODE_SATKER || "") : "", t === 4 ? (r.NAMA_SUBKOMPONEN || "") : "", +r.pagu || 0, +r.real || 0]); });
       f("anggaran-rincian-" + ta + ".csv", ["Tingkat", "Kegiatan", "KRO", "RO", "Komponen", "Sub-komponen", "Kode satker (sub-komponen)", "Nama sub-komponen", "Pagu (Rp)", "Realisasi SP2D (Rp)"], out);
     } else if (jenis === "akun") {
-      f("anggaran-per-akun-" + ta + ".csv", ["Akun", "Nama akun", "Pagu (Rp)", "Realisasi SP2D (Rp)", "%"],
+      f("anggaran-per-akun-" + ta + ".csv", ["Akun", "Nama akun", "Pagu (Rp)", "Realisasi SP2D (Rp)", "%", "Sisa (Rp)"],
         sumberAkun(j).filter(function (r) { return !STATE.rinci.jenis || jenisDari(r.S03) === STATE.rinci.jenis; })
-          .map(function (r) { return [r.S03, r.nama, r.pagu, r.real, bulat(pct(r.real, r.pagu))]; }));
+          .map(function (r) { return [r.S03, r.nama, r.pagu, r.real, bulat(pct(r.real, r.pagu)), r.pagu - r.real]; }));
     } else if (jenis === "kewenangan") {
       var kw = kewenangan(j);
       f("anggaran-jenis-kewenangan-" + ta + ".csv", ["Jenis belanja"].concat(kw.kolom.map(function (c) { return c + " (Rp)"; })),
