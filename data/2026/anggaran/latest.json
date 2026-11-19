@@ -32512,7 +32512,7 @@
  "realisasi": {
   "unduh": {
    "KEG": "2026-11-19 14:10:35",
-   "KP": "2026-11-17 16:11:36",
+   "KP": "2026-11-19 14:09:52",
    "SATKER": "2026-11-19 14:10:19"
   },
   "s2": {
@@ -32718,6 +32718,18 @@
      "kunci": "Balai Pelindungan Tanaman Perkebunan (BPTP) Pontianak"
     },
     {
+     "nama": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
+     "pagu": 226083361000,
+     "blokir": 0,
+     "real": 79289232456,
+     "pct": 35.070795172759304,
+     "os": 52749168629,
+     "realOs": 132038401085,
+     "pct2": 58.4025292710506,
+     "sisa": 94044959915,
+     "kunci": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma"
+    },
+    {
      "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
      "pagu": 310766884000,
      "blokir": 352331000,
@@ -32728,18 +32740,6 @@
      "pct2": 71.40083447115299,
      "sisa": 88524404564,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan"
-    },
-    {
-     "nama": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
-     "pagu": 226083361000,
-     "blokir": 0,
-     "real": 75263276497,
-     "pct": 33.29005556362018,
-     "os": 52749168629,
-     "realOs": 128012445126,
-     "pct2": 56.62178966191147,
-     "sisa": 98070915874,
-     "kunci": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma"
     },
     {
      "nama": "Direktorat Hilirisasi Hasil Perkebunan",
@@ -32757,12 +32757,12 @@
      "nama": "Direktorat Perbenihan Perkebunan",
      "pagu": 2699469972000,
      "blokir": 11400669000,
-     "real": 618516385319,
-     "pct": 22.91251214995919,
+     "real": 647770863285,
+     "pct": 23.996224073760505,
      "os": 1707591796518,
-     "realOs": 2326108181837,
-     "pct2": 86.16907044584084,
-     "sisa": 361961121163,
+     "realOs": 2355362659803,
+     "pct2": 87.25278236964216,
+     "sisa": 332706643197,
      "kunci": "Direktorat Perbenihan Perkebunan"
     },
     {
@@ -32793,12 +32793,12 @@
      "nama": "Direktorat Tanaman Semusim dan Tahunan",
      "pagu": 1695377809000,
      "blokir": 0,
-     "real": 233835571822,
-     "pct": 13.792534653967504,
+     "real": 247237583007,
+     "pct": 14.583037579855453,
      "os": 605409060089,
-     "realOs": 839244631911,
-     "pct2": 49.5019238458724,
-     "sisa": 856133177089,
+     "realOs": 852646643096,
+     "pct2": 50.29242677176035,
+     "sisa": 842731165904,
      "kunci": "Direktorat Tanaman Semusim dan Tahunan"
     },
     {
@@ -32818,12 +32818,12 @@
     "nama": "Jumlah",
     "pagu": 6173139544000,
     "blokir": 14253000000,
-    "real": 1312897472444,
-    "pct": 21.267905303065348,
+    "real": 1359579917554,
+    "pct": 22.02412415697694,
     "os": 3047510749379,
-    "realOs": 4360408221823,
-    "pct2": 70.63517989093752,
-    "sisa": 1798478322177,
+    "realOs": 4407090666933,
+    "pct2": 71.39139874484911,
+    "sisa": 1751795877067,
     "total": true
    },
    "notes": [
