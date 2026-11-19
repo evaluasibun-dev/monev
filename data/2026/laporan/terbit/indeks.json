@@ -3,6 +3,12 @@
  "ta": 2026,
  "laporan": [
   {
+   "tanggal": "2026-11-19",
+   "diterbitkan": "2026-11-19T16:17:00+07:00",
+   "pembanding": "Sun Nov 15 2026 00:00:00 GMT+0700 (Waktu Indonesia Barat)",
+   "file": "2026-11-19.json"
+  },
+  {
    "tanggal": "2026-11-15",
    "diterbitkan": "2026-11-15T21:37:00+07:00",
    "pembanding": null,
