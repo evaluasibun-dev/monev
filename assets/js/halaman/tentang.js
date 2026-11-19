@@ -18,7 +18,8 @@
   ];
 
   var RUMUS = [
-    ["Anggaran terbayar (bantuan)", "SP2D akun 526 + realisasi Produksi Benih + KBD Tebu", "Outstanding kontrak tidak termasuk."],
+    ["Anggaran terbayar (bantuan, BANPER)", "SP2D akun 526, hanya dari sheet 7_Gabungan_Anggaran_Fisik hasil integrasi", "Produksi Benih dan KBD Tebu (sheet 16) tidak dimasukkan; outstanding kontrak tidak termasuk."],
+    ["Rekap Semua akun", "Pagu dan realisasi SP2D semua akun belanja (51, 52, 53) per lokus, hanya dari sheet 17_Gabungan_Semua_Akun", "Pilihan di Rekap nasional dan per provinsi; anggaran tanpa lokus tidak masuk provinsi mana pun."],
     ["Realisasi SP2D", "Realisasi MyIntress + tambahan realisasi hibah", "Tambahan hibah hanya pembayaran yang belum tercatat di MyIntress."],
     ["Outstanding (OS)", "Nilai kontrak − pembayaran, semua kontrak aktif", "Termasuk kontrak selesai yang belum lunas; kontrak dikeluarkan tidak dihitung."],
     ["Sisa anggaran", "Pagu − Blokir − (Realisasi SP2D + OS)", "% sisa = 100% − % (SP2D + OS)."],

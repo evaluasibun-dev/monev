@@ -18,10 +18,11 @@
 
   var STATE = {
     kom: "Kelapa", ukuran: "tanam", petaKom: "", prov: "", tren: "tanam",
-    nas: { sumber: "", komoditas: "", bencana: false },
-    pv: { provinsi: "", sumber: "", komoditas: "", kabHal: null, kabKunci: "" }
+    jenis: "banper",   /* jenis rekap: "banper" (sheet 7, rekap.json) | "semua" (sheet 17, rekap-semua.json) */
+    nas: { sumber: "", komoditas: "", kegiatan: "", bencana: false },
+    pv: { provinsi: "", sumber: "", komoditas: "", kegiatan: "", kabHal: null, kabKunci: "" }
   };
-  var D = { ta: null, sisbun: null, rekap: undefined, titik: null, catatan: null, lap: null, satker: {}, waktuMuat: 0 };
+  var D = { ta: null, sisbun: null, rekap: undefined, semua: undefined, titik: null, catatan: null, lap: null, satker: {}, waktuMuat: 0 };
 
   /* ---------- pembantu tampilan ---------- */
   function seksi(judul, isi, opsi) {
@@ -49,8 +50,16 @@
 
   /* ---------- muat data ---------- */
   function opsional(p) { return p.catch(function () { return null; }); }
-  function muatRekap(ta) {
-    return Monev.data.muatTahun("integrasi/rekap.json", ta).catch(function (err) { if (err && err.status === 404) return null; throw err; });
+  function muatRekap(ta, berkas) {
+    return Monev.data.muatTahun("integrasi/" + (berkas || "rekap.json"), ta).catch(function (err) { if (err && err.status === 404) return null; throw err; });
+  }
+  /** Muat rekap jenis yang dipilih (BANPER selalu, Semua akun bila dipilih); hasil disimpan di D. */
+  function muatJenis(ta) {
+    var p1 = D.rekap !== undefined ? Promise.resolve(D.rekap) : muatRekap(ta).then(function (j) { D.rekap = j; return j; });
+    return p1.then(function () {
+      if (STATE.jenis !== "semua" || D.semua !== undefined) return;
+      return muatRekap(ta, "rekap-semua.json").then(function (j) { D.semua = j; });
+    });
   }
   /** Laporan terbit: pembanding tanam (terbaru) dan titik tanam akhir bulan setelah titik tetap terakhir. */
   function muatLaporan(ta, batasTanggal) {
@@ -128,7 +137,7 @@
       '<div class="grid-kartu grid-kartu-padat">' +
       kartuJejak(H.tanam == null ? "–" : F().persen(H.tanam), "lahan sasaran sudah dikerjakan atau ditanam " + (H.tebuIkut ? "(tujuh komoditas, termasuk tebu)" : "(di luar tebu)"), S().ha(H.R) + " dari " + S().ha(H.T)) +
       kartuJejak(H.benih, "benih sudah dipesan, sebagian besar masih dirawat di persemaian", "kontrak benih terhadap target kawasan") +
-      kartuJejak(H.uang == null ? "–" : F().persen(H.uang), "anggaran kawasan dan benih tujuh komoditas sudah dibayarkan (SP2D akun 526 + produksi benih + KBD tebu)",
+      kartuJejak(H.uang == null ? "–" : F().persen(H.uang), "anggaran bantuan kawasan tujuh komoditas sudah dibayarkan (SP2D akun 526)",
         H.P ? F().rupiahM(H.B) + " dari " + F().rupiahM(H.P) : "hasil integrasi belum terbit", "#bantuan-nasional") +
       "</div>" +
       '<p class="catatan">Sisbun per ' + e(F().tanggal(sb.asof)) + ", dibaca " + e(F().jam(sb.diambil)) + " · " + e(sumberRekap(D.rekap)) +
@@ -310,7 +319,7 @@
       ["Kontrak pengadaan", "Perjanjian dengan penyedia benih atau pupuk. Kontrak ditandatangani belum berarti barang sampai atau dibayar."],
       ["Anggaran terbayar", "Uang yang benar-benar sudah dicairkan (SP2D), berbeda dengan nilai kontrak yang baru merupakan janji bayar."]];
     var C = ["Persentase lahan keseluruhan dihitung di luar tebu selama data tebu belum dilaporkan.",
-      "Anggaran terbayar memakai rumus integrasi: SP2D akun 526 + realisasi produksi benih + KBD tebu; outstanding kontrak tidak termasuk.",
+      "Anggaran terbayar = SP2D akun 526 dari hasil integrasi (BANPER, sheet 7); outstanding kontrak tidak termasuk.",
       "Target pada API publik Sisbun bisa sedikit berbeda dengan menu admin Sisbun; target resmi mengikuti SAT 3 (lihat Rekap nasional).",
       "Untuk pala, lada, dan jambu mete, penerima terdata masih berupa usulan yang belum seluruhnya ditetapkan.",
       "Luas HOK tidak dihitung sebagai luas tanam.",
@@ -476,7 +485,7 @@
       '<div class="slide"><span class="slide-kicker">Langkah berikutnya</span><h2>' + e(X.judul7) + '</h2><div class="slide-kolom">' +
         X.kartu.map(function (c) { return "<div><b>" + e(c[0]) + "</b><p>" + e(c[1]) + "</p></div>"; }).join("") + "</div><p><b>" + e(X.rata) + "</b></p></div>",
       '<div class="slide"><span class="slide-kicker">Catatan</span><h2>Tentang data ini</h2><p>Target kawasan, CPCL, kontrak benih, jadwal salur, luas tanam, sebaran provinsi, dan satker kawasan diambil langsung dari API Sisbun. ' +
-        "Anggaran terbayar dari hasil integrasi (SP2D akun 526 + realisasi produksi benih + KBD tebu). Titik perkembangan dari pemantauan harian Ditjenbun dan laporan triwulan. " +
+        "Anggaran terbayar dari hasil integrasi (SP2D akun 526). Titik perkembangan dari pemantauan harian Ditjenbun dan laporan triwulan. " +
         "Status membandingkan luas tanam dengan jadwal salur benih s.d. akhir bulan lalu (≥ 75% sesuai jadwal, 30–75% perlu dipercepat, &lt; 30% tertinggal jauh).</p></div>"
     ];
   }
@@ -518,7 +527,27 @@
     if (fokusAwal && fokusAwal.focus) fokusAwal.focus();
   }
 
-  /* ============================== REKAP NASIONAL ============================== */
+  /* ============================== REKAP NASIONAL ==============================
+     Dua jenis rekap (Keputusan 1, diubah 19 Nov 2026; mockup monev-gas/docs/mockup/RekapJenis.html):
+     BANPER = akun 526, hanya sheet 7 (rekap.json); Semua akun = semua akun belanja, hanya sheet 17 (rekap-semua.json).
+     Pilihan jenis berlaku untuk Rekap nasional dan Rekap per provinsi, juga untuk CSV, PDF, dan Excel. */
+  function jenisSemua() { return STATE.jenis === "semua"; }
+  function RJ() { return jenisSemua() ? D.semua : D.rekap; }
+  function pilihJenis() {
+    return segmen("jenis", [["banper", "BANPER"], ["semua", "Semua akun"]], STATE.jenis, "Jenis rekap");
+  }
+  function penjelasJenis() {
+    return jenisSemua()
+      ? '<p class="paragraf-kecil"><strong>Semua akun</strong> = seluruh pagu dan realisasi SP2D Ditjenbun per lokus, semua akun belanja (51 pegawai, 52 barang, 53 modal), dari sheet 17_Gabungan_Semua_Akun hasil integrasi. Fisik sama dengan BANPER (hanya akun 526115 yang membawa fisik).</p>'
+      : '<p class="paragraf-kecil"><strong>BANPER</strong> = bantuan pemerintah kepada masyarakat: akun 526, dari sheet 7_Gabungan_Anggaran_Fisik hasil integrasi. Anggaran terbayar = realisasi SP2D akun 526.</p>';
+  }
+  function kosongJenis(el, ta) {
+    el.innerHTML = '<div class="filter-bar">' + pilihJenis() + "</div>" + Monev.data.tampil.kosong(
+      (jenisSemua() ? "Rekap Semua akun TA " : "Rekap BANPER TA ") + ta + " belum terbit",
+      jenisSemua() ? "Rekap Semua akun tampil setelah admin mengunggah hasil integrasi yang memuat sheet 17_Gabungan_Semua_Akun di menu Unggah data."
+        : "Rekap nasional dan per provinsi tampil setelah admin mengunggah hasil aplikasi integrasi di menu Unggah data.",
+      null, jenisSemua() ? "Sumbernya sheet 17_Gabungan_Semua_Akun hasil integrasi (SAKTI, FA16, SAT 3, Hilirisasi)." : "Sumbernya sheet 7_Gabungan_Anggaran_Fisik hasil integrasi (SAKTI, FA16, SAT 3, Hilirisasi).");
+  }
   function opsiSumber(nilai, panjang) {
     return [["", panjang ? "Reguler dan ABT (baris terpisah)" : "Reguler dan ABT"], ["REGULER", "Reguler"], ["ABT", "ABT"]].map(function (o) {
       return '<option value="' + o[0] + '"' + (o[0] === nilai ? " selected" : "") + ">" + e(o[1]) + "</option>";
@@ -528,97 +557,172 @@
     var ada = R().daftarKomoditas(rows).sort(Monev.istilah.urutKomoditas);
     return '<option value="">Semua komoditas</option>' + ada.map(function (k) { return '<option value="' + e(k) + '"' + (k === nilai ? " selected" : "") + ">" + e(k) + "</option>"; }).join("");
   }
+  function opsiKegiatan(rows, nilai) {
+    return '<option value="">Semua kegiatan</option>' + R().daftarKegiatan(rows).map(function (k) {
+      return '<option value="' + e(k) + '"' + (k === nilai ? " selected" : "") + ">" + e(Monev.istilah.kegiatanSingkat(k) + " (" + k + ")") + "</option>";
+    }).join("");
+  }
+  /** Saringan kedua: komoditas (BANPER) atau kegiatan (Semua akun). */
+  function saringanKedua(rows, st, awalan) {
+    var id = "b-" + awalan + "-km";
+    return jenisSemua()
+      ? '<label class="sr-only" for="' + id + '">Kegiatan</label><select id="' + id + '" data-bantuan-filter="' + awalan + '.kegiatan">' + opsiKegiatan(rows, st.kegiatan) + "</select>"
+      : '<label class="sr-only" for="' + id + '">Komoditas</label><select id="' + id + '" data-bantuan-filter="' + awalan + '.komoditas">' + opsiKomoditas(rows, st.komoditas) + "</select>";
+  }
+  function saringJenis(rows, st) {
+    return R().saring(rows, jenisSemua() ? { sumber: st.sumber, kegiatan: st.kegiatan } : { sumber: st.sumber, komoditas: st.komoditas });
+  }
   function kartuRekap(label, nilai, ket) {
     return '<div class="kartu-angka"><span class="kartu-label">' + e(label) + '</span><span class="kartu-nilai">' + e(nilai) + '</span><span class="kartu-ket">' + e(ket) + "</span></div>";
   }
   function tabelKegiatan(rows, lingkup, bencana) {
-    var keg = R().perKegiatan(rows), t = R().jumlah(keg, rows), nas = lingkup === "nasional";
-    var kepala = '<thead><tr><th scope="col" rowspan="2">Komoditas / sub-komponen</th><th scope="col" rowspan="2">Sumber dana</th>' +
+    var sm = jenisSemua(), keg = R().perKegiatan(rows), t = R().jumlah(keg, rows), nas = lingkup === "nasional", j = RJ();
+    var kolom = (nas ? 4 : 3) + 6 + (bencana ? 2 : 0);
+    var kepala = '<thead><tr><th scope="col" rowspan="2">' + (sm ? "Kegiatan / RO" : "Komoditas / sub-komponen") + '</th><th scope="col" rowspan="2">Sumber dana</th>' +
       (nas ? '<th scope="col" rowspan="2" class="angka">Provinsi</th>' : "") + '<th scope="col" rowspan="2" class="angka">Kab/kota</th>' +
       '<th scope="colgroup" colspan="3" class="kelompok">Fisik</th><th scope="colgroup" colspan="' + (bencana ? 5 : 3) + '" class="kelompok">Anggaran</th></tr>' +
       '<tr><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th>' +
-      '<th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Terbayar (Rp)</th><th scope="col" class="angka">%</th>' +
-      (bencana ? '<th scope="col" class="angka">Pagu bencana (Rp)</th><th scope="col" class="angka">Terbayar bencana (Rp)</th>' : "") + "</tr></thead>";
+      '<th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">' + (sm ? "Realisasi SP2D (Rp)" : "Terbayar (Rp)") + '</th><th scope="col" class="angka">%</th>' +
+      (bencana ? '<th scope="col" class="angka">Pagu bencana (Rp)</th><th scope="col" class="angka">' + (sm ? "SP2D bencana (Rp)" : "Terbayar bencana (Rp)") + "</th>" : "") + "</tr></thead>";
     var sel = function (x, satuan, grup) {
       var fp = satuan === "Hektar" && grup <= 1 ? pct(x.realisasi, x.target) : "–";
       return '<td class="angka">' + fisik(x.target, satuan) + '</td><td class="angka">' + fisik(x.realisasi, satuan) + '</td><td class="angka">' + fp + "</td>" +
         '<td class="angka">' + F().ribuan(x.pagu) + '</td><td class="angka">' + F().ribuan(x.terbayar) + '</td><td class="angka">' + pct(x.terbayar, x.pagu) + "</td>" +
         (bencana ? '<td class="angka">' + (x.pagu_b ? F().ribuan(x.pagu_b) : "–") + '</td><td class="angka">' + (x.terbayar_b ? F().ribuan(x.terbayar_b) : "–") + "</td>" : "");
     };
-    var body = keg.map(function (x) {
-      return '<tr class="tingkat-0"><td>' + e(x.kegiatan) + "</td><td>" + chipSumber(x.sumber_dana) + "</td>" + (nas ? '<td class="angka">' + x.jml_prov + "</td>" : "") +
+    var barisKeg = function (x, kelas) {
+      return "<tr" + (kelas ? ' class="' + kelas + '"' : "") + "><td>" + e(x.kegiatan) + "</td><td>" + chipSumber(x.sumber_dana) + "</td>" + (nas ? '<td class="angka">' + x.jml_prov + "</td>" : "") +
         '<td class="angka">' + x.jml_kab + "</td>" + sel(x, x.satuan, x.grup) + "</tr>" +
-        x.sub.map(function (s) {
+        /* Semua akun per provinsi: tanpa sub-baris akun supaya rincian tidak terlalu panjang (rinciannya ada di CSV) */
+        (sm && !nas ? [] : x.sub).map(function (s) {
           return '<tr class="baris-sub"><td><span class="indentasi">' + e(s.nama) + "</span></td><td></td>" + (nas ? "<td></td>" : "") + "<td></td>" + sel(s, x.satuan, x.grup) + "</tr>";
         }).join("");
-    }).join("");
+    };
+    var body;
+    if (!sm) body = keg.map(function (x) { return barisKeg(x, "tingkat-0"); }).join("");
+    else {
+      /* Semua akun: baris kelompok (tingkat atas, berisi subtotal) lalu kegiatan/RO di bawahnya */
+      var grup = []; keg.forEach(function (x) { if (grup.indexOf(x.grup) < 0) grup.push(x.grup); });
+      body = grup.map(function (g) {
+        var kg = keg.filter(function (x) { return x.grup === g; }), rg = rows.filter(function (r) { return r.grup === g; }), tg = R().jumlah(kg, rg);
+        return '<tr class="tingkat-0"><td>' + e(R().namaGrup(j, g)) + "</td><td></td>" + (nas ? '<td class="angka">' + tg.jml_prov + "</td>" : "") + '<td class="angka">' + tg.jml_kab + "</td>" + sel(tg, "Hektar", g) + "</tr>" +
+          kg.map(function (x) { return barisKeg(x, ""); }).join("");
+      }).join("");
+    }
     var jml = '<tr class="jumlah"><td>' + (nas ? "Jumlah nasional" : "Jumlah provinsi") + "</td><td></td>" + (nas ? '<td class="angka">' + t.jml_prov + "</td>" : "") + '<td class="angka">' + t.jml_kab + "</td>" + sel(t, "Hektar", 0) + "</tr>";
-    return '<div class="wadah-tabel"><table class="tabel tabel-rekap">' + kepala + "<tbody>" + (keg.length ? body + jml : '<tr><td colspan="12">Tidak ada baris untuk pilihan ini.</td></tr>') + "</tbody></table></div>";
+    if (sm && nas) {
+      var k = R().kartu(rows);
+      if (k.pagu_tl || k.terbayar_tl) jml += '<tr class="baris-sub"><td><span class="indentasi">di antaranya tanpa lokus (tidak masuk provinsi mana pun)</span></td><td></td><td></td><td></td>' +
+        '<td class="angka"></td><td class="angka"></td><td class="angka"></td><td class="angka">' + F().ribuan(k.pagu_tl) + '</td><td class="angka">' + F().ribuan(k.terbayar_tl) + '</td><td class="angka">' + pct(k.terbayar_tl, k.pagu_tl) + "</td>" +
+        (bencana ? "<td></td><td></td>" : "") + "</tr>";
+    }
+    return '<div class="wadah-tabel"><table class="tabel tabel-rekap">' + kepala + "<tbody>" + (keg.length ? body + jml : '<tr><td colspan="' + kolom + '">Tidak ada baris untuk pilihan ini.</td></tr>') + "</tbody></table></div>";
+  }
+  function tabelBelanja(rows) {
+    var d = R().perJenisBelanja(rows), t = { pagu: 0, terbayar: 0, pagu_tl: 0 };
+    d.forEach(function (x) { t.pagu += x.pagu; t.terbayar += x.terbayar; t.pagu_tl += x.pagu_tl; });
+    var tr = function (x, sub) {
+      var nama = (x.akun === "-" ? "" : x.akun + " ") + x.nama;
+      return "<tr" + (sub ? ' class="baris-sub"' : "") + "><td>" + (sub ? '<span class="indentasi">di antaranya ' + e(nama) + "</span>" : e(nama)) + '</td><td class="angka">' + F().ribuan(x.pagu) + '</td><td class="angka">' + F().ribuan(x.terbayar) +
+        '</td><td class="angka">' + pct(x.terbayar, x.pagu) + '</td><td class="angka">' + (x.pagu_tl ? F().ribuan(x.pagu_tl) : "–") + "</td></tr>";
+    };
+    return '<div class="wadah-tabel"><table class="tabel tabel-rapat"><thead><tr><th scope="col">Jenis belanja (akun)</th><th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Realisasi SP2D (Rp)</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Tanpa lokus (Rp)</th></tr></thead><tbody>' +
+      d.map(function (x) { return tr(x) + x.sub.map(function (s) { return tr(s, true); }).join(""); }).join("") +
+      '<tr class="jumlah"><td>Jumlah</td><td class="angka">' + F().ribuan(t.pagu) + '</td><td class="angka">' + F().ribuan(t.terbayar) + '</td><td class="angka">' + pct(t.terbayar, t.pagu) + '</td><td class="angka">' + F().ribuan(t.pagu_tl) + "</td></tr></tbody></table></div>";
   }
   function filterNasional(rows, j) {
     var N = STATE.nas;
-    return '<div class="filter-bar">' +
+    return '<div class="filter-bar">' + pilihJenis() +
       '<label class="sr-only" for="b-nas-sd">Sumber dana</label><select id="b-nas-sd" data-bantuan-filter="nas.sumber">' + opsiSumber(N.sumber, true) + "</select>" +
-      '<label class="sr-only" for="b-nas-km">Komoditas</label><select id="b-nas-km" data-bantuan-filter="nas.komoditas">' + opsiKomoditas(rows, N.komoditas) + "</select>" +
+      saringanKedua(rows, N, "nas") +
       '<label class="centang"><input type="checkbox" data-bantuan-filter="nas.bencana"' + (N.bencana ? " checked" : "") + "> Rincian bencana</label>" +
-      '<span class="sumber">Data per ' + e(F().tanggal(j.data_per)) + " · hasil integrasi SAKTI, FA16, SAT 3, dan Hilirisasi</span></div>";
+      '<span class="sumber">Data per ' + e(F().tanggal(j.data_per)) + " · hasil integrasi " + (jenisSemua() ? "sheet 17" : "sheet 7") + "</span></div>" + penjelasJenis();
   }
   function gambarNasional(el) {
-    var j = D.rekap, semua = R().baca(j), N = STATE.nas, rows = R().saring(semua, { sumber: N.sumber, komoditas: N.komoditas });
+    var j = RJ();
+    if (!j) { kosongJenis(el, Monev.tahun.aktif()); return; }
+    var sm = jenisSemua(), semua = R().baca(j), N = STATE.nas, rows = saringJenis(semua, N);
     var k = R().kartu(rows);
-    el.innerHTML = filterNasional(semua, j) +
-      '<section class="grid-kartu grid-kartu-padat" aria-label="Angka nasional">' +
-      kartuRekap("Target fisik", F().hektar(k.target), N.sumber === "ABT" ? "ABT" : N.sumber === "REGULER" ? "reguler" : "reguler + ABT") +
+    var kartuFisik = kartuRekap("Target fisik", F().hektar(k.target), sm ? "sama dengan BANPER (akun 526115)" : N.sumber === "ABT" ? "ABT" : N.sumber === "REGULER" ? "reguler" : "reguler + ABT") +
       kartuRekap("Realisasi tanam", F().hektar(k.realisasi_reg), "reguler, dari Hilirisasi") +
-      kartuRekap("Capaian fisik", pct(k.realisasi_reg, k.target_reg), "dari target reguler") +
-      kartuRekap("Pagu bantuan", F().rupiahM(k.pagu), "akun 526 + produksi benih + KBD tebu") +
-      kartuRekap("Anggaran terbayar", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " · SP2D + produksi benih + KBD tebu") +
-      kartuRekap("Cakupan", k.jml_prov + " provinsi", k.jml_kab + " kabupaten/kota") + "</section>" +
-      seksi("Rekap nasional per komoditas", tabelKegiatan(rows, "nasional", N.bencana) +
-        '<p class="catatan">Reguler dan ABT selalu baris terpisah; ABT belum punya realisasi fisik di Hilirisasi. Sub-komponen tebu tidak digabung. Luas HOK tidak dihitung sebagai realisasi tanam. ' +
-        "Jumlah fisik hanya menjumlah baris kawasan (ha). Volume KBD Tebu tercatat \"Hektar\" di sumber tetapi bernilai ratusan juta, kemungkinan satuannya mata." +
-        (j.ada_produksi_benih ? "" : " Baris Produksi Benih dan KBD Tebu belum ada: sheet Produksi Benih tidak ikut diunggah.") +
-        (N.bencana ? " Bencana = sumber dana ABT serta kegiatan reguler di kabupaten terdampak bencana." : "") + "</p>",
-        { kanan: '<div class="baris-alat"><span class="seksi-keterangan">Target fisik dari SAT 3 · realisasi tanam dari Hilirisasi · anggaran dari SAKTI</span>' + tombolCSV("nasional") + "</div>" }) +
-      seksi("Isi file unduhan", '<div class="grid-ekspor"><div class="kotak-ekspor"><h3>PDF (A4 lanskap)</h3><p class="paragraf-kecil">Kop Kementerian Pertanian RI, judul dan tanggal data, rekap nasional (dengan rincian bencana), lalu satu tabel per provinsi. Nomor halaman di kaki dan catatan sumber data di halaman terakhir.</p>' +
+      kartuRekap("Capaian fisik", pct(k.realisasi_reg, k.target_reg), "dari target reguler");
+    var kartuUang = sm
+      ? kartuRekap("Pagu", F().rupiahM(k.pagu), "semua akun · RAW SAKTI") +
+        kartuRekap("Realisasi SP2D", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " dari pagu · semua akun") +
+        kartuRekap("Tanpa lokus", F().rupiahM(k.pagu_tl), pct(k.pagu_tl, k.pagu) + " pagu · tidak masuk provinsi mana pun")
+      : kartuRekap("Pagu bantuan", F().rupiahM(k.pagu), "akun 526 · sheet 7") +
+        kartuRekap("Anggaran terbayar", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " · SP2D akun 526") +
+        kartuRekap("Cakupan", k.jml_prov + " provinsi", k.jml_kab + " kabupaten/kota");
+    var catatan = sm
+      ? '<p class="catatan">Baris kawasan dan pendukung memakai label yang sama dengan BANPER, dipecah menjadi bagian akun 526 dan akun lain. Kegiatan lain ditampilkan per RO di bawah kelompoknya. Fisik hanya ada di baris pembawa fisik (akun 526115). Reguler dan ABT selalu baris terpisah.' +
+        (N.bencana ? " Bencana = sumber dana ABT serta kegiatan reguler di kabupaten terdampak bencana." : "") + "</p>"
+      : '<p class="catatan">Reguler dan ABT selalu baris terpisah; ABT belum punya realisasi fisik di Hilirisasi. Sub-komponen tebu tidak digabung. Luas HOK tidak dihitung sebagai realisasi tanam. Jumlah fisik hanya menjumlah baris kawasan (ha).' +
+        (N.bencana ? " Bencana = sumber dana ABT serta kegiatan reguler di kabupaten terdampak bencana." : "") + "</p>";
+    var ekspor = sm
+      ? '<div class="kotak-ekspor"><h3>PDF (A4 lanskap)</h3><p class="paragraf-kecil">Judul "Rekap Anggaran dan Fisik — Semua Akun": rekap nasional per kegiatan (dengan rincian bencana dan baris tanpa lokus), tabel per jenis belanja, lalu satu tabel per provinsi. Catatan sumber data di halaman terakhir.</p>' +
+        '<div class="baris-alat"><button type="button" class="tombol tombol-pdf" data-bantuan-aksi="pdf-nasional">Unduh PDF</button></div></div>' +
+        '<div class="kotak-ekspor"><h3>Excel (.xlsx)</h3><p class="paragraf-kecil">Sheet Nasional, Per Jenis Belanja, Per Provinsi, Per Kabupaten, Tanpa Lokus, dan Catatan Data. Persentase dan jumlah memakai rumus.</p>' +
+        '<div class="baris-alat"><button type="button" class="tombol tombol-utama" data-bantuan-aksi="excel">Unduh Excel</button></div></div>'
+      : '<div class="kotak-ekspor"><h3>PDF (A4 lanskap)</h3><p class="paragraf-kecil">Kop Kementerian Pertanian RI, judul dan tanggal data, rekap nasional (dengan rincian bencana), lalu satu tabel per provinsi. Nomor halaman di kaki dan catatan sumber data di halaman terakhir.</p>' +
         '<div class="baris-alat"><button type="button" class="tombol tombol-pdf" data-bantuan-aksi="pdf-nasional">Unduh PDF</button></div></div>' +
         '<div class="kotak-ekspor"><h3>Excel (.xlsx)</h3><p class="paragraf-kecil">Sheet Nasional, Per Provinsi, Per Kabupaten, dan Catatan Data. Persentase dan jumlah memakai rumus, sehingga tetap benar bila baris disaring atau diubah.</p>' +
-        '<div class="baris-alat"><button type="button" class="tombol tombol-utama" data-bantuan-aksi="excel">Unduh Excel</button></div></div></div>' +
-        '<p class="catatan" id="bantuan-pesan" role="status">Unduhan mengikuti pilihan sumber dana dan komoditas di atas.</p>');
+        '<div class="baris-alat"><button type="button" class="tombol tombol-utama" data-bantuan-aksi="excel">Unduh Excel</button></div></div>';
+    el.innerHTML = filterNasional(semua, j) +
+      '<section class="grid-kartu grid-kartu-padat" aria-label="Angka nasional">' + kartuFisik + kartuUang + "</section>" +
+      seksi(sm ? "Rekap nasional per kegiatan — semua akun" : "Rekap nasional per komoditas", tabelKegiatan(rows, "nasional", N.bencana) + catatan,
+        { kanan: '<div class="baris-alat"><span class="seksi-keterangan">' + (sm ? "Anggaran dari RAW SAKTI (semua akun) · fisik dari SAT 3 dan Hilirisasi (akun 526115)" : "Target fisik dari SAT 3 · realisasi tanam dari Hilirisasi · anggaran dari SAKTI") + "</span>" + tombolCSV("nasional") + "</div>" }) +
+      (sm ? '<div class="grid-dua">' +
+        seksi("Per jenis belanja", tabelBelanja(rows) + '<p class="catatan">Akun 526 = bantuan pemerintah (seluruh isi rekap BANPER). Akun 521822 = barang persediaan, termasuk pengadaan benih produksi kegiatan 5890.</p>', { kanan: tombolCSV("belanja") }) +
+        seksi("Catatan sumber data", '<ul class="daftar-titik isi-rata">' + [
+          "Pagu semua akun mengikuti RAW SAKTI (" + F().rupiahM(k.pagu) + "). Menu Anggaran memakai FA16 dan MyIntress, sehingga angkanya bisa berbeda karena beda revisi DIPA dan tanggal data.",
+          "Realisasi SP2D di sini = SP2D FA16 yang dipakai aplikasi integrasi (tanggal proses integrasi), bukan MyIntress harian.",
+          F().rupiahM(k.pagu_tl) + " (" + pct(k.pagu_tl, k.pagu) + " pagu) tidak punya lokus provinsi/kabupaten, terutama pengadaan benih produksi kegiatan 5890 dan belanja pegawai/operasional. Bagian ini tetap di baris kegiatannya dan tidak masuk Rekap per provinsi.",
+          "Produksi benih tercatat di akun 521822 kegiatan 5890; sheet 16 Produksi Benih tidak dipakai.",
+          "Bencana: ABT selalu bencana; reguler bencana bila kabupatennya terdampak (sama dengan BANPER)."
+        ].map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul>") + "</div>" : "") +
+      seksi("Isi file unduhan", '<div class="grid-ekspor">' + ekspor + "</div>" +
+        '<p class="catatan" id="bantuan-pesan" role="status">Unduhan mengikuti jenis rekap, sumber dana, dan ' + (sm ? "kegiatan" : "komoditas") + " yang dipilih di atas.</p>");
   }
 
   /* ============================== REKAP PROVINSI ============================== */
   function gambarProvinsi(el) {
-    var j = D.rekap, semua = R().baca(j), V = STATE.pv;
-    var dasar = R().saring(semua, { sumber: V.sumber, komoditas: V.komoditas });
+    var j = RJ();
+    if (!j) { kosongJenis(el, Monev.tahun.aktif()); return; }
+    var sm = jenisSemua(), semua = R().baca(j), V = STATE.pv;
+    var dasar = saringJenis(semua, V);
     var prov = R().daftarProvinsi(dasar);
     if (!prov.length) { V.provinsi = ""; }
     else if (!prov.some(function (p) { return p.nama === V.provinsi; })) V.provinsi = prov.slice().sort(function (a, b) { return b.pagu - a.pagu; })[0].nama;
     var opsiProv = prov.map(function (p) { return '<option value="' + e(p.nama) + '"' + (p.nama === V.provinsi ? " selected" : "") + ">" + e(namaProv(p.nama)) + "</option>"; }).join("");
-    var filter = '<div class="filter-bar">' +
+    var filter = '<div class="filter-bar">' + pilihJenis() +
       '<label class="sr-only" for="b-pv-prov">Provinsi</label><select id="b-pv-prov" data-bantuan-filter="pv.provinsi">' + opsiProv + "</select>" +
       '<label class="sr-only" for="b-pv-sd">Sumber dana</label><select id="b-pv-sd" data-bantuan-filter="pv.sumber">' + opsiSumber(V.sumber) + "</select>" +
-      '<label class="sr-only" for="b-pv-km">Komoditas</label><select id="b-pv-km" data-bantuan-filter="pv.komoditas">' + opsiKomoditas(semua, V.komoditas) + "</select>" +
-      '<span class="sumber">Data per ' + e(F().tanggal(j.data_per)) + " · wilayah mengikuti Master Lokus</span></div>";
-    var daftar = '<div class="wadah-tabel"><table class="tabel"><thead><tr><th scope="col">Provinsi</th><th scope="col" class="angka">Target (ha)</th><th scope="col" class="angka">Fisik</th><th scope="col" class="angka">Anggaran</th></tr></thead><tbody>' +
+      saringanKedua(semua, V, "pv") +
+      '<span class="sumber">Data per ' + e(F().tanggal(j.data_per)) + " · hasil integrasi " + (sm ? "sheet 17" : "sheet 7") + " · wilayah mengikuti Master Lokus</span></div>" + penjelasJenis();
+    var k = R().kartu(dasar);
+    var banner = sm && k.pagu_tl ? '<div class="banner"><span>' + e(F().rupiahM(k.pagu_tl) + " (" + pct(k.pagu_tl, k.pagu) + " pagu semua akun) tidak punya lokus dan tidak masuk provinsi mana pun, sehingga jumlah semua provinsi lebih kecil dari angka nasional.") + "</span></div>" : "";
+    var daftar = '<div class="wadah-tabel"><table class="tabel"><thead><tr><th scope="col">Provinsi</th><th scope="col" class="angka">Target (ha)</th><th scope="col" class="angka">Fisik</th><th scope="col" class="angka">' + (sm ? "SP2D" : "Anggaran") + "</th></tr></thead><tbody>" +
       prov.map(function (p) {
         return "<tr" + (p.nama === V.provinsi ? ' class="terpilih"' : "") + '><td><button type="button" class="tautan-sel" data-bantuan-buka-prov="' + e(p.nama) + '"' + (p.nama === V.provinsi ? ' aria-current="true"' : "") + ">" + e(namaProv(p.nama)) + "</button></td>" +
           '<td class="angka">' + (p.target_fisik ? S().nf(p.target_fisik) : "–") + '</td><td class="angka">' + pct(p.realisasi_fisik, p.target_reg) + '</td><td class="angka">' + pct(p.terbayar, p.pagu) + "</td></tr>";
-      }).join("") + "</tbody></table></div>";
-    var kiri = seksi("Semua provinsi", daftar + '<p class="catatan">Fisik = realisasi tanam dibanding target reguler. Anggaran = terbayar dibanding pagu.</p>', { kanan: '<span class="seksi-keterangan">Klik nama provinsi untuk membuka rinciannya</span>' });
+      }).join("") +
+      (sm && k.pagu_tl ? '<tr class="baris-sub"><td>Tanpa lokus · pagu ' + e(F().rupiahM(k.pagu_tl)) + '</td><td class="angka">–</td><td class="angka">–</td><td class="angka">' + pct(k.terbayar_tl, k.pagu_tl) + "</td></tr>" : "") +
+      "</tbody></table></div>";
+    var kiri = seksi("Semua provinsi", daftar + '<p class="catatan">' + (sm ? "Fisik sama dengan BANPER. SP2D = realisasi SP2D semua akun dibanding pagu semua akun. Tanpa lokus tidak punya rincian kabupaten."
+      : "Fisik = realisasi tanam dibanding target reguler. Anggaran = terbayar dibanding pagu bantuan.") + "</p>", { kanan: '<span class="seksi-keterangan">Klik nama provinsi untuk membuka rinciannya</span>' });
     var kanan = V.provinsi ? rincianProvinsi(dasar, V.provinsi, j) : seksi("Rincian provinsi", '<p class="paragraf-kecil">Tidak ada provinsi untuk pilihan ini.</p>');
-    el.innerHTML = filter + '<div class="grid-rekap-prov">' + kiri + kanan + "</div>" + '<p class="catatan" id="bantuan-pesan" role="status"></p>';
+    el.innerHTML = filter + banner + '<div class="grid-rekap-prov">' + kiri + kanan + "</div>" + '<p class="catatan" id="bantuan-pesan" role="status"></p>';
     // tabel kabupaten/kota dibagi per halaman supaya rincian setinggi daftar Semua provinsi
-    var kunciKab = [V.provinsi, V.sumber, V.komoditas].join("|");
+    var kunciKab = [STATE.jenis, V.provinsi, V.sumber, V.komoditas, V.kegiatan].join("|");
     if (V.kabKunci !== kunciKab) { V.kabKunci = kunciKab; V.kabHal = null; }
     var g = el.querySelector(".grid-rekap-prov");
     Monev.bagiHalaman.pasang({ kartu: el.querySelector(".seksi-rincian-prov"), lawan: g && g.firstElementChild, baris: "tr[data-hal-baris]",
       perHal: 15, minBaris: 10, keadaan: V, kunci: "kabHal" });
   }
   function rincianProvinsi(dasar, nama, j) {
-    var rows = R().saring(dasar, { provinsi: nama }), k = R().kartu(rows), ben = (j.provinsi_bencana || []).indexOf(nama) >= 0;
+    var sm = jenisSemua(), rows = R().saring(dasar, { provinsi: nama }), k = R().kartu(rows), ben = (j.provinsi_bencana || []).indexOf(nama) >= 0;
     var kab = R().perKabupaten(rows, nama).sort(function (a, b) { return a.grup - b.grup || b.pagu - a.pagu || (a.kabupaten < b.kabupaten ? -1 : 1); });
-    var kabTabel = '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Kabupaten/kota</th><th scope="col">Komoditas / kegiatan</th><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">Terbayar (Rp)</th></tr></thead><tbody>' +
+    var kabTabel = '<div class="wadah-tabel"><table class="tabel tabel-sedang"><thead><tr><th scope="col">Kabupaten/kota</th><th scope="col">' + (sm ? "Kegiatan / RO" : "Komoditas / kegiatan") + '</th><th scope="col" class="angka">Target</th><th scope="col" class="angka">Realisasi</th><th scope="col" class="angka">%</th><th scope="col" class="angka">Pagu (Rp)</th><th scope="col" class="angka">' + (sm ? "Realisasi SP2D (Rp)" : "Terbayar (Rp)") + "</th></tr></thead><tbody>" +
       kab.map(function (x) {
         return "<tr data-hal-baris><td>" + e(x.kabupaten) + "</td><td>" + e(x.kegiatan) + (x.sumber_dana === "ABT" ? " " + chip("abt", "ABT") : "") + '</td><td class="angka">' + fisik(x.target, x.satuan) + '</td><td class="angka">' + fisik(x.realisasi, x.satuan) +
           '</td><td class="angka">' + (x.satuan === "Hektar" && x.grup <= 1 ? pct(x.realisasi, x.target) : "–") + '</td><td class="angka">' + F().ribuan(x.pagu) + '</td><td class="angka">' + F().ribuan(x.terbayar) + "</td></tr>";
@@ -626,32 +730,42 @@
     return '<section class="seksi seksi-rincian-prov"><div class="seksi-kepala"><div class="kolom-blok"><span class="label-kecil">RINCIAN PROVINSI</span><h2>' + e(namaProv(nama)) + "</h2></div>" +
       (ben ? chip("abt", "Provinsi terdampak bencana") : "") + "</div>" +
       '<div class="grid-kartu grid-kartu-padat grid-kartu-empat">' + kartuRekap("Target fisik", F().hektar(k.target), "kawasan") + kartuRekap("Realisasi tanam", F().hektar(k.realisasi_reg), pct(k.realisasi_reg, k.target_reg) + " dari target reguler") +
-      kartuRekap("Pagu", F().rupiahM(k.pagu), "kawasan, pendukung, benih, KBD") + kartuRekap("Terbayar", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " dari pagu") + "</div>" +
-      '<div class="seksi-kepala"><h3 class="subjudul">Per komoditas</h3>' + tombolCSV("prov-kegiatan") + "</div>" + tabelKegiatan(rows, "provinsi", ben) +
+      (sm ? kartuRekap("Pagu", F().rupiahM(k.pagu), "semua akun berlokus provinsi ini") + kartuRekap("Realisasi SP2D", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " dari pagu")
+        : kartuRekap("Pagu", F().rupiahM(k.pagu), "akun 526: kawasan dan pendukung") + kartuRekap("Terbayar", F().rupiahM(k.terbayar), pct(k.terbayar, k.pagu) + " dari pagu")) + "</div>" +
+      '<div class="seksi-kepala"><h3 class="subjudul">' + (sm ? "Per kegiatan" : "Per komoditas") + "</h3>" + tombolCSV("prov-kegiatan") + "</div>" + tabelKegiatan(rows, "provinsi", ben) +
       '<div class="seksi-kepala"><h3 class="subjudul">Per kabupaten/kota</h3>' + tombolCSV("prov-kab") + "</div>" + kabTabel +
       '<p class="catatan">Baris yang lokusnya tingkat provinsi (bukan kabupaten tertentu) tampil sebagai "' + e(R().TANPA_KAB) + '". Baris yang lokusnya satker balai mengikuti lokasi DIPA satker itu.</p></section>';
   }
 
   /* ============================== CSV ============================== */
   function csv(id) {
-    var j = D.rekap, semua = R().baca(j), tgl = String(j.data_per || "").slice(0, 10);
-    var kepala = ["Kegiatan/Bantuan", "Sub-komponen", "Sumber dana", "Satuan", "Jumlah provinsi", "Jumlah kab/kota", "Target", "Realisasi fisik", "Pagu (Rp)", "Terbayar (Rp)", "Pagu bencana (Rp)", "Terbayar bencana (Rp)"];
+    var j = RJ(); if (!j) return;
+    var sm = jenisSemua(), semua = R().baca(j), tgl = String(j.data_per || "").slice(0, 10), awal = sm ? "rekap-semua-akun-" : "rekap-bantuan-";
+    var bayar = sm ? "Realisasi SP2D (Rp)" : "Terbayar (Rp)";
+    var kepala = [sm ? "Kegiatan/RO" : "Kegiatan/Bantuan", sm ? "Bagian" : "Sub-komponen", "Sumber dana", "Satuan", "Jumlah provinsi", "Jumlah kab/kota", "Target", "Realisasi fisik", "Pagu (Rp)", bayar, "Pagu bencana (Rp)", sm ? "SP2D bencana (Rp)" : "Terbayar bencana (Rp)"];
+    if (sm) kepala.unshift("Kelompok");
     var baris = function (keg) {
       var out = [];
       keg.forEach(function (x) {
-        out.push([x.kegiatan, "", x.sumber_dana || "", x.satuan, x.jml_prov, x.jml_kab, x.target, x.realisasi, x.pagu, x.terbayar, x.pagu_b, x.terbayar_b]);
-        x.sub.forEach(function (s) { out.push([x.kegiatan, s.nama, x.sumber_dana || "", x.satuan, "", "", s.target, s.realisasi, s.pagu, s.terbayar, s.pagu_b, s.terbayar_b]); });
+        var g = sm ? [R().namaGrup(j, x.grup)] : [];
+        out.push(g.concat([x.kegiatan, "", x.sumber_dana || "", x.satuan, x.jml_prov, x.jml_kab, x.target, x.realisasi, x.pagu, x.terbayar, x.pagu_b, x.terbayar_b]));
+        x.sub.forEach(function (s) { out.push(g.concat([x.kegiatan, s.nama, x.sumber_dana || "", x.satuan, "", "", s.target, s.realisasi, s.pagu, s.terbayar, s.pagu_b, s.terbayar_b])); });
       });
       return out;
     };
-    if (id === "nasional") {
-      var N = STATE.nas; Monev.unduhCSV("rekap-bantuan-nasional-" + tgl + ".csv", kepala, baris(R().perKegiatan(R().saring(semua, { sumber: N.sumber, komoditas: N.komoditas }))));
+    if (id === "nasional" || id === "belanja") {
+      var rowsN = saringJenis(semua, STATE.nas);
+      if (id === "belanja") {
+        var B = [];
+        R().perJenisBelanja(rowsN).forEach(function (x) { [x].concat(x.sub).forEach(function (y) { B.push([y.akun, y.nama, y.pagu, y.terbayar, y.pagu_tl, y.terbayar_tl]); }); });
+        Monev.unduhCSV(awal + "jenis-belanja-" + tgl + ".csv", ["Akun", "Jenis belanja", "Pagu (Rp)", "Realisasi SP2D (Rp)", "Pagu tanpa lokus (Rp)", "SP2D tanpa lokus (Rp)"], B);
+      } else Monev.unduhCSV(awal + "nasional-" + tgl + ".csv", kepala, baris(R().perKegiatan(rowsN)));
       return;
     }
-    var V = STATE.pv, rows = R().saring(semua, { sumber: V.sumber, komoditas: V.komoditas, provinsi: V.provinsi });
-    if (id === "prov-kegiatan") Monev.unduhCSV("rekap-bantuan-" + V.provinsi.toLowerCase().replace(/\s+/g, "-") + "-" + tgl + ".csv", kepala, baris(R().perKegiatan(rows)));
-    else Monev.unduhCSV("rekap-bantuan-" + V.provinsi.toLowerCase().replace(/\s+/g, "-") + "-kabupaten-" + tgl + ".csv",
-      ["Kabupaten/kota", "Kegiatan/Bantuan", "Sumber dana", "Satuan", "Target", "Realisasi fisik", "Pagu (Rp)", "Terbayar (Rp)"],
+    var V = STATE.pv, rows = R().saring(saringJenis(semua, V), { provinsi: V.provinsi }), nm = V.provinsi.toLowerCase().replace(/\s+/g, "-");
+    if (id === "prov-kegiatan") Monev.unduhCSV(awal + nm + "-" + tgl + ".csv", kepala, baris(R().perKegiatan(rows)));
+    else Monev.unduhCSV(awal + nm + "-kabupaten-" + tgl + ".csv",
+      ["Kabupaten/kota", sm ? "Kegiatan/RO" : "Kegiatan/Bantuan", "Sumber dana", "Satuan", "Target", "Realisasi fisik", "Pagu (Rp)", bayar],
       R().perKabupaten(rows, V.provinsi).map(function (x) { return [x.kabupaten, x.kegiatan, x.sumber_dana || "", x.satuan, x.target, x.realisasi, x.pagu, x.terbayar]; }));
   }
 
@@ -673,11 +787,13 @@
 
   function pesan(t) { var p = document.getElementById("bantuan-pesan"); if (p) p.textContent = t; }
   function unduh(jenis, tombol) {
-    if (!D.rekap) { pesan("Rekap belum terbit; belum ada yang bisa diunduh."); return; }
+    if (!RJ()) { pesan("Rekap belum terbit; belum ada yang bisa diunduh."); return; }
     var Dk = window.RekapDokumen, lama = tombol ? tombol.textContent : "";
     if (tombol) { tombol.disabled = true; tombol.textContent = "Menyiapkan…"; }
     var s = jenis === "excel" ? (location.hash.indexOf("provinsi") >= 0 ? STATE.pv : STATE.nas) : jenis === "pdf-nasional" ? STATE.nas : STATE.pv;
-    var p = jenis === "excel" ? Dk.unduhExcel(D.rekap, s) : jenis === "excel-provinsi" ? Dk.unduhExcelProvinsi(D.rekap, s) : Dk.unduhPDF(jenis.replace("pdf-", ""), D.rekap, s);
+    s = Object.assign({}, s, jenisSemua() ? { komoditas: "" } : { kegiatan: "" });
+    var j = RJ();
+    var p = jenis === "excel" ? Dk.unduhExcel(j, s) : jenis === "excel-provinsi" ? Dk.unduhExcelProvinsi(j, s) : Dk.unduhPDF(jenis.replace("pdf-", ""), j, s);
     p.then(function () { pesan(jenis.indexOf("excel") === 0 ? "Excel diunduh." : "PDF diunduh."); }, function (err) { pesan((err && err.message || "Unduhan gagal") + ". Periksa sambungan internet lalu coba lagi."); })
       .then(function () { if (tombol) { tombol.disabled = false; tombol.textContent = lama; } });
   }
@@ -705,6 +821,7 @@
         var f = elAktif.querySelector('[data-bantuan-kom="' + STATE.kom + '"]'); if (f && !t.classList.contains("baris-bar-tombol")) f.focus();
       } else if (t.hasAttribute("data-bseg")) {
         var k = t.getAttribute("data-bseg"), v = t.getAttribute("data-nilai");
+        if (k === "jenis") { gantiJenis(v); return; }
         if (k === "ukuran") STATE.ukuran = v; else if (k === "tren") STATE.tren = v;
         gambarJejak(elAktif);
         var b = elAktif.querySelector('[data-bseg="' + k + '"][data-nilai="' + v + '"]'); if (b) b.focus();
@@ -740,6 +857,16 @@
         D.waktuMuat && Date.now() - D.waktuMuat > JEDA_AUTO) isiJejak(elAktif, false);
     });
   }
+  function gantiJenis(v) {
+    if (v === STATE.jenis) return;
+    STATE.jenis = v;
+    var el = elAktif, prov = location.hash === "#bantuan-provinsi";
+    muatJenis(D.ta).then(function () {
+      if (!el.isConnected) return;
+      if (prov) gambarProvinsi(el); else gambarNasional(el);
+      var b = el.querySelector('[data-bseg="jenis"][data-nilai="' + v + '"]'); if (b) b.focus();
+    }).catch(function () { if (el.isConnected) el.innerHTML = Monev.data.tampil.gagal("Rekap bantuan gagal dimuat", ""); });
+  }
   function pilihProvPeta(n) {
     STATE.prov = n; gantiPeta();
     var p = elAktif.querySelector('[data-bantuan-prov="' + n + '"]'); if (p && document.activeElement && document.activeElement.hasAttribute("data-bantuan-prov")) p.focus();
@@ -752,7 +879,7 @@
   function isi(el, r) {
     elAktif = el; rAktif = r; pasangSekali();
     var ta = Monev.tahun.aktif(), tab = tabDari(r);
-    if (D.ta !== ta) { D = { ta: ta, sisbun: null, rekap: undefined, titik: null, catatan: null, lap: null, satker: {}, waktuMuat: 0 }; }
+    if (D.ta !== ta) { D = { ta: ta, sisbun: null, rekap: undefined, semua: undefined, titik: null, catatan: null, lap: null, satker: {}, waktuMuat: 0 }; }
     if (tab === "jejak" && !Monev.tahun.berjalan(ta)) {
       /* API Sisbun tidak punya pilihan tahun: Jejak hanya untuk tahun berjalan (keputusan Pilih tahun 15 Nov 2026). */
       clearTimeout(timerAuto);
@@ -764,15 +891,8 @@
     if (tab === "jejak") { if (D.sisbun) { gambarJejak(el); jadwalkan(el); } else isiJejak(el, false); return; }
     clearTimeout(timerAuto);
     el.innerHTML = Monev.data.tampil.memuat(4);
-    (D.rekap !== undefined ? Promise.resolve(D.rekap) : muatRekap(ta)).then(function (j) {
-      D.rekap = j;
+    muatJenis(ta).then(function () {
       if (!el.isConnected) return;
-      if (!j) {
-        el.innerHTML = Monev.data.tampil.kosong("Rekap bantuan TA " + ta + " belum terbit",
-          "Rekap nasional dan per provinsi tampil setelah admin mengunggah hasil aplikasi integrasi di menu Unggah data.",
-          null, "Sumbernya hasil integrasi SAKTI, FA16 Segmen, SAT 3, Hilirisasi, dan Produksi Benih.");
-        return;
-      }
       if (tab === "nasional") gambarNasional(el); else gambarProvinsi(el);
     }).catch(function () {
       if (el.isConnected) el.innerHTML = Monev.data.tampil.gagal("Rekap bantuan gagal dimuat", "");

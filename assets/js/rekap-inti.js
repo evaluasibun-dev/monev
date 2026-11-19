@@ -1,27 +1,38 @@
-/* Rekap bantuan — fungsi murni dari data/<ta>/integrasi/rekap.json (disusun RekapInti_ di monev-gas/gas/RekapInti.gs).
-   Satu sumber untuk layar Rekap nasional/provinsi, Jejak (anggaran per komoditas), PDF, dan Excel.
-   Pengelompokan dan urutan mengikuti banper.py aplikasi integrasi (web lama evaluasibun-dev/monev):
-   baris Kegiatan/Bantuan diurut grup (kawasan, kawasan ABT, pendukung, KBD, produksi benih) lalu pagu menurun. */
+/* Rekap bantuan — fungsi murni dari data/<ta>/integrasi/rekap.json (BANPER, sheet 7) dan rekap-semua.json (Semua akun,
+   sheet 17), keduanya disusun RekapInti_ di monev-gas/gas/RekapInti.gs (Keputusan 1, diubah 19 Nov 2026).
+   Satu sumber untuk layar Rekap nasional/provinsi, Jejak (anggaran per komoditas, BANPER), PDF, dan Excel.
+   Baris Kegiatan/Bantuan diurut grup (kawasan, kawasan ABT, pendukung; Semua akun + perbenihan, lainnya) lalu pagu menurun.
+   Semua akun: kolom sp2d dibaca sebagai "terbayar" supaya fungsi di bawah dipakai bersama. */
 (function (akar) {
   "use strict";
 
   var TANPA_KAB = "Tingkat provinsi";
-  var NAMA_GRUP = ["Kawasan", "Kawasan ABT", "Kegiatan pendukung", "KBD Tebu", "Produksi benih"];
+  var NAMA_GRUP = ["Kawasan (reguler)", "Kawasan (ABT)", "Kegiatan pendukung", "Perbenihan (5890)", "Dukungan manajemen dan layanan lain"];
+  /* nama jenis belanja (akun 3 digit) dari kolom AKUN sheet 17 */
+  var NAMA_AKUN = { "511": "Belanja gaji dan tunjangan", "512": "Belanja uang lembur", "521": "Belanja barang (bahan, honor output, persediaan)",
+    "521822": "Barang persediaan (pengadaan benih produksi)", "522": "Belanja jasa (sewa, jasa profesi)", "523": "Belanja pemeliharaan",
+    "524": "Belanja perjalanan dinas", "526": "Belanja barang fisik diserahkan kepada masyarakat/Pemda (BANPER)",
+    "532": "Belanja modal peralatan dan mesin", "-": "Fisik tanpa anggaran di SAKTI" };
 
-  /** rekap.json → daftar objek baris */
+  /** rekap.json / rekap-semua.json → daftar objek baris */
   function baca(j) {
     var k = (j && j.kolom) || [];
     return ((j && j.baris) || []).map(function (r) {
-      var o = {}; k.forEach(function (n, i) { o[n] = r[i]; }); return o;
+      var o = {}; k.forEach(function (n, i) { o[n] = r[i]; });
+      if (o.terbayar == null && o.sp2d != null) o.terbayar = o.sp2d;
+      return o;
     });
   }
+  function semuaAkun(j) { return !!(j && j.jenis === "semua"); }
+  function namaGrup(j, g) { return ((j && j.nama_grup) || NAMA_GRUP)[g] || ""; }
 
-  /** saring: {sumber: "" | "REGULER" | "ABT", komoditas: "", provinsi: ""} */
+  /** saring: {sumber: "" | "REGULER" | "ABT", komoditas: "", kegiatan: "" (kode, Semua akun), provinsi: ""} */
   function saring(rows, s) {
     s = s || {};
     return rows.filter(function (r) {
       if (s.sumber && r.sumber_dana !== s.sumber) return false;
       if (s.komoditas && r.komoditas !== s.komoditas) return false;
+      if (s.kegiatan && r.kode_kegiatan !== s.kegiatan) return false;
       if (s.provinsi && r.provinsi !== s.provinsi) return false;
       return true;
     });
@@ -52,6 +63,8 @@
     d.forEach(function (x) {
       x.jml_prov = Object.keys(x._prov).length; x.jml_kab = Object.keys(x._kab).length;
       x.sub = Object.keys(x._sub).map(function (n) { return x._sub[n]; }).sort(function (a, b) { return b.target - a.target || b.pagu - a.pagu; });
+      /* Semua akun: satu bagian saja ("Akun lain", "Bantuan (akun 526)") tidak perlu sub-baris */
+      if (x.sub.length === 1 && /akun/i.test(x.sub[0].nama)) x.sub = [];
       delete x._prov; delete x._kab; delete x._sub;
     });
     return d.sort(urutKegiatan);
@@ -72,11 +85,13 @@
     return t;
   }
 
-  /** Kartu nasional: target reguler + ABT, realisasi dan capaian dari reguler (ABT belum punya realisasi fisik). */
+  /** Kartu nasional: target reguler + ABT, realisasi dan capaian dari reguler (ABT belum punya realisasi fisik).
+      pagu_tl / terbayar_tl = baris tanpa lokus provinsi (Semua akun). */
   function kartu(rows) {
-    var k = { target: 0, target_reg: 0, realisasi_reg: 0, pagu: 0, terbayar: 0 };
+    var k = { target: 0, target_reg: 0, realisasi_reg: 0, pagu: 0, terbayar: 0, pagu_tl: 0, terbayar_tl: 0 };
     rows.forEach(function (r) {
       k.pagu += r.pagu; k.terbayar += r.terbayar;
+      if (!r.provinsi) { k.pagu_tl += r.pagu; k.terbayar_tl += r.terbayar; }
       if (r.grup <= 1) { k.target += r.target; if (r.sumber_dana === "REGULER") { k.target_reg += r.target; k.realisasi_reg += r.realisasi_fisik; } }
     });
     var j = jumlah([], rows); k.jml_prov = j.jml_prov; k.jml_kab = j.jml_kab;
@@ -110,7 +125,29 @@
     return d.filter(function (x) { return x.target || x.pagu; });
   }
 
-  /** Anggaran per komoditas untuk Jejak: kawasan (reguler + ABT) + produksi benih (+ KBD untuk tebu). */
+  /** Per jenis belanja (Semua akun): akun 3 digit, 521822 sebagai sub-baris 521; tl = tanpa lokus. */
+  function perJenisBelanja(rows) {
+    var g = {}, d = [];
+    function ambil(k) {
+      if (!g[k]) { g[k] = Object.assign(nol(), { akun: k, nama: NAMA_AKUN[k] || ("Akun " + k), pagu_tl: 0, terbayar_tl: 0, sub: [] }); if (k !== "521822") d.push(g[k]); }
+      return g[k];
+    }
+    rows.forEach(function (r) {
+      var a = String(r.akun || "-"), list = a === "521822" ? [ambil("521"), ambil("521822")] : [ambil(a)];
+      list.forEach(function (x) { tambah(x, r); if (!r.provinsi) { x.pagu_tl += r.pagu; x.terbayar_tl += r.terbayar; } });
+    });
+    if (g["521822"]) g["521"].sub.push(g["521822"]);
+    return d.filter(function (x) { return x.pagu || x.terbayar; })
+      .sort(function (a, b) { return a.akun === "-" ? 1 : b.akun === "-" ? -1 : a.akun < b.akun ? -1 : 1; });
+  }
+
+  /** Daftar kode kegiatan yang ada (Semua akun), urut kode. */
+  function daftarKegiatan(rows) {
+    var s = {}; rows.forEach(function (r) { if (r.kode_kegiatan) s[r.kode_kegiatan] = 1; });
+    return Object.keys(s).sort();
+  }
+
+  /** Anggaran per komoditas untuk Jejak (BANPER): baris kawasan reguler + ABT. */
   function perKomoditas(rows) {
     var g = {};
     rows.forEach(function (r) {
@@ -134,9 +171,10 @@
       .replace(/\bDki\b/, "DKI");
   }
 
-  var api = { TANPA_KAB: TANPA_KAB, NAMA_GRUP: NAMA_GRUP, baca: baca, saring: saring, perKegiatan: perKegiatan, jumlah: jumlah,
+  var api = { TANPA_KAB: TANPA_KAB, NAMA_GRUP: NAMA_GRUP, NAMA_AKUN: NAMA_AKUN, baca: baca, semuaAkun: semuaAkun, namaGrup: namaGrup,
+    saring: saring, perKegiatan: perKegiatan, jumlah: jumlah,
     kartu: kartu, daftarProvinsi: daftarProvinsi, perKabupaten: perKabupaten, perKomoditas: perKomoditas,
-    daftarKomoditas: daftarKomoditas, namaProvinsi: namaProvinsi };
+    perJenisBelanja: perJenisBelanja, daftarKegiatan: daftarKegiatan, daftarKomoditas: daftarKomoditas, namaProvinsi: namaProvinsi };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else akar.RekapInti = api;
 })(typeof window !== "undefined" ? window : this);

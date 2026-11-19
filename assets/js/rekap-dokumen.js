@@ -2,7 +2,9 @@
    Angka dari rekap.json yang sama dengan layar, diolah window.RekapInti. Pustaka dimuat saat tombol ditekan.
    PDF: kop Kementerian Pertanian RI, judul dan tanggal data, tabel; "Halaman X dari Y" dan sumber di kaki tiap halaman;
    catatan data di halaman terakhir. Format Bencana (pagu dan terbayar non bencana/bencana) hanya untuk nasional dan
-   provinsi terdampak (rekap.json provinsi_bencana). */
+   provinsi terdampak (rekap.json provinsi_bencana).
+   Dua jenis rekap (19 Nov 2026): j.jenis "banper" (rekap.json, sheet 7) atau "semua" (rekap-semua.json, sheet 17);
+   Semua akun memakai "Realisasi SP2D", baris kelompok, baris tanpa lokus, dan tabel per jenis belanja. */
 (function () {
   "use strict";
 
@@ -42,21 +44,35 @@
   function tglTeks(iso) { return iso ? Monev.format.tanggal(iso) : "–"; }
 
   var CATATAN = [
-    "Sumber: hasil integrasi SAKTI (anggaran), FA16 Segmen, RAW SAT 3 (target fisik), Hilirisasi (luas tanam desa), dan berkas Produksi Benih; diolah Setditjenbun.",
-    "Anggaran terbayar = SP2D akun 526 + realisasi Produksi Benih + KBD Tebu. Outstanding kontrak tidak termasuk. Pagu bantuan dihitung dengan dasar yang sama.",
+    "Sumber: sheet 7_Gabungan_Anggaran_Fisik hasil integrasi SAKTI (anggaran), FA16 Segmen (SP2D), RAW SAT 3 (target fisik), dan Hilirisasi (luas tanam desa); diolah Setditjenbun.",
+    "BANPER = bantuan pemerintah kepada masyarakat, akun 526. Anggaran terbayar = SP2D akun 526; Produksi Benih dan KBD Tebu tidak dimasukkan. Outstanding kontrak tidak termasuk.",
     "Anggaran di semua tingkat mengikuti RAW SAKTI; kode provinsi dan kabupaten mengikuti Master Lokus.",
-    "Reguler dan ABT selalu baris terpisah. ABT belum punya realisasi fisik di Hilirisasi. Baris Produksi Benih dan KBD Tebu belum dipisah per sumber dana.",
+    "Reguler dan ABT selalu baris terpisah. ABT belum punya realisasi fisik di Hilirisasi.",
     "Realisasi fisik = luas tanam desa (Hilirisasi) diagregasi ke kabupaten; luas HOK tidak dihitung. Target dan realisasi fisik mengikuti akun 526115.",
-    "Jumlah fisik hanya menjumlah baris kawasan (hektar). Volume Produksi Benih (batang) dan KBD Tebu tidak dijumlah. Volume KBD Tebu tercatat \"Hektar\" di sumber tetapi bernilai ratusan juta, kemungkinan satuannya mata.",
+    "Jumlah fisik hanya menjumlah baris kawasan (hektar).",
     "Bencana = sumber dana ABT, serta kegiatan reguler di kabupaten terdampak bencana (Aceh, Sumatera Utara, Sumatera Barat). Rincian bencana hanya untuk nasional dan provinsi terdampak.",
     "Baris yang lokusnya tingkat provinsi (tanpa kabupaten) tampil sebagai \"Tingkat provinsi\"."
   ];
+  var CATATAN_SEMUA = [
+    "Sumber: sheet 17_Gabungan_Semua_Akun hasil integrasi SAKTI (anggaran semua akun), FA16 Segmen (SP2D), RAW SAT 3 (target fisik), dan Hilirisasi (luas tanam desa); diolah Setditjenbun.",
+    "Semua akun = seluruh pagu dan realisasi SP2D Ditjenbun per lokus, semua akun belanja (51 pegawai, 52 barang, 53 modal). Ukuran anggaran = realisasi SP2D; outstanding kontrak tidak termasuk.",
+    "Pagu mengikuti RAW SAKTI dan SP2D mengikuti FA16 pada tanggal proses integrasi, sehingga bisa berbeda dengan menu Anggaran (FA16 dan MyIntress harian).",
+    "Anggaran tanpa lokus provinsi/kabupaten (terutama pengadaan benih produksi kegiatan 5890 dan belanja pegawai/operasional) tetap dihitung di baris kegiatannya, tetapi tidak masuk tabel provinsi mana pun.",
+    "Baris kawasan dan pendukung memakai label yang sama dengan BANPER, dipecah menjadi bagian akun 526 dan akun lain; kegiatan lain per RO.",
+    "Reguler dan ABT selalu baris terpisah. Fisik hanya ada di baris pembawa fisik (akun 526115) dan sama dengan BANPER; jumlah fisik hanya menjumlah baris kawasan (hektar).",
+    "Bencana = sumber dana ABT, serta kegiatan reguler di kabupaten terdampak bencana. Rincian bencana hanya untuk nasional dan provinsi terdampak.",
+    "Baris yang lokusnya tingkat provinsi (tanpa kabupaten) tampil sebagai \"Tingkat provinsi\"."
+  ];
+  function sm(j) { return window.RekapInti.semuaAkun(j); }
+  function catatanDari(j) { return sm(j) ? CATATAN_SEMUA : CATATAN; }
+  function kataBayar(j) { return sm(j) ? "Realisasi SP2D" : "Terbayar"; }
 
   /* ================= PDF ================= */
-  function kepalaTabel(lingkup, bencana) {
-    var h1 = ["No", "Kegiatan / sub-komponen", "Sumber dana"].concat(lingkup === "nasional" ? ["Prov"] : []).concat(["Kab/kota", "Volume", "Satuan", "Realisasi fisik", "% fisik",
-      "Pagu (Rp)", "Terbayar (Rp)", "% terbayar"]);
-    if (bencana) h1 = h1.concat(["Pagu non bencana (Rp)", "Pagu bencana (Rp)", "Terbayar non bencana (Rp)", "Terbayar bencana (Rp)"]);
+  function kepalaTabel(lingkup, bencana, j) {
+    var b = kataBayar(j);
+    var h1 = ["No", sm(j) ? "Kegiatan / RO" : "Kegiatan / sub-komponen", "Sumber dana"].concat(lingkup === "nasional" ? ["Prov"] : []).concat(["Kab/kota", "Volume", "Satuan", "Realisasi fisik", "% fisik",
+      "Pagu (Rp)", b + " (Rp)", "% " + b.toLowerCase()]);
+    if (bencana) h1 = h1.concat(["Pagu non bencana (Rp)", "Pagu bencana (Rp)", b + " non bencana (Rp)", b + " bencana (Rp)"]);
     return [h1];
   }
   function selBaris(x, lingkup, bencana, no, label) {
@@ -66,10 +82,17 @@
     if (bencana) r = r.concat([rupiah(x.pagu - x.pagu_b), rupiah(x.pagu_b), rupiah(x.terbayar - x.terbayar_b), rupiah(x.terbayar_b)]);
     return r;
   }
-  function badanTabel(rows, lingkup, bencana, kabDari) {
-    var R = window.RekapInti, keg = R.perKegiatan(rows), t = R.jumlah(keg, rows), body = [];
+  function badanTabel(rows, lingkup, bencana, kabDari, j) {
+    var R = window.RekapInti, keg = R.perKegiatan(rows), t = R.jumlah(keg, rows), body = [], semua = sm(j), grupLalu = null;
     keg.forEach(function (x, i) {
-      body.push({ jenis: "induk", sel: selBaris(x, lingkup, bencana, String(i + 1)) });
+      if (semua && x.grup !== grupLalu) {   /* Semua akun: baris kelompok berisi subtotal */
+        grupLalu = x.grup;
+        var kg = keg.filter(function (y) { return y.grup === x.grup; }), tg = R.jumlah(kg, rows.filter(function (r) { return r.grup === x.grup; }));
+        tg.satuan = "Hektar"; tg.grup = x.grup; tg.sumber_dana = null;
+        var sg = selBaris(tg, lingkup, bencana, "", R.namaGrup(j, x.grup).toUpperCase()); sg[2] = "";
+        body.push({ jenis: "induk", sel: sg });
+      }
+      body.push({ jenis: semua ? "item" : "induk", sel: selBaris(x, lingkup, bencana, String(i + 1)) });
       x.sub.forEach(function (s) {
         s.satuan = x.satuan; s.grup = x.grup; s.sumber_dana = x.sumber_dana;
         body.push({ jenis: "sub", sel: selBaris(s, lingkup, bencana, "", "   · " + s.nama) });
@@ -82,6 +105,26 @@
     var tr = selBaris(t, lingkup, bencana, "");
     tr[lingkup === "nasional" ? 6 : 5] = "ha (kawasan)";
     body.push({ jenis: "jumlah", sel: tr });
+    if (semua && lingkup === "nasional") {
+      var k = R.kartu(rows);
+      if (k.pagu_tl || k.terbayar_tl) {
+        var tl = Object.assign({}, t, { kegiatan: "   di antaranya tanpa lokus (tidak masuk provinsi mana pun)", target: 0, realisasi: 0, pagu: k.pagu_tl, terbayar: k.terbayar_tl, pagu_b: 0, terbayar_b: 0, jml_prov: null, jml_kab: null });
+        var sl = selBaris(tl, lingkup, bencana, ""); sl[2] = "";
+        if (bencana) { var n = sl.length; sl[n - 4] = ""; sl[n - 3] = ""; sl[n - 2] = ""; sl[n - 1] = ""; }
+        body.push({ jenis: "sub", sel: sl });
+      }
+    }
+    return body;
+  }
+  /** Tabel per jenis belanja (Semua akun, PDF nasional). */
+  function badanBelanja(rows) {
+    var R = window.RekapInti, body = [], T = { pagu: 0, terbayar: 0, pagu_tl: 0 };
+    R.perJenisBelanja(rows).forEach(function (x, i) {
+      T.pagu += x.pagu; T.terbayar += x.terbayar; T.pagu_tl += x.pagu_tl;
+      body.push({ jenis: "induk", sel: [String(i + 1), x.akun === "-" ? x.nama : x.akun + " " + x.nama, rupiah(x.pagu), rupiah(x.terbayar), persen(x.terbayar, x.pagu), rupiah(x.pagu_tl)] });
+      x.sub.forEach(function (y) { body.push({ jenis: "sub", sel: ["", "   di antaranya " + y.akun + " " + y.nama, rupiah(y.pagu), rupiah(y.terbayar), persen(y.terbayar, y.pagu), rupiah(y.pagu_tl)] }); });
+    });
+    body.push({ jenis: "jumlah", sel: ["", "JUMLAH", rupiah(T.pagu), rupiah(T.terbayar), persen(T.terbayar, T.pagu), rupiah(T.pagu_tl)] });
     return body;
   }
 
@@ -106,8 +149,9 @@
     doc.setTextColor.apply(doc, W.ink); doc.setFont("helvetica", "bold"); doc.setFontSize(13); doc.text(a, 148.5, 29, { align: "center" });
     doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); doc.setTextColor.apply(doc, W.ink3); doc.text(b, 148.5, 35, { align: "center" });
   }
-  function tabel(doc, head, body, startY) {
-    var angkaMulai = 3, awal = doc.internal.getCurrentPageInfo().pageNumber;
+  function tabel(doc, head, body, startY, angkaMulai) {
+    angkaMulai = angkaMulai || 3;
+    var awal = doc.internal.getCurrentPageInfo().pageNumber;
     /* Lebar kolom dihitung dari isinya: setiap kolom angka/teks pendek selebar isi terpanjang (tidak terpotong baris; kepala kolom
        boleh terpotong pada spasi), huruf sebesar mungkin (≤ 10 pt) selama tabel muat 273 mm, sisa lebar untuk kolom kegiatan
        (sampai muat satu baris), lalu dibagi rata ke semua kolom. */
@@ -138,7 +182,7 @@
         if (d.section !== "body") { return; }
         var b = body[d.row.index];
         if (d.column.index >= angkaMulai) d.cell.styles.halign = "right";
-        if (d.column.index === 2) d.cell.styles.halign = "center";
+        if (d.column.index === 2 && angkaMulai === 3) d.cell.styles.halign = "center";
         if (b.jenis === "jumlah") { d.cell.styles.fontStyle = "bold"; d.cell.styles.fillColor = W.muted; }
         if (b.jenis === "induk") d.cell.styles.fontStyle = "bold";
         if (b.jenis === "kab" || b.jenis === "sub") { d.cell.styles.textColor = W.ink3; d.cell.styles.fontSize = huruf - 0.5; }
@@ -151,7 +195,7 @@
     if (y > 160) { doc.addPage(); kop(doc); y = 30; }
     doc.setTextColor.apply(doc, W.ink); doc.setFont("helvetica", "bold"); doc.setFontSize(9.5); doc.text("Catatan data", 12, y);
     doc.setFont("helvetica", "normal"); doc.setFontSize(8.2); doc.setTextColor.apply(doc, W.ink3);
-    CATATAN.concat(tambahan || []).forEach(function (c) {
+    catatanDari(j).concat(tambahan || []).forEach(function (c) {
       var baris = doc.splitTextToSize("• " + c, 270);
       y += 4.6; if (y + baris.length * 3.8 > 196) { doc.addPage(); kop(doc); y = 30; }
       doc.text(baris, 12, y); y += (baris.length - 1) * 3.8;
@@ -167,24 +211,31 @@
   }
   function namaSumber(s) { return s.sumber === "REGULER" ? "reguler" : s.sumber === "ABT" ? "ABT" : "reguler dan ABT"; }
   function subjudul(j, s) {
-    return "Data per " + tglTeks(j.data_per) + " · " + namaSumber(s) + (s.komoditas ? " · komoditas " + s.komoditas.toLowerCase() : "");
+    return "Data per " + tglTeks(j.data_per) + " · " + (sm(j) ? "semua akun · " : "BANPER (akun 526) · ") + namaSumber(s) + (s.komoditas ? " · komoditas " + s.komoditas.toLowerCase() : "") +
+      (s.kegiatan ? " · kegiatan " + Monev.istilah.kegiatanSingkat(s.kegiatan).toLowerCase() + " (" + s.kegiatan + ")" : "");
   }
+  function saringDok(j, s) { var R = window.RekapInti; return R.saring(R.baca(j), { sumber: s.sumber, komoditas: s.komoditas, kegiatan: s.kegiatan }); }
 
   /** jenis: "nasional" (nasional + satu tabel per provinsi), "provinsi" (satu provinsi + kabupaten), "semua" (semua provinsi + kabupaten) */
   function unduhPDF(jenis, j, s) {
     s = s || {};
     return muatPDF().then(function (jsPDF) {
-      var R = window.RekapInti, semua = R.saring(R.baca(j), { sumber: s.sumber, komoditas: s.komoditas });
+      var R = window.RekapInti, semua = saringDok(j, s);
       var bencanaProv = j.provinsi_bencana || [], doc = buatDokumen(jsPDF, j), ta = j.ta || "";
+      var JUDUL = sm(j) ? "REKAP ANGGARAN DAN FISIK SEMUA AKUN" : "REKAP BANTUAN PEMERINTAH (BANPER) PERKEBUNAN";
       var prov = R.daftarProvinsi(semua).map(function (p) { return p.nama; });
       function satuProvinsi(nama, denganKab) {
         var rows = R.saring(semua, { provinsi: nama }), ben = bencanaProv.indexOf(nama) >= 0;
-        judul(doc, "REKAP BANTUAN PERKEBUNAN DI PROVINSI " + nama + " TA " + ta, subjudul(j, s));
-        tabel(doc, kepalaTabel("provinsi", ben), badanTabel(rows, "provinsi", ben, denganKab ? R.perKabupaten(rows, nama) : null));
+        judul(doc, JUDUL + " DI PROVINSI " + nama + " TA " + ta, subjudul(j, s));
+        tabel(doc, kepalaTabel("provinsi", ben, j), badanTabel(rows, "provinsi", ben, denganKab ? R.perKabupaten(rows, nama) : null, j));
       }
       if (jenis === "nasional") {
-        judul(doc, "REKAP NASIONAL BANTUAN PERKEBUNAN TA " + ta, subjudul(j, s));
-        tabel(doc, kepalaTabel("nasional", true), badanTabel(semua, "nasional", true));
+        judul(doc, JUDUL + " NASIONAL TA " + ta, subjudul(j, s));
+        tabel(doc, kepalaTabel("nasional", true, j), badanTabel(semua, "nasional", true, null, j));
+        if (sm(j)) {
+          judul(doc, "REKAP NASIONAL PER JENIS BELANJA TA " + ta, subjudul(j, s));
+          tabel(doc, [["No", "Jenis belanja (akun)", "Pagu (Rp)", "Realisasi SP2D (Rp)", "% SP2D", "Tanpa lokus (Rp)"]], badanBelanja(semua), null, 2);
+        }
         prov.forEach(function (p) { satuProvinsi(p, false); });
       } else if (jenis === "provinsi") {
         satuProvinsi(s.provinsi, true);
@@ -194,7 +245,7 @@
       catatanAkhir(doc, j);
       kaki(doc);
       var nama = jenis === "nasional" ? "Nasional" : jenis === "provinsi" ? R.namaProvinsi(s.provinsi) : "Semua provinsi";
-      doc.save("Rekap Bantuan Ditjenbun " + ta + " - " + nama + " - " + String(j.data_per || "").slice(0, 10) + ".pdf");
+      doc.save((sm(j) ? "Rekap Semua Akun Ditjenbun " : "Rekap Bantuan Ditjenbun ") + ta + " - " + nama + " - " + String(j.data_per || "").slice(0, 10) + ".pdf");
     });
   }
 
@@ -254,9 +305,9 @@
   function unduhExcel(j, s, satuProvinsi) {
     s = s || {};
     return muatXLSX().then(function (X) {
-      var R = window.RekapInti, semua = R.saring(R.baca(j), { sumber: s.sumber, komoditas: s.komoditas });
+      var R = window.RekapInti, semua = saringDok(j, s), B = kataBayar(j), KEG = sm(j) ? "Kegiatan/RO" : "Kegiatan/Bantuan";
       var HA = "#,##0.00", bagi = function (a, b) { return b ? a / b : 0; };
-      var grupNama = function (x) { return R.NAMA_GRUP[x.grup]; };
+      var grupNama = function (x) { return R.namaGrup(j, x.grup); };
       var pctF = function (a, b) { return function (r, K) { return "IF(" + K[b] + r + "=0,0," + K[a] + r + "/" + K[b] + r + ")"; }; };
       function kolomAngka(T) {
         return [
@@ -264,12 +315,12 @@
           { judul: "Realisasi fisik", kunci: "rf", jenis: "n", z: HA, nilai: function (x) { return x.realisasi; }, fisik: true, total: T.realisasi, lebar: 14 },
           { judul: "% fisik", rumus: pctF("rf", "tg"), nilai: function (x) { return bagi(x.realisasi, x.target); }, diJumlah: true, total: bagi(T.realisasi, T.target), lebar: 9 },
           { judul: "Pagu (Rp)", kunci: "pg", jenis: "n", nilai: function (x) { return x.pagu; }, jumlah: true, total: T.pagu, lebar: 18 },
-          { judul: "Terbayar (Rp)", kunci: "tb", jenis: "n", nilai: function (x) { return x.terbayar; }, jumlah: true, total: T.terbayar, lebar: 18 },
-          { judul: "% terbayar", rumus: pctF("tb", "pg"), nilai: function (x) { return bagi(x.terbayar, x.pagu); }, diJumlah: true, total: bagi(T.terbayar, T.pagu), lebar: 10 },
+          { judul: B + " (Rp)", kunci: "tb", jenis: "n", nilai: function (x) { return x.terbayar; }, jumlah: true, total: T.terbayar, lebar: 18 },
+          { judul: "% " + B.toLowerCase(), rumus: pctF("tb", "pg"), nilai: function (x) { return bagi(x.terbayar, x.pagu); }, diJumlah: true, total: bagi(T.terbayar, T.pagu), lebar: 10 },
           { judul: "Pagu bencana (Rp)", kunci: "pb", jenis: "n", nilai: function (x) { return x.pagu_b; }, jumlah: true, total: T.pagu_b, lebar: 18 },
           { judul: "Pagu non bencana (Rp)", rumus: function (r, K) { return K.pg + r + "-" + K.pb + r; }, z: "#,##0", nilai: function (x) { return x.pagu - x.pagu_b; }, diJumlah: true, total: T.pagu - T.pagu_b, lebar: 18 },
-          { judul: "Terbayar bencana (Rp)", kunci: "bb", jenis: "n", nilai: function (x) { return x.terbayar_b; }, jumlah: true, total: T.terbayar_b, lebar: 18 },
-          { judul: "Terbayar non bencana (Rp)", rumus: function (r, K) { return K.tb + r + "-" + K.bb + r; }, z: "#,##0", nilai: function (x) { return x.terbayar - x.terbayar_b; }, diJumlah: true, total: T.terbayar - T.terbayar_b, lebar: 18 }
+          { judul: B + " bencana (Rp)", kunci: "bb", jenis: "n", nilai: function (x) { return x.terbayar_b; }, jumlah: true, total: T.terbayar_b, lebar: 18 },
+          { judul: B + " non bencana (Rp)", rumus: function (r, K) { return K.tb + r + "-" + K.bb + r; }, z: "#,##0", nilai: function (x) { return x.terbayar - x.terbayar_b; }, diJumlah: true, total: T.terbayar - T.terbayar_b, lebar: 18 }
         ];
       }
       var sumberNama = function (x) { return sd(x.sumber_dana); };
@@ -281,7 +332,7 @@
       }
       var keg = R.perKegiatan(semua), T = R.jumlah(keg, semua);
       var wsNas = lembar(X, [
-        { judul: "Kegiatan/Bantuan", nilai: function (x) { return x.kegiatan; }, lebar: 52 },
+        { judul: KEG, nilai: function (x) { return x.kegiatan; }, lebar: 52 },
         { judul: "Kelompok", kunci: "grup", nilai: grupNama, lebar: 18 },
         { judul: "Sumber dana", nilai: sumberNama, lebar: 11 },
         { judul: "Satuan", nilai: satuanNama, lebar: 9 },
@@ -290,7 +341,7 @@
       ].concat(kolomAngka(T)), keg, "Jumlah nasional");
 
       var wsProvSatu = satuProvinsi ? lembar(X, [
-        { judul: "Kegiatan/Bantuan", nilai: function (x) { return x.kegiatan; }, lebar: 52 },
+        { judul: KEG, nilai: function (x) { return x.kegiatan; }, lebar: 52 },
         { judul: "Kelompok", kunci: "grup", nilai: grupNama, lebar: 18 },
         { judul: "Sumber dana", nilai: sumberNama, lebar: 11 },
         { judul: "Satuan", nilai: satuanNama, lebar: 9 },
@@ -304,7 +355,7 @@
       var TP = R.jumlah(rowsProv, []);
       var wsProv = lembar(X, [
         { judul: "Provinsi", nilai: function (x) { return x.provinsi; }, lebar: 26 },
-        { judul: "Kegiatan/Bantuan", nilai: function (x) { return x.kegiatan; }, lebar: 46 },
+        { judul: KEG, nilai: function (x) { return x.kegiatan; }, lebar: 46 },
         { judul: "Kelompok", kunci: "grup", nilai: grupNama, lebar: 18 },
         { judul: "Sumber dana", nilai: sumberNama, lebar: 11 },
         { judul: "Satuan", nilai: satuanNama, lebar: 9 },
@@ -320,16 +371,16 @@
       var wsKab = lembar(X, [
         { judul: "Provinsi", nilai: function (x) { return x.provinsi; }, lebar: 26 },
         { judul: "Kabupaten/kota", nilai: function (x) { return x.kabupaten; }, lebar: 28 },
-        { judul: "Kegiatan/Bantuan", nilai: function (x) { return x.kegiatan; }, lebar: 46 },
+        { judul: KEG, nilai: function (x) { return x.kegiatan; }, lebar: 46 },
         { judul: "Kelompok", kunci: "grup", nilai: grupNama, lebar: 18 },
         { judul: "Sumber dana", nilai: sumberNama, lebar: 11 },
         { judul: "Satuan", nilai: satuanNama, lebar: 9 }
       ].concat(kolomAngka(TK)), rowsKab, "Jumlah");
 
-      var cat = [["Rekap bantuan perkebunan " + (satuProvinsi ? "Provinsi " + R.namaProvinsi(s.provinsi) + " " : "") + "TA " + (j.ta || "")], ["Data per " + tglTeks(j.data_per)],
-        ["Sumber dana: " + namaSumber(s) + (s.komoditas ? " · komoditas " + s.komoditas.toLowerCase() : "")],
+      var cat = [[(sm(j) ? "Rekap anggaran dan fisik semua akun " : "Rekap bantuan pemerintah (BANPER) perkebunan ") + (satuProvinsi ? "Provinsi " + R.namaProvinsi(s.provinsi) + " " : "") + "TA " + (j.ta || "")],
+        [subjudul(j, s)],
         ["Diunduh " + Monev.format.waktu(new Date()) + " dari Monev Ditjenbun"], [""]]
-        .concat(CATATAN.map(function (c) { return [c]; }))
+        .concat(catatanDari(j).map(function (c) { return [c]; }))
         .concat([[""], ["Persentase dan jumlah memakai rumus. Jumlah fisik menjumlah baris kelompok Kawasan dan Kawasan ABT saja (SUMIF)."]]);
       var wsCat = X.utils.aoa_to_sheet(cat); wsCat["!cols"] = [{ wch: 140 }];
 
@@ -337,14 +388,41 @@
       if (satuProvinsi) X.utils.book_append_sheet(wb, wsProvSatu, "Provinsi");
       else {
         X.utils.book_append_sheet(wb, wsNas, "Nasional");
+        if (sm(j)) {
+          var bel = [];
+          R.perJenisBelanja(semua).forEach(function (x) { bel.push(x); x.sub.forEach(function (y) { bel.push(Object.assign({}, y, { anak: true })); }); });
+          var TB = { pagu: 0, terbayar: 0, pagu_tl: 0, terbayar_tl: 0 };
+          bel.forEach(function (x) { if (!x.anak) { TB.pagu += x.pagu; TB.terbayar += x.terbayar; TB.pagu_tl += x.pagu_tl; TB.terbayar_tl += x.terbayar_tl; } });
+          var wsBel = lembar(X, [
+            { judul: "Akun", nilai: function (x) { return x.akun; }, lebar: 9 },
+            { judul: "Jenis belanja", nilai: function (x) { return (x.anak ? "di antaranya " : "") + x.nama; }, lebar: 56 },
+            { judul: "Pagu (Rp)", kunci: "pg", jenis: "n", nilai: function (x) { return x.anak ? 0 : x.pagu; }, jumlah: true, total: TB.pagu, lebar: 18 },
+            { judul: "Realisasi SP2D (Rp)", kunci: "tb", jenis: "n", nilai: function (x) { return x.anak ? 0 : x.terbayar; }, jumlah: true, total: TB.terbayar, lebar: 18 },
+            { judul: "% SP2D", rumus: pctF("tb", "pg"), nilai: function (x) { return bagi(x.terbayar, x.pagu); }, diJumlah: true, total: bagi(TB.terbayar, TB.pagu), lebar: 9 },
+            { judul: "Pagu tanpa lokus (Rp)", jenis: "n", nilai: function (x) { return x.anak ? 0 : x.pagu_tl; }, jumlah: true, total: TB.pagu_tl, lebar: 18 },
+            { judul: "SP2D tanpa lokus (Rp)", jenis: "n", nilai: function (x) { return x.anak ? 0 : x.terbayar_tl; }, jumlah: true, total: TB.terbayar_tl, lebar: 18 },
+            { judul: "Pagu (rincian, Rp)", jenis: "n", nilai: function (x) { return x.anak ? x.pagu : 0; }, lebar: 18 },
+            { judul: "Realisasi SP2D (rincian, Rp)", jenis: "n", nilai: function (x) { return x.anak ? x.terbayar : 0; }, lebar: 18 }
+          ], bel, "Jumlah");
+          X.utils.book_append_sheet(wb, wsBel, "Per Jenis Belanja");
+        }
         X.utils.book_append_sheet(wb, wsProv, "Per Provinsi");
       }
       X.utils.book_append_sheet(wb, wsKab, "Per Kabupaten");
+      if (sm(j) && !satuProvinsi) {
+        var tlRows = semua.filter(function (r) { return !r.provinsi; }), kegTl = R.perKegiatan(tlRows), TT = R.jumlah(kegTl, tlRows);
+        X.utils.book_append_sheet(wb, lembar(X, [
+          { judul: KEG, nilai: function (x) { return x.kegiatan; }, lebar: 52 },
+          { judul: "Kelompok", kunci: "grup", nilai: grupNama, lebar: 18 },
+          { judul: "Sumber dana", nilai: sumberNama, lebar: 11 },
+          { judul: "Satuan", nilai: satuanNama, lebar: 9 }
+        ].concat(kolomAngka(TT)), kegTl, "Jumlah tanpa lokus"), "Tanpa Lokus");
+      }
       X.utils.book_append_sheet(wb, wsCat, "Catatan Data");
-      simpanXlsx(X, wb, "Rekap Bantuan Ditjenbun " + (j.ta || "") + " - " + (satuProvinsi ? R.namaProvinsi(s.provinsi) + " - " : "") + String(j.data_per || "").slice(0, 10) + ".xlsx");
+      simpanXlsx(X, wb, (sm(j) ? "Rekap Semua Akun Ditjenbun " : "Rekap Bantuan Ditjenbun ") + (j.ta || "") + " - " + (satuProvinsi ? R.namaProvinsi(s.provinsi) + " - " : "") + String(j.data_per || "").slice(0, 10) + ".xlsx");
     });
   }
 
   window.RekapDokumen = { unduhPDF: unduhPDF, unduhExcel: unduhExcel,
-    unduhExcelProvinsi: function (j, s) { return unduhExcel(j, s, true); }, CATATAN: CATATAN };
+    unduhExcelProvinsi: function (j, s) { return unduhExcel(j, s, true); }, CATATAN: CATATAN, CATATAN_SEMUA: CATATAN_SEMUA };
 })();

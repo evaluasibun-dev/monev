@@ -191,6 +191,8 @@ Menu di atas pita: teks `--band-sub` tebal 600; menu aktif: latar `--band-isi`, 
 
 Sub-tab berupa segmen di wadah `--surface-sunk`; yang aktif berlatar putih.
 
+**Jenis rekap Bantuan** (keputusan pemilik portal 19 Nov 2026): Rekap nasional dan Rekap per provinsi punya segmen "BANPER | Semua akun" sebagai kontrol pertama bilah saringan (bawaan BANPER; pilihan ikut dibawa antar kedua sub-tab dan ke CSV, PDF, Excel). BANPER = akun 526 dari sheet 7 (`rekap.json`), istilah "Pagu bantuan" dan "Anggaran terbayar". Semua akun = semua akun belanja dari sheet 17 (`rekap-semua.json`), istilah "Pagu" dan "Realisasi SP2D", saringan Kegiatan menggantikan Komoditas, baris kelompok memakai gaya `tingkat-0` berisi subtotal, anggaran tanpa lokus ditunjukkan sebagai baris "di antaranya tanpa lokus" dan kartu "Tanpa lokus". Jejak, Beranda, dan Pilih tahun tetap BANPER.
+
 ### 4.3 Alamat halaman
 
 Pola `#<menu>` atau `#<menu>-<subtab>`, hanya huruf kecil, angka, dan tanda hubung.
@@ -350,6 +352,7 @@ Urutan komoditas: Kelapa, Kopi, Kakao, Pala, Lada, Jambu mete, Tebu.
 | Paparan laporan kontrak BUN | PPTX | Memakai `TEMPLATE PAPARAN BUN.pptx` |
 | Excel | XLSX | Satu sheet per tabel, persentase dan jumlah sebagai rumus, baris judul dibekukan |
 | Excel rekap satu provinsi | XLSX | Tombol "Excel provinsi ini" di Rekap per provinsi: sheet Provinsi, Per Kabupaten, Catatan Data; saringan sama dengan PDF provinsi ini |
+| Rekap Semua akun | A4 lanskap PDF, XLSX | Judul "Rekap Anggaran dan Fisik Semua Akun"; kolom "Realisasi SP2D"; PDF nasional + tabel per jenis belanja; Excel + sheet Per Jenis Belanja dan Tanpa Lokus; nama file "Rekap Semua Akun Ditjenbun …" |
 
 Isi angka di semua keluaran diambil dari data yang sama dengan yang tampil di layar.
 

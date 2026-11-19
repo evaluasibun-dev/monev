@@ -180,7 +180,7 @@
     else langkah("CPCL ditetapkan", "–", 0, belumB);
     if (H && H.benihMin != null) langkah("Benih dikontrak", H.benih, H.benihMax, "rentang tujuh komoditas · Sisbun", { lo: H.benihMin });
     else langkah("Benih dikontrak", "–", 0, H ? "belum ada kontrak benih" : belumB);
-    if (K && K.pagu) langkah("Anggaran terbayar", F().persen(K.terbayar / K.pagu * 100), K.terbayar / K.pagu * 100, rpM(K.terbayar) + " · SP2D 526 + benih + KBD tebu");
+    if (K && K.pagu) langkah("Anggaran terbayar", F().persen(K.terbayar / K.pagu * 100), K.terbayar / K.pagu * 100, rpM(K.terbayar) + " · SP2D akun 526");
     else langkah("Anggaran terbayar", "–", 0, belumR);
     if (O) {
       /* tahap 5 Jejak: jadwal salur s.d. bulan ini ÷ kontrak benih (batang/mata), per komoditas */
