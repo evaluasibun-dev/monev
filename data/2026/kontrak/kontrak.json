@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-19T14:21:00+07:00",
+ "data_per": "2026-11-19T14:37:00+07:00",
  "hari_ini": "2026-11-19",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -24923,11 +24923,11 @@
   {
    "no": "EP-01M7PTEEZT0M6NY9DBSBSS21HV",
    "uraian": "PENGADAAN BENIH UNTUK KUNJUNGAN, BANTUAN BENCANA, PAMERAN, PERCONTOHAN, FASILITASI PERMINTAAN KELP TANI/DINAS/AKADEMISI/KELP MASYARAKAT LAINNYA DI KECAMATAN SUKAMAKMUR, KABUPATEN BOGOR, PROVINSI JAWA BARAT TAHAP 4",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Perbenihan Perkebunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengadaan Benih",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "238830.139.521211.01805EC.5890RAG",
    "komoditas": "",
    "provinsi": "",
    "kab": "",
@@ -24942,8 +24942,8 @@
    "sisa_hari": 15,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -37179,12 +37179,6 @@
   {
    "k": "06. KRO kosong",
    "no": "EP-01M5Y8CSKEYVR2STMQF5CKG805",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7PTEEZT0M6NY9DBSBSS21HV",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
