@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-19T14:13:00+07:00",
+ "data_per": "2026-11-19T14:14:00+07:00",
  "cfg": {
   "start": "2026-11-12",
   "end": "2026-12-31",
@@ -516,17 +516,17 @@
   },
   {
    "tgl": "2026-11-19",
-   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
-   "pagu": 310766884000,
-   "real": 106531714893,
-   "os": 115347633543
+   "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
+   "pagu": 226083361000,
+   "real": 79289232456,
+   "os": 52749168629
   },
   {
    "tgl": "2026-11-19",
-   "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
-   "pagu": 226083361000,
-   "real": 75263276497,
-   "os": 52749168629
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
+   "pagu": 310766884000,
+   "real": 106542514893,
+   "os": 115347633543
   },
   {
    "tgl": "2026-11-19",
@@ -539,7 +539,7 @@
    "tgl": "2026-11-19",
    "unit": "Direktorat Perbenihan Perkebunan",
    "pagu": 2699469972000,
-   "real": 618516385319,
+   "real": 647770863285,
    "os": 1707591796518
   },
   {
@@ -560,7 +560,7 @@
    "tgl": "2026-11-19",
    "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "pagu": 1695377809000,
-   "real": 233835571822,
+   "real": 247237583007,
    "os": 605409060089
   }
  ]
