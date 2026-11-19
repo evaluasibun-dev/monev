@@ -32505,7 +32505,7 @@
   "unduh": {
    "KEG": "2026-11-17 16:11:01",
    "KP": "2026-11-17 16:11:36",
-   "SATKER": "2026-11-17 16:11:18"
+   "SATKER": "2026-11-19 13:07:17"
   },
   "s2": {
    "pagu": 6173139544000,
@@ -32553,14 +32553,14 @@
     {
      "nama": "Kantor Pusat",
      "pagu": 4690547527000,
-     "real": 975131390685,
-     "pct": 20.789287073031293
+     "real": 1021679719844,
+     "pct": 21.781672906264106
     },
     {
      "nama": "Kantor Daerah",
      "pagu": 1482592017000,
-     "real": 337331011759,
-     "pct": 22.752787543101956
+     "real": 337755281759,
+     "pct": 22.781404316640135
     }
    ]
   },
@@ -32700,12 +32700,12 @@
      "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
      "pagu": 310766884000,
      "blokir": 352331000,
-     "real": 106174954893,
-     "pct": 34.165466257659546,
+     "real": 106531714893,
+     "pct": 34.280266134470104,
      "os": 115347633543,
-     "realOs": 221522588436,
-     "pct2": 71.28255932057421,
-     "sisa": 88891964564,
+     "realOs": 221879348436,
+     "pct2": 71.39735919738474,
+     "sisa": 88535204564,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan"
     },
     {
@@ -32748,12 +32748,12 @@
      "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
      "pagu": 784831219000,
      "blokir": 2500000000,
-     "real": 152624357942,
-     "pct": 19.44677457357873,
+     "real": 152691867942,
+     "pct": 19.45537642304211,
      "os": 411699178901,
-     "realOs": 564323536843,
-     "pct2": 71.90380851083346,
-     "sisa": 218007682157,
+     "realOs": 564391046843,
+     "pct2": 71.91241036029685,
+     "sisa": 217940172157,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya"
     },
     {
@@ -32785,12 +32785,12 @@
     "nama": "Jumlah",
     "pagu": 6173139544000,
     "blokir": 14253000000,
-    "real": 1312462402444,
-    "pct": 21.2608575116312,
+    "real": 1312886672444,
+    "pct": 21.26773035156906,
     "os": 3067183691197,
-    "realOs": 4379646093641,
-    "pct2": 70.94681826685432,
-    "sisa": 1779240450359,
+    "realOs": 4380070363641,
+    "pct2": 70.95369110679219,
+    "sisa": 1778816180359,
     "total": true
    },
    "notes": [
