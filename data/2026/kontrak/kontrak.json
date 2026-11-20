@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-20T16:20:00+07:00",
+ "data_per": "2026-11-20T16:27:00+07:00",
  "hari_ini": "2026-11-20",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -25057,7 +25057,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RAG",
    "komoditas": "Kelapa Genjah Khusus",
    "provinsi": "JAWA TIMUR",
    "kab": "Bangkalan",
@@ -25073,7 +25073,7 @@
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "TERVERIFIKASI",
-   "perlu_verifikasi": true,
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -33271,8 +33271,8 @@
    "uraian": "Pengadaan gedung dan bangunan berupa pondok jaga dan shadding house di Kebun Induk Tanaman Kakao Kabupaten Bone (2 Ha) untuk pemerintah daerah Kabupaten Bone",
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
    "satker": "BBPPTP Surabaya",
-   "kegiatan": "(belum diisi)",
-   "kode_keg": "",
+   "kegiatan": "Belanja Gedung dan Bangunan",
+   "kode_keg": "5890",
    "kro": "",
    "komoditas": "Kakao",
    "provinsi": "SULAWESI SELATAN",
@@ -33288,7 +33288,7 @@
    "sisa_hari": 41,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "PERLU KONFIRMASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -37363,12 +37363,6 @@
    "tl": "Isi KRO lengkap dari SAKTI"
   },
   {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7S7Y96Y7EZG7KG3NSTDAKQM",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
    "k": "07. Akun di KRO ≠ KODE COA",
    "no": "EP-01KDSG226JD2J0MADSR8218A4M",
    "d": "KRO: 567408.004.525113.01805WA.1780EBA | COA: 522191,525113",
@@ -37408,12 +37402,6 @@
    "k": "08. Kegiatan kosong",
    "no": "EP-01M7521ZTJ4NQ6YNHZSSZ7D1FT",
    "d": "Kode keg: 5890",
-   "tl": "Isi nama kegiatan"
-  },
-  {
-   "k": "08. Kegiatan kosong",
-   "no": "EP-01M7KK0VYQ0QCA7YVPS7FBTND0",
-   "d": "Kode keg: -",
    "tl": "Isi nama kegiatan"
   },
   {
