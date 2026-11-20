@@ -193,6 +193,8 @@ Sub-tab berupa segmen di wadah `--surface-sunk`; yang aktif berlatar putih.
 
 **Jenis rekap Bantuan** (keputusan pemilik portal 19 Nov 2026): Rekap nasional dan Rekap per provinsi punya segmen "BANPER | Semua akun" sebagai kontrol pertama bilah saringan (bawaan BANPER; pilihan ikut dibawa antar kedua sub-tab dan ke CSV, PDF, Excel). BANPER = akun 526 dari sheet 7 (`rekap.json`), istilah "Pagu bantuan" dan "Anggaran terbayar". Semua akun = semua akun belanja dari sheet 17 (`rekap-semua.json`), istilah "Pagu" dan "Realisasi SP2D", saringan Kegiatan menggantikan Komoditas, baris kelompok memakai gaya `tingkat-0` berisi subtotal, anggaran tanpa lokus ditunjukkan sebagai baris "di antaranya tanpa lokus" dan kartu "Tanpa lokus". Jejak, Beranda, dan Pilih tahun tetap BANPER.
 
+**Peta sebaran Rekap nasional** (mockup `RekapNasionalPeta` disetujui pemilik portal 20 Nov 2026; `assets/js/rekap-peta.js`): di antara kartu angka dan tabel rekap, dua seksi berdampingan sama tinggi. Kiri: peta provinsi (`peta-provinsi.js`, warna `.peta-0…5`, satu skala hijau untuk semua metrik), legenda 5 kelas, daftar "Buka provinsi", Catatan data otomatis (≤ 6 butir, chip Info / Perlu dicek). Kanan: 10 provinsi Tertinggi | Terendah, baris non-wilayah "Tanpa lokus", sebaran antarprovinsi + median, Unduh CSV. Peta mengikuti bilah saringan halaman; kontrol baru hanya Metrik (Pagu bantuan/Pagu · Anggaran terbayar/Realisasi SP2D · % terbayar/% SP2D · Capaian fisik). Kelas rupiah = kuantil (batas 2 angka penting), kelas persen = 20/40/60/80%. Klik provinsi → `#bantuan-provinsi` dengan saringan dibawa. Peta tidak ikut PDF/Excel.
+
 ### 4.3 Alamat halaman
 
 Pola `#<menu>` atau `#<menu>-<subtab>`, hanya huruf kecil, angka, dan tanda hubung.

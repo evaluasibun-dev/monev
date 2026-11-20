@@ -450,6 +450,42 @@
 .grid-rekap-prov { display: grid; grid-template-columns: minmax(340px, 420px) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
 @media (max-width: 1000px) { .grid-rekap-prov { grid-template-columns: minmax(0, 1fr); } }
 .tabel-rekap { min-width: 980px; }
+
+/* Peta sebaran per provinsi di Rekap nasional (rekap-peta.js; mockup RekapNasionalPeta, disetujui 20 Nov 2026). Warna peta = .peta-0…5. */
+.rp-grid { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(330px, 1fr); gap: var(--space-4); align-items: stretch; }
+@media (max-width: 1000px) { .rp-grid { grid-template-columns: minmax(0, 1fr); } }
+.rp-saring { font-size: 12px; color: var(--ink-3); }
+.rp-saring strong { color: var(--ink-2); font-weight: 600; }
+.rp-kepala-kanan { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.rp-kepala-kanan select, .rp-bawah-peta select { height: 40px; max-width: 100%; padding: 0 var(--space-3); border-radius: var(--radius-md); border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; }
+.rp-bawah-peta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+.peta-prov.peta-kosong { cursor: default; }
+.rp-catatan { border-top: 1px solid var(--line-soft); padding-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); flex: 1 1 auto; }
+.rp-catatan-daftar { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; flex: 1 1 auto; }
+.rp-catatan-daftar li { display: flex; gap: var(--space-2); font-size: 13px; color: var(--ink-2); }
+.rp-catatan-daftar .chip { flex: none; align-self: flex-start; }
+.rp-top { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-between; flex: 1 1 auto; }
+.rp-baris { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; column-gap: var(--space-2); row-gap: 3px; align-items: center; width: 100%; min-height: 40px;
+  padding: 5px 6px; border: 0; border-bottom: 1px solid var(--line-soft); background: none; font: inherit; color: var(--ink); text-align: left; cursor: pointer; }
+.rp-baris:hover { background: var(--surface-muted); }
+.rp-no { grid-row: 1 / span 2; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+.rp-nm { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rp-nl { font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.rp-br { grid-column: 2 / span 2; height: 6px; border-radius: var(--radius-pill); background: var(--line-soft); overflow: hidden; }
+.rp-br i { display: block; height: 100%; background: var(--brand); border-radius: var(--radius-pill); }
+.rp-subjudul { margin: 0; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.rp-nonwil { display: flex; flex-direction: column; gap: var(--space-1); padding: var(--space-2) var(--space-3); background: var(--surface-muted); border-radius: var(--radius-md); }
+.rp-nonwil-baris { display: flex; justify-content: space-between; gap: var(--space-2); font-size: 13px; }
+.rp-nonwil-baris span:last-child { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+.rp-sebaran svg { display: block; width: 100%; height: 64px; }
+.rp-titik { fill: var(--brand-mid); stroke: var(--surface); stroke-width: .6; }
+.rp-sumbu { stroke: var(--line); stroke-width: 1; }
+.rp-median { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.rp-sumbu-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+@media (max-width: 639.98px) {
+  .rp-baris { min-height: 48px; }
+  .rp-kepala-kanan, .rp-kepala-kanan select, .rp-bawah-peta > span, .rp-bawah-peta select { width: 100%; }
+}
 .tabel tr.baris-sub td { color: var(--ink-3); font-size: 12px; }
 .indentasi { padding-left: 18px; display: inline-block; }
 

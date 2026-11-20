@@ -19,7 +19,7 @@
   var STATE = {
     kom: "Kelapa", ukuran: "tanam", petaKom: "", prov: "", tren: "tanam",
     jenis: "banper",   /* jenis rekap: "banper" (sheet 7, rekap.json) | "semua" (sheet 17, rekap-semua.json) */
-    nas: { sumber: "", komoditas: "", kegiatan: "", bencana: false },
+    nas: { sumber: "", komoditas: "", kegiatan: "", bencana: false, metrik: "pagu", urut: null },   /* metrik/urut = peta sebaran (rekap-peta.js) */
     pv: { provinsi: "", sumber: "", komoditas: "", kegiatan: "", kabHal: null, kabKunci: "" }
   };
   var D = { ta: null, sisbun: null, rekap: undefined, semua: undefined, titik: null, catatan: null, lap: null, satker: {}, waktuMuat: 0 };
@@ -669,6 +669,7 @@
         '<div class="baris-alat"><button type="button" class="tombol tombol-utama" data-bantuan-aksi="excel">Unduh Excel</button></div></div>';
     el.innerHTML = filterNasional(semua, j) +
       '<section class="grid-kartu grid-kartu-padat" aria-label="Angka nasional">' + kartuFisik + kartuUang + "</section>" +
+      petaRekap(rows) +
       seksi(sm ? "Rekap nasional per kegiatan — semua akun" : "Rekap nasional per komoditas", tabelKegiatan(rows, "nasional", N.bencana) + catatan,
         { kanan: '<div class="baris-alat"><span class="seksi-keterangan">' + (sm ? "Anggaran dari RAW SAKTI (semua akun) · fisik dari SAT 3 dan Hilirisasi (akun 526115)" : "Target fisik dari SAT 3 · realisasi tanam dari Hilirisasi · anggaran dari SAKTI") + "</span>" + tombolCSV("nasional") + "</div>" }) +
       (sm ? '<div class="grid-dua">' +
@@ -682,6 +683,26 @@
         ].map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul>") + "</div>" : "") +
       seksi("Isi file unduhan", '<div class="grid-ekspor">' + ekspor + "</div>" +
         '<p class="catatan" id="bantuan-pesan" role="status">Unduhan mengikuti jenis rekap, sumber dana, dan ' + (sm ? "kegiatan" : "komoditas") + " yang dipilih di atas.</p>");
+  }
+
+  /* Peta sebaran per provinsi (mockup monev-gas/docs/mockup/RekapNasionalPeta.html, disetujui 20 Nov 2026): ikut saringan halaman, klik → Rekap per provinsi. */
+  function hitungPeta(rows) {
+    var N = STATE.nas;
+    return window.RekapPeta.hitung(rows, R(), window.PetaProvinsi.PROV, { jenis: STATE.jenis, metrik: N.metrik, urut: N.urut, sumber: N.sumber });
+  }
+  function petaRekap(rows) {
+    if (!window.RekapPeta || !window.PetaProvinsi) return "";
+    var N = STATE.nas, sd = N.sumber === "ABT" ? "ABT" : N.sumber === "REGULER" ? "Reguler" : "Reguler dan ABT";
+    var kedua = jenisSemua() ? (N.kegiatan ? Monev.istilah.kegiatanSingkat(N.kegiatan) + " (" + N.kegiatan + ")" : "Semua kegiatan") : (N.komoditas || "Semua komoditas");
+    var teks = "<strong>" + (jenisSemua() ? "Semua akun" : "BANPER") + "</strong> · <strong>" + e(sd) + "</strong> · <strong>" + e(kedua) + "</strong>";
+    return window.RekapPeta.html(hitungPeta(rows), { R: R(), jenis: STATE.jenis, saringTeks: teks });
+  }
+  function bukaProvinsi(n) {
+    var V = STATE.pv;
+    if (location.hash === "#bantuan-nasional") { V.sumber = STATE.nas.sumber; V.komoditas = STATE.nas.komoditas; V.kegiatan = STATE.nas.kegiatan; }
+    V.provinsi = n;
+    if (location.hash === "#bantuan-provinsi") { gambarProvinsi(elAktif); var x = elAktif.querySelector("#b-pv-prov"); if (x) x.focus(); }
+    else location.hash = "#bantuan-provinsi";
   }
 
   /* ============================== REKAP PROVINSI ============================== */
@@ -753,6 +774,11 @@
       });
       return out;
     };
+    if (id === "peta") {
+      var Cp = window.RekapPeta.csv(hitungPeta(saringJenis(semua, STATE.nas)), sm);
+      Monev.unduhCSV(awal + "per-provinsi-" + tgl + ".csv", Cp.kepala, Cp.baris);
+      return;
+    }
     if (id === "nasional" || id === "belanja") {
       var rowsN = saringJenis(semua, STATE.nas);
       if (id === "belanja") {
@@ -822,25 +848,27 @@
       } else if (t.hasAttribute("data-bseg")) {
         var k = t.getAttribute("data-bseg"), v = t.getAttribute("data-nilai");
         if (k === "jenis") { gantiJenis(v); return; }
+        if (k === "petaUrut") { STATE.nas.urut = v; gambarNasional(elAktif); var bu = elAktif.querySelector('[data-bseg="petaUrut"][data-nilai="' + v + '"]'); if (bu) bu.focus(); return; }
         if (k === "ukuran") STATE.ukuran = v; else if (k === "tren") STATE.tren = v;
         gambarJejak(elAktif);
         var b = elAktif.querySelector('[data-bseg="' + k + '"][data-nilai="' + v + '"]'); if (b) b.focus();
       } else if (t.hasAttribute("data-bantuan-prov")) {
         pilihProvPeta(t.getAttribute("data-bantuan-prov"));
       } else if (t.hasAttribute("data-bantuan-buka-prov")) {
-        STATE.pv.provinsi = t.getAttribute("data-bantuan-buka-prov");
-        if (location.hash === "#bantuan-provinsi") { gambarProvinsi(elAktif); var x = elAktif.querySelector("#b-pv-prov"); if (x) x.focus(); }
-        else location.hash = "#bantuan-provinsi";
+        bukaProvinsi(t.getAttribute("data-bantuan-buka-prov"));
       } else if (t.hasAttribute("data-bantuan-csv")) csv(t.getAttribute("data-bantuan-csv"));
     });
     document.addEventListener("keydown", function (ev) {
+      if (ev.key !== "Enter" && ev.key !== " ") return;
       var t = ev.target.closest && ev.target.closest("[data-bantuan-prov]");
-      if (!t || (ev.key !== "Enter" && ev.key !== " ")) return;
-      ev.preventDefault(); pilihProvPeta(t.getAttribute("data-bantuan-prov"));
+      if (t) { ev.preventDefault(); pilihProvPeta(t.getAttribute("data-bantuan-prov")); return; }
+      var pb = ev.target.closest && ev.target.closest("path[data-bantuan-buka-prov]");
+      if (pb && elAktif && document.body.contains(elAktif)) { ev.preventDefault(); bukaProvinsi(pb.getAttribute("data-bantuan-buka-prov")); }
     });
     document.addEventListener("change", function (ev) {
       var t = ev.target;
       if (!elAktif || !document.body.contains(elAktif)) return;
+      if (t.hasAttribute("data-bantuan-buka-pilih")) { if (t.value) bukaProvinsi(t.value); return; }
       if (t.hasAttribute("data-bantuan-pilih")) {
         var k = t.getAttribute("data-bantuan-pilih");
         if (k === "prov") { pilihProvPeta(t.value); var s = elAktif.querySelector("#b-peta-prov"); if (s) s.focus(); }
@@ -848,6 +876,7 @@
       } else if (t.hasAttribute("data-bantuan-filter")) {
         var p = t.getAttribute("data-bantuan-filter").split("."), id = t.id;
         STATE[p[0]][p[1]] = t.type === "checkbox" ? t.checked : t.value;
+        if (p[0] === "nas" && p[1] === "metrik") STATE.nas.urut = null;
         if (p[0] === "nas") gambarNasional(elAktif); else gambarProvinsi(elAktif);
         var f = document.getElementById(id); if (f) f.focus();
       }
