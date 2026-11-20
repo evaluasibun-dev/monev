@@ -32146,14 +32146,6 @@
   ],
   "by_kegiatan": [
    {
-    "KDKEG": "",
-    "NAMA_KEGIATAN": "",
-    "jml_kontrak": 1,
-    "nilai_kontrak": 52550000,
-    "realisasi_kontrak": 0,
-    "sisa_kontrak": 52550000
-   },
-   {
     "KDKEG": "1777",
     "NAMA_KEGIATAN": "Pengadaan Pupuk Organik",
     "jml_kontrak": 155,
@@ -32196,10 +32188,10 @@
    {
     "KDKEG": "5890",
     "NAMA_KEGIATAN": "Produksi Benih (Lanjutan)",
-    "jml_kontrak": 679,
-    "nilai_kontrak": 3095032553220,
+    "jml_kontrak": 680,
+    "nilai_kontrak": 3095085103220,
     "realisasi_kontrak": 820566286264,
-    "sisa_kontrak": 2274466266956
+    "sisa_kontrak": 2274518816956
    }
   ],
   "by_seg5": [
@@ -32287,20 +32279,11 @@
    {
     "KODE_SATKER": "238830",
     "KDKEG": "5890",
-    "KDKRO_SUFFIX": "",
-    "jml_kontrak": 1,
-    "nilai_kontrak": 1637433000,
-    "realisasi_kontrak": 0,
-    "sisa_kontrak": 1637433000
-   },
-   {
-    "KODE_SATKER": "238830",
-    "KDKEG": "5890",
     "KDKRO_SUFFIX": "RAG",
-    "jml_kontrak": 346,
-    "nilai_kontrak": 2092900589584,
+    "jml_kontrak": 347,
+    "nilai_kontrak": 2094538022584,
     "realisasi_kontrak": 562415350529,
-    "sisa_kontrak": 1530485239055
+    "sisa_kontrak": 1532122672055
    },
    {
     "KODE_SATKER": "238830",
@@ -32359,6 +32342,15 @@
    {
     "KODE_SATKER": "567338",
     "KDKEG": "5890",
+    "KDKRO_SUFFIX": "",
+    "jml_kontrak": 1,
+    "nilai_kontrak": 52550000,
+    "realisasi_kontrak": 0,
+    "sisa_kontrak": 52550000
+   },
+   {
+    "KODE_SATKER": "567338",
+    "KDKEG": "5890",
     "KDKRO_SUFFIX": "RAG",
     "jml_kontrak": 188,
     "nilai_kontrak": 469155897270,
@@ -32382,15 +32374,6 @@
     "nilai_kontrak": 246053870,
     "realisasi_kontrak": 246053870,
     "sisa_kontrak": 0
-   },
-   {
-    "KODE_SATKER": "567338",
-    "KDKEG": "",
-    "KDKRO_SUFFIX": "",
-    "jml_kontrak": 1,
-    "nilai_kontrak": 52550000,
-    "realisasi_kontrak": 0,
-    "sisa_kontrak": 52550000
    },
    {
     "KODE_SATKER": "567408",
@@ -32641,10 +32624,10 @@
      "blokir": 14191000000,
      "real": 870619207491,
      "pct": 24.1270848595499,
-     "os": 2274466266956,
-     "realOs": 3145085474447,
-     "pct2": 87.15836209403288,
-     "sisa": 449195964553,
+     "os": 2274518816956,
+     "realOs": 3145138024447,
+     "pct2": 87.1598183889302,
+     "sisa": 449143414553,
      "kode": "5890",
      "kunci": "5890"
     },
@@ -32660,19 +32643,6 @@
      "sisa": 1041522552514,
      "kode": "5888",
      "kunci": "5888"
-    },
-    {
-     "nama": "Belum terpetakan (KRO/kode kegiatan kontrak kosong/tidak valid) – 1 kontrak",
-     "pagu": 0,
-     "blokir": 0,
-     "real": 0,
-     "pct": 0,
-     "os": 52550000,
-     "realOs": 52550000,
-     "pct2": 0,
-     "sisa": -52550000,
-     "kode": "",
-     "unmapped": true
     }
    ],
    "total": {
