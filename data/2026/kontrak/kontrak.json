@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-20T16:17:00+07:00",
+ "data_per": "2026-11-20T16:20:00+07:00",
  "hari_ini": "2026-11-20",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -24767,11 +24767,11 @@
   {
    "no": "EP-01M74RKH1V4FQ7TKW21JPS5M9D",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Tanaman Tebu Kabupaten Indramayu Tahap 5 Seluas 142 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "JAWA BARAT",
    "kab": "Indramayu",
@@ -24786,18 +24786,18 @@
    "sisa_hari": 41,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
    "no": "EP-01M74RM89T7KM1QXNNJTK8DMBV",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Tanaman Tebu Kabupaten Indramayu Tahap 7 Seluas 26.3 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "JAWA BARAT",
    "kab": "Indramayu",
@@ -24812,8 +24812,8 @@
    "sisa_hari": 41,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -25027,11 +25027,11 @@
   {
    "no": "EP-01M7KYYRQG2ZMJXT1X31WZXSJ0",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kabupaten Kediri Tahap 27 180,80 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5888",
+   "kro": "238830.139.526115.01805EC.5888RAI",
    "komoditas": "Tebu",
    "provinsi": "JAWA TIMUR",
    "kab": "Kediri",
@@ -25046,8 +25046,8 @@
    "sisa_hari": 41,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -37359,24 +37359,6 @@
   {
    "k": "06. KRO kosong",
    "no": "EP-01M5Y8CSKEYVR2STMQF5CKG805",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M74RKH1V4FQ7TKW21JPS5M9D",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M74RM89T7KM1QXNNJTK8DMBV",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7KYYRQG2ZMJXT1X31WZXSJ0",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
