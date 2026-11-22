@@ -4,7 +4,7 @@
  "data_per": "2026-11-22T12:49:00+07:00",
  "sumber": {
   "myintress_unduh": "2026-11-22T12:49:00+07:00",
-  "kontrak_per": "2026-11-21T15:25:00+07:00",
+  "kontrak_per": "2026-11-22T12:48:00+07:00",
   "fa16_per": "2026-11-20"
  },
  "tanggal": "2026-11-20",
@@ -32098,9 +32098,9 @@
   "summary": {
    "jml_kontrak": 1395,
    "nilai_kontrak": 4030612129470,
-   "realisasi_kontrak": 987143841247,
-   "sisa_kontrak": 3043468288223,
-   "pct_realisasi": 24.49
+   "realisasi_kontrak": 989013635092,
+   "sisa_kontrak": 3041598494378,
+   "pct_realisasi": 24.54
   },
   "by_satker": [
    {
@@ -32108,8 +32108,8 @@
     "DESKRIPSI_SATKER": "DIREKTORAT JENDERAL PERKEBUNAN",
     "jml_kontrak": 962,
     "nilai_kontrak": 3119755137369,
-    "realisasi_kontrak": 745073385979,
-    "sisa_kontrak": 2374681751390
+    "realisasi_kontrak": 746943179824,
+    "sisa_kontrak": 2372811957545
    },
    {
     "KODE_SATKER": "567338",
@@ -32174,8 +32174,8 @@
     "NAMA_KEGIATAN": "Bongkar Ratoon",
     "jml_kontrak": 485,
     "nilai_kontrak": 744399805325,
-    "realisasi_kontrak": 93136594655,
-    "sisa_kontrak": 651263210670
+    "realisasi_kontrak": 94311528500,
+    "sisa_kontrak": 650088276825
    },
    {
     "KDKEG": "5889",
@@ -32190,8 +32190,8 @@
     "NAMA_KEGIATAN": "Produksi Benih (Lanjutan)",
     "jml_kontrak": 680,
     "nilai_kontrak": 3095085103220,
-    "realisasi_kontrak": 820566286264,
-    "sisa_kontrak": 2274518816956
+    "realisasi_kontrak": 821261146264,
+    "sisa_kontrak": 2273823956956
    }
   ],
   "by_seg5": [
@@ -32255,8 +32255,8 @@
     "KDKRO_SUFFIX": "RAI",
     "jml_kontrak": 427,
     "nilai_kontrak": 687577781827,
-    "realisasi_kontrak": 90413894081,
-    "sisa_kontrak": 597163887746
+    "realisasi_kontrak": 91588827926,
+    "sisa_kontrak": 595988953901
    },
    {
     "KODE_SATKER": "238830",
@@ -32282,8 +32282,8 @@
     "KDKRO_SUFFIX": "RAG",
     "jml_kontrak": 347,
     "nilai_kontrak": 2094538022584,
-    "realisasi_kontrak": 562415350529,
-    "sisa_kontrak": 1532122672055
+    "realisasi_kontrak": 563110210529,
+    "sisa_kontrak": 1531427812055
    },
    {
     "KODE_SATKER": "238830",
@@ -32490,7 +32490,7 @@
   "kegiatan_count": 6,
   "akun_count": 52,
   "kontrak_count": 1395,
-  "kontrak_sisa_total": 3043468288223
+  "kontrak_sisa_total": 3041598494378
  },
  "realisasi": {
   "unduh": {
@@ -32512,14 +32512,14 @@
     "5890": 0
    },
    "real": 1378476545754,
-   "os": 3043468288223,
-   "realOs": 4421944833977,
+   "os": 3041598494378,
+   "realOs": 4420075040132,
    "blokir": 14253000000,
    "pctReal": 22.33023465497089,
-   "pctOs": 49.30178990010209,
-   "pctRealOs": 71.63202455507299,
-   "sisa": 1736941710023,
-   "pctSisa": 28.367975444927012,
+   "pctOs": 49.27150071205324,
+   "pctRealOs": 71.60173536702413,
+   "sisa": 1738811503868,
+   "pctSisa": 28.398264632975867,
    "jenis": [
     {
      "nama": "Belanja Pegawai",
@@ -32615,10 +32615,10 @@
      "blokir": 14191000000,
      "real": 871917816217,
      "pct": 24.163072628556108,
-     "os": 2274518816956,
-     "realOs": 3146436633173,
-     "pct2": 87.1958061579364,
-     "sisa": 447844805827,
+     "os": 2273823956956,
+     "realOs": 3145741773173,
+     "pct2": 87.1765498102229,
+     "sisa": 448539665827,
      "kode": "5890",
      "kunci": "5890"
     },
@@ -32628,10 +32628,10 @@
      "blokir": 0,
      "real": 293021983374,
      "pct": 14.767557932195361,
-     "os": 651263210670,
-     "realOs": 944285194044,
-     "pct2": 47.58955675267754,
-     "sisa": 1039942561956,
+     "os": 650088276825,
+     "realOs": 943110260199,
+     "pct2": 47.53034309429346,
+     "sisa": 1041117495801,
      "kode": "5888",
      "kunci": "5888"
     }
@@ -32642,10 +32642,10 @@
     "blokir": 14253000000,
     "real": 1378476545754,
     "pct": 22.33023465497089,
-    "os": 3043468288223,
-    "realOs": 4421944833977,
-    "pct2": 71.63202455507299,
-    "sisa": 1736941710023,
+    "os": 3041598494378,
+    "realOs": 4420075040132,
+    "pct2": 71.60173536702413,
+    "sisa": 1738811503868,
     "total": true
    }
   },
@@ -32729,10 +32729,10 @@
      "blokir": 11400669000,
      "real": 649019152040,
      "pct": 24.04246606822415,
-     "os": 1709417229518,
-     "realOs": 2358436381558,
-     "pct2": 87.36664626836604,
-     "sisa": 329632921442,
+     "os": 1708722369518,
+     "realOs": 2357741521558,
+     "pct2": 87.34090565975741,
+     "sisa": 330327781442,
      "kunci": "Direktorat Perbenihan Perkebunan"
     },
     {
@@ -32765,10 +32765,10 @@
      "blokir": 0,
      "real": 256177015862,
      "pct": 15.11032021901379,
-     "os": 602110243686,
-     "realOs": 858287259548,
-     "pct2": 50.62513234464543,
-     "sisa": 837090549452,
+     "os": 600935309841,
+     "realOs": 857112325703,
+     "pct2": 50.55583016086298,
+     "sisa": 838265483297,
      "kunci": "Direktorat Tanaman Semusim dan Tahunan"
     }
    ],
@@ -32778,10 +32778,10 @@
     "blokir": 14253000000,
     "real": 1378476545754,
     "pct": 22.33023465497089,
-    "os": 3043468288223,
-    "realOs": 4421944833977,
-    "pct2": 71.63202455507299,
-    "sisa": 1736941710023,
+    "os": 3041598494378,
+    "realOs": 4420075040132,
+    "pct2": 71.60173536702413,
+    "sisa": 1738811503868,
     "total": true
    },
    "notes": [
