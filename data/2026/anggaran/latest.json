@@ -1,9 +1,9 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-22T12:49:00+07:00",
+ "data_per": "2026-11-23T15:10:00+07:00",
  "sumber": {
-  "myintress_unduh": "2026-11-22T12:49:00+07:00",
+  "myintress_unduh": "2026-11-23T15:10:00+07:00",
   "kontrak_per": "2026-11-23T15:13:00+07:00",
   "fa16_per": "2026-11-23"
  },
@@ -32494,13 +32494,13 @@
  },
  "realisasi": {
   "unduh": {
-   "KEG": "2026-11-22 12:49:36",
-   "KP": "2026-11-22 12:50:48",
-   "SATKER": "2026-11-22 12:50:12"
+   "KEG": "2026-11-23 15:10:00",
+   "KP": "2026-11-23 15:12:45",
+   "SATKER": "2026-11-23 15:10:36"
   },
   "s2": {
    "pagu": 6173139544000,
-   "realMyIntress": 1377061625754,
+   "realMyIntress": 1381035308228,
    "manualBayar": 1414920000,
    "manualBayarKontrak": 3626309999,
    "tambahan": {
@@ -32511,15 +32511,15 @@
     "5889": 1414920000,
     "5890": 0
    },
-   "real": 1378476545754,
+   "real": 1382450228228,
    "os": 3042533036599,
-   "realOs": 4421009582353,
+   "realOs": 4424983264827,
    "blokir": 14253000000,
-   "pctReal": 22.33023465497089,
+   "pctReal": 22.394605182247602,
    "pctOs": 49.28663956019265,
-   "pctRealOs": 71.61687421516353,
-   "sisa": 1737876961647,
-   "pctSisa": 28.383125784836466,
+   "pctRealOs": 71.68124474244026,
+   "sisa": 1733903279173,
+   "pctSisa": 28.318755257559744,
    "jenis": [
     {
      "nama": "Belanja Pegawai",
@@ -32530,8 +32530,8 @@
     {
      "nama": "Belanja Barang",
      "pagu": 6101268361000,
-     "real": 1315583080898,
-     "pct": 21.56245231413449
+     "real": 1319556763372,
+     "pct": 21.62758110767192
     },
     {
      "nama": "Belanja Modal",
@@ -32544,14 +32544,14 @@
     {
      "nama": "Kantor Pusat",
      "pagu": 4690547527000,
-     "real": 1037365881405,
-     "pct": 22.116093599599083
+     "real": 1039982490459,
+     "pct": 22.17187832492034
     },
     {
      "nama": "Kantor Daerah",
      "pagu": 1482592017000,
-     "real": 341110664349,
-     "pct": 23.00772299039028
+     "real": 342467737769,
+     "pct": 23.099256831422693
     }
    ]
   },
@@ -32587,12 +32587,12 @@
      "nama": "1777  |  Pengembangan Kawasan Tanaman Kelapa Sawit dan Aneka Palma",
      "pagu": 464241741000,
      "blokir": 0,
-     "real": 125193600760,
-     "pct": 26.967329669737733,
+     "real": 125508550235,
+     "pct": 27.035171366678117,
      "os": 105917354646,
-     "realOs": 231110955406,
-     "pct2": 49.782459222252484,
-     "sisa": 233130785594,
+     "realOs": 231425904881,
+     "pct2": 49.850300919192875,
+     "sisa": 232815836119,
      "kode": "1777",
      "kunci": "1777"
     },
@@ -32613,12 +32613,12 @@
      "nama": "5890  |  Penguatan Perbenihan Tanaman Perkebunan",
      "pagu": 3608472439000,
      "blokir": 14191000000,
-     "real": 871917816217,
-     "pct": 24.163072628556108,
+     "real": 872426814637,
+     "pct": 24.177178276544403,
      "os": 2275418250956,
-     "realOs": 3147336067173,
-     "pct2": 87.22073177439059,
-     "sisa": 446945371827,
+     "realOs": 3147845065593,
+     "pct2": 87.23483742237889,
+     "sisa": 446436373407,
      "kode": "5890",
      "kunci": "5890"
     },
@@ -32626,12 +32626,12 @@
      "nama": "5888  |  Pengembangan Kawasan Tanaman Semusim dan Tahunan",
      "pagu": 1984227756000,
      "blokir": 0,
-     "real": 293021983374,
-     "pct": 14.767557932195361,
+     "real": 296171717953,
+     "pct": 14.926296492800395,
      "os": 649719900046,
-     "realOs": 942741883420,
-     "pct2": 47.51177784754262,
-     "sisa": 1041485872580,
+     "realOs": 945891617999,
+     "pct2": 47.670516408147655,
+     "sisa": 1038336138001,
      "kode": "5888",
      "kunci": "5888"
     }
@@ -32640,12 +32640,12 @@
     "nama": "Jumlah",
     "pagu": 6173139544000,
     "blokir": 14253000000,
-    "real": 1378476545754,
-    "pct": 22.33023465497089,
+    "real": 1382450228228,
+    "pct": 22.394605182247602,
     "os": 3042533036599,
-    "realOs": 4421009582353,
-    "pct2": 71.61687421516353,
-    "sisa": 1737876961647,
+    "realOs": 4424983264827,
+    "pct2": 71.68124474244026,
+    "sisa": 1733903279173,
     "total": true
    }
   },
@@ -32691,24 +32691,24 @@
      "nama": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
      "pagu": 226083361000,
      "blokir": 0,
-     "real": 84653556456,
-     "pct": 37.443514675987146,
+     "real": 84677130931,
+     "pct": 37.453942013450515,
      "os": 52240344629,
-     "realOs": 136893901085,
-     "pct2": 60.550188425852355,
-     "sisa": 89189459915,
+     "realOs": 136917475560,
+     "pct2": 60.56061576331573,
+     "sisa": 89165885440,
      "kunci": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma"
     },
     {
      "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
      "pagu": 310766884000,
      "blokir": 352331000,
-     "real": 108680085763,
-     "pct": 34.97157881307585,
+     "real": 109245780763,
+     "pct": 35.153610756994304,
      "os": 115347633543,
-     "realOs": 224027719306,
-     "pct2": 72.0886718759905,
-     "sisa": 86386833694,
+     "realOs": 224593414306,
+     "pct2": 72.27070381990895,
+     "sisa": 85821138694,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan"
     },
     {
@@ -32727,48 +32727,48 @@
      "nama": "Direktorat Perbenihan Perkebunan",
      "pagu": 2699469972000,
      "blokir": 11400669000,
-     "real": 649019152040,
-     "pct": 24.04246606822415,
+     "real": 649502647040,
+     "pct": 24.060376806443692,
      "os": 1710332869518,
-     "realOs": 2359352021558,
-     "pct2": 87.40056551953377,
-     "sisa": 328717281442,
+     "realOs": 2359835516558,
+     "pct2": 87.41847625775331,
+     "sisa": 328233786442,
      "kunci": "Direktorat Perbenihan Perkebunan"
-    },
-    {
-     "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
-     "pagu": 784831219000,
-     "blokir": 2500000000,
-     "real": 153232515811,
-     "pct": 19.524263574306158,
-     "os": 410256246124,
-     "realOs": 563488761935,
-     "pct2": 71.79744488923038,
-     "sisa": 218842457065,
-     "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya"
     },
     {
      "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
      "pagu": 375165883000,
      "blokir": 0,
-     "real": 72934151883,
-     "pct": 19.44050756955424,
+     "real": 73700026883,
+     "pct": 19.644650599265713,
      "os": 141614929256,
-     "realOs": 214549081139,
-     "pct2": 57.18779101750039,
-     "sisa": 160616801861,
+     "realOs": 215314956139,
+     "pct2": 57.391934047211855,
+     "sisa": 159850926861,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon"
+    },
+    {
+     "nama": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
+     "pagu": 784831219000,
+     "blokir": 2500000000,
+     "real": 153258019231,
+     "pct": 19.527513116294624,
+     "os": 410256246124,
+     "realOs": 563514265355,
+     "pct2": 71.80069443121884,
+     "sisa": 218816953645,
+     "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya"
     },
     {
      "nama": "Direktorat Tanaman Semusim dan Tahunan",
      "pagu": 1695377809000,
      "blokir": 0,
-     "real": 256177015862,
-     "pct": 15.11032021901379,
+     "real": 258286555441,
+     "pct": 15.234749096624514,
      "os": 600566933062,
-     "realOs": 856743948924,
-     "pct2": 50.53410186071393,
-     "sisa": 838633860076,
+     "realOs": 858853488503,
+     "pct2": 50.65853073832465,
+     "sisa": 836524320497,
      "kunci": "Direktorat Tanaman Semusim dan Tahunan"
     }
    ],
@@ -32776,12 +32776,12 @@
     "nama": "Jumlah",
     "pagu": 6173139544000,
     "blokir": 14253000000,
-    "real": 1378476545754,
-    "pct": 22.33023465497089,
+    "real": 1382450228228,
+    "pct": 22.394605182247602,
     "os": 3042533036599,
-    "realOs": 4421009582353,
-    "pct2": 71.61687421516353,
-    "sisa": 1737876961647,
+    "realOs": 4424983264827,
+    "pct2": 71.68124474244026,
+    "sisa": 1733903279173,
     "total": true
    },
    "notes": [
