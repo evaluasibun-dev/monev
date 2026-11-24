@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-23T15:32:00+07:00",
+ "data_per": "2026-11-24T15:28:00+07:00",
  "cfg": {
   "start": "2026-11-12",
   "end": "2026-12-31",
@@ -842,6 +842,76 @@
    "pagu": 1695377809000,
    "real": 258286555441,
    "os": 600566933062
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Direktorat Pelindungan Perkebunan",
+   "pagu": 1059901000,
+   "real": 1028740219,
+   "os": 0
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Sekretariat Direktorat Jenderal Perkebunan",
+   "pagu": 53229301000,
+   "real": 42462681646,
+   "os": 1109712970
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Balai Pelindungan Tanaman Perkebunan (BPTP) Pontianak",
+   "pagu": 11828031000,
+   "real": 6287410892,
+   "os": 1260146910
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Direktorat Tanaman Kelapa Sawit dan Aneka Palma",
+   "pagu": 226083361000,
+   "real": 84677130931,
+   "os": 52240344629
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
+   "pagu": 310766884000,
+   "real": 109262580763,
+   "os": 115347633543
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Direktorat Hilirisasi Hasil Perkebunan",
+   "pagu": 15327183000,
+   "real": 4026610182,
+   "os": 9804220587
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Direktorat Perbenihan Perkebunan",
+   "pagu": 2699469972000,
+   "real": 655157673082,
+   "os": 1705104869518
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon",
+   "pagu": 375165883000,
+   "real": 74186206883,
+   "os": 141614929256
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
+   "pagu": 784831219000,
+   "real": 154157654269,
+   "os": 410109060124
+  },
+  {
+   "tgl": "2026-11-24",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
+   "pagu": 1695377809000,
+   "real": 264943940241,
+   "os": 598403425402
   }
  ]
 }
