@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-26T15:39:00+07:00",
+ "data_per": "2026-11-26T15:47:00+07:00",
  "hari_ini": "2026-11-26",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -25287,10 +25287,10 @@
   {
    "no": "EP-01M7ZH946Z5EJAKF0QWE2K9RYM",
    "uraian": "PENGADAAN PEKERJAAN PRODUKSI BENIH KAKAO DALAM PROSES UMUR PALING KURANG 1 BULAN DI PROVINSI PAPUA (PAKET 18)",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Perbenihan Perkebunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
-   "kode_keg": "",
+   "kode_keg": "5890",
    "kro": "",
    "komoditas": "Kakao",
    "provinsi": "PAPUA",
@@ -25306,7 +25306,7 @@
    "sisa_hari": 35,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "PERLU KONFIRMASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -25365,10 +25365,10 @@
   {
    "no": "EP-01M8857W1NG35N9FNQCFXKXAM5",
    "uraian": "Pengadaan Benih Tebu Kegiatan Perluasan Tanaman Tebu Kabupaten Blora Tahap IV seluas 13,40 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Perluasan Tebu",
-   "kode_keg": "",
+   "kode_keg": "5888",
    "kro": "",
    "komoditas": "Tebu",
    "provinsi": "JAWA TENGAH",
@@ -25384,7 +25384,7 @@
    "sisa_hari": 35,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "PERLU KONFIRMASI",
    "perlu_verifikasi": true,
    "baru": true
   },
