@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-27T10:09:00+07:00",
+ "data_per": "2026-11-27T10:17:00+07:00",
  "hari_ini": "2026-11-27",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -25157,10 +25157,10 @@
   {
    "no": "EP-01M7MKN6HR5GMB47GY3J932HEP",
    "uraian": "Pengadaan Pupuk Organik Kegiatan Peremajaan Tanaman Kakao Kabupaten Pidie Jaya 210 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengadaan Pupuk Organik",
-   "kode_keg": "",
+   "kode_keg": "5888",
    "kro": "",
    "komoditas": "Kakao",
    "provinsi": "ACEH",
@@ -25176,7 +25176,7 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -25213,7 +25213,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengembangan Setara KBD",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RBK",
    "komoditas": "Tebu",
    "provinsi": "JAWA TIMUR",
    "kab": "Probolinggo",
@@ -25229,7 +25229,7 @@
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "TERVERIFIKASI",
-   "perlu_verifikasi": true,
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -25239,7 +25239,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RAG",
    "komoditas": "Kakao",
    "provinsi": "PAPUA",
    "kab": "",
@@ -25265,7 +25265,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RAG",
    "komoditas": "Kakao",
    "provinsi": "PAPUA",
    "kab": "",
@@ -25291,7 +25291,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RAG",
    "komoditas": "Kakao",
    "provinsi": "PAPUA",
    "kab": "",
@@ -25317,7 +25317,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RAG",
    "komoditas": "Kakao",
    "provinsi": "PAPUA",
    "kab": "",
@@ -25332,7 +25332,7 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "PERLU KONFIRMASI",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -25343,7 +25343,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengembangan Setara KBD",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RBK",
    "komoditas": "Tebu",
    "provinsi": "JAWA BARAT",
    "kab": "Indramayu",
@@ -25358,8 +25358,8 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "PERLU KONFIRMASI",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -25369,7 +25369,7 @@
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengembangan Setara KBD",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "238830.139.521822.01805EC.5890RBK",
    "komoditas": "Tebu",
    "provinsi": "JAWA TIMUR",
    "kab": "Situbondo",
@@ -25385,7 +25385,7 @@
    "aktif": true,
    "sumber": "MyIntress",
    "verifikasi": "TERVERIFIKASI",
-   "perlu_verifikasi": true,
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -26746,8 +26746,8 @@
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan",
    "satker": "BBPPTP Medan",
    "kegiatan": "(belum diisi)",
-   "kode_keg": "1780",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "567408.004.522141.01805EC.5890RAG",
    "komoditas": "",
    "provinsi": "",
    "kab": "",
@@ -26762,7 +26762,7 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "PERLU KONFIRMASI",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -33714,8 +33714,8 @@
    "unit": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya",
    "satker": "BBPPTP Surabaya",
    "kegiatan": "Produksi Benih",
-   "kode_keg": "",
-   "kro": "",
+   "kode_keg": "5890",
+   "kro": "567338.098.521822.01805EC.5890RAG",
    "komoditas": "Kakao",
    "provinsi": "KALIMANTAN UTARA",
    "kab": "Bulungan",
@@ -33730,8 +33730,8 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
-   "perlu_verifikasi": true,
+   "verifikasi": "TERVERIFIKASI",
+   "perlu_verifikasi": false,
    "baru": true
   },
   {
@@ -37680,19 +37680,7 @@
   },
   {
    "k": "06. KRO kosong",
-   "no": "07/SABPLU/SPK/PL.040E.8/11/2026",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
    "no": "B-10385/PL.020/E7/11/2026",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7VPTTH02E7S30KCJC47YZM1",
    "d": "",
    "tl": "Isi KRO lengkap dari SAKTI"
   },
@@ -37721,48 +37709,6 @@
    "tl": "Isi KRO lengkap dari SAKTI"
   },
   {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7YD4AQF37FTVKWHK557868Z",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7ZGYVN7XQJA132PH6SZ079K",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7ZH3T7CPN96T1RNS3T6VFDY",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7ZH6X498BQTFJJBW2ZWY9PW",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M7ZH946Z5EJAKF0QWE2K9RYM",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M8425Q9TTYKFAT2PZXENNN6G",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "EP-01M85PPW62NXPM016MGJAYANBN",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
-  },
-  {
    "k": "07. Akun di KRO ≠ KODE COA",
    "no": "EP-01KDSG226JD2J0MADSR8218A4M",
    "d": "KRO: 567408.004.525113.01805WA.1780EBA | COA: 522191,525113",
@@ -37777,7 +37723,7 @@
   {
    "k": "08. Kegiatan kosong",
    "no": "07/SABPLU/SPK/PL.040E.8/11/2026",
-   "d": "Kode keg: 1780",
+   "d": "Kode keg: 5890",
    "tl": "Isi nama kegiatan"
   },
   {
