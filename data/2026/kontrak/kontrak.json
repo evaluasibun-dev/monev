@@ -1,7 +1,7 @@
 {
  "versi": 1,
  "ta": 2026,
- "data_per": "2026-11-27T15:59:00+07:00",
+ "data_per": "2026-11-27T16:07:00+07:00",
  "hari_ini": "2026-11-27",
  "batas_peringatan_hari": 30,
  "urutan_unit": [
@@ -25443,10 +25443,10 @@
   {
    "no": "EP-01M86G4FQ0G97W1NNG4ZZC986F",
    "uraian": "Pengadaan Pekerjaan Pengembangan Setara KBD Tebu Kabupaten Cirebon Provinsi Jawa Barat seluas 20 Ha TA. 2026",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Perbenihan Perkebunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Pengembangan Setara KBD",
-   "kode_keg": "",
+   "kode_keg": "5890",
    "kro": "",
    "komoditas": "Tebu",
    "provinsi": "JAWA BARAT",
@@ -25462,17 +25462,17 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
   {
    "no": "EP-01M7YSP070VYSH97KR4A53TSAW",
    "uraian": "PENGADAAN PEKERJAAN PRODUKSI BENIH KAKAO DALAM PROSES UMUR PALING KURANG 1 BULAN DI PROVINSI PAPUA BARAT DAYA (PAKET 2)",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Perbenihan Perkebunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Produksi Benih",
-   "kode_keg": "",
+   "kode_keg": "5890",
    "kro": "",
    "komoditas": "Kakao",
    "provinsi": "PAPUA BARAT DAYA",
@@ -25488,17 +25488,17 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
   {
    "no": "EP-01M88KCPDE5ND860P5S31P4HJ2",
    "uraian": "Pengadaan Benih Tebu untuk Kegiatan Bongkar Ratoon Kab. Dompu Tahap IV Seluas 54,5 Ha",
-   "unit": "Ditjenbun Pusat (kode kegiatan belum diisi)",
+   "unit": "Direktorat Tanaman Semusim dan Tahunan",
    "satker": "Ditjenbun Pusat",
    "kegiatan": "Bongkar Ratoon",
-   "kode_keg": "",
+   "kode_keg": "5888",
    "kro": "",
    "komoditas": "Tebu",
    "provinsi": "NUSA TENGGARA BARAT",
@@ -25514,7 +25514,7 @@
    "sisa_hari": 34,
    "aktif": true,
    "sumber": "MyIntress",
-   "verifikasi": "",
+   "verifikasi": "TERVERIFIKASI",
    "perlu_verifikasi": true,
    "baru": true
   },
@@ -33767,7 +33767,7 @@
    "satker": "BBPPTP Surabaya",
    "kegiatan": "Pengadaan Benih",
    "kode_keg": "5890",
-   "kro": "",
+   "kro": "567338.098.521822.01805EC.5890RAG",
    "komoditas": "Kelapa Genjah",
    "provinsi": "",
    "kab": "",
@@ -37881,12 +37881,6 @@
    "no": "EP-01M63Z94CNHRT2JC9YWXF8ST3Q",
    "d": "BELUM SELESAI TERLAMBAT",
    "tl": "Konfirmasi progres fisik/pembayaran termin"
-  },
-  {
-   "k": "06. KRO kosong",
-   "no": "B-10385/PL.020/E7/11/2026",
-   "d": "",
-   "tl": "Isi KRO lengkap dari SAKTI"
   },
   {
    "k": "06. KRO kosong",
