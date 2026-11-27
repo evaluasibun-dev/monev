@@ -4,7 +4,7 @@
  "data_per": "2026-11-26T15:34:00+07:00",
  "sumber": {
   "myintress_unduh": "2026-11-26T15:34:00+07:00",
-  "kontrak_per": "2026-11-26T15:33:00+07:00",
+  "kontrak_per": "2026-11-27T09:50:00+07:00",
   "fa16_per": "2026-11-26"
  },
  "tanggal": "2026-11-26",
@@ -32096,36 +32096,36 @@
  ],
  "outstanding": {
   "summary": {
-   "jml_kontrak": 1408,
-   "nilai_kontrak": 4050431393790,
-   "realisasi_kontrak": 1008489328691,
-   "sisa_kontrak": 3041942065099,
-   "pct_realisasi": 24.9
+   "jml_kontrak": 1411,
+   "nilai_kontrak": 4052388296045,
+   "realisasi_kontrak": 1013307907406,
+   "sisa_kontrak": 3039080388639,
+   "pct_realisasi": 25.01
   },
   "by_satker": [
    {
     "KODE_SATKER": "238830",
     "DESKRIPSI_SATKER": "DIREKTORAT JENDERAL PERKEBUNAN",
-    "jml_kontrak": 974,
-    "nilai_kontrak": 3139375401689,
-    "realisasi_kontrak": 762090841689,
-    "sisa_kontrak": 2377284560000
+    "jml_kontrak": 975,
+    "nilai_kontrak": 3140150703944,
+    "realisasi_kontrak": 764697588654,
+    "sisa_kontrak": 2375453115290
    },
    {
     "KODE_SATKER": "567338",
     "DESKRIPSI_SATKER": "BALAI BESAR PERBENIHAN DAN PROTEKSI TANAMAN PERKEBUNAN (BBP2TP) SURABAYA",
-    "jml_kontrak": 266,
-    "nilai_kontrak": 540657292659,
-    "realisasi_kontrak": 133386053169,
-    "sisa_kontrak": 407271239490
+    "jml_kontrak": 268,
+    "nilai_kontrak": 541838892659,
+    "realisasi_kontrak": 134967614919,
+    "sisa_kontrak": 406871277740
    },
    {
     "KODE_SATKER": "567408",
     "DESKRIPSI_SATKER": "BALAI BESAR PERBENIHAN DAN PROTEKSI TANAMAN PERKEBUNAN (BBP2TP) MEDAN",
     "jml_kontrak": 51,
     "nilai_kontrak": 174050349392,
-    "realisasi_kontrak": 59052979949,
-    "sisa_kontrak": 114997369443
+    "realisasi_kontrak": 59116879949,
+    "sisa_kontrak": 114933469443
    },
    {
     "KODE_SATKER": "567521",
@@ -32140,11 +32140,19 @@
     "DESKRIPSI_SATKER": "BALAI BESAR PERBENIHAN DAN PROTEKSI TANAMAN PERKEBUNAN (BBP2TP) AMBON",
     "jml_kontrak": 102,
     "nilai_kontrak": 194726032188,
-    "realisasi_kontrak": 53597282932,
-    "sisa_kontrak": 141128749256
+    "realisasi_kontrak": 54163652932,
+    "sisa_kontrak": 140562379256
    }
   ],
   "by_kegiatan": [
+   {
+    "KDKEG": "",
+    "NAMA_KEGIATAN": "Pengadaan Pupuk Organik",
+    "jml_kontrak": 3,
+    "nilai_kontrak": 1956902255,
+    "realisasi_kontrak": 0,
+    "sisa_kontrak": 1956902255
+   },
    {
     "KDKEG": "1777",
     "NAMA_KEGIATAN": "Pengadaan Pupuk Organik",
@@ -32166,16 +32174,16 @@
     "NAMA_KEGIATAN": "Fasilitasi Satuan Pengamanan dan Pengemudi, Penjaga Kebun dan Tenaga Adm, dll non P3K",
     "jml_kontrak": 45,
     "nilai_kontrak": 9090061076,
-    "realisasi_kontrak": 7282090362,
-    "sisa_kontrak": 1807970714
+    "realisasi_kontrak": 7345990362,
+    "sisa_kontrak": 1744070714
    },
    {
     "KDKEG": "5888",
     "NAMA_KEGIATAN": "Bongkar Ratoon",
     "jml_kontrak": 490,
     "nilai_kontrak": 746087468645,
-    "realisasi_kontrak": 103757190365,
-    "sisa_kontrak": 642330278280
+    "realisasi_kontrak": 106363937330,
+    "sisa_kontrak": 639723531315
    },
    {
     "KDKEG": "5889",
@@ -32190,8 +32198,8 @@
     "NAMA_KEGIATAN": "Produksi Benih (Lanjutan)",
     "jml_kontrak": 688,
     "nilai_kontrak": 3113072703220,
-    "realisasi_kontrak": 830513622998,
-    "sisa_kontrak": 2282559080222
+    "realisasi_kontrak": 832661554748,
+    "sisa_kontrak": 2280411148472
    }
   ],
   "by_seg5": [
@@ -32235,10 +32243,10 @@
     "KODE_SATKER": "238830",
     "KDKEG": "5888",
     "KDKRO_SUFFIX": "",
-    "jml_kontrak": 5,
-    "nilai_kontrak": 1585189128,
+    "jml_kontrak": 2,
+    "nilai_kontrak": 1205822448,
     "realisasi_kontrak": 0,
-    "sisa_kontrak": 1585189128
+    "sisa_kontrak": 1205822448
    },
    {
     "KODE_SATKER": "238830",
@@ -32253,10 +32261,10 @@
     "KODE_SATKER": "238830",
     "KDKEG": "5888",
     "KDKRO_SUFFIX": "RAI",
-    "jml_kontrak": 428,
-    "nilai_kontrak": 688301310019,
-    "realisasi_kontrak": 101034489791,
-    "sisa_kontrak": 587266820228
+    "jml_kontrak": 431,
+    "nilai_kontrak": 688680676699,
+    "realisasi_kontrak": 103641236756,
+    "sisa_kontrak": 585039439943
    },
    {
     "KODE_SATKER": "238830",
@@ -32302,6 +32310,15 @@
     "nilai_kontrak": 226103961408,
     "realisasi_kontrak": 48809403945,
     "sisa_kontrak": 177294557463
+   },
+   {
+    "KODE_SATKER": "238830",
+    "KDKEG": "",
+    "KDKRO_SUFFIX": "",
+    "jml_kontrak": 1,
+    "nilai_kontrak": 775302255,
+    "realisasi_kontrak": 0,
+    "sisa_kontrak": 775302255
    },
    {
     "KODE_SATKER": "567338",
@@ -32354,8 +32371,8 @@
     "KDKRO_SUFFIX": "RAG",
     "jml_kontrak": 188,
     "nilai_kontrak": 469155897270,
-    "realisasi_kontrak": 125404997437,
-    "sisa_kontrak": 343750899833
+    "realisasi_kontrak": 126986559187,
+    "sisa_kontrak": 342169338083
    },
    {
     "KODE_SATKER": "567338",
@@ -32374,6 +32391,15 @@
     "nilai_kontrak": 246053870,
     "realisasi_kontrak": 246053870,
     "sisa_kontrak": 0
+   },
+   {
+    "KODE_SATKER": "567338",
+    "KDKEG": "",
+    "KDKRO_SUFFIX": "",
+    "jml_kontrak": 2,
+    "nilai_kontrak": 1181600000,
+    "realisasi_kontrak": 0,
+    "sisa_kontrak": 1181600000
    },
    {
     "KODE_SATKER": "567408",
@@ -32399,8 +32425,8 @@
     "KDKRO_SUFFIX": "EBA",
     "jml_kontrak": 1,
     "nilai_kontrak": 830696676,
-    "realisasi_kontrak": 702896676,
-    "sisa_kontrak": 127800000
+    "realisasi_kontrak": 766796676,
+    "sisa_kontrak": 63900000
    },
    {
     "KODE_SATKER": "567408",
@@ -32489,8 +32515,8 @@
     "KDKRO_SUFFIX": "RAG",
     "jml_kontrak": 41,
     "nilai_kontrak": 155628928772,
-    "realisasi_kontrak": 40338864922,
-    "sisa_kontrak": 115290063850
+    "realisasi_kontrak": 40905234922,
+    "sisa_kontrak": 114723693850
    }
   ]
  },
@@ -32507,8 +32533,8 @@
   "satker_count": 5,
   "kegiatan_count": 6,
   "akun_count": 52,
-  "kontrak_count": 1408,
-  "kontrak_sisa_total": 3041942065099
+  "kontrak_count": 1411,
+  "kontrak_sisa_total": 3039080388639
  },
  "realisasi": {
   "unduh": {
@@ -32530,14 +32556,14 @@
     "5890": 0
    },
    "real": 1430011846157,
-   "os": 3041942065099,
-   "realOs": 4471953911256,
+   "os": 3039080388639,
+   "realOs": 4469092234796,
    "blokir": 14253000000,
    "pctReal": 23.16506594358302,
-   "pctOs": 49.27706628721238,
-   "pctRealOs": 72.4421322307954,
-   "sisa": 1686932632744,
-   "pctSisa": 27.557867769204606,
+   "pctOs": 49.23070938179006,
+   "pctRealOs": 72.39577532537308,
+   "sisa": 1689794309204,
+   "pctSisa": 27.60422467462692,
    "jenis": [
     {
      "nama": "Belanja Pegawai",
@@ -32594,10 +32620,10 @@
      "blokir": 62000000,
      "real": 83134028686,
      "pct": 83.81598402949857,
-     "os": 1807970714,
-     "realOs": 84941999400,
-     "pct2": 85.63878567745894,
-     "sisa": 14182366600,
+     "os": 1744070714,
+     "realOs": 84878099400,
+     "pct2": 85.57436150045058,
+     "sisa": 14246266600,
      "kode": "1780",
      "kunci": "1780"
     },
@@ -32633,10 +32659,10 @@
      "blokir": 14191000000,
      "real": 884197933341,
      "pct": 24.5033860806218,
-     "os": 2282559080222,
-     "realOs": 3166757013563,
-     "pct2": 87.75893586818108,
-     "sisa": 427524425437,
+     "os": 2280411148472,
+     "realOs": 3164609081813,
+     "pct2": 87.69941118602513,
+     "sisa": 429672357187,
      "kode": "5890",
      "kunci": "5890"
     },
@@ -32646,12 +32672,25 @@
      "blokir": 0,
      "real": 326473852488,
      "pct": 16.453446510905476,
-     "os": 642330278280,
-     "realOs": 968804130768,
-     "pct2": 48.8252484039942,
-     "sisa": 1015423625232,
+     "os": 639723531315,
+     "realOs": 966197383803,
+     "pct2": 48.69387502928368,
+     "sisa": 1018030372197,
      "kode": "5888",
      "kunci": "5888"
+    },
+    {
+     "nama": "Belum terpetakan (KRO/kode kegiatan kontrak kosong/tidak valid) – 3 kontrak",
+     "pagu": 0,
+     "blokir": 0,
+     "real": 0,
+     "pct": 0,
+     "os": 1956902255,
+     "realOs": 1956902255,
+     "pct2": 0,
+     "sisa": -1956902255,
+     "kode": "",
+     "unmapped": true
     }
    ],
    "total": {
@@ -32660,10 +32699,10 @@
     "blokir": 14253000000,
     "real": 1430011846157,
     "pct": 23.16506594358302,
-    "os": 3041942065099,
-    "realOs": 4471953911256,
-    "pct2": 72.4421322307954,
-    "sisa": 1686932632744,
+    "os": 3039080388639,
+    "realOs": 4469092234796,
+    "pct2": 72.39577532537308,
+    "sisa": 1689794309204,
     "total": true
    }
   },
@@ -32723,10 +32762,10 @@
      "blokir": 352331000,
      "real": 111068847263,
      "pct": 35.74024549636376,
-     "os": 114997369443,
-     "realOs": 226066216706,
-     "pct2": 72.74462896310406,
-     "sisa": 84348336294,
+     "os": 114933469443,
+     "realOs": 226002316706,
+     "pct2": 72.72406692664202,
+     "sisa": 84412236294,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Medan"
     },
     {
@@ -32759,10 +32798,10 @@
      "blokir": 0,
      "real": 78302851883,
      "pct": 20.87152788437322,
-     "os": 141128749256,
-     "realOs": 219431601139,
-     "pct2": 58.48922065735918,
-     "sisa": 155734281861,
+     "os": 140562379256,
+     "realOs": 218865231139,
+     "pct2": 58.33825543752869,
+     "sisa": 156300651861,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Ambon"
     },
     {
@@ -32771,10 +32810,10 @@
      "blokir": 2500000000,
      "real": 158782458099,
      "pct": 20.23141463476875,
-     "os": 407271239490,
-     "realOs": 566053697589,
-     "pct2": 72.12425855207985,
-     "sisa": 216277521411,
+     "os": 406871277740,
+     "realOs": 565653735839,
+     "pct2": 72.07329705356688,
+     "sisa": 216677483161,
      "kunci": "Balai Besar Perbenihan dan Pelindungan Tanaman Perkebunan (BBP2TP) Surabaya"
     },
     {
@@ -32783,11 +32822,23 @@
      "blokir": 0,
      "real": 284231506252,
      "pct": 16.765083555013078,
-     "os": 593177311296,
-     "realOs": 877408817548,
-     "pct2": 51.752996464282496,
-     "sisa": 817968991452,
+     "os": 590570564331,
+     "realOs": 874802070583,
+     "pct2": 51.59924035451381,
+     "sisa": 820575738417,
      "kunci": "Direktorat Tanaman Semusim dan Tahunan"
+    },
+    {
+     "nama": "Ditjenbun Pusat (kode kegiatan belum diisi) – 1 kontrak",
+     "pagu": 0,
+     "blokir": 0,
+     "real": 0,
+     "pct": 0,
+     "os": 775302255,
+     "realOs": 775302255,
+     "pct2": 0,
+     "sisa": -775302255,
+     "unmapped": true
     }
    ],
    "total": {
@@ -32796,16 +32847,17 @@
     "blokir": 14253000000,
     "real": 1430011846157,
     "pct": 23.16506594358302,
-    "os": 3041942065099,
-    "realOs": 4471953911256,
-    "pct2": 72.4421322307954,
-    "sisa": 1686932632744,
+    "os": 3039080388639,
+    "realOs": 4469092234796,
+    "pct2": 72.39577532537308,
+    "sisa": 1689794309204,
     "total": true
    },
    "notes": [
-    "Realisasi Outstanding (OS) Direktorat Hilirisasi Hasil Perkebunan termasuk dana hibah luar negeri sebesar Rp 9.804.220.587,- dan realisasi termasuk pembayaran hibah Rp 1.414.920.000,- di input secara manual karena tidak muncul dalam aplikasi MyIntress DJPB, KPPN khusus hibah dan pinjaman tidak mencantumkan catatan untuk OS."
+    "Realisasi Outstanding (OS) Direktorat Hilirisasi Hasil Perkebunan termasuk dana hibah luar negeri sebesar Rp 9.804.220.587,- dan realisasi termasuk pembayaran hibah Rp 1.414.920.000,- di input secara manual karena tidak muncul dalam aplikasi MyIntress DJPB, KPPN khusus hibah dan pinjaman tidak mencantumkan catatan untuk OS.",
+    "Outstanding Rp 775.302.255,- berasal dari kontrak Kantor Pusat yang KRO/kode kegiatannya belum diisi; lengkapi melalui Dashboard › Verifikasi."
    ]
   },
-  "kontrak_aktif": 1408
+  "kontrak_aktif": 1411
  }
 }
